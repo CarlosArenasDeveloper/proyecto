@@ -1,0 +1,26 @@
+<app-navegacion></app-navegacion>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<form [formGroup]="miFormulario" (ngSubmit)="login()">
+  <mat-form-field appearance="fill">
+    <mat-label form>Email:</mat-label>
+    <input matInput formControlName="email" />
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Contraseña:</mat-label>
+    <input matInput formControlName="password" />
+  </mat-form-field>
+  <button type="submit" mat-raised-button color="primary">login</button>
+</form>

@@ -5,24 +5,22 @@ session_start();
 require_once 'conexion.php';
 $conn = openConection();
 
-$json=file_get_contents('php://input');
-$params=json_decode($json);
 
-$jsondata = array();
 $jsondata=[];
 
 try {
     $stmt = $conn->prepare("SELECT * FROM usuarios where email=:email and password=:password");
-    $stmt->bindParam(":email",$params->email);
-    $stmt->bindParam(":password",$params->password);
+    $stmt->bindParam(":email",$_GET["email"]);
+    $stmt->bindParam(":password",$_GET["password"]);
     $stmt->execute();
     $filasobtenidas = $stmt->fetchAll();
     if ($stmt->rowCount() > 0) {
         foreach($filasobtenidas as $fila){
+
             $jsondata[]= $fila;
         }
     } else {
-        $jsondata[]="Error";
+        echo json_encode("error");
     }
 } catch (PDOException $exception) {
     echo $exception;

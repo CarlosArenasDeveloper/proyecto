@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavegacionComponent } from './navegacion/navegacion.component';
 import { RouterModule } from '@angular/router';
+import { MaterialModule } from '../material/material.module';
 
 
 
@@ -9,8 +10,7 @@ import { RouterModule } from '@angular/router';
   declarations: [NavegacionComponent],
   imports: [
     CommonModule,
-    RouterModule
-  ],
+    RouterModule, MaterialModule ],
   exports:[
     NavegacionComponent
   ]

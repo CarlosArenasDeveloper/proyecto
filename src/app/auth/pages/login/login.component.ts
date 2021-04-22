@@ -24,9 +24,17 @@ export class LoginComponent {
 
     this.authService.login(email, password).subscribe((resp) => {
       console.log(resp);
-      if (resp!="error") {
-        this.router.navigateByUrl('/dashboard');
-      }else{
+      if (resp != 'error') {
+        sessionStorage.setItem('usuario', JSON.stringify(resp));
+        const valores = JSON.parse(sessionStorage.getItem('usuario')!);
+        if (valores[0].role == 1) {
+          this.router.navigateByUrl('/dashboard/admin');
+        } else if (valores[0].role == 2) {
+          console.log('/dashboard/cliente');
+        } else {
+          console.log('/dashboard/monitor');
+        }
+      } else {
         //this.router.navigateByUrl('/auth/main/registro')
         this.miFormulario.reset();
       }

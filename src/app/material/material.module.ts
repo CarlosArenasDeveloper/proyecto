@@ -5,12 +5,20 @@ import {MatInputModule} from '@angular/material/input';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import {MatRadioModule} from '@angular/material/radio';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+
 
 
 
 
 
 @NgModule({
-  exports: [MatFormFieldModule,MatSelectModule,MatInputModule,MatToolbarModule,MatIconModule,MatButtonModule],
+  exports: [MatListModule,MatSidenavModule,MatRadioModule,MatNativeDateModule
+    ,MatDatepickerModule,MatFormFieldModule,MatSelectModule,MatInputModule,MatToolbarModule,MatIconModule,MatButtonModule,MatStepperModule],
 })
 export class MaterialModule {}

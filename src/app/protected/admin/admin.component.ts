@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Usuario, Cliente } from '../../auth/interfaces/interface';
+import { Usuario } from '../../auth/interfaces/interface';
 import { AdminService } from '../services/admin.service';
 
 @Component({
@@ -8,7 +8,7 @@ import { AdminService } from '../services/admin.service';
   styleUrls: ['./admin.component.css'],
 })
 export class AdminComponent implements OnInit {
-  clientes :any = [];
+  clientes: any = [];
 
   constructor(private adminService: AdminService) {}
 
@@ -18,11 +18,11 @@ export class AdminComponent implements OnInit {
       .subscribe((clientes) => (this.clientes = clientes));
   }
 
-  editarCliente(){
+  editarCliente() {}
 
-  }
-
-  borrarCliente(cliente: Cliente,i:number){
-
+  borrarCliente(usuario: Usuario, i: number) {
+    this.adminService.borrarCliente(usuario.email!).subscribe((usuario) => {
+      this.clientes.splice(i,1)
+    });
   }
 }

@@ -1,107 +1,86 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-info fixed-top">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#"><img src="./../../../assets/logo.png"> </a>
-
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link" routerLink="./login" routerLinkActive="active" >LOGIN</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="./registro" routerLinkActive="active">REGISTRO</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="./logout" routerLinkActive="active">LOGOUT</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-
-  <h1>Listado de Clientes</h1>
-<hr>
+<h1>Listado de Clientes</h1>
+<hr />
 <div class="row">
   <div class="col text-right">
-    <button routerLink= "/pelicula" class="btn btn-primary">
+    <button routerLink="./altacliente" class="btn btn-primary">
       <i class="fa fa-plus"></i>
       Agregar
     </button>
   </div>
 </div>
-<table class="table mt-3 animated fadeIn faster">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Rol</th>
-      <th scope="col">Dni</th>
-      <th scope="col">Email</th>
-      <th scope="col">Password</th>
-      <th scope="col">Nombre</th>
-      <th scope="col">Apellido1</th>
-      <th scope="col">Apellido2</th>
-      <th scope="col">Fecha nacimiento</th>
-      <th scope="col">Genero</th>
-      <th scope="col">Telefono</th>
-      <th scope="col">Cuenta bancaria</th>
-      <th scope="col">Ciudad</th>
-      <th scope="col">Direccion</th>
-      <th scope="col">C.Postal</th>
-      <th scope="col">Estado</th>
-      <th scope="col">Tarifa</th>
-      <th scope="col">Fecha alta</th>
-      <th scope="col">Fecha baja</th>
-      <th scope="col">N1 reservas</th>
-      <th scope="col">Centro</th>
 
-
-
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor ="let ele of clientes; let i=index">
-      <td>{{i+1}}</td>
-      <td>{{ele.role}}</td>
-      <td>{{ele.dni}}</td>
-      <td>{{ele.email}}</td>
-      <td>{{ele.password}}</td>
-      <td>{{ele.nombre}}</td>
-      <td>{{ele.apellido1}}</td>
-      <td>{{ele.apellido2}}</td>
-      <td>{{ele.fecha_nac}}</td>
-      <td>{{ele.genero}}</td>
-      <td>{{ele.telefono}}</td>
-      <td>{{ele.cuenta_bancaria}}</td>
-      <td>{{ele.ciudad}}</td>
-      <td>{{ele.direccion}}</td>
-      <td>{{ele.cod_postal}}</td>
-      <td>{{ele.estado}}</td>
-      <td>{{ele.id_tarifa}}</td>
-      <td>{{ele.fecha_alta}}</td>
-      <td>{{ele.fecha_baja}}</td>
-      <td>{{ele.num_reservas}}</td>
-      <td>{{ele.id_centro}}</td>
-      <td>
-        <button class="btn btn-danger" (click)="borrarCliente(ele,i)"><i class="fa fa-trash"></i></button>
-        <button class="btn btn-warning ml-2" [routerLink]="['/pelicula', ele.id]"><i class="fa fa-pen"></i></button>
-      </td>
-    </tr>
-  </tbody>
-</table>
-<div *ngIf="clientes.length==0" class="alert alert-warning text-center mt-3">
+<div class="row">
+  <div class="col"></div>
+  <table class="table mt-3 animated fadeIn faster">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Rol</th>
+        <th scope="col">Dni</th>
+        <th scope="col">Email</th>
+        <th scope="col">Password</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Apellido1</th>
+        <th scope="col">Apellido2</th>
+        <th scope="col">Fecha nacimiento</th>
+        <th scope="col">Genero</th>
+        <th scope="col">Telefono</th>
+        <th scope="col">Cuenta bancaria</th>
+        <th scope="col">Ciudad</th>
+        <th scope="col">Direccion</th>
+        <th scope="col">C.Postal</th>
+        <th scope="col">Estado</th>
+        <th scope="col">Tarifa</th>
+        <th scope="col">Fecha alta</th>
+        <th scope="col">Fecha baja</th>
+        <th scope="col">N1 reservas</th>
+        <th scope="col">Centro</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let ele of clientes; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ ele.role | rol }}</td>
+        <td>{{ ele.dni }}</td>
+        <td>{{ ele.email }}</td>
+        <td>{{ ele.password }}</td>
+        <td>{{ ele.nombre }}</td>
+        <td>{{ ele.apellido1 }}</td>
+        <td>{{ ele.apellido2 }}</td>
+        <td>{{ ele.fecha_nac }}</td>
+        <td>{{ ele.genero }}</td>
+        <td>{{ ele.telefono }}</td>
+        <td>{{ ele.cuenta_bancaria }}</td>
+        <td>{{ ele.ciudad }}</td>
+        <td>{{ ele.direccion }}</td>
+        <td>{{ ele.cod_postal }}</td>
+        <td>{{ ele.estado }}</td>
+        <td>{{ ele.id_tarifa }}</td>
+        <td>{{ ele.fecha_alta }}</td>
+        <td>{{ ele.fecha_baja }}</td>
+        <td>{{ ele.num_reservas }}</td>
+        <td>{{ ele.id_centro }}</td>
+        <td>
+          <button class="btn btn-danger" (click)="borrarCliente(ele, i)">
+            <i class="fa fa-trash"></i>
+          </button>
+          <button
+            class="btn btn-warning ml-2"
+            [routerLink]="['./editcliente', ele.email]"
+          >
+            <i class="fa fa-pen"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div
+    *ngIf="clientes.length == 0"
+    class="alert alert-warning text-center mt-3"
+  >
     <h4 class="alert-heading">No hay registros</h4>
     <p>
-        <i class="fa fa-exclamation fa-2x"></i>
+      <i class="fa fa-exclamation fa-2x"></i>
     </p>
+  </div>
 </div>

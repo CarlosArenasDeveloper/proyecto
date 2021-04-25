@@ -1,0 +1,59 @@
+
+<form [formGroup]="miFormulario" (ngSubmit)="editar()">
+  <div class="row">
+    <div class="col-12">
+      <label for="dni">dni</label>
+      <input name="dni" formControlName="dni" type="text" value="{{cliente.dni}}"/>
+     
+      <label for="password">Password</label>
+      <input name="password" formControlName="password" type="password" />
+     
+      <label for="nombre">nombre</label>
+      <input name="nombre" formControlName="nombre" type="text" />
+     
+      <label for="apellido1">apellido1</label>
+      <input name="apellido1" formControlName="apellido1" type="text" />
+     
+      <label for="apellido2">apellido2</label>
+      <input name="apellido2" formControlName="apellido2" type="text" />
+     
+      <label for="fecha_nac">fecha_nac</label>
+      <input name="fecha_nac" formControlName="fecha_nac" type="date" />
+     
+      <label for="genero">genero</label>
+      <input name="genero" formControlName="genero" type="text" />
+    
+
+      <label for="telefono">telefono</label>
+      <input name="telefono" formControlName="telefono" type="number" />
+
+      <label for="cuenta_bancaria">cuenta_bancaria</label>
+      <input name="cuenta_bancaria" formControlName="cuenta_bancaria" type="text" />
+      
+      <label for="ciudad">ciudad</label>
+      <input name="ciudad" formControlName="ciudad" type="text" />
+
+      <label for="direccion">direccion</label>
+      <input name="direccion" formControlName="direccion" type="text" />
+
+      <label for="cod_postal">cod_postal</label>
+      <input name="cod_postal" formControlName="cod_postal" type="number" />
+
+      <label for="id_tarifa">id_tarifa</label>
+      <input name="id_tarifa" formControlName="id_tarifa" type="number" value="{{cliente.id_tarifa}}"/>
+
+      <label for="id_centro">id_centro</label>
+      <input name="id_centro" formControlName="id_centro" type="number" value="{{cliente.id_centro}}" />
+    </div>
+
+    <div class="col-12">
+      <button type="submit" class="btn btn-primary">Actualizar cliente</button>
+    </div>
+    <div class="col-12">
+      <button type="submit" class="btn btn-danger" routerLink="/dashboard/admin">Regresar</button>
+    </div>
+  </div>
+</form>
+
+<pre>{{miFormulario.value|json}}</pre>
+<pre>{{cliente|json}}</pre>

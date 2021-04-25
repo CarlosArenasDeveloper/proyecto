@@ -1,12 +1,69 @@
-<app-navegacion></app-navegacion>
-<form [formGroup]="miFormulario" (ngSubmit)="login()">
-  <mat-form-field appearance="fill">
-    <mat-label form>Email:</mat-label>
-    <input matInput formControlName="email" />
-  </mat-form-field>
-  <mat-form-field appearance="fill">
-    <mat-label>Contraseña:</mat-label>
-    <input matInput formControlName="password" />
-  </mat-form-field>
-  <button type="submit" mat-raised-button color="primary">login</button>
-</form>
+<h2>BIENVENID@ A FIT & HEALTHY</h2>
+<hr />
+
+<div class="row">
+  <div class="col">
+    <form autocomplete="off" [formGroup]="miFormulario" (ngSubmit)="login()">
+      <!-- Email -->
+      <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Email:</label>
+        <div class="col-sm-9">
+          <input
+            type="email"
+            class="form-control"
+            formControlName="email"
+            placeholder="Ingrese el email"
+          />
+          <span class="form-text text-danger" *ngIf="campoNoValido('email')">
+            {{ emailErrorMsg }}
+          </span>
+        </div>
+      </div>
+      <!-- Password -->
+      <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Contraseña:</label>
+        <div class="col-sm-9">
+          <input
+            type="password"
+            class="form-control"
+            formControlName="password"
+            placeholder=" Ingrese la contraseña"
+          />
+          <span class="form-text text-danger" *ngIf="campoNoValido('password')">
+            La contraseña debe de ser mayor de 6 caracteres.
+          </span>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <button
+            class="btn btn-primary float-end"
+            [disabled]="miFormulario.invalid"
+            type="submit"
+          >
+            Login
+          </button>
+        </div>
+      </div>
+      <div *ngIf="datosIncorrectos" class="row">
+        <div class="col">
+          <span class="text-danger"
+            >El nombre de usuario y la contraseña que ingresaste no coinciden
+            con nuestros registros. Por favor, revisa e inténtalo de
+            nuevo.</span>
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="col">
+          ¿Aun no formas parte de nuestro equipo?
+          <button class="btn btn-primary" type="submit" routerLink="/auth/main/registro">Unete ya!</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">¿Has olvidado tu contraseña?</div>
+      </div>
+    
+    </form>
+  </div>
+</div>

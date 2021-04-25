@@ -6,13 +6,12 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegistroComponent } from './pages/registro/registro.component';
 import { MaterialModule } from '../material/material.module';
 import { SharedModule } from '../shared/shared.module';
-import { MainComponent } from './pages/main/main.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LogoutComponent } from './pages/logout/logout.component';
 
 
 @NgModule({
-  declarations: [LoginComponent, RegistroComponent, MainComponent, LogoutComponent],
+  declarations: [LoginComponent, RegistroComponent, LogoutComponent],
   imports: [
     CommonModule,
     AuthRoutingModule,

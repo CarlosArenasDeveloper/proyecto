@@ -15,6 +15,9 @@ import { CentroPipe } from './pipes/centro.pipe';
 import { TarifaPipe } from './pipes/tarifa.pipe';
 import { EditclienteComponent } from './admin/editcliente/editcliente.component';
 import { MaterialModule } from '../material/material.module';
+import { AltamonitorComponent } from './admin/altamonitor/altamonitor.component';
+import { ListaclientesComponent } from './admin/listaclientes/listaclientes.component';
+import { SharedComponent } from './admin/shared/shared.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +31,9 @@ import { MaterialModule } from '../material/material.module';
     CentroPipe,
     TarifaPipe,
     EditclienteComponent,
+    AltamonitorComponent,
+    ListaclientesComponent,
+    SharedComponent,
   ],
   imports: [CommonModule, ProtectedRoutingModule, SharedModule,ReactiveFormsModule,MaterialModule],
 })

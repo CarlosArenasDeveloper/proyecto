@@ -1,6 +1,65 @@
-<h1>Unete a Fit & Healthy, ¡De la manera más sencilla y segura!</h1>
+<!-- <h1>Añadiendo cliente</h1>
+<hr>
+<form [formGroup]="miFormulario" (ngSubmit)="registrar()">
+  <div class="row">
+    <div class="col-12">
+      <label for="dni">dni</label>
+      <input name="dni" formControlName="dni" type="text" />
+     
+      <label for="password">Password</label>
+      <input name="password" formControlName="password" type="password" />
+     
+      <label for="nombre">nombre</label>
+      <input name="nombre" formControlName="nombre" type="text" />
+     
+      <label for="apellido1">apellido1</label>
+      <input name="apellido1" formControlName="apellido1" type="text" />
+     
+      <label for="apellido2">apellido2</label>
+      <input name="apellido2" formControlName="apellido2" type="text" />
+     
+      <label for="fecha_nac">fecha_nac</label>
+      <input name="fecha_nac" formControlName="fecha_nac" type="date" />
+     
+      <label for="genero">genero</label>
+      <input name="genero" formControlName="genero" type="text" />
+      
+      <label for="email">E-mail</label>
+      <input name="email" formControlName="email" type="email" />
+
+      <label for="telefono">telefono</label>
+      <input name="telefono" formControlName="telefono" type="number" />
+
+      <label for="cuenta_bancaria">cuenta_bancaria</label>
+      <input name="cuenta_bancaria" formControlName="cuenta_bancaria" type="text" />
+      
+      <label for="ciudad">ciudad</label>
+      <input name="ciudad" formControlName="ciudad" type="text" />
+
+      <label for="direccion">direccion</label>
+      <input name="direccion" formControlName="direccion" type="text" />
+
+      <label for="cod_postal">cod_postal</label>
+      <input name="cod_postal" formControlName="cod_postal" type="number" />
+
+      <label for="id_tarifa">id_tarifa</label>
+      <input name="id_tarifa" formControlName="id_tarifa" type="number" />
+
+      <label for="id_centro">id_centro</label>
+      <input name="id_centro" formControlName="id_centro" type="number" />
+    </div>
+
+    <div class="col-12">
+      <button type="submit" class="btn btn-primary">Añadir cliente</button>
+    </div>
+    <div class="col-12">
+      <button type="submit" class="btn btn-danger" routerLink="/dashboard/admin">Regresar</button>
+    </div>
+  </div>
+</form> -->
+
+<!-- <h1>Añadiendo un nuevo cliente</h1>
 <mat-horizontal-stepper [linear]="true" #stepper>
-  
   <mat-step [stepControl]="firstFormGroup">
     <form [formGroup]="firstFormGroup">
       <ng-template matStepLabel>Paso 1</ng-template>
@@ -132,14 +191,19 @@
           </span>
         </div>
 
-        <div class="col-12">  
-          <button mat-raised-button matStepperPrevious color="warn" routerLink="/dashboard">
+        <div class="col-12">
+          <button
+            mat-raised-button
+            matStepperPrevious
+            color="warn"
+            routerLink="/dashboard/admin/listaclientes"
+          >
             Regresar
           </button>
           <button mat-raised-button matStepperNext color="primary" class="mt-5">
-          Siguiente
-        </button></div>
-      
+            Siguiente
+          </button>
+        </div>
       </div>
     </form>
   </mat-step>
@@ -167,28 +231,40 @@
         <div class="col-12 col-md-6 mt-4">
           <mat-radio-group formControlName="sexo" required>
             Seleccione su sexo:
-            <br>
-            <mat-radio-button value="hombre" color="warn">Hombre</mat-radio-button>
-            <br>
-            <mat-radio-button value="mujer" color="warn">Mujer</mat-radio-button>
+            <br />
+            <mat-radio-button value="hombre" color="warn"
+              >Hombre</mat-radio-button
+            >
+            <br />
+            <mat-radio-button value="mujer" color="warn"
+              >Mujer</mat-radio-button
+            >
           </mat-radio-group>
           <span
-          class="form-text text-danger fst-italic"
-          *ngIf="secondFormGroup.controls['sexo'].hasError('required')"
-        >
-          <br />
-          ¿Eres hombre o mujer?
-        </span>
+            class="form-text text-danger fst-italic"
+            *ngIf="secondFormGroup.controls['sexo'].hasError('required')"
+          >
+            <br />
+            ¿Eres hombre o mujer?
+          </span>
         </div>
 
         <div class="col-12 col-md-6">
-        <mat-form-field>
-          <mat-label>Fecha de nacimiento: </mat-label>
-          <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker"               formControlName="fecha_nac"
-          >
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
+          <mat-form-field>
+            <mat-label>Fecha de nacimiento: </mat-label>
+            <input
+              matInput
+              [min]="minDate"
+              [max]="maxDate"
+              [matDatepicker]="picker"
+              formControlName="fecha_nac"
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
           <span
             class="form-text text-danger fst-italic"
             *ngIf="campoNoValido('fecha_nac')"
@@ -274,7 +350,6 @@
             El codigo postal es requerido
           </span>
         </div>
-        
 
         <div class="col-12">
           <button mat-raised-button matStepperPrevious color="warn">
@@ -282,7 +357,7 @@
           </button>
           <button mat-raised-button matStepperNext color="primary" class="mt-5">
             Siguiente
-            </button>
+          </button>
         </div>
       </div>
     </form>
@@ -290,49 +365,49 @@
 
   <mat-step [stepControl]="thirdFormGroup" label="Paso 3">
     <form [formGroup]="thirdFormGroup">
-    <div class="row mt-5">
-      <div *ngFor="let tarifa of tarifas" class="col">
-        <div class="card" style="width: 18rem;">
-          <div class="card-body">
-            <h5 class="card-title">TARIFA {{tarifa.nombre|uppercase}}</h5>
-            <p class="card-text">{{tarifa.descripcion|titlecase}}</p>
-            <a class="btn btn-primary">{{tarifa.precio}} €</a>
+      <div class="row mt-5">
+        <div *ngFor="let tarifa of tarifas" class="col">
+          <div class="card" style="width: 18rem">
+            <div class="card-body">
+              <h5 class="card-title">TARIFA {{ tarifa.nombre | uppercase }}</h5>
+              <p class="card-text">{{ tarifa.descripcion | titlecase }}</p>
+              <a class="btn btn-primary">{{ tarifa.precio }} €</a>
+            </div>
           </div>
         </div>
       </div>
-    </div>
       <div class="row">
         <mat-form-field appearance="fill">
           <mat-label>Seleccione una tarifa: </mat-label>
           <mat-select formControlName="id_tarifa">
             <mat-option *ngFor="let tarifa of tarifas" [value]="tarifa.id">
-              {{tarifa.nombre|titlecase}} 
+              {{ tarifa.nombre | titlecase }}
             </mat-option>
           </mat-select>
         </mat-form-field>
         <span
-        class="form-text text-danger fst-italic"
-        *ngIf="campoNoValido('id_tarifa')"
-      >
-        La eleccion de la tarifa es requerida
-      </span>
+          class="form-text text-danger fst-italic"
+          *ngIf="campoNoValido('id_tarifa')"
+        >
+          La eleccion de la tarifa es requerida
+        </span>
       </div>
-        
+
       <div class="row">
         <mat-form-field appearance="fill">
           <mat-label>Seleccione un centro: </mat-label>
           <mat-select formControlName="id_centro">
             <mat-option *ngFor="let centro of centros" [value]="centro.id">
-              {{centro.nombre|titlecase}} 
+              {{ centro.nombre | titlecase }}
             </mat-option>
           </mat-select>
         </mat-form-field>
         <span
-        class="form-text text-danger fst-italic"
-        *ngIf="campoNoValido('id_centro')"
-      >
-        La eleccion del centro es requerida
-      </span>
+          class="form-text text-danger fst-italic"
+          *ngIf="campoNoValido('id_centro')"
+        >
+          La eleccion del centro es requerida
+        </span>
       </div>
       <div class="mt-5">
         <button mat-raised-button matStepperPrevious color="warn">
@@ -351,9 +426,15 @@
       <button mat-raised-button matStepperPrevious color="warn">
         Anterior
       </button>
-      <button mat-raised-button matStepperNext color="primary" class="mt-5" (click)="registrar()">
+      <button
+        mat-raised-button
+        matStepperNext
+        color="primary"
+        class="mt-5"
+        (click)="registrar()"
+      >
         Confirmar registro
-        </button>
+      </button>
     </div>
   </mat-step>
-</mat-horizontal-stepper>
+</mat-horizontal-stepper> -->

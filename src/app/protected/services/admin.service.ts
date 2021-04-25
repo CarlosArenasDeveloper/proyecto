@@ -14,8 +14,12 @@ export class AdminService {
 
   getClientes(){
     return this.htpp.get(`${this.baseUrl}/index.php`);
-
   }
+
+  getMonitores(){
+    return this.htpp.get(`${this.baseUrl}/selectMonitores.php`);
+  }
+  
   getCentro(id: number) {
     return this.htpp.get(`${this.baseUrl}/selectCentro.php?id=${id}`);
   }

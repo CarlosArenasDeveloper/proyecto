@@ -112,7 +112,7 @@ export class RegistroComponent implements OnInit {
     };
     this.authService.registro(this.cliente).subscribe((resp) => {
       if (resp != 'ERROR') {
-        this.router.navigateByUrl('auth/main/login');
+        this.router.navigateByUrl('auth/login');
       }
     });
   }

@@ -31,4 +31,5 @@ export class AuthService {
   selectCentros(): Observable<Centro> {
     return this.http.get(`${this.baseUrl}/selectCentros.php`);
   }
+
 }

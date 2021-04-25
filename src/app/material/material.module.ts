@@ -11,6 +11,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import {MatRadioModule} from '@angular/material/radio';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
+import { MatCardModule } from '@angular/material/card';
 
 
 
@@ -18,7 +19,7 @@ import { MatListModule } from '@angular/material/list';
 
 
 @NgModule({
-  exports: [MatListModule,MatSidenavModule,MatRadioModule,MatNativeDateModule
+  exports: [MatCardModule,MatListModule,MatSidenavModule,MatRadioModule,MatNativeDateModule
     ,MatDatepickerModule,MatFormFieldModule,MatSelectModule,MatInputModule,MatToolbarModule,MatIconModule,MatButtonModule,MatStepperModule],
 })
 export class MaterialModule {}

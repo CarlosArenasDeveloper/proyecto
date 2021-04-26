@@ -1,4 +1,6 @@
 <app-shared></app-shared>
+<form [formGroup]="miFormulario" (ngSubmit)="editar()">
+
 <h1>
   Informacion del cliente: {{ cliente.nombre | titlecase }}
   {{ cliente.apellido1 | titlecase }} {{ cliente.apellido2 | titlecase }}
@@ -14,19 +16,64 @@
     >
       Regresar
     </button>
+    <button type="submit" class="btn btn-primary" [disabled]="miFormulario.invalid">
+      Actualizar datos
+    </button>
+
+    <div class="row mt-5">
+      <mat-form-field appearance="fill">
+        <mat-label>Seleccione una tarifa: </mat-label>
+        <mat-select formControlName="id_tarifa">
+          <mat-option *ngFor="let tarifa of tarifas" [value]="tarifa.id">
+            {{ tarifa.nombre | titlecase }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <span
+        class="form-text text-danger fst-italic"
+        *ngIf="campoNoValido('id_tarifa')"
+      >
+        La eleccion de la tarifa es requerida
+      </span>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Seleccione un centro: </mat-label>
+        <mat-select formControlName="id_centro">
+          <mat-option *ngFor="let centro of centros" [value]="centro.id">
+            {{ centro.nombre | titlecase }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <span
+        class="form-text text-danger fst-italic"
+        *ngIf="campoNoValido('id_centro')"
+      >
+        La eleccion del centro es requerida
+      </span>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Seleccione un rol: </mat-label>
+        <mat-select formControlName="role">
+          <mat-option value="2"> Cliente </mat-option>
+          <mat-option value="3"> Monitor </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <span
+        class="form-text text-danger fst-italic"
+        *ngIf="campoNoValido('role')"
+      >
+        La eleccion del rol es requerida
+      </span>
+    </div>
   </div>
 
   <div class="col-6">
     <div class="row">
-      <form [formGroup]="miFormulario" (ngSubmit)="editar()">
         <div class="row">
-          <div class="col-12">
             <mat-form-field>
-              <mat-label>Email:</mat-label>
+              <mat-label>Email:(no se puede cambiar)</mat-label>
               <input matInput formControlName="email" readonly />
             </mat-form-field>
-            <span class="fw-bold fs-5">Email:</span> {{ cliente.email }}
-          </div>
           <mat-form-field>
             <mat-label>Nombre:</mat-label>
             <input
@@ -136,7 +183,7 @@
             {{ cuentaErrorMsg }}
           </span>
 
-          <mat-radio-group formControlName="sexo" required>
+          <mat-radio-group formControlName="sexo">
             Seleccione su sexo:
             <br />
             <mat-radio-button value="hombre" color="warn"
@@ -253,52 +300,15 @@
 
           <mat-form-field>
             <mat-label>Fecha alta:</mat-label>
-            <input type="date" matInput formControlName="fecha_alta" readonly />
+            <input type="date" matInput 
+            formControlName="fecha_alta" 
+            readonly />
           </mat-form-field>
 
-          <mat-form-field appearance="fill">
-            <mat-label>Seleccione una tarifa: </mat-label>
-            <mat-select formControlName="id_tarifa">
-              <mat-option *ngFor="let tarifa of tarifas" [value]="tarifa.id">
-                {{ tarifa.nombre | titlecase }}
-              </mat-option>
-            </mat-select>
+          <mat-form-field>
+            <mat-label>Fecha baja:</mat-label>
+            <input type="date" matInput formControlName="fecha_baja" readonly />
           </mat-form-field>
-          <span
-            class="form-text text-danger fst-italic"
-            *ngIf="campoNoValido('id_tarifa')"
-          >
-            La eleccion de la tarifa es requerida
-          </span>
-
-          <mat-form-field appearance="fill">
-            <mat-label>Seleccione un centro: </mat-label>
-            <mat-select formControlName="id_centro">
-              <mat-option *ngFor="let centro of centros" [value]="centro.id">
-                {{ centro.nombre | titlecase }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-          <span
-            class="form-text text-danger fst-italic"
-            *ngIf="campoNoValido('id_centro')"
-          >
-            La eleccion del centro es requerida
-          </span>
-
-          <mat-form-field appearance="fill">
-            <mat-label>Seleccione un rol: </mat-label>
-            <mat-select formControlName="role">
-              <mat-option value="2"> Cliente </mat-option>
-              <mat-option value="3"> Monitor </mat-option>
-            </mat-select>
-          </mat-form-field>
-          <span
-            class="form-text text-danger fst-italic"
-            *ngIf="campoNoValido('role')"
-          >
-            La eleccion del rol es requerida
-          </span>
 
           Estado : {{ cliente.estado }}
           <a
@@ -316,11 +326,11 @@
             Dar de alta
           </a>
         </div>
-        <button type="submit" class="btn btn-primary" [disabled]="miFormulario.invalid">
-          Actualizar cliente
-        </button>
-      </form>
+        
     </div>
   </div>
 </div>
-
+</form>
+<!-- 
+<pre>{{miFormulario.value|json}}</pre>
+<pre>{{cliente|json}}</pre> -->

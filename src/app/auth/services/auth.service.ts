@@ -18,7 +18,7 @@ export class AuthService {
     );
   }
 
-  registro(usuario: Usuario) {
+  registro(usuario: Usuario):Observable<Usuario> {
     return this.http.post(
       `${this.baseUrl}/registroCliente.php`,
       JSON.stringify(usuario)

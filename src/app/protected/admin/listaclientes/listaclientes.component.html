@@ -22,17 +22,19 @@
         <th scope="col">Apellido2</th>
         <th scope="col">Estado</th>
         <th scope="col">Tarifa</th>
+        <th scope="col"></th>
+
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let ele of clientes; let i = index">
         <td>{{ i + 1 }}</td>
-        <td>{{ ele.email }}</td>
-        <td>{{ ele.nombre }}</td>
-        <td>{{ ele.apellido1 }}</td>
-        <td>{{ ele.apellido2 }}</td>
-        <td>{{ ele.estado }}</td>
-        <td>{{ ele.id_tarifa }}</td>
+        <td>{{ ele.email |titlecase}}</td>
+        <td>{{ ele.nombre |titlecase}}</td>
+        <td>{{ ele.apellido1 |titlecase }}</td>
+        <td>{{ ele.apellido2 |titlecase}}</td>
+        <td>{{ ele.estado |titlecase}}</td>
+        <td>{{ ele.id_tarifa |titlecase}}</td>
         <td>
           <button class="btn btn-danger" (click)="borrarCliente(ele, i)">
             <i class="fa fa-trash"></i>

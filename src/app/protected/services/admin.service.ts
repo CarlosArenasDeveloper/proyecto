@@ -36,4 +36,10 @@ export class AdminService {
     return  this.htpp.post<Usuario>(`${this.baseUrl}/editarCliente.php`,JSON.stringify(cliente))
   }
 
+  darBaja(cliente:Usuario){
+    return  this.htpp.post<Usuario>(`${this.baseUrl}/darBaja.php`,JSON.stringify(cliente))
+  }
+  darAlta(cliente:Usuario){
+    return  this.htpp.post<Usuario>(`${this.baseUrl}/darAlta.php`,JSON.stringify(cliente))
+  }
 }

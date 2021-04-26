@@ -33,6 +33,21 @@ export class EditclienteComponent implements OnInit {
   tarifas: any;
   centros: any;
   cliente: Usuario = {};
+
+  fechaActual():string {
+    let date = new Date();
+
+    let day = date.getDate();
+    let month = date.getMonth() + 1;
+    let year = date.getFullYear();
+
+    if (month < 10) {
+      return (`${year}-0${month}-${day}`);
+    } else {
+      return(`${year}-${month}-${day}`);
+    }
+  }
+
   miFormulario: FormGroup = this.fb.group(
     {
       nombre: ['', [Validators.required]],
@@ -50,7 +65,7 @@ export class EditclienteComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(6)]],
       password2: ['', []],
       fecha_nac: ['', [Validators.required]],
-      sexo: ['', [Validators.required]],
+      sexo: [''],
       telefono: ['', [Validators.required, Validators.pattern('^[0-9]{9}$')]],
       cuenta_bancaria: [
         '',
@@ -66,7 +81,7 @@ export class EditclienteComponent implements OnInit {
       fecha_baja: [''],
       role: ['', [Validators.required]],
       estado: [''],
-      email:[`${this.cliente.email}`],
+      email: [`${this.cliente.email}`],
     },
     {
       validators: [
@@ -95,6 +110,8 @@ export class EditclienteComponent implements OnInit {
         );
         this.miFormulario.controls['dni'].setValue(this.cliente.dni);
         this.miFormulario.controls['password'].setValue(this.cliente.password);
+        this.miFormulario.controls['password2'].setValue(this.cliente.password);
+
         this.miFormulario.controls['nombre'].setValue(this.cliente.nombre);
         this.miFormulario.controls['apellido1'].setValue(
           this.cliente.apellido1
@@ -131,26 +148,24 @@ export class EditclienteComponent implements OnInit {
         this.miFormulario.controls['fecha_baja'].setValue(
           this.cliente.fecha_baja
         );
-        this.miFormulario.controls['email'].setValue(this.cliente.email)
+        this.miFormulario.controls['email'].setValue(this.cliente.email);
+        this.miFormulario.controls['role'].setValue(this.cliente.role);
       });
   }
 
-  editar() {
-    this.cliente=this.miFormulario.value
-    this.adminService
-      .editarCliente(this.cliente)
-      .subscribe((resp) => {
-        if(resp){
-          Swal.fire({
-            position: 'top-end',
-            icon: 'success',
-            title: 'Datos correctamente actualizados',
-            showConfirmButton: false,
-            timer: 1500
-          })
-        }
-      });
-
+  editar():void {
+    this.cliente = this.miFormulario.value;
+    this.adminService.editarCliente(this.cliente).subscribe((resp) => {
+      if (resp) {
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Datos correctamente actualizados',
+          showConfirmButton: false,
+          timer: 2000,
+        });
+      }
+    });
   }
 
   campoNoValido(campo: string) {
@@ -210,16 +225,20 @@ export class EditclienteComponent implements OnInit {
       cancelButtonText: 'No, cancelar',
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire(
-          'Baja completada!',
-          `Se ha dado de baja de ${
-            this.cliente.id_centro
-          } a ${this.cliente.nombre?.toUpperCase()} ${this.cliente.apellido1?.toUpperCase()}`,
-          'success'
-        );
         this.cliente.estado = 'baja';
         this.miFormulario.controls['estado'].setValue('baja');
-        this.miFormulario.controls['fecha_baja'].setValue(new Date());
+        this.miFormulario.controls['fecha_baja'].setValue(this.fechaActual());
+        this.miFormulario.controls['num_reservas'].setValue(0);
+        this.cliente = this.miFormulario.value;
+        this.adminService.darBaja(this.cliente).subscribe((resp) => {
+          Swal.fire(
+            'Baja completada!',
+            `Se ha dado de baja de ${
+              this.cliente.id_centro
+            } a ${this.cliente.nombre?.toUpperCase()} ${this.cliente.apellido1?.toUpperCase()}`,
+            'success'
+          );
+        });
       }
     });
   }
@@ -235,18 +254,23 @@ export class EditclienteComponent implements OnInit {
       cancelButtonText: 'No, cancelar',
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire(
-          'Alta completada!',
-          `Se ha dado de alta de ${
-            this.cliente.id_centro
-          } a ${this.cliente.nombre?.toUpperCase()} ${this.cliente.apellido1?.toUpperCase()}`,
-          'success'
-        );
         this.cliente.estado = 'activo';
         this.miFormulario.controls['estado'].setValue('activo');
-        this.miFormulario.controls['fecha_alta'].setValue(new Date());
+         this.miFormulario.controls['fecha_alta'].setValue(this.fechaActual());
+        this.cliente = this.miFormulario.value;
+        console.log(this.cliente);
+        this.adminService.darAlta(this.cliente).subscribe((resp) => {
+          Swal.fire(
+            'Alta completada!',
+            `Se ha dado de alta de ${
+              this.cliente.id_centro
+            } a ${this.cliente.nombre?.toUpperCase()} ${this.cliente.apellido1?.toUpperCase()}`,
+            'success'
+          );
+        });
       }
     });
-   
   }
+
+
 }

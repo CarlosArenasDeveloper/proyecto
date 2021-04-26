@@ -5,6 +5,7 @@ import { AuthService } from '../../../auth/services/auth.service';
 import { Usuario } from '../../../auth/interfaces/interface';
 import { ValidatorService } from '../../../auth/services/validator.service';
 import { EmailValidatorService } from '../../../auth/services/email-validator.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-altacliente',
@@ -80,8 +81,8 @@ export class AltaclienteComponent implements OnInit {
     );
     this.secondFormGroup = this.fb.group({
       fecha_nac: ['', [Validators.required]],
-      sexo: ['',[Validators.required]],
-      telefono: ['', [Validators.required,Validators.pattern('^[0-9]{9}$')]],
+      sexo: [''],
+      telefono: ['', [Validators.required,Validators.pattern('^[6-7]{1}[0-9]{8}$')]],
       cuenta_bancaria: ['', [Validators.required,Validators.pattern('[a-zA-Z]{2}[0-9]{22}$')]],
       ciudad: ['', [Validators.required]],
       direccion: ['', [Validators.required]],
@@ -102,7 +103,14 @@ export class AltaclienteComponent implements OnInit {
     };
     this.authService.registro(this.cliente).subscribe((resp) => {
       if (resp != 'ERROR') {
-        this.router.navigateByUrl('auth/login');
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Se ha añadido con exito a ' +resp.nombre?.toUpperCase() +'!' ,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        this.router.navigateByUrl('dashboard/admin/listaclientes');
       }
     });
   }
@@ -170,5 +178,10 @@ export class AltaclienteComponent implements OnInit {
     }
     return '';
   }
-  
+
+  elegirTarifa(id:number){
+    this.thirdFormGroup.controls['id_tarifa'].setValue(id);
+    this.thirdFormGroup.controls['id_centro'].setValue("");
+
+  }
 }

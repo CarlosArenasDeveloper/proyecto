@@ -1,8 +1,8 @@
-<h1>Añadiendo un nuevo cliente</h1>
+<h1>Unete a Fit & Healthy, ¡De la manera más sencilla y segura!</h1>
 <mat-horizontal-stepper [linear]="true" #stepper>
   
   <mat-step [stepControl]="firstFormGroup">
-    <form [formGroup]="firstFormGroup">
+    <form [formGroup]="firstFormGroup" autocomplete="off">
       <ng-template matStepLabel>Paso 1</ng-template>
       <div class="row">
         <div class="col-12 col-md-6 col-lg-4">
@@ -133,7 +133,7 @@
         </div>
 
         <div class="col-12">  
-          <button mat-raised-button matStepperPrevious color="warn" routerLink="/dashboard/admin/listaclientes">
+          <button mat-raised-button matStepperPrevious color="warn" routerLink="/dashboard">
             Regresar
           </button>
           <button mat-raised-button matStepperNext color="primary" class="mt-5">
@@ -145,7 +145,7 @@
   </mat-step>
 
   <mat-step [stepControl]="secondFormGroup" label="Paso 2">
-    <form [formGroup]="secondFormGroup">
+    <form [formGroup]="secondFormGroup" autocomplete="off">
       <div class="row">
         <div class="col-12 col-md-6">
           <mat-form-field>
@@ -165,20 +165,13 @@
           </span>
         </div>
         <div class="col-12 col-md-6 mt-4">
-          <mat-radio-group formControlName="sexo" required>
+          <mat-radio-group formControlName="sexo">
             Seleccione su sexo:
             <br>
             <mat-radio-button value="hombre" color="warn">Hombre</mat-radio-button>
             <br>
             <mat-radio-button value="mujer" color="warn">Mujer</mat-radio-button>
           </mat-radio-group>
-          <span
-          class="form-text text-danger fst-italic"
-          *ngIf="secondFormGroup.controls['sexo'].hasError('required')"
-        >
-          <br />
-          ¿Eres hombre o mujer?
-        </span>
         </div>
 
         <div class="col-12 col-md-6">
@@ -289,14 +282,14 @@
   </mat-step>
 
   <mat-step [stepControl]="thirdFormGroup" label="Paso 3">
-    <form [formGroup]="thirdFormGroup">
+    <form [formGroup]="thirdFormGroup" autocomplete="off">
     <div class="row mt-5">
       <div *ngFor="let tarifa of tarifas" class="col">
         <div class="card" style="width: 18rem;">
           <div class="card-body">
             <h5 class="card-title">TARIFA {{tarifa.nombre|uppercase}}</h5>
             <p class="card-text">{{tarifa.descripcion|titlecase}}</p>
-            <a class="btn btn-primary">{{tarifa.precio}} €</a>
+            <a (click)="elegirTarifa(tarifa.id)" class="btn btn-primary">{{tarifa.precio}} €</a>
           </div>
         </div>
       </div>
@@ -307,7 +300,7 @@
           <mat-select formControlName="id_tarifa">
             <mat-option *ngFor="let tarifa of tarifas" [value]="tarifa.id">
               {{tarifa.nombre|titlecase}} 
-            </mat-option>
+            </mat-option> 
           </mat-select>
         </mat-form-field>
         <span
@@ -318,7 +311,7 @@
       </span>
       </div>
         
-      <div class="row">
+      <div class="row mt-4">
         <mat-form-field appearance="fill">
           <mat-label>Seleccione un centro: </mat-label>
           <mat-select formControlName="id_centro">
@@ -346,13 +339,13 @@
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>Hecho</ng-template>
-    <p>Para terminar, pulse el boton de Confirmar registro</p>
+    <p>Para terminar, pulse el boton de confirmar</p>
     <div>
       <button mat-raised-button matStepperPrevious color="warn">
         Anterior
       </button>
       <button mat-raised-button matStepperNext color="primary" class="mt-5" (click)="registrar()">
-        Confirmar registro
+        Confirmar 
         </button>
     </div>
   </mat-step>

@@ -5,6 +5,7 @@ import { AuthService } from '../../services/auth.service';
 import { Usuario, Tarifa } from '../../interfaces/interface';
 import { ValidatorService } from '../../services/validator.service';
 import { EmailValidatorService } from '../../services/email-validator.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-registro',
@@ -79,8 +80,8 @@ export class RegistroComponent implements OnInit {
           ],
           [this.emailValidatorService],
         ],
-        password: ['123456', [Validators.required, Validators.minLength(6)]],
-        password2: ['123456', [Validators.required]],
+        password: ['', [Validators.required, Validators.minLength(6)]],
+        password2: ['', [Validators.required]],
       },
       {
         validators: [
@@ -90,8 +91,8 @@ export class RegistroComponent implements OnInit {
     );
     this.secondFormGroup = this.fb.group({
       fecha_nac: ['', [Validators.required]],
-      sexo: ['',[Validators.required]],
-      telefono: ['', [Validators.required,Validators.pattern('^[0-9]{9}$')]],
+      sexo: [''],
+      telefono: ['', [Validators.required,Validators.pattern('^[6-7]{1}[0-9]{8}$')]],
       cuenta_bancaria: ['', [Validators.required,Validators.pattern('[a-zA-Z]{2}[0-9]{22}$')]],
       ciudad: ['', [Validators.required]],
       direccion: ['', [Validators.required]],
@@ -112,6 +113,13 @@ export class RegistroComponent implements OnInit {
     };
     this.authService.registro(this.cliente).subscribe((resp) => {
       if (resp != 'ERROR') {
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Registro completado con exito, gracias por confiar en nosotros ' +resp.nombre?.toUpperCase() +'!' ,
+          showConfirmButton: false,
+          timer: 1500,
+        });
         this.router.navigateByUrl('auth/login');
       }
     });
@@ -179,6 +187,10 @@ export class RegistroComponent implements OnInit {
       return 'El valor ingresado no tiene formato de numero de cuenta';
     }
     return '';
+  }
+
+  elegirTarifa(id:number){
+    this.thirdFormGroup.controls['id_tarifa'].setValue(id);
   }
   
 }

@@ -1,58 +1,30 @@
-
-
 <mat-sidenav-container>
-    
-    <mat-sidenav #sidenav mode="push">
-        
-        <mat-toolbar color="warn">
-            <span>Panel de administracion</span>
-            <span class="spacer"></span>
-            <button mat-icon-button
-                    (click)="sidenav.toggle()">
-                <mat-icon>menu</mat-icon>
-            </button>
-            
-        </mat-toolbar>
-
-        <mat-nav-list>
-            <a routerLink="./listaclientes"
-               mat-list-item
-               (click)="sidenav.toggle()">
-                <mat-icon mat-list-icon>label</mat-icon>
-                <span>Clientes</span>
-            </a>
-            <a routerLink="./agregar"
-               mat-list-item
-               (click)="sidenav.toggle()">
-                <mat-icon mat-list-icon>add</mat-icon>
-                <span>Añadir Héroe</span>
-            </a>
-
-            <a routerLink="./buscar"
-               mat-list-item
-               (click)="sidenav.toggle()">
-                <mat-icon mat-list-icon>search</mat-icon>
-                <span>Búscar Héroe</span>
-            </a>
-            
-        </mat-nav-list>
-        
-    </mat-sidenav>
-
+  <mat-sidenav #sidenav mode="push">
     <mat-toolbar color="warn">
-        <button mat-icon-button
-                (click)="sidenav.toggle()">
-            <mat-icon>menu</mat-icon>
-        </button>
-
-        <span class="spacer"></span>
-
-        <!-- <span>{{ usuario }} </span> -->
+      <span>Panel de administracion</span>
+      <span class="spacer"></span>
+      <button mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
     </mat-toolbar>
 
+    <mat-nav-list>
+      <a routerLink="./listaclientes" mat-list-item (click)="sidenav.toggle()">
+        <mat-icon mat-list-icon>label</mat-icon>
+        <span>Clientes</span>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
 
-    <div class="container">
-        <router-outlet></router-outlet>
-    </div>
+  <mat-toolbar color="warn">
+    <button mat-icon-button (click)="sidenav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+
+    <span class="spacer"></span>
+
+    <!-- <span>{{ usuario }} </span> -->
+  </mat-toolbar>
+
 
 </mat-sidenav-container>

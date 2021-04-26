@@ -2,7 +2,7 @@
 <mat-horizontal-stepper [linear]="true" #stepper>
   
   <mat-step [stepControl]="firstFormGroup">
-    <form [formGroup]="firstFormGroup">
+    <form [formGroup]="firstFormGroup" autocomplete="off">
       <ng-template matStepLabel>Paso 1</ng-template>
       <div class="row">
         <div class="col-12 col-md-6 col-lg-4">
@@ -145,7 +145,7 @@
   </mat-step>
 
   <mat-step [stepControl]="secondFormGroup" label="Paso 2">
-    <form [formGroup]="secondFormGroup">
+    <form [formGroup]="secondFormGroup" autocomplete="off">
       <div class="row">
         <div class="col-12 col-md-6">
           <mat-form-field>
@@ -165,20 +165,13 @@
           </span>
         </div>
         <div class="col-12 col-md-6 mt-4">
-          <mat-radio-group formControlName="sexo" required>
+          <mat-radio-group formControlName="sexo">
             Seleccione su sexo:
             <br>
             <mat-radio-button value="hombre" color="warn">Hombre</mat-radio-button>
             <br>
             <mat-radio-button value="mujer" color="warn">Mujer</mat-radio-button>
           </mat-radio-group>
-          <span
-          class="form-text text-danger fst-italic"
-          *ngIf="secondFormGroup.controls['sexo'].hasError('required')"
-        >
-          <br />
-          ¿Eres hombre o mujer?
-        </span>
         </div>
 
         <div class="col-12 col-md-6">
@@ -289,14 +282,14 @@
   </mat-step>
 
   <mat-step [stepControl]="thirdFormGroup" label="Paso 3">
-    <form [formGroup]="thirdFormGroup">
+    <form [formGroup]="thirdFormGroup" autocomplete="off">
     <div class="row mt-5">
       <div *ngFor="let tarifa of tarifas" class="col">
         <div class="card" style="width: 18rem;">
           <div class="card-body">
             <h5 class="card-title">TARIFA {{tarifa.nombre|uppercase}}</h5>
             <p class="card-text">{{tarifa.descripcion|titlecase}}</p>
-            <a class="btn btn-primary">{{tarifa.precio}} €</a>
+            <button  (click)="elegirTarifa(tarifa.id)" class="btn btn-primary">{{tarifa.precio}} €</button>
           </div>
         </div>
       </div>

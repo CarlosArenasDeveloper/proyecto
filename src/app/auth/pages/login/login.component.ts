@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { Usuario } from '../../interfaces/interface';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -44,9 +45,7 @@ export class LoginComponent {
     );
   }
   login() {
-
-    if(this.miFormulario.invalid){
-          
+    if (this.miFormulario.invalid) {
     }
     const { email, password } = this.miFormulario.value;
     this.authService.login(email, password).subscribe((datosUsuario) => {
@@ -62,6 +61,12 @@ export class LoginComponent {
       } else {
         this.miFormulario.reset();
         this.datosIncorrectos = true;
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text:
+            'El nombre de usuario y la contraseña que ingresaste no coinciden con nuestros registros. Por favor, revisa e inténtelo de nuevo.',
+        });
       }
     });
   }

@@ -16,6 +16,9 @@ import { EditclienteComponent } from './admin/editcliente/editcliente.component'
 import { MaterialModule } from '../material/material.module';
 import { SharedComponent } from './admin/shared/shared.component';
 import { ListaclientesComponent } from './admin/listaclientes/listaclientes.component';
+import { ListamonitoresComponent } from './admin/listamonitores/listamonitores.component';
+import { AltamonitorComponent } from './admin/altamonitor/altamonitor.component';
+import { EditmonitorComponent } from './admin/editmonitor/editmonitor.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +33,9 @@ import { ListaclientesComponent } from './admin/listaclientes/listaclientes.comp
     EditclienteComponent,
     ListaclientesComponent,
     SharedComponent,
+    ListamonitoresComponent,
+    AltamonitorComponent,
+    EditmonitorComponent,
   ],
   imports: [
     CommonModule,

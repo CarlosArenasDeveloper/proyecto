@@ -1,11 +1,64 @@
-<h1>Añadiendo a un nuevo cliente!</h1>
-<mat-horizontal-stepper [linear]="true" #stepper>
-  
-  <mat-step [stepControl]="firstFormGroup">
-    <form [formGroup]="firstFormGroup" autocomplete="off">
-      <ng-template matStepLabel>Paso 1</ng-template>
-      <div class="row">
-        <div class="col-12 col-md-6 col-lg-4">
+<app-shared></app-shared>
+<form [formGroup]="miFormulario" (ngSubmit)="editar()">
+
+<h1>
+  Informacion del monitor: {{ monitor.nombre | titlecase }}
+  {{ monitor.apellido1 | titlecase }} {{ monitor.apellido2 | titlecase }}
+</h1>
+<div class="row">
+  <div class="col-5">
+    <img src="assets/no-image.png" class="img-fluid" />
+   
+    <button
+      type="submit"
+      class="btn btn-danger mx-3"
+      routerLink="/dashboard/admin/listamonitores"
+    >
+      Regresar
+    </button>
+    <button type="submit" class="btn btn-primary" [disabled]="miFormulario.invalid">
+      Actualizar datos
+    </button>
+
+    <div class="row mt-5">
+      <mat-form-field appearance="fill">
+        <mat-label>Seleccione un centro: </mat-label>
+        <mat-select formControlName="id_centro">
+          <mat-option *ngFor="let centro of centros" [value]="centro.id">
+            {{ centro.nombre | titlecase }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <span
+        class="form-text text-danger fst-italic"
+        *ngIf="campoNoValido('id_centro')"
+      >
+        La eleccion del centro es requerida
+      </span>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Seleccione un rol: </mat-label>
+        <mat-select formControlName="role">
+          <mat-option value="2"> monitor </mat-option>
+          <mat-option value="3"> Monitor </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <span
+        class="form-text text-danger fst-italic"
+        *ngIf="campoNoValido('role')"
+      >
+        La eleccion del rol es requerida
+      </span>
+    </div>
+  </div>
+
+  <div class="col-6">
+    <div class="row">
+        <div class="row">
+            <mat-form-field>
+              <mat-label>Email:(no se puede cambiar)</mat-label>
+              <input matInput formControlName="email" readonly />
+            </mat-form-field>
           <mat-form-field>
             <mat-label>Nombre:</mat-label>
             <input
@@ -19,12 +72,9 @@
             class="form-text text-danger fst-italic"
             *ngIf="campoNoValido('nombre')"
           >
-            <br />
             El nombre es requerido
           </span>
-        </div>
 
-        <div class="col-12 col-md-6 col-lg-4">
           <mat-form-field>
             <mat-label>Primer apellido:</mat-label>
             <input
@@ -38,12 +88,9 @@
             class="form-text text-danger fst-italic"
             *ngIf="campoNoValido('apellido1')"
           >
-            <br />
             El primer apellido es requerido
           </span>
-        </div>
 
-        <div class="col-12 col-md-6 col-lg-4">
           <mat-form-field>
             <mat-label>Segundo apellido:</mat-label>
             <input
@@ -52,28 +99,6 @@
               formControlName="apellido2"
             />
           </mat-form-field>
-        </div>
-
-        <div class="col-4">
-          <mat-form-field>
-            <mat-label>Email:</mat-label>
-            <input
-              matInput
-              placeholder="Introduzca su email"
-              formControlName="email"
-              required
-            />
-          </mat-form-field>
-          <br />
-          <span
-            class="form-text text-danger fst-italic"
-            *ngIf="campoNoValido('email')"
-          >
-            {{ emailErrorMsg }}
-          </span>
-        </div>
-
-        <div class="col-6">
           <mat-form-field>
             <mat-label>DNI/NIE:</mat-label>
             <input
@@ -90,9 +115,7 @@
             <br />
             {{ dniErrorMsg }}
           </span>
-        </div>
 
-        <div class="col-6">
           <mat-form-field>
             <mat-label>Contraseña</mat-label>
             <input
@@ -107,12 +130,9 @@
             class="form-text text-danger fst-italic"
             *ngIf="campoNoValido('password')"
           >
-            <br />
             {{ passwordErrorMsg }}
           </span>
-        </div>
 
-        <div class="col">
           <mat-form-field>
             <mat-label>Confirmar contraseña</mat-label>
             <input
@@ -123,31 +143,13 @@
               required
             />
           </mat-form-field>
-          <br />
           <span
             class="form-text text-danger fst-italic"
             *ngIf="campoNoValido('password2')"
           >
             Las contraseñas deben de ser iguales
           </span>
-        </div>
 
-        <div class="col-12">  
-          <button mat-raised-button matStepperPrevious color="warn" routerLink="/dashboard/admin/listaclientes">
-            Regresar
-          </button>
-          <button mat-raised-button matStepperNext color="primary" class="mt-5">
-          Siguiente
-        </button></div>
-      
-      </div>
-    </form>
-  </mat-step>
-
-  <mat-step [stepControl]="secondFormGroup" label="Paso 2">
-    <form [formGroup]="secondFormGroup" autocomplete="off">
-      <div class="row">
-        <div class="col-12 col-md-6">
           <mat-form-field>
             <mat-label>Nº de cuenta bancaria (24 digitos): </mat-label>
             <input
@@ -163,25 +165,34 @@
             <br />
             {{ cuentaErrorMsg }}
           </span>
-        </div>
-        <div class="col-12 col-md-6 mt-4">
-          <mat-radio-group formControlName="sexo">
-            Seleccione su sexo:
-            <br>
-            <mat-radio-button value="hombre" color="warn">Hombre</mat-radio-button>
-            <br>
-            <mat-radio-button value="mujer" color="warn">Mujer</mat-radio-button>
-          </mat-radio-group>
-        </div>
 
-        <div class="col-12 col-md-6">
-        <mat-form-field>
-          <mat-label>Fecha de nacimiento: </mat-label>
-          <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker"               formControlName="fecha_nac"
-          >
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
+          <mat-radio-group formControlName="sexo" class="mb-4">
+            Seleccione su sexo:
+            <br />
+            <mat-radio-button value="hombre" color="warn"
+              >Hombre</mat-radio-button
+            >
+            <br />
+            <mat-radio-button value="mujer" color="warn"
+              >Mujer</mat-radio-button
+            >
+          </mat-radio-group>
+
+          <mat-form-field>
+            <mat-label>Fecha de nacimiento: </mat-label>
+            <input
+              matInput
+              [min]="minDate"
+              [max]="maxDate"
+              [matDatepicker]="picker"
+              formControlName="fecha_nac"
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
           <span
             class="form-text text-danger fst-italic"
             *ngIf="campoNoValido('fecha_nac')"
@@ -189,9 +200,7 @@
             <br />
             La fecha de nacimiento es requerida
           </span>
-        </div>
 
-        <div class="col-12 col-md-6">
           <mat-form-field>
             <mat-label
               >Nº de telefono: <mat-icon>call_end</mat-icon>
@@ -209,9 +218,7 @@
             <br />
             {{ telefonoErrorMsg }}
           </span>
-        </div>
 
-        <div class="col-12 col-md-6 col-lg-4">
           <mat-form-field>
             <mat-label>Ciudad:</mat-label>
             <input
@@ -228,9 +235,7 @@
             <br />
             El ciudad es requerida
           </span>
-        </div>
 
-        <div class="col-12 col-md-6">
           <mat-form-field>
             <mat-label>Direccion:</mat-label>
             <input
@@ -247,9 +252,6 @@
             <br />
             La direccion es requerida
           </span>
-        </div>
-
-        <div class="col-12 col-md-6 col-lg-4">
           <mat-form-field>
             <mat-label>Codigo postal:</mat-label>
             <input
@@ -268,85 +270,7 @@
           </span>
         </div>
         
-
-        <div class="col-12">
-          <button mat-raised-button matStepperPrevious color="warn">
-            Anterior
-          </button>
-          <button mat-raised-button matStepperNext color="primary" class="mt-5">
-            Siguiente
-            </button>
-        </div>
-      </div>
-    </form>
-  </mat-step>
-
-  <mat-step [stepControl]="thirdFormGroup" label="Paso 3">
-    <form [formGroup]="thirdFormGroup" autocomplete="off">
-    <div class="row mt-5">
-      <div *ngFor="let tarifa of tarifas" class="col">
-        <div class="card" style="width: 18rem;">
-          <div class="card-body">
-            <h5 class="card-title">TARIFA {{tarifa.nombre|uppercase}}</h5>
-            <p class="card-text">{{tarifa.descripcion|titlecase}}</p>
-            <a (click)="elegirTarifa(tarifa.id)" class="btn btn-primary">{{tarifa.precio}} €</a>
-          </div>
-        </div>
-      </div>
     </div>
-      <div class="row">
-        <mat-form-field appearance="fill">
-          <mat-label>Seleccione una tarifa: </mat-label>
-          <mat-select formControlName="id_tarifa">
-            <mat-option *ngFor="let tarifa of tarifas" [value]="tarifa.id">
-              {{tarifa.nombre|titlecase}} 
-            </mat-option> 
-          </mat-select>
-        </mat-form-field>
-        <span
-        class="form-text text-danger fst-italic"
-        *ngIf="campoNoValido('id_tarifa')"
-      >
-        La eleccion de la tarifa es requerida
-      </span>
-      </div>
-        
-      <div class="row mt-4">
-        <mat-form-field appearance="fill">
-          <mat-label>Seleccione un centro: </mat-label>
-          <mat-select formControlName="id_centro">
-            <mat-option *ngFor="let centro of centros" [value]="centro.id">
-              {{centro.nombre|titlecase}} 
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <span
-        class="form-text text-danger fst-italic"
-        *ngIf="campoNoValido('id_centro')"
-      >
-        La eleccion del centro es requerida
-      </span>
-      </div>
-      <div class="mt-5">
-        <button mat-raised-button matStepperPrevious color="warn">
-          Anterior
-        </button>
-        <button mat-raised-button matStepperNext color="primary">
-          Siguiente
-        </button>
-      </div>
-    </form>
-  </mat-step>
-  <mat-step>
-    <ng-template matStepLabel>Hecho</ng-template>
-    <p>Para terminar, pulse el boton de confirmar</p>
-    <div>
-      <button mat-raised-button matStepperPrevious color="warn">
-        Anterior
-      </button>
-      <button mat-raised-button matStepperNext color="primary" class="mt-5" (click)="add()">
-        Confirmar 
-        </button>
-    </div>
-  </mat-step>
-</mat-horizontal-stepper>
+  </div>
+</div>
+</form>

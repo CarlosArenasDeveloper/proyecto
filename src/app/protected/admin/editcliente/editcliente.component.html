@@ -183,7 +183,7 @@
             {{ cuentaErrorMsg }}
           </span>
 
-          <mat-radio-group formControlName="sexo">
+          <mat-radio-group formControlName="sexo" class="mb-4">
             Seleccione su sexo:
             <br />
             <mat-radio-button value="hombre" color="warn"
@@ -194,13 +194,6 @@
               >Mujer</mat-radio-button
             >
           </mat-radio-group>
-          <span
-            class="form-text text-danger fst-italic"
-            *ngIf="miFormulario.controls['sexo'].hasError('required')"
-          >
-            <br />
-            ¿Eres hombre o mujer?
-          </span>
 
           <mat-form-field>
             <mat-label>Fecha de nacimiento: </mat-label>

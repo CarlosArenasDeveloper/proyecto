@@ -1,0 +1,57 @@
+<app-shared></app-shared>
+<h1>Listado de Monitores</h1>
+<hr />
+<div class="row">
+  <div class="col text-right">
+    <button routerLink="./altamonitor" class="btn btn-primary">
+      <i class="fa fa-plus"></i>
+      Añadir monitor
+    </button>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col"></div>
+  <table class="table mt-3 animated fadeIn faster">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Email</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Apellido1</th>
+        <th scope="col">Apellido2</th>
+        <th scope="col"></th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let ele of monitores; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ ele.email |titlecase}}</td>
+        <td>{{ ele.nombre |titlecase}}</td>
+        <td>{{ ele.apellido1 |titlecase }}</td>
+        <td>{{ ele.apellido2 |titlecase}}</td>
+        <td>
+          <button class="btn btn-danger" (click)="borrarMonitor(ele, i)">
+            <i class="fa fa-trash"></i>
+          </button>
+          <button
+            class="btn btn-warning ms-2"
+            [routerLink]="['./editmonitor', ele.email]"
+          >
+            Ver mas...
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div
+    *ngIf="monitores.length == 0"
+    class="alert alert-warning text-center mt-3"
+  >
+    <h4 class="alert-heading">No hay registros</h4>
+    <p>
+      <i class="fa fa-exclamation fa-2x"></i>
+    </p>
+  </div>
+</div>

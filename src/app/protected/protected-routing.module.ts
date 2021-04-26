@@ -7,6 +7,9 @@ import { MonitorComponent } from './monitor/monitor.component';
 import { AltaclienteComponent } from './admin/altacliente/altacliente.component';
 import { EditclienteComponent } from './admin/editcliente/editcliente.component';
 import { ListaclientesComponent } from './admin/listaclientes/listaclientes.component';
+import { ListamonitoresComponent } from './admin/listamonitores/listamonitores.component';
+import { AltamonitorComponent } from './admin/altamonitor/altamonitor.component';
+import { EditmonitorComponent } from './admin/editmonitor/editmonitor.component';
 
 const routes: Routes = [
   {
@@ -17,6 +20,9 @@ const routes: Routes = [
       {path:  'admin/listaclientes',component:ListaclientesComponent},
       { path: 'admin/listaclientes/altacliente', component: AltaclienteComponent },
       { path: 'admin/listaclientes/editcliente/:email', component: EditclienteComponent },
+      { path: 'admin/listamonitores', component: ListamonitoresComponent },
+      { path: 'admin/listamonitores/altamonitor', component: AltamonitorComponent },
+      { path: 'admin/listamonitores/editmonitor/:email', component: EditmonitorComponent },
       { path: 'cliente', component: ClienteComponent },
       { path: 'monitor', component: MonitorComponent },
       { path: '**', redirectTo: '' },

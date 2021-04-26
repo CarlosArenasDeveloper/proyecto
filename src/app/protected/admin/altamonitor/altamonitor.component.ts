@@ -1,25 +1,26 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { AuthService } from '../../../auth/services/auth.service';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { ValidatorService } from 'src/app/auth/services/validator.service';
 import { Usuario } from '../../../auth/interfaces/interface';
-import { ValidatorService } from '../../../auth/services/validator.service';
 import { EmailValidatorService } from '../../../auth/services/email-validator.service';
+import { AuthService } from '../../../auth/services/auth.service';
+import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { AdminService } from '../../services/admin.service';
 
 @Component({
-  selector: 'app-altacliente',
-  templateUrl: './altacliente.component.html',
-  styleUrls: ['./altacliente.component.css']
+  selector: 'app-altamonitor',
+  templateUrl: './altamonitor.component.html',
+  styleUrls: ['./altamonitor.component.css']
 })
-export class AltaclienteComponent implements OnInit {
-  cliente: Usuario = {};
+export class AltamonitorComponent implements OnInit {
+
+  monitor: Usuario = {};
   firstFormGroup!: FormGroup;
   secondFormGroup!: FormGroup;
   thirdFormGroup!: FormGroup;
   minDate!: Date;
   maxDate!: Date;
-  tarifas:any;
   centros:any;
 
   constructor(
@@ -27,22 +28,17 @@ export class AltaclienteComponent implements OnInit {
     private validatorService: ValidatorService,
     private emailValidatorService: EmailValidatorService,
     private authService:AuthService,
+    private adminService :AdminService,
     private router: Router
   ) {
     const currentYear = new Date().getFullYear();
     this.minDate = new Date(currentYear - 100, 0, 1);
     this.maxDate = new Date(currentYear - 18,0,0);
-    this.tarifas=[];
     this.centros=[];
   }
 
 
   ngOnInit() {
-
-    this.authService.selectTarifas().subscribe(resp=>{
-      this.tarifas=resp;
-    })
-
     this.authService.selectCentros().subscribe(resp=>{
       this.centros=resp;
     })
@@ -87,31 +83,7 @@ export class AltaclienteComponent implements OnInit {
       ciudad: ['', [Validators.required]],
       direccion: ['', [Validators.required]],
       cod_postal: ['', [Validators.required]],
-    });
-    
-    this.thirdFormGroup = this.fb.group({
-      id_tarifa: ['', [Validators.required]],
       id_centro: ['', [Validators.required]],
-    });
-  }
-
-  add() {
-    this.cliente = {
-      ...this.firstFormGroup.value,
-      ...this.secondFormGroup.value,
-      ...this.thirdFormGroup.value
-    };
-    this.authService.registro(this.cliente).subscribe((resp) => {
-      if (resp != 'ERROR') {
-        Swal.fire({
-          position: 'top-end',
-          icon: 'success',
-          title: 'Se ha añadido con exito a ' +resp.nombre?.toUpperCase() +'!' ,
-          showConfirmButton: false,
-          timer: 1500,
-        });
-        this.router.navigateByUrl('dashboard/admin/listaclientes');
-      }
     });
   }
 
@@ -121,9 +93,6 @@ export class AltaclienteComponent implements OnInit {
         this.firstFormGroup.get(campo)?.touched) ||
       (this.secondFormGroup.get(campo)?.invalid &&
         this.secondFormGroup.get(campo)?.touched)
-        ||
-      (this.thirdFormGroup.get(campo)?.invalid &&
-        this.thirdFormGroup.get(campo)?.touched)
     );
   }
 
@@ -179,9 +148,23 @@ export class AltaclienteComponent implements OnInit {
     return '';
   }
 
-  elegirTarifa(id:number){
-    this.thirdFormGroup.controls['id_tarifa'].setValue(id);
-    this.thirdFormGroup.controls['id_centro'].setValue("");
-
+  
+  add() {
+    this.monitor = {
+      ...this.firstFormGroup.value,
+      ...this.secondFormGroup.value,
+    };
+    this.adminService.addMonitor(this.monitor).subscribe((resp) => {
+      if (resp != 'ERROR') {
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Se ha añadido con exito a ' +resp.nombre?.toUpperCase() +'!' ,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        this.router.navigateByUrl('dashboard/admin/listamonitores');
+      }
+    });
   }
 }

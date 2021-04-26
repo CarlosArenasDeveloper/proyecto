@@ -1,29 +1,29 @@
 import { Component, OnInit } from '@angular/core';
+import Swal from 'sweetalert2';
 import { AdminService } from '../../services/admin.service';
 import { Usuario } from '../../../auth/interfaces/interface';
-import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-listaclientes',
-  templateUrl: './listaclientes.component.html',
-  styleUrls: ['./listaclientes.component.css']
+  selector: 'app-listamonitores',
+  templateUrl: './listamonitores.component.html',
+  styleUrls: ['./listamonitores.component.css']
 })
-export class ListaclientesComponent implements OnInit {
+export class ListamonitoresComponent implements OnInit {
 
  
-  clientes: any = [];
+  monitores: any = [];
 
   constructor(private adminService: AdminService) {}
 
   ngOnInit(): void {
     this.adminService
-      .getClientes()
-      .subscribe((clientes) => (this.clientes = clientes));
+      .getMonitores()
+      .subscribe((monitores) => (this.monitores = monitores));
   }
 
   editarCliente() {}
 
-  borrarCliente(usuario: Usuario, i: number) {
+  borrarMonitor(usuario: Usuario, i: number) {
     Swal.fire({
       title: `¿Estas seguro de querer eliminar a ${usuario.nombre?.toUpperCase()} ${usuario.apellido1?.toUpperCase()}?`,
       icon: 'warning',
@@ -35,11 +35,11 @@ export class ListaclientesComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         this.adminService.borrarUsuario(usuario.email!).subscribe((usuario) => {
-          this.clientes.splice(i,1)
+          this.monitores.splice(i,1)
         });
 
         Swal.fire(
-          'Cliente eliminado!',
+          'Monitor eliminado!',
           `Se ha borrado correctamente a ${usuario.nombre?.toUpperCase()} ${usuario.apellido1?.toUpperCase()}`,
           'success'
         )
@@ -47,5 +47,4 @@ export class ListaclientesComponent implements OnInit {
     })
     
   }
-
 }

@@ -66,7 +66,7 @@ export class EditclienteComponent implements OnInit {
       password2: ['', []],
       fecha_nac: ['', [Validators.required]],
       sexo: [''],
-      telefono: ['', [Validators.required, Validators.pattern('^[0-9]{9}$')]],
+      telefono: ['', [Validators.required,Validators.pattern('^[6-7]{1}[0-9]{8}$')]],
       cuenta_bancaria: [
         '',
         [Validators.required, Validators.pattern('[a-zA-Z]{2}[0-9]{22}$')],
@@ -101,7 +101,7 @@ export class EditclienteComponent implements OnInit {
 
     this.activatedRoute.params
       .pipe(
-        switchMap(({ email }) => this.adminService.getClientePorEmail(email))
+        switchMap(({ email }) => this.adminService.getUsuarioPorEmail(email))
       )
       .subscribe((cliente) => {
         this.cliente = cliente;

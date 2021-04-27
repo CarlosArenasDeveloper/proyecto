@@ -1,27 +1,43 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AdminService } from '../../services/admin.service';
-import { Usuario } from '../../../auth/interfaces/interface';
+import { Usuario, UserData } from '../../../auth/interfaces/interface';
 import Swal from 'sweetalert2';
+
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-listaclientes',
   templateUrl: './listaclientes.component.html',
-  styleUrls: ['./listaclientes.component.css']
+  styleUrls: ['./listaclientes.component.css'],
 })
-export class ListaclientesComponent implements OnInit {
-
- 
+export class ListaclientesComponent implements OnInit, OnDestroy {
+  dtOptions: DataTables.Settings = {};
+  dtTrigger = new Subject();
   clientes: any = [];
 
   constructor(private adminService: AdminService) {}
 
   ngOnInit(): void {
-    this.adminService
-      .getClientes()
-      .subscribe((clientes) => (this.clientes = clientes));
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 3,
+      language: {
+        url: '//cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json',
+      },
+      responsive: true,
+    };
+
+
+    this.adminService.getClientes().subscribe((clientes) => {
+      
+      this.clientes = clientes;
+      this.dtTrigger.next();
+    });
   }
 
-  editarCliente() {}
+  ngOnDestroy(): void {
+    this.dtTrigger.unsubscribe();
+  }
 
   borrarCliente(usuario: Usuario, i: number) {
     Swal.fire({
@@ -31,21 +47,18 @@ export class ListaclientesComponent implements OnInit {
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
       confirmButtonText: 'Si, eliminar',
-      cancelButtonText: 'No, cancelar'
+      cancelButtonText: 'No, cancelar',
     }).then((result) => {
       if (result.isConfirmed) {
         this.adminService.borrarUsuario(usuario.email!).subscribe((usuario) => {
-          this.clientes.splice(i,1)
+          Swal.fire(
+            'Cliente eliminado!',
+            `Se ha borrado correctamente a ${usuario.nombre?.toUpperCase()} ${usuario.apellido1?.toUpperCase()}`,
+            'success'
+          );
+          this.clientes.splice(i, 1);
         });
-
-        Swal.fire(
-          'Cliente eliminado!',
-          `Se ha borrado correctamente a ${usuario.nombre?.toUpperCase()} ${usuario.apellido1?.toUpperCase()}`,
-          'success'
-        )
       }
-    })
-    
+    });
   }
-
 }

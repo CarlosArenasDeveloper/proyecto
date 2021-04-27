@@ -19,6 +19,8 @@ import { ListaclientesComponent } from './admin/listaclientes/listaclientes.comp
 import { ListamonitoresComponent } from './admin/listamonitores/listamonitores.component';
 import { AltamonitorComponent } from './admin/altamonitor/altamonitor.component';
 import { EditmonitorComponent } from './admin/editmonitor/editmonitor.component';
+import { DataTablesModule } from "angular-datatables";
+
 
 @NgModule({
   declarations: [
@@ -43,6 +45,8 @@ import { EditmonitorComponent } from './admin/editmonitor/editmonitor.component'
     SharedModule,
     ReactiveFormsModule,
     MaterialModule,
+    DataTablesModule
+
   ],
 })
 export class ProtectedModule {}

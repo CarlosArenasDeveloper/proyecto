@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import { AdminService } from '../../services/admin.service';
 import { Usuario } from '../../../auth/interfaces/interface';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-listamonitores',
@@ -10,18 +11,33 @@ import { Usuario } from '../../../auth/interfaces/interface';
 })
 export class ListamonitoresComponent implements OnInit {
 
- 
+  dtOptions: DataTables.Settings = {};
+  dtTrigger = new Subject();
   monitores: any = [];
 
-  constructor(private adminService: AdminService) {}
+  constructor(private adminService: AdminService) {
 
-  ngOnInit(): void {
-    this.adminService
-      .getMonitores()
-      .subscribe((monitores) => (this.monitores = monitores));
+  }
+  ngOnDestroy(): void {
+    this.dtTrigger.unsubscribe();
   }
 
-  editarCliente() {}
+  ngOnInit(): void {
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 3,
+      language:{
+        url: '//cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json'
+      },
+      responsive:true
+    };
+ 
+      this.adminService.getMonitores().subscribe((clientes) => {
+        this.monitores = clientes;
+        this.dtTrigger.next();
+      });  
+    }
+
 
   borrarMonitor(usuario: Usuario, i: number) {
     Swal.fire({
@@ -36,13 +52,14 @@ export class ListamonitoresComponent implements OnInit {
       if (result.isConfirmed) {
         this.adminService.borrarUsuario(usuario.email!).subscribe((usuario) => {
           this.monitores.splice(i,1)
+          Swal.fire(
+            'Monitor eliminado!',
+            `Se ha borrado correctamente a ${usuario.nombre?.toUpperCase()} ${usuario.apellido1?.toUpperCase()}`,
+            'success'
+          )
         });
 
-        Swal.fire(
-          'Monitor eliminado!',
-          `Se ha borrado correctamente a ${usuario.nombre?.toUpperCase()} ${usuario.apellido1?.toUpperCase()}`,
-          'success'
-        )
+     
       }
     })
     

@@ -12,14 +12,16 @@ import {MatRadioModule} from '@angular/material/radio';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
-
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSortModule} from '@angular/material/sort';
 
 
 
 
 
 @NgModule({
-  exports: [MatCardModule,MatListModule,MatSidenavModule,MatRadioModule,MatNativeDateModule
+  exports: [MatSortModule,MatTableModule,MatPaginatorModule,MatCardModule,MatListModule,MatSidenavModule,MatRadioModule,MatNativeDateModule
     ,MatDatepickerModule,MatFormFieldModule,MatSelectModule,MatInputModule,MatToolbarModule,MatIconModule,MatButtonModule,MatStepperModule],
 })
 export class MaterialModule {}

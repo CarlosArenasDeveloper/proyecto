@@ -33,7 +33,7 @@
         <td>{{ ele.nombre |titlecase}}</td>
         <td>{{ ele.apellido1 |titlecase }}</td>
         <td>{{ ele.apellido2 |titlecase}}</td>
-        <td>{{ ele.estado |titlecase}}</td>
+        <td [ngClass]="{'text-success': ele.estado==='activo', 'text-danger': ele.estado==='baja'}">{{ ele.estado |titlecase}}</td>
         <td>{{ ele.id_tarifa |titlecase}}</td>
         <td>
           <button class="btn btn-danger" (click)="borrarCliente(ele, i)">

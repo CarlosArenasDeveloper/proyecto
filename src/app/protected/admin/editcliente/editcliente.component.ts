@@ -155,6 +155,14 @@ export class EditclienteComponent implements OnInit {
 
   editar():void {
     this.cliente = this.miFormulario.value;
+    if(this.cliente.estado==='baja'){
+      Swal.fire({
+        icon: 'error',
+        title: 'Los datos no fueron actualizados...',
+        text: 'Para cambiar la informacion de un cliente, este debe de estar dado de alta!',
+      })
+      return ;
+    }
     this.adminService.editarCliente(this.cliente).subscribe((resp) => {
       if (resp) {
         Swal.fire({
@@ -256,7 +264,6 @@ export class EditclienteComponent implements OnInit {
         this.miFormulario.controls['estado'].setValue('activo');
          this.miFormulario.controls['fecha_alta'].setValue(this.fechaActual());
         this.cliente = this.miFormulario.value;
-        console.log(this.cliente);
         this.adminService.darAlta(this.cliente).subscribe((resp) => {
           Swal.fire(
             'Alta completada!',

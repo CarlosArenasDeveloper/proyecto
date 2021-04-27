@@ -19,6 +19,10 @@ import Swal from 'sweetalert2';
       .mat-form-field {
         margin-top: 18px;
       }
+      
+      mat-form-field{
+    width: 100%;
+}
     `,
   ],
 })

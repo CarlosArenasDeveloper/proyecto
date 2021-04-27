@@ -14,7 +14,6 @@ export class SharedComponent implements OnInit {
   ngOnInit(): void {
    const usuario= JSON.parse(sessionStorage.getItem('usuario')!);
    this.usuario=usuario;
-   console.log(this.usuario);
   }
 
 

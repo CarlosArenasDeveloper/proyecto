@@ -114,7 +114,6 @@
             class="form-text text-danger fst-italic"
             *ngIf="campoNoValido('dni')"
           >
-            <br />
             {{ dniErrorMsg }}
           </span>
 
@@ -163,9 +162,7 @@
           <span
             class="form-text text-danger fst-italic"
             *ngIf="campoNoValido('cuenta_bancaria')"
-          >
-            <br />
-            {{ cuentaErrorMsg }}
+          >            {{ cuentaErrorMsg }}
           </span>
 
           <mat-radio-group formControlName="sexo" class="mb-4">
@@ -199,7 +196,6 @@
             class="form-text text-danger fst-italic"
             *ngIf="campoNoValido('fecha_nac')"
           >
-            <br />
             La fecha de nacimiento es requerida
           </span>
 
@@ -217,7 +213,6 @@
             class="form-text text-danger fst-italic"
             *ngIf="campoNoValido('telefono')"
           >
-            <br />
             {{ telefonoErrorMsg }}
           </span>
 
@@ -234,7 +229,6 @@
             class="form-text text-danger fst-italic"
             *ngIf="campoNoValido('ciudad')"
           >
-            <br />
             El ciudad es requerida
           </span>
 
@@ -251,7 +245,6 @@
             class="form-text text-danger fst-italic"
             *ngIf="campoNoValido('direccion')"
           >
-            <br />
             La direccion es requerida
           </span>
           <mat-form-field>
@@ -267,7 +260,6 @@
             class="form-text text-danger fst-italic"
             *ngIf="campoNoValido('cod_postal')"
           >
-            <br />
             El codigo postal es requerido
           </span>
         </div>

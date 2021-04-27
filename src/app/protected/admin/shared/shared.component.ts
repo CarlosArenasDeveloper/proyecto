@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Usuario } from '../../../auth/interfaces/interface';
 
 @Component({
   selector: 'app-shared',
@@ -6,12 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./shared.component.css']
 })
 export class SharedComponent implements OnInit {
-  usuario:any;
+  usuario!:Usuario;
 
   constructor() {
   }
   ngOnInit(): void {
-   const usuario= sessionStorage.getItem('usuario');
+   const usuario= JSON.parse(sessionStorage.getItem('usuario')!);
    this.usuario=usuario;
    console.log(this.usuario);
   }

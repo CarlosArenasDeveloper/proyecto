@@ -134,10 +134,12 @@
 
         <div class="col-12">  
           <button mat-raised-button matStepperPrevious color="warn" routerLink="/dashboard/admin/listaclientes">
-            Regresar
+            <i class="fas fa-arrow-circle-left"></i>
+            Volver atras
           </button>
-          <button mat-raised-button matStepperNext color="primary" class="mt-5">
+          <button mat-raised-button matStepperNext color="primary" class="mt-5 mx-2">
           Siguiente
+          <i class="fas fa-arrow-circle-right"></i>
         </button></div>
       
       </div>
@@ -271,10 +273,12 @@
 
         <div class="col-12">
           <button mat-raised-button matStepperPrevious color="warn">
+            <i class="fas fa-arrow-circle-left"></i>
             Anterior
           </button>
-          <button mat-raised-button matStepperNext color="primary" class="mt-5">
+          <button mat-raised-button matStepperNext color="primary" class="mt-5 mx-2">
             Siguiente
+            <i class="fas fa-arrow-circle-right"></i>
             </button>
         </div>
       </div>
@@ -328,12 +332,14 @@
       </span>
       </div>
       <div class="mt-5">
-        <button mat-raised-button matStepperPrevious color="warn">
-          Anterior
-        </button>
-        <button mat-raised-button matStepperNext color="primary">
-          Siguiente
-        </button>
+          <button mat-raised-button matStepperPrevious color="warn">
+            <i class="fas fa-arrow-circle-left"></i>
+            Anterior
+          </button>
+          <button mat-raised-button matStepperNext color="primary" class="mt-5 mx-2">
+            Siguiente
+            <i class="fas fa-arrow-circle-right"></i>
+            </button>
       </div>
     </form>
   </mat-step>
@@ -342,10 +348,11 @@
     <p>Para terminar, pulse el boton de confirmar</p>
     <div>
       <button mat-raised-button matStepperPrevious color="warn">
-        Anterior
+        <i class="fas fa-arrow-circle-left"></i>
+        Anterior 
       </button>
-      <button mat-raised-button matStepperNext color="primary" class="mt-5" (click)="add()">
-        Confirmar 
+      <button mat-raised-button matStepperNext color="primary" class="mt-5 mx-2" (click)="add()">
+        Confirmar <i class="fas fa-check-circle"></i>
         </button>
     </div>
   </mat-step>

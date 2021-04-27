@@ -10,15 +10,17 @@
     <img src="assets/no-image.png" class="img-fluid" />
    
     <button
-      type="submit"
-      class="btn btn-danger mx-3"
-      routerLink="/dashboard/admin/listamonitores"
-    >
-      Regresar
-    </button>
-    <button type="submit" class="btn btn-primary" [disabled]="miFormulario.invalid">
-      Actualizar datos
-    </button>
+    type="submit"
+    class="btn btn-danger mx-3"
+    routerLink="/dashboard/admin/listamonitores"
+  >
+  <i class="fas fa-arrow-circle-left"></i>
+    Volver atrás
+      </button>
+  <button type="submit" class="btn btn-primary" [disabled]="miFormulario.invalid">
+    Actualizar datos 
+    <i class="fa fa-edit"></i>
+  </button>
 
     <div class="row mt-5">
       <mat-form-field appearance="fill">

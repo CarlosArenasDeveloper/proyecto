@@ -233,9 +233,7 @@ export class EditclienteComponent implements OnInit {
         this.adminService.darBaja(this.cliente).subscribe((resp) => {
           Swal.fire(
             'Baja completada!',
-            `Se ha dado de baja de ${
-              this.cliente.id_centro
-            } a ${this.cliente.nombre?.toUpperCase()} ${this.cliente.apellido1?.toUpperCase()}`,
+            `Se ha dado de baja a ${this.cliente.nombre?.toUpperCase()} ${this.cliente.apellido1?.toUpperCase()}`,
             'success'
           );
         });
@@ -262,9 +260,7 @@ export class EditclienteComponent implements OnInit {
         this.adminService.darAlta(this.cliente).subscribe((resp) => {
           Swal.fire(
             'Alta completada!',
-            `Se ha dado de alta de ${
-              this.cliente.id_centro
-            } a ${this.cliente.nombre?.toUpperCase()} ${this.cliente.apellido1?.toUpperCase()}`,
+            `Se ha dado de alta a ${this.cliente.nombre?.toUpperCase()} ${this.cliente.apellido1?.toUpperCase()}`,
             'success'
           );
         });

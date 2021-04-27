@@ -14,10 +14,12 @@
       class="btn btn-danger mx-3"
       routerLink="/dashboard/admin/listaclientes"
     >
-      Regresar
-    </button>
+    <i class="fas fa-arrow-circle-left"></i>
+      Volver atrás
+        </button>
     <button type="submit" class="btn btn-primary" [disabled]="miFormulario.invalid">
-      Actualizar datos
+      Actualizar datos 
+      <i class="fa fa-edit"></i>
     </button>
 
     <div class="row mt-5">
@@ -303,20 +305,20 @@
             <input type="date" matInput formControlName="fecha_baja" readonly />
           </mat-form-field>
 
-          Estado : {{ cliente.estado }}
+          Estado actual : {{ cliente.estado |titlecase }}
           <a
             *ngIf="cliente.estado == 'activo'"
             (click)="baja()"
             class="btn btn-danger mx-3"
           >
-            Dar de baja
+            Dar de baja <i class="fas fa-arrow-down"></i>
           </a>
           <a
             *ngIf="cliente.estado == 'baja'"
             (click)="alta()"
             class="btn btn-primary mx-3"
           >
-            Dar de alta
+            Dar de alta <i class="fas fa-arrow-up"></i>
           </a>
         </div>
         

@@ -50,14 +50,14 @@ export class ListamonitoresComponent implements OnInit {
       cancelButtonText: 'No, cancelar'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.adminService.borrarUsuario(usuario.email!).subscribe((usuario) => {
+        this.adminService.borrarMonitor(usuario.email!).subscribe((usuario) => {
           this.monitores.splice(i,1)
-          Swal.fire(
-            'Monitor eliminado!',
-            `Se ha borrado correctamente a ${usuario.nombre?.toUpperCase()} ${usuario.apellido1?.toUpperCase()}`,
-            'success'
-          )
         });
+        Swal.fire(
+          'Monitor eliminado!',
+          `Se ha borrado correctamente a ${usuario.nombre?.toUpperCase()} ${usuario.apellido1?.toUpperCase()}`,
+          'success'
+        )
 
      
       }

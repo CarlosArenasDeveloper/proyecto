@@ -120,7 +120,7 @@ export class RegistroComponent implements OnInit {
         Swal.fire({
           position: 'top-end',
           icon: 'success',
-          title: 'Registro completado con exito, gracias por confiar en nosotros ' +resp.nombre?.toUpperCase() +'!' ,
+          title: 'Registro completado con exito, gracias por confiar en nosotros ' +this.cliente.nombre?.toUpperCase() +'!' ,
           showConfirmButton: false,
           timer: 1500,
         });

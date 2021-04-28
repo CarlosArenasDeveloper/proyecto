@@ -36,6 +36,13 @@ export class AdminService {
     );
   }
 
+  borrarMonitor(email: string) {
+    return this.htpp.get<Usuario>(
+      `${this.baseUrl}/borrarMonitor.php?email=${email}`
+    );
+  }
+
+
   editarCliente(cliente: Usuario) {
     return this.htpp.post<Usuario>(
       `${this.baseUrl}/editarCliente.php`,

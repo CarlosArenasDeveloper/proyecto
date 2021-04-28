@@ -26,7 +26,7 @@ export class LoginComponent {
         Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
       ],
     ],
-    password: ['carlos', [Validators.required, Validators.minLength(6)]],
+    password: ['123456', [Validators.required, Validators.minLength(6)]],
   });
 
   get emailErrorMsg(): string {
@@ -50,12 +50,22 @@ export class LoginComponent {
     const { email, password } = this.miFormulario.value;
     this.authService.login(email, password).subscribe((datosUsuario) => {
       if (datosUsuario != 'error') {
+        console.log(datosUsuario);
         sessionStorage.setItem('usuario', JSON.stringify(datosUsuario));
         if (datosUsuario.role == 1) {
           this.router.navigateByUrl('/dashboard/admin');
-        } else if (datosUsuario.role == 2) {
+        } else if (datosUsuario.role == 2 && datosUsuario.verificado==1) {
           this.router.navigateByUrl('/dashboard/cliente');
-        } else {
+        }  else if (datosUsuario.role == 2 && datosUsuario.verificado==0) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text:
+              `Hola, ${datosUsuario.nombre?.toUpperCase()} para acceder a Fit&Healthy debe verificar su email. Se ha enviado un correo a la direccion de ${datosUsuario.email} `,
+          });
+          this.router.navigateByUrl('/auth/login');
+        }
+        else {
           this.router.navigateByUrl('/dashboard/monitor');
         }
       } else {

@@ -8,10 +8,12 @@ import { MaterialModule } from '../material/material.module';
 import { SharedModule } from '../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LogoutComponent } from './pages/logout/logout.component';
+import { PasswordOlvidadaComponent } from './pages/password-olvidada/password-olvidada.component';
+import { ReestablecerPasswordComponent } from './pages/reestablecer-password/reestablecer-password.component';
 
 
 @NgModule({
-  declarations: [LoginComponent, RegistroComponent, LogoutComponent],
+  declarations: [LoginComponent, RegistroComponent, LogoutComponent, PasswordOlvidadaComponent, ReestablecerPasswordComponent],
   imports: [
     CommonModule,
     AuthRoutingModule,

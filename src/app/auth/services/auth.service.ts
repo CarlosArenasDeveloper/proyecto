@@ -32,4 +32,12 @@ export class AuthService {
     return this.http.get(`${this.baseUrl}/selectCentros.php`);
   }
 
+  passwordOlvidada(email:string){
+    return this.http.post(`${this.baseUrl}/passwordOlvidada.php`,JSON.stringify({email:email}))
+  }
+  
+  reestablecerPassword(usuario: Usuario){
+    return this.http.post(`${this.baseUrl}/reestablecerPassword.php`,JSON.stringify(usuario))
+  }
+
 }

@@ -24,6 +24,7 @@ export interface Usuario {
   num_reservas?:number;
   role?:any;
   estado?: string;
+  verificado?:number;
 
 }
 

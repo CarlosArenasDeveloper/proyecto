@@ -65,10 +65,10 @@ export class RegistroComponent implements OnInit {
       {
         
         nombre: ['', [Validators.required]],
-        apellido1: ['', [Validators.required]],
-        apellido2: [''],
+        apellido1: ['arenas', [Validators.required]],
+        apellido2: ['carretero'],
         dni: [
-          '',
+          '31032580Z',
           [
             Validators.required,
             Validators.pattern(
@@ -77,15 +77,15 @@ export class RegistroComponent implements OnInit {
           ],
         ],
         email: [
-          '',
+          'carlos_arenas_99@hotmail.com',
           [
             Validators.required,
             Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
           ],
           [this.emailValidatorService],
         ],
-        password: ['', [Validators.required, Validators.minLength(6)]],
-        password2: ['', [Validators.required]],
+        password: ['123456', [Validators.required, Validators.minLength(6)]],
+        password2: ['123456', [Validators.required]],
       },
       {
         validators: [
@@ -96,16 +96,16 @@ export class RegistroComponent implements OnInit {
     this.secondFormGroup = this.fb.group({
       fecha_nac: ['', [Validators.required]],
       sexo: [''],
-      telefono: ['', [Validators.required,Validators.pattern('^[6-7]{1}[0-9]{8}$')]],
-      cuenta_bancaria: ['', [Validators.required,Validators.pattern('[a-zA-Z]{2}[0-9]{22}$')]],
-      ciudad: ['', [Validators.required]],
-      direccion: ['', [Validators.required]],
-      cod_postal: ['', [Validators.required]],
+      telefono: ['678767678', [Validators.required,Validators.pattern('^[6-7]{1}[0-9]{8}$')]],
+      cuenta_bancaria: ['ES2121212211221212121212', [Validators.required,Validators.pattern('[a-zA-Z]{2}[0-9]{22}$')]],
+      ciudad: ['c', [Validators.required]],
+      direccion: ['calle', [Validators.required]],
+      cod_postal: ['14907', [Validators.required]],
     });
     
     this.thirdFormGroup = this.fb.group({
-      id_tarifa: ['', [Validators.required]],
-      id_centro: ['', [Validators.required]],
+      id_tarifa: ['1', [Validators.required]],
+      id_centro: ['1', [Validators.required]],
     });
   }
 
@@ -120,9 +120,9 @@ export class RegistroComponent implements OnInit {
         Swal.fire({
           position: 'top-end',
           icon: 'success',
-          title: 'Registro completado con exito, gracias por confiar en nosotros ' +this.cliente.nombre?.toUpperCase() +'!' ,
+          title: 'Bienvenido ' + this.cliente.nombre?.toLocaleUpperCase()+ '. Se ha enviado un correo de verificacion a ' +this.cliente.email +'!' ,
           showConfirmButton: false,
-          timer: 1500,
+          timer: 4000,
         });
         this.router.navigateByUrl('auth/login');
       }

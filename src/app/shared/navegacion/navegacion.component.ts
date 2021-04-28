@@ -1,15 +1,20 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navegacion',
   templateUrl: './navegacion.component.html',
   styleUrls: ['./navegacion.component.css']
 })
-export class NavegacionComponent implements OnInit {
+export class NavegacionComponent {
 
-  constructor() { }
+  constructor(private route: Router) { }
 
-  ngOnInit(): void {
+  cerrarSesion(): void {
+    console.log("logout");
+    sessionStorage.removeItem('usuario')
+    this.route.navigateByUrl("/")
   }
 
 }
+

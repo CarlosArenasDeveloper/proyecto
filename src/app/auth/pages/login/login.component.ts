@@ -46,26 +46,34 @@ export class LoginComponent {
   }
   login() {
     if (this.miFormulario.invalid) {
+      return ;
     }
     const { email, password } = this.miFormulario.value;
     this.authService.login(email, password).subscribe((datosUsuario) => {
       if (datosUsuario != 'error') {
-        console.log(datosUsuario);
         sessionStorage.setItem('usuario', JSON.stringify(datosUsuario));
         if (datosUsuario.role == 1) {
           this.router.navigateByUrl('/dashboard/admin');
-        } else if (datosUsuario.role == 2 && datosUsuario.verificado==1) {
+        } else if (datosUsuario.role == 2 && datosUsuario.verificado == 1) {
           this.router.navigateByUrl('/dashboard/cliente');
-        }  else if (datosUsuario.role == 2 && datosUsuario.verificado==0) {
+        } else if (datosUsuario.role == 2 && datosUsuario.verificado == 0) {
+          sessionStorage.removeItem('usuario');
           Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text:
-              `Hola, ${datosUsuario.nombre?.toUpperCase()} para acceder a Fit&Healthy debe verificar su email. Se ha enviado un correo a la direccion de ${datosUsuario.email} `,
-          });
-          this.router.navigateByUrl('/auth/login');
-        }
-        else {
+            text: `Hola ${datosUsuario.nombre?.toUpperCase()},  para acceder a Fit & Healthy debe verificar su email. Se ha enviado un correo a la direccion de ${
+              datosUsuario.email
+            } `,
+          }).then((result) => {
+            if (result.isConfirmed) {
+            this.authService.enviarVerificacionBis(email).subscribe(resp=>{
+              console.log("enviar correo bis")
+            })
+            }
+          })
+
+          // this.router.navigateByUrl('/auth/login');
+        } else {
           this.router.navigateByUrl('/dashboard/monitor');
         }
       } else {
@@ -73,9 +81,9 @@ export class LoginComponent {
         this.datosIncorrectos = true;
         Swal.fire({
           icon: 'error',
-          title: 'Oops...',
+          title: 'Error al intentar acceder a Fit & Healthy!',
           text:
-            'El nombre de usuario y la contraseña que ingresaste no coinciden con nuestros registros. Por favor, revisa e inténtelo de nuevo.',
+            'El email y la contraseña que ingresaste no coinciden con nuestros registros. Por favor, revisa e inténtelo de nuevo.',
         });
       }
     });

@@ -20,11 +20,11 @@ export class ListaclientesComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.dtOptions = {
       pagingType: 'full_numbers',
-      pageLength: 3,
+      pageLength: 5,
       language: {
         url: '//cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json',
       },
-      responsive: true,
+      responsive: true   
     };
 
 

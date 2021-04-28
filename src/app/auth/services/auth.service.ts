@@ -40,4 +40,9 @@ export class AuthService {
     return this.http.post(`${this.baseUrl}/reestablecerPassword.php`,JSON.stringify(usuario))
   }
 
+  enviarVerificacionBis(email:string){
+    return this.http.post(`${this.baseUrl}/enviarVerificacionBis.php`,JSON.stringify({email:email}))
+
+  }
+
 }

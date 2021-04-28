@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { AdminService } from '../../../protected/services/admin.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-password-olvidada',
@@ -15,7 +17,8 @@ export class PasswordOlvidadaComponent  {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private adminService: AdminService
   ) {}
   miFormulario: FormGroup = this.fb.group({
     email: [
@@ -45,9 +48,28 @@ export class PasswordOlvidadaComponent  {
   }
 
   enviar(){
-    this.authService.passwordOlvidada(this.miFormulario.controls['email'].value).subscribe(resp=>{
-      console.log(resp);
+    this.adminService.getUsuarioPorEmail(this.miFormulario.controls['email'].value).subscribe(resp=>{
+      if(resp!="error"){
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Se ha enviado un correo a ' +this.miFormulario.controls['email'].value +' para reestablecer la contraseña.' ,
+          showConfirmButton: false,
+          timer: 3000,
+        });
+        this.authService.passwordOlvidada(this.miFormulario.controls['email'].value).subscribe(resp=>{
+     
+        })
+      }else{
+        Swal.fire({
+          icon: 'error',
+          title: 'Email no registrado',
+          text:
+            'El email que ingresaste no coincide con nuestros registros. Por favor, revisa e inténtelo de nuevo.',
+        });
+      }
     })
+
   }
 
 }

@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { ValidatorService } from '../../services/validator.service';
 import { switchMap } from 'rxjs/operators';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -54,7 +55,17 @@ export class ReestablecerPasswordComponent {
       switchMap(({ email }) => this.authService.reestablecerPassword({email:email,password:this.miFormulario.controls['password'].value}))
     )
     .subscribe(resp=>{
-      console.log(resp);
+      if(resp=='correcto'){
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Se ha cambiado la contraseña de acceso correctamente!' ,
+          showConfirmButton: false,
+          timer: 3000,
+        });
+        this.router.navigateByUrl('auth/login');
+
+      }
     })
   }
 }

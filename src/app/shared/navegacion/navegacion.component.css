@@ -1,7 +1,23 @@
 img{
-    width: 200px;
+    width: 150px;
+    height: 100px;
 }
 
 li{
     cursor:pointer;
 }
+
+
+.active{
+    background-color: red;
+}
+
+.color{
+    background-color: #000000;
+}
+
+.spacer {
+    flex: 1 1 auto;
+  }
+
+  

@@ -1,2 +1,40 @@
+<!-- <h1>Bienvenido a </h1> -->
+<mat-sidenav-container *ngIf="sesion()">
+  <mat-sidenav #sidenav mode="push" class="bg-dark">
+    <mat-toolbar color="warn">
+      <span>Panel de administracion</span>
+      <span class="spacer"></span>
+      <button mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </mat-toolbar>
 
-<h1>Bienvenido {{nombre}}</h1>
+    <mat-nav-list *ngIf="isAdmin() || isMonitor()">
+      <a (click)="clientes()" mat-list-item (click)="sidenav.toggle()">
+        <mat-icon mat-list-icon>label</mat-icon>
+        <span class="text-white">Clientes</span>
+      </a>
+    </mat-nav-list>
+
+    <mat-nav-list *ngIf="isAdmin()">
+      <a (click)="monitores()" mat-list-item (click)="sidenav.toggle()">
+        <mat-icon mat-list-icon>label</mat-icon>
+        <span class="text-white">Monitores</span>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-toolbar color="warn">
+    <button mat-icon-button (click)="sidenav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+
+    <span class="spacer"></span>
+
+    <span>Hola {{ usuario.nombre | titlecase }}! <i class="fas fa-user"></i> </span>
+  </mat-toolbar>
+
+  <div class="container-fluid">
+    <router-outlet></router-outlet>
+  </div>
+</mat-sidenav-container>

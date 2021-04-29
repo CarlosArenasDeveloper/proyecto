@@ -7,23 +7,23 @@ import { Usuario } from '../../../auth/interfaces/interface';
   templateUrl: './shared.component.html',
   styleUrls: ['./shared.component.css']
 })
-export class SharedComponent implements OnInit {
-  usuario!:Usuario;
+export class SharedComponent{
+  // usuario!:Usuario;
 
-  constructor(private route: Router) {
-  }
-  ngOnInit(): void {
-   const usuario= JSON.parse(sessionStorage.getItem('usuario')!);
-   this.usuario=usuario;
-  }
+  // constructor(private route: Router) {
+  // }
+  // ngOnInit(): void {
+  //  const usuario= JSON.parse(sessionStorage.getItem('usuario')!);
+  //  this.usuario=usuario;
+  // }
 
-  monitores(){
-    this.route.navigateByUrl("dashboard/admin/listamonitores")
-  }
+  // monitores(){
+  //   this.route.navigateByUrl("dashboard/admin/listamonitores")
+  // }
 
-  clientes(){
-    this.route.navigateByUrl("dashboard/admin/listaclientes")
+  // clientes(){
+  //   this.route.navigateByUrl("dashboard/admin/listaclientes")
 
-  }
+  // }
 
 }

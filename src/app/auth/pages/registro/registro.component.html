@@ -97,11 +97,14 @@
             <mat-label>Contraseña</mat-label>
             <input
               type="password"
-              matInput
+              matInput [type]="hide ? 'password' : 'text'"
               placeholder="Introduzca su contraseña"
               formControlName="password"
               required
             />
+            <a mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </a>
           </mat-form-field>
           <span
             class="form-text text-danger fst-italic"
@@ -117,11 +120,14 @@
             <mat-label>Confirmar contraseña</mat-label>
             <input
               type="password"
-              matInput
+              matInput [type]="oculto ? 'password' : 'text'"
               placeholder="Introduzca su nombre"
               formControlName="password2"
               required
             />
+            <a mat-icon-button matSuffix (click)="oculto = !oculto" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </a>
           </mat-form-field>
           <br />
           <span

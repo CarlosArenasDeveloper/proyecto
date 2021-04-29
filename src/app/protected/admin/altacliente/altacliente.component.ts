@@ -106,7 +106,7 @@ export class AltaclienteComponent implements OnInit {
         Swal.fire({
           position: 'top-end',
           icon: 'success',
-          title: 'Se ha añadido con exito a ' +resp.nombre?.toUpperCase() +'!' ,
+          title: 'Se ha añadido con exito a ' +this.cliente.nombre!.toUpperCase() +'!' ,
           showConfirmButton: false,
           timer: 1500,
         });

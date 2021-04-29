@@ -15,6 +15,7 @@ import { DataTablesModule } from "angular-datatables";
 const routes: Routes = [
   {
     path: '',
+    component: DashboardComponent,
     children: [
       { path: '', component: DashboardComponent },
       { path: 'admin', component: AdminComponent },

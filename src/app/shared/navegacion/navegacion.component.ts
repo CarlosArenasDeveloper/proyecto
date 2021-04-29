@@ -13,7 +13,7 @@ export class NavegacionComponent {
 
   cerrarSesion(): void {
     sessionStorage.removeItem('usuario')
-    this.route.navigateByUrl("/")
+    this.route.navigateByUrl("/dashboard")
   }
 
   sesion():boolean{

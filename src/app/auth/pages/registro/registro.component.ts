@@ -28,6 +28,9 @@ import Swal from 'sweetalert2';
 })
 export class RegistroComponent implements OnInit {
   cliente: Usuario = {};
+  hide = true;
+  oculto = true;
+
   firstFormGroup!: FormGroup;
   secondFormGroup!: FormGroup;
   thirdFormGroup!: FormGroup;

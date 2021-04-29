@@ -12,9 +12,8 @@ export class AdminComponent implements OnInit {
   constructor() {
   }
   ngOnInit(): void {
-   const usuario= sessionStorage.getItem('usuario');
-   this.usuario=usuario;
-   console.log(this.usuario);
+  //  const usuario= sessionStorage.getItem('usuario');
+  //  this.usuario=usuario;
   }
 
 

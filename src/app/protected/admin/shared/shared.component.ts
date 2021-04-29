@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Usuario } from '../../../auth/interfaces/interface';
 
 @Component({
@@ -9,12 +10,20 @@ import { Usuario } from '../../../auth/interfaces/interface';
 export class SharedComponent implements OnInit {
   usuario!:Usuario;
 
-  constructor() {
+  constructor(private route: Router) {
   }
   ngOnInit(): void {
    const usuario= JSON.parse(sessionStorage.getItem('usuario')!);
    this.usuario=usuario;
   }
 
+  monitores(){
+    this.route.navigateByUrl("dashboard/admin/listamonitores")
+  }
+
+  clientes(){
+    this.route.navigateByUrl("dashboard/admin/listaclientes")
+
+  }
 
 }

@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-info">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#"><img src="./../../../assets/logo.png"></a>
+        <a class="navbar-brand" (click)="panel()"><img src="./../../../assets/logo.png"></a>
 
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -8,13 +8,13 @@
       <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           
-          <li class="nav-item ">
+          <li *ngIf="!sesion()" class="nav-item ">
             <a class="nav-link" routerLink="./auth/login" routerLinkActive="active" >LOGIN</a>
           </li>
-          <li class="nav-item">
+          <li *ngIf="!sesion()" class="nav-item">
             <a class="nav-link" routerLink="./auth/registro" routerLinkActive="active">REGISTRO</a>
           </li>
-          <li class="nav-item">
+          <li *ngIf="sesion()" class="nav-item">
             <a class="nav-link" (click)="cerrarSesion()" routerLinkActive="active"> CERRAR SESION <i class="fas fa-sign-out-alt"></i></a>
           </li>
         </ul>

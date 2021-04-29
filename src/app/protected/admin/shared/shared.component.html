@@ -9,14 +9,14 @@
     </mat-toolbar>
 
     <mat-nav-list>
-      <a routerLink="./listaclientes" mat-list-item (click)="sidenav.toggle()">
+      <a (click)="clientes()" mat-list-item (click)="sidenav.toggle()">
         <mat-icon mat-list-icon>label</mat-icon>
         <span>Clientes</span>
       </a>
     </mat-nav-list>
 
     <mat-nav-list>
-      <a routerLink="./listamonitores" mat-list-item (click)="sidenav.toggle()">
+      <a (click)="monitores()" mat-list-item (click)="sidenav.toggle()">
         <mat-icon mat-list-icon>label</mat-icon>
         <span>Monitores</span>
       </a>
@@ -34,5 +34,13 @@
     <span>Hola {{ usuario.nombre|titlecase }}! </span>
   </mat-toolbar>
 
+  <div class="container">
+    
+      <router-outlet></router-outlet>
+  </div>
+
 
 </mat-sidenav-container>
+
+
+

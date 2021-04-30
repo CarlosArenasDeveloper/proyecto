@@ -21,7 +21,7 @@ export class EmailValidatorService implements AsyncValidator {
                   // delay(3000),
                   map( resp => {
                     return ( resp.length === 1 ) 
-                        ? null
+                         ? null
                         : { emailTomado: true }
                   })
                 );

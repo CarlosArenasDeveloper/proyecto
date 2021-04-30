@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-import { Usuario, Tarifa } from '../../interfaces/interface';
+import { Usuario } from '../../interfaces/interface';
 import { ValidatorService } from '../../services/validator.service';
 import { EmailValidatorService } from '../../services/email-validator.service';
 import Swal from 'sweetalert2';
@@ -68,10 +68,10 @@ export class RegistroComponent implements OnInit {
       {
         
         nombre: ['', [Validators.required]],
-        apellido1: ['arenas', [Validators.required]],
-        apellido2: ['carretero'],
+        apellido1: ['', [Validators.required]],
+        apellido2: [''],
         dni: [
-          '31032580Z',
+          '',
           [
             Validators.required,
             Validators.pattern(
@@ -80,15 +80,15 @@ export class RegistroComponent implements OnInit {
           ],
         ],
         email: [
-          'carlos_arenas_99@hotmail.com',
+          '',
           [
             Validators.required,
             Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
           ],
           [this.emailValidatorService],
         ],
-        password: ['123456', [Validators.required, Validators.minLength(6)]],
-        password2: ['123456', [Validators.required]],
+        password: ['', [Validators.required, Validators.minLength(6)]],
+        password2: ['', [Validators.required]],
       },
       {
         validators: [
@@ -99,16 +99,16 @@ export class RegistroComponent implements OnInit {
     this.secondFormGroup = this.fb.group({
       fecha_nac: ['', [Validators.required]],
       sexo: [''],
-      telefono: ['678767678', [Validators.required,Validators.pattern('^[6-7]{1}[0-9]{8}$')]],
-      cuenta_bancaria: ['ES2121212211221212121212', [Validators.required,Validators.pattern('[a-zA-Z]{2}[0-9]{22}$')]],
-      ciudad: ['c', [Validators.required]],
-      direccion: ['calle', [Validators.required]],
-      cod_postal: ['14907', [Validators.required]],
+      telefono: ['', [Validators.required,Validators.pattern('^[6-7]{1}[0-9]{8}$')]],
+      cuenta_bancaria: ['', [Validators.required,Validators.pattern('[a-zA-Z]{2}[0-9]{22}$')]],
+      ciudad: ['', [Validators.required]],
+      direccion: ['', [Validators.required]],
+      cod_postal: ['', [Validators.required]],
     });
     
     this.thirdFormGroup = this.fb.group({
-      id_tarifa: ['1', [Validators.required]],
-      id_centro: ['1', [Validators.required]],
+      id_tarifa: ['', [Validators.required]],
+      id_centro: ['', [Validators.required]],
     });
   }
 
@@ -132,7 +132,7 @@ export class RegistroComponent implements OnInit {
     });
   }
 
-  campoNoValido(campo: string) {
+  campoNoValido(campo: string){
     return (
       (this.firstFormGroup.get(campo)?.invalid &&
         this.firstFormGroup.get(campo)?.touched) ||
@@ -196,7 +196,7 @@ export class RegistroComponent implements OnInit {
     return '';
   }
 
-  elegirTarifa(id:number){
+  elegirTarifa(id:number):void{
     this.thirdFormGroup.controls['id_tarifa'].setValue(id);
   }
   

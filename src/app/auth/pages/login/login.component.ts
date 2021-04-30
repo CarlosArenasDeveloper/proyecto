@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-import { Usuario } from '../../interfaces/interface';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -12,7 +11,8 @@ import Swal from 'sweetalert2';
 })
 export class LoginComponent {
   datosIncorrectos: boolean = false;
-
+  hide = true;
+  oculto = true;
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -20,13 +20,13 @@ export class LoginComponent {
   ) {}
   miFormulario: FormGroup = this.fb.group({
     email: [
-      'carlos_arenas_99@hotmail.com',
+      '',
       [
         Validators.required,
         Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
       ],
     ],
-    password: ['123456', [Validators.required, Validators.minLength(6)]],
+    password: ['', [Validators.required, Validators.minLength(6)]],
   });
 
   get emailErrorMsg(): string {

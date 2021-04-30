@@ -34,7 +34,7 @@ export class EditclienteComponent implements OnInit {
   centros: any;
   cliente: Usuario = {};
 
-  fechaActual():string {
+  fechaActual(): string {
     let date = new Date();
 
     let day = date.getDate();
@@ -42,9 +42,9 @@ export class EditclienteComponent implements OnInit {
     let year = date.getFullYear();
 
     if (month < 10) {
-      return (`${year}-0${month}-${day}`);
+      return `${year}-0${month}-${day}`;
     } else {
-      return(`${year}-${month}-${day}`);
+      return `${year}-${month}-${day}`;
     }
   }
 
@@ -66,7 +66,10 @@ export class EditclienteComponent implements OnInit {
       password2: ['', []],
       fecha_nac: ['', [Validators.required]],
       sexo: [''],
-      telefono: ['', [Validators.required,Validators.pattern('^[6-7]{1}[0-9]{8}$')]],
+      telefono: [
+        '',
+        [Validators.required, Validators.pattern('^[6-7]{1}[0-9]{8}$')],
+      ],
       cuenta_bancaria: [
         '',
         [Validators.required, Validators.pattern('[a-zA-Z]{2}[0-9]{22}$')],
@@ -82,6 +85,7 @@ export class EditclienteComponent implements OnInit {
       role: ['', [Validators.required]],
       estado: [''],
       email: [`${this.cliente.email}`],
+      verificado: [],
     },
     {
       validators: [
@@ -105,6 +109,12 @@ export class EditclienteComponent implements OnInit {
       )
       .subscribe((cliente) => {
         this.cliente = cliente;
+
+        if (this.cliente.verificado == 1) {
+          this.miFormulario.controls['verificado'].setValue(true);
+        } else {
+          this.miFormulario.controls['verificado'].setValue(false);
+        }
         this.miFormulario.controls['fecha_alta'].setValue(
           this.cliente.fecha_alta
         );
@@ -153,15 +163,26 @@ export class EditclienteComponent implements OnInit {
       });
   }
 
-  editar():void {
+  editar(): void {
+    
     this.cliente = this.miFormulario.value;
-    if(this.cliente.estado==='baja'){
+    const verificado = this.cliente.verificado;
+    if(verificado){
+      this.cliente.verificado=1;
+    }else{
+      this.cliente.verificado=0;
+    }
+    
+    console.log(this.cliente);
+    // console.log(this.cliente);
+    if (this.cliente.estado === 'baja') {
       Swal.fire({
         icon: 'error',
         title: 'Los datos no fueron actualizados...',
-        text: 'Para cambiar la informacion de un cliente, este debe de estar dado de alta!',
-      })
-      return ;
+        text:
+          'Para cambiar la informacion de un cliente, este debe de estar dado de alta!',
+      });
+      return;
     }
     this.adminService.editarCliente(this.cliente).subscribe((resp) => {
       if (resp) {
@@ -262,7 +283,7 @@ export class EditclienteComponent implements OnInit {
       if (result.isConfirmed) {
         this.cliente.estado = 'activo';
         this.miFormulario.controls['estado'].setValue('activo');
-         this.miFormulario.controls['fecha_alta'].setValue(this.fechaActual());
+        this.miFormulario.controls['fecha_alta'].setValue(this.fechaActual());
         this.cliente = this.miFormulario.value;
         this.adminService.darAlta(this.cliente).subscribe((resp) => {
           Swal.fire(
@@ -274,6 +295,4 @@ export class EditclienteComponent implements OnInit {
       }
     });
   }
-
-
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
@@ -16,27 +16,27 @@ export class PasswordOlvidadaComponent  {
 
   constructor(
     private fb: FormBuilder,
-    private router: Router,
     private authService: AuthService,
-    private adminService: AdminService
+    private adminService: AdminService,
   ) {}
   miFormulario: FormGroup = this.fb.group({
     email: [
-      'carlos_arenas_99@hotmail.com',
+      '',
       [
         Validators.required,
         Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
       ],
+      
     ],
   });
-
+  
   get emailErrorMsg(): string {
     const errors = this.miFormulario.get('email')?.errors;
     if (errors?.required) {
-      return 'Email es obligatorio';
+      return 'El email es requerido';
     } else if (errors?.pattern) {
       return 'El valor ingresado no tiene formato de correo';
-    }
+    } 
     return '';
   }
   

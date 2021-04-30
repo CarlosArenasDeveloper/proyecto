@@ -50,13 +50,13 @@ export class ListaclientesComponent implements OnInit, OnDestroy {
     }).then((result) => {
       if (result.isConfirmed) {
         this.adminService.borrarUsuario(usuario.email!).subscribe((usuario) => {
-          Swal.fire(
-            'Cliente eliminado!',
-            `Se ha borrado correctamente a ${usuario.nombre?.toUpperCase()} ${usuario.apellido1?.toUpperCase()}`,
-            'success'
-          );
           this.clientes.splice(i, 1);
         });
+        Swal.fire(
+          'Cliente eliminado!',
+          `Se ha borrado correctamente a ${usuario.nombre?.toUpperCase()} ${usuario.apellido1?.toUpperCase()}`,
+          'success'
+        );
       }
     });
   }

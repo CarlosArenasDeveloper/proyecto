@@ -9,19 +9,40 @@
       </button>
     </mat-toolbar>
 
+    <!-- <mat-accordion>
+      <mat-expansion-panel (opened)="panelOpenState = true"
+                           (closed)="panelOpenState = false" class="bg-dark">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <a (click)="clientes()" mat-list-item (click)="sidenav.toggle()">
+              <i class="fas fa-users"></i>
+              <span class="text-white">Usuarios</span>
+            </a>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <a (click)="clientes()" mat-list-item (click)="sidenav.toggle()">
+          <span class="text-white">Clientes</span>
+        </a>
+        <a (click)="monitores()" mat-list-item (click)="sidenav.toggle()">
+          <span class="text-white">Monitores</span>
+        </a>
+      </mat-expansion-panel>
+    </mat-accordion> -->
+
     <mat-nav-list *ngIf="isAdmin() || isMonitor()">
       <a (click)="clientes()" mat-list-item (click)="sidenav.toggle()">
         <mat-icon mat-list-icon>label</mat-icon>
         <span class="text-white">Clientes</span>
       </a>
     </mat-nav-list>
-
+    <mat-divider></mat-divider>
     <mat-nav-list *ngIf="isAdmin()">
       <a (click)="monitores()" mat-list-item (click)="sidenav.toggle()">
         <mat-icon mat-list-icon>label</mat-icon>
         <span class="text-white">Monitores</span>
       </a>
     </mat-nav-list>
+    
   </mat-sidenav>
 
   <mat-toolbar color="warn">

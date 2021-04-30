@@ -14,6 +14,7 @@ export class DashboardComponent implements OnInit {
   // ngOnInit(): void {
 
   // }
+  panelOpenState = false;
 
   usuario!: Usuario;
 

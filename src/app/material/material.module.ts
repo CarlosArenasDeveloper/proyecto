@@ -15,13 +15,15 @@ import { MatCardModule } from '@angular/material/card';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 
 
 
 
 @NgModule({
-  exports: [MatSortModule,MatTableModule,MatPaginatorModule,MatCardModule,MatListModule,MatSidenavModule,MatRadioModule,MatNativeDateModule
+  exports: [MatExpansionModule,MatMenuModule,MatSortModule,MatTableModule,MatPaginatorModule,MatCardModule,MatListModule,MatSidenavModule,MatRadioModule,MatNativeDateModule
     ,MatDatepickerModule,MatFormFieldModule,MatSelectModule,MatInputModule,MatToolbarModule,MatIconModule,MatButtonModule,MatStepperModule],
 })
 export class MaterialModule {}

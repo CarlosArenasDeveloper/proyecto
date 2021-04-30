@@ -4,3 +4,11 @@ mat-icon{
 .spacer {
   flex: 1 1 auto;
 }
+
+.mat-divider {
+  border-top-color: white;
+}
+
+a{
+  cursor: pointer;
+}

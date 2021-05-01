@@ -303,11 +303,15 @@
           <div>
             Estado actual :<span [ngClass]="{
               'text-success': cliente.estado === 'activo',
-              'text-danger': cliente.estado === 'baja'
+              'text-danger': cliente.estado === 'baja',
+              'text-secondary':cliente.estado==='bloqueado'
             }">  {{ cliente.estado |titlecase }}</span>
+            <a class="btn btn-primary mx-3" (click)="cambiarEstado()">
+              Cambiar estado 
+                      </a>
           </div>
           
-          <a
+          <!-- <a
             *ngIf="cliente.estado == 'activo'"
             (click)="baja()"
             class="btn btn-danger mx-3"
@@ -320,12 +324,9 @@
             class="btn btn-primary mx-3"
           >
             Dar de alta <i class="fas fa-arrow-up"></i>
-          </a>
+          </a> -->
         </div>
     </div>
   </div>
 </div>
 </form>
-<!-- 
-<pre>{{miFormulario.value|json}}</pre>
-<pre>{{cliente|json}}</pre> -->

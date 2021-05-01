@@ -6,6 +6,7 @@ import { Usuario } from '../../../auth/interfaces/interface';
 import { ValidatorService } from '../../../auth/services/validator.service';
 import { EmailValidatorService } from '../../../auth/services/email-validator.service';
 import Swal from 'sweetalert2';
+import { AdminService } from '../../services/admin.service';
 
 @Component({
   selector: 'app-altacliente',
@@ -27,7 +28,8 @@ export class AltaclienteComponent implements OnInit {
     private validatorService: ValidatorService,
     private emailValidatorService: EmailValidatorService,
     private authService:AuthService,
-    private router: Router
+    private router: Router,
+    private adminService: AdminService
   ) {
     const currentYear = new Date().getFullYear();
     this.minDate = new Date(currentYear - 100, 0, 1);
@@ -101,7 +103,9 @@ export class AltaclienteComponent implements OnInit {
       ...this.secondFormGroup.value,
       ...this.thirdFormGroup.value
     };
-    this.authService.registro(this.cliente).subscribe((resp) => {
+    this.cliente.fecha_alta=new Date();
+    
+    this.adminService.addCliente(this.cliente).subscribe((resp) => {
       if (resp != 'ERROR') {
         Swal.fire({
           position: 'top-end',

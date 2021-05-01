@@ -118,6 +118,7 @@ export class RegistroComponent implements OnInit {
       ...this.secondFormGroup.value,
       ...this.thirdFormGroup.value
     };
+    this.cliente.fecha_alta=new Date();
     this.authService.registro(this.cliente).subscribe((resp) => {
       if (resp != 'ERROR') {
         Swal.fire({

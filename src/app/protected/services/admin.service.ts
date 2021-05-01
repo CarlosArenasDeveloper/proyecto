@@ -76,7 +76,12 @@ export class AdminService {
       JSON.stringify(usuario)
     );
   }
-
+  addCliente(usuario: Usuario): Observable<Usuario> {
+    return this.htpp.post(
+      `${this.baseUrl}/addCliente.php`,
+      JSON.stringify(usuario)
+    );
+  }
   getNombresClientes() {
     return this.htpp.get(`${this.baseUrl}/nombres.php`);
   }

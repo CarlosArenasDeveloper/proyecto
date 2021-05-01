@@ -51,6 +51,22 @@
       >
         La eleccion del rol es requerida
       </span>
+
+
+      <mat-form-field appearance="fill" *ngIf="miFormulario.controls['role'].value==2">
+        <mat-label>Seleccione una tarifa: </mat-label>
+        <mat-select formControlName="id_tarifa">
+          <mat-option *ngFor="let tarifa of tarifas" [value]="tarifa.id">
+            {{ tarifa.nombre | titlecase }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <span
+        class="form-text text-danger fst-italic"
+        *ngIf="campoNoValido('id_tarifa')"
+      >
+        La eleccion de la tarifa es requerida
+      </span>
     </div>
   </div>
 

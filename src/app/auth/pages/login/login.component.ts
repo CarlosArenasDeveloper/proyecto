@@ -46,7 +46,7 @@ export class LoginComponent {
   }
   login() {
     if (this.miFormulario.invalid) {
-      return ;
+      return;
     }
     const { email, password } = this.miFormulario.value;
     this.authService.login(email, password).subscribe((datosUsuario) => {
@@ -54,6 +54,15 @@ export class LoginComponent {
         sessionStorage.setItem('usuario', JSON.stringify(datosUsuario));
         if (datosUsuario.role == 1) {
           this.router.navigateByUrl('/dashboard/admin');
+        } else if (
+          datosUsuario.role == 2 &&
+          datosUsuario.estado == 'bloqueado'
+        ) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Bloqueado',
+            text: `Hola ${datosUsuario.nombre?.toUpperCase()}, usted está bloqueado, para volver a acceder pongase en contacto con el personal de Fit & Healthy  `,
+          });
         } else if (datosUsuario.role == 2 && datosUsuario.verificado == 1) {
           this.router.navigateByUrl('/dashboard/cliente');
         } else if (datosUsuario.role == 2 && datosUsuario.verificado == 0) {
@@ -66,13 +75,13 @@ export class LoginComponent {
             } `,
           }).then((result) => {
             if (result.isConfirmed) {
-            this.authService.enviarVerificacionBis(email).subscribe(resp=>{
-              console.log("enviar correo bis")
-            })
+              this.authService
+                .enviarVerificacionBis(email)
+                .subscribe((resp) => {
+                  console.log('enviar correo bis');
+                });
             }
-          })
-
-          // this.router.navigateByUrl('/auth/login');
+          });
         } else {
           this.router.navigateByUrl('/dashboard/monitor');
         }

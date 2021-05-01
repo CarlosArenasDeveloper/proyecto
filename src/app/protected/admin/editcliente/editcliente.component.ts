@@ -194,6 +194,13 @@ export class EditclienteComponent implements OnInit {
       });
       return;
     }
+    if (this.cliente.role == 3) {
+      this.cliente.id_tarifa=undefined;
+      this.cliente.fecha_alta=undefined;
+      this.cliente.fecha_baja=undefined;
+      this.cliente.num_reservas=0;
+    }
+    
     this.adminService.editarCliente(this.cliente).subscribe((resp) => {
       if (resp) {
         Swal.fire({
@@ -205,6 +212,10 @@ export class EditclienteComponent implements OnInit {
         });
       }
     });
+
+    if (this.cliente.role == 3) {
+      this.router.navigateByUrl('dashboard/admin/listaclientes');
+    }
   }
 
   campoNoValido(campo: string) {
@@ -253,54 +264,153 @@ export class EditclienteComponent implements OnInit {
     return '';
   }
 
-  baja() {
-    Swal.fire({
-      title: `¿Estas seguro de que quieres dar de baja a ${this.cliente.nombre?.toUpperCase()} ${this.cliente.apellido1?.toUpperCase()}?`,
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Si, dar de baja',
-      cancelButtonText: 'No, cancelar',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.cliente.estado = 'baja';
-        this.miFormulario.controls['estado'].setValue('baja');
-        this.miFormulario.controls['fecha_baja'].setValue(this.fechaActual());
-        this.miFormulario.controls['num_reservas'].setValue(0);
-        this.cliente = this.miFormulario.value;
-        this.adminService.darBaja(this.cliente).subscribe((resp) => {
-          Swal.fire(
-            'Baja completada!',
-            `Se ha dado de baja a ${this.cliente.nombre?.toUpperCase()} ${this.cliente.apellido1?.toUpperCase()}`,
-            'success'
-          );
-        });
-      }
-    });
-  }
+  // baja() {
+  //   Swal.fire({
+  //     title: `¿Estas seguro de que quieres dar de baja a ${this.cliente.nombre?.toUpperCase()} ${this.cliente.apellido1?.toUpperCase()}?`,
+  //     icon: 'warning',
+  //     showCancelButton: true,
+  //     confirmButtonColor: '#3085d6',
+  //     cancelButtonColor: '#d33',
+  //     confirmButtonText: 'Si, dar de baja',
+  //     cancelButtonText: 'No, cancelar',
+  //   }).then((result) => {
+  //     if (result.isConfirmed) {
+  //       this.cliente.estado = 'baja';
+  //       this.miFormulario.controls['estado'].setValue('baja');
+  //       this.miFormulario.controls['fecha_baja'].setValue(this.fechaActual());
+  //       this.miFormulario.controls['num_reservas'].setValue(0);
+  //       this.cliente = this.miFormulario.value;
+  //       this.adminService.darBaja(this.cliente).subscribe((resp) => {
+  //         Swal.fire(
+  //           'Baja completada!',
+  //           `Se ha dado de baja a ${this.cliente.nombre?.toUpperCase()} ${this.cliente.apellido1?.toUpperCase()}`,
+  //           'success'
+  //         );
+  //       });
+  //     }
+  //   });
+  // }
 
-  alta() {
+  // alta() {
+  //   Swal.fire({
+  //     title: `¿Estas seguro de que quieres dar de alta a ${this.cliente.nombre?.toUpperCase()} ${this.cliente.apellido1?.toUpperCase()}?`,
+  //     icon: 'warning',
+  //     showCancelButton: true,
+  //     confirmButtonColor: '#3085d6',
+  //     cancelButtonColor: '#d33',
+  //     confirmButtonText: 'Si, dar de alta',
+  //     cancelButtonText: 'No, cancelar',
+  //   }).then((result) => {
+  //     if (result.isConfirmed) {
+  //       this.cliente.estado = 'activo';
+  //       this.miFormulario.controls['estado'].setValue('activo');
+  //       this.miFormulario.controls['fecha_alta'].setValue(this.fechaActual());
+  //       this.cliente = this.miFormulario.value;
+  //       this.adminService.darAlta(this.cliente).subscribe((resp) => {
+  //         Swal.fire(
+  //           'Alta completada!',
+  //           `Se ha dado de alta a ${this.cliente.nombre?.toUpperCase()} ${this.cliente.apellido1?.toUpperCase()}`,
+  //           'success'
+  //         );
+  //       });
+  //     }
+  //   });
+  // }
+
+  cambiarEstado() {
     Swal.fire({
-      title: `¿Estas seguro de que quieres dar de alta a ${this.cliente.nombre?.toUpperCase()} ${this.cliente.apellido1?.toUpperCase()}?`,
-      icon: 'warning',
+      title: 'Cambiar estado a ' + this.cliente.nombre?.toUpperCase(),
+      showDenyButton: true,
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Si, dar de alta',
-      cancelButtonText: 'No, cancelar',
+      confirmButtonText: `ALTA`,
+      denyButtonText: `BAJA`,
+      cancelButtonText: `BLOQUEAR`,
     }).then((result) => {
       if (result.isConfirmed) {
-        this.cliente.estado = 'activo';
-        this.miFormulario.controls['estado'].setValue('activo');
-        this.miFormulario.controls['fecha_alta'].setValue(this.fechaActual());
-        this.cliente = this.miFormulario.value;
-        this.adminService.darAlta(this.cliente).subscribe((resp) => {
-          Swal.fire(
-            'Alta completada!',
-            `Se ha dado de alta a ${this.cliente.nombre?.toUpperCase()} ${this.cliente.apellido1?.toUpperCase()}`,
-            'success'
-          );
+        Swal.fire({
+          title: `¿Estas seguro de que quieres dar de alta a ${this.cliente.nombre?.toUpperCase()} ${this.cliente.apellido1?.toUpperCase()}?`,
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Si, dar de alta',
+          cancelButtonText: 'No, cancelar',
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.cliente.estado = 'activo';
+            this.miFormulario.controls['estado'].setValue('activo');
+            this.miFormulario.controls['fecha_alta'].setValue(
+              this.fechaActual()
+            );
+            this.cliente = this.miFormulario.value;
+            this.adminService.darAlta(this.cliente).subscribe((resp) => {
+              Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Datos correctamente actualizados',
+                showConfirmButton: false,
+                timer: 2000,
+              });
+            });
+          }
+        });
+      } else if (result.isDenied) {
+        Swal.fire({
+          title: `¿Estas seguro de que quieres dar de baja a ${this.cliente.nombre?.toUpperCase()} ${this.cliente.apellido1?.toUpperCase()}?`,
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Si, dar de baja',
+          cancelButtonText: 'No, cancelar',
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.cliente.estado = 'baja';
+            this.miFormulario.controls['estado'].setValue('baja');
+            this.miFormulario.controls['fecha_baja'].setValue(
+              this.fechaActual()
+            );
+            this.miFormulario.controls['num_reservas'].setValue(0);
+            this.cliente = this.miFormulario.value;
+            this.adminService.darBaja(this.cliente).subscribe((resp) => {
+              Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Datos correctamente actualizados',
+                showConfirmButton: false,
+                timer: 2000,
+              });
+            });
+          }
+        });
+      } else {
+        Swal.fire({
+          title: `¿Estas seguro de que quieres bloquear a ${this.cliente.nombre?.toUpperCase()} ${this.cliente.apellido1?.toUpperCase()}?`,
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Si, bloquear',
+          cancelButtonText: 'No, cancelar',
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.cliente.estado = 'bloqueado';
+            this.miFormulario.controls['estado'].setValue('bloqueado');
+            this.miFormulario.controls['fecha_baja'].setValue(
+              this.fechaActual()
+            );
+            this.miFormulario.controls['num_reservas'].setValue(0);
+            this.cliente = this.miFormulario.value;
+            this.adminService.darBaja(this.cliente).subscribe((resp) => {
+              Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Datos correctamente actualizados',
+                showConfirmButton: false,
+                timer: 2000,
+              });
+            });
+          }
         });
       }
     });

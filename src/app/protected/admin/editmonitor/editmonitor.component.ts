@@ -32,6 +32,8 @@ export class EditmonitorComponent implements OnInit {
   minDate!: Date;
   maxDate!: Date;
   centros: any;
+  tarifas: any;
+
   monitor: Usuario = {};
 
 
@@ -64,6 +66,8 @@ export class EditmonitorComponent implements OnInit {
       id_centro: ['', [Validators.required]],
       role: ['', [Validators.required]],
       email: [`${this.monitor.email}`],
+      id_tarifa:[''],
+      fecha_alta_:[]
     },
     {
       validators: [
@@ -76,6 +80,10 @@ export class EditmonitorComponent implements OnInit {
 
     this.authService.selectCentros().subscribe((resp) => {
       this.centros = resp;
+    });
+
+    this.authService.selectTarifas().subscribe((resp) => {
+      this.tarifas = resp;
     });
 
     this.activatedRoute.params
@@ -119,12 +127,20 @@ export class EditmonitorComponent implements OnInit {
 
   editar():void {
     this.monitor = this.miFormulario.value;
-    console.log(this.monitor);
     if(this.monitor.role==2){
       this.monitor.estado="activo"
-    }else{
-      this.monitor.estado=""
+      this.monitor.fecha_alta=new Date();
+      this.monitor.num_reservas=0;
     }
+       this.monitor.estado="activo"
+       if(this.monitor.role==3){
+         this.monitor.id_tarifa=undefined;
+       }
+
+    console.log(this.miFormulario.value);
+
+    console.log(this.monitor);
+
     this.adminService.editarMonitor(this.monitor).subscribe((resp) => {
       if (resp) {
         Swal.fire({
@@ -136,6 +152,10 @@ export class EditmonitorComponent implements OnInit {
         });
       }
     });
+
+    if(this.monitor.role==2){
+      this.router.navigateByUrl('dashboard/admin/listamonitores')
+    }
   }
 
   campoNoValido(campo: string) {

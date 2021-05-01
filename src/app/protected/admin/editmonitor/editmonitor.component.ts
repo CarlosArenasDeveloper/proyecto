@@ -119,6 +119,12 @@ export class EditmonitorComponent implements OnInit {
 
   editar():void {
     this.monitor = this.miFormulario.value;
+    console.log(this.monitor);
+    if(this.monitor.role==2){
+      this.monitor.estado="activo"
+    }else{
+      this.monitor.estado=""
+    }
     this.adminService.editarMonitor(this.monitor).subscribe((resp) => {
       if (resp) {
         Swal.fire({

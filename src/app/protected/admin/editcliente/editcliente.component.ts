@@ -41,10 +41,22 @@ export class EditclienteComponent implements OnInit {
     let month = date.getMonth() + 1;
     let year = date.getFullYear();
 
-    if (month < 10) {
-      return `${year}-0${month}-${day}`;
+    if (day < 10) {
+      if (month < 10) {
+        console.log(`${year}-0${month}-0${day}`);
+        return `${year}-0${month}-0${day}`;
+      } else {
+        console.log(`${year}-${month}-${day}`);
+        return `${year}-${month}-0${day}`;
+      }
     } else {
-      return `${year}-${month}-${day}`;
+      if (month < 10) {
+        console.log(`${year}-0${month}-${day}`);
+        return `${year}-0${month}-${day}`;
+      } else {
+        console.log(`${year}-${month}-${day}`);
+        return `${year}-${month}-${day}`;
+      }
     }
   }
 
@@ -164,17 +176,15 @@ export class EditclienteComponent implements OnInit {
   }
 
   editar(): void {
-    
     this.cliente = this.miFormulario.value;
     const verificado = this.cliente.verificado;
-    if(verificado){
-      this.cliente.verificado=1;
-    }else{
-      this.cliente.verificado=0;
+    if (verificado) {
+      this.cliente.verificado = 1;
+    } else {
+      this.cliente.verificado = 0;
     }
-    
+
     console.log(this.cliente);
-    // console.log(this.cliente);
     if (this.cliente.estado === 'baja') {
       Swal.fire({
         icon: 'error',

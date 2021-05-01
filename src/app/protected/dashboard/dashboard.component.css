@@ -12,3 +12,7 @@ mat-icon{
 a{
   cursor: pointer;
 }
+
+::ng-deep .icono > .mat-expansion-indicator:after {
+  color: white;
+}

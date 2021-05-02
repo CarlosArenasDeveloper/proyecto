@@ -24,9 +24,8 @@ export class ListaclientesComponent implements OnInit, OnDestroy {
       language: {
         url: '//cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json',
       },
-      responsive: true   
+      responsive: true,
     };
-
 
     this.adminService.getClientes().subscribe((clientes) => {
       this.clientes = clientes;
@@ -52,11 +51,14 @@ export class ListaclientesComponent implements OnInit, OnDestroy {
         this.adminService.borrarUsuario(usuario.email!).subscribe((usuario) => {
           this.clientes.splice(i, 1);
         });
-        Swal.fire(
-          'Cliente eliminado!',
-          `Se ha borrado correctamente a ${usuario.nombre?.toUpperCase()} ${usuario.apellido1?.toUpperCase()}`,
-          'success'
-        );
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Cliente eliminado',
+          text: `Se ha borrado correctamente a ${usuario.nombre?.toUpperCase()} ${usuario.apellido1?.toUpperCase()}`,
+          showConfirmButton: false,
+          timer: 2000,
+        });
       }
     });
   }

@@ -1,1 +1,78 @@
-<p>add-tarifa works!</p>
+<h1>Añadiendo tarifa</h1>
+<hr />
+<form [formGroup]="miFormulario" (ngSubmit)="addTarifa()">
+  <div class="mb-3">
+    <label for="exampleFormControlInput1" class="form-label"
+      >Nombre de la tarifa:
+    </label>
+    <input
+      [ngClass]="{
+        'is-invalid': campoNoValido('nombre')
+      }"
+      formControlName="nombre"
+      type="text"
+      class="form-control"
+      id="exampleFormControlInput1"
+    />
+    <span
+      class="form-text text-danger fst-italic"
+      *ngIf="campoNoValido('nombre')"
+    >
+      <br />
+      El nombre es requerido
+    </span>
+  </div>
+  <div class="mb-3">
+    <label for="exampleFormControlTextarea1" class="form-label"
+      >Descripcion:
+    </label>
+    <textarea
+      [ngClass]="{
+        'is-invalid': campoNoValido('descripcion')
+      }"
+      class="form-control"
+      id="exampleFormControlTextarea1"
+      rows="3"
+      formControlName="descripcion"
+    ></textarea>
+    <span
+      class="form-text text-danger fst-italic"
+      *ngIf="campoNoValido('descripcion')"
+    >
+      <br />
+      La descripcion es obligatoria
+    </span>
+  </div>
+  <div class="mb-3">
+    <label for="exampleFormControlInput1" class="form-label"
+      >Precio (euros):
+    </label>
+    <input
+      [ngClass]="{
+        'is-invalid': campoNoValido('precio')
+      }"
+      formControlName="precio"
+      type="text"
+      class="form-control"
+      id="exampleFormControlInput1"
+    />
+    <span
+      class="form-text text-danger fst-italic"
+      *ngIf="campoNoValido('precio')"
+    >
+      <br />
+      {{ precioMessage }}
+    </span>
+  </div>
+  <button type="submit" class="btn btn-danger mx-3" routerLink="tarifas">
+    <i class="fas fa-arrow-circle-left"></i>
+    Volver atrás
+  </button>
+  <button
+    type="submit"
+    [disabled]="miFormulario.invalid"
+    class="btn btn-primary"
+  >
+    Añadir
+  </button>
+</form>

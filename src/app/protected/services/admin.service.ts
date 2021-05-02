@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { Usuario } from '../../auth/interfaces/interface';
+import { Tarifa, Usuario } from '../../auth/interfaces/interface';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -41,7 +41,6 @@ export class AdminService {
       `${this.baseUrl}/borrarMonitor.php?email=${email}`
     );
   }
-
 
   editarCliente(cliente: Usuario) {
     return this.htpp.post<Usuario>(
@@ -84,5 +83,36 @@ export class AdminService {
   }
   getNombresClientes() {
     return this.htpp.get(`${this.baseUrl}/nombres.php`);
+  }
+
+  getTarifas(): Observable<Tarifa> {
+    return this.htpp.get(`${this.baseUrl}/selectTarifas.php`);
+  }
+
+  addTarifa(tarifa: Tarifa): Observable<Tarifa> {
+    return this.htpp.post(
+      `${this.baseUrl}/addTarifa.php`,
+      JSON.stringify(tarifa)
+    );
+  }
+  borrarTarifa(id: number) {
+    return this.htpp.get<Tarifa>(`${this.baseUrl}/borrarTarifa.php?id=${id}`);
+  }
+  getTarifaPorId(id: number) {
+    return this.htpp.get<Tarifa>(
+      `${this.baseUrl}/seleccionarTarifa.php?id=${id}`
+    );
+  }
+  // editarTarifa(tarifa: Tarifa) {
+  //   return this.htpp.post<Tarifa>(
+  //     `${this.baseUrl}/editarTarifa.php`,
+  //     JSON.stringify(tarifa)
+  //   );
+  // }
+  editarTarifa(tarifa: Usuario) {
+    return this.htpp.post(
+      `${this.baseUrl}/editarTarifa.php`,
+      JSON.stringify(tarifa)
+    );
   }
 }

@@ -137,10 +137,6 @@ export class EditmonitorComponent implements OnInit {
          this.monitor.id_tarifa=undefined;
        }
 
-    console.log(this.miFormulario.value);
-
-    console.log(this.monitor);
-
     this.adminService.editarMonitor(this.monitor).subscribe((resp) => {
       if (resp) {
         Swal.fire({

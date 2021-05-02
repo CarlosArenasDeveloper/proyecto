@@ -183,8 +183,6 @@ export class EditclienteComponent implements OnInit {
     } else {
       this.cliente.verificado = 0;
     }
-
-    console.log(this.cliente);
     if (this.cliente.estado === 'baja') {
       Swal.fire({
         icon: 'error',

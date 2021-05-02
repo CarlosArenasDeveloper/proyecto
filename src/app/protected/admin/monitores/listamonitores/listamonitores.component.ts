@@ -7,17 +7,14 @@ import { Subject } from 'rxjs';
 @Component({
   selector: 'app-listamonitores',
   templateUrl: './listamonitores.component.html',
-  styleUrls: ['./listamonitores.component.css']
+  styleUrls: ['./listamonitores.component.css'],
 })
 export class ListamonitoresComponent implements OnInit {
-
   dtOptions: DataTables.Settings = {};
   dtTrigger = new Subject();
   monitores: any = [];
 
-  constructor(private adminService: AdminService) {
-
-  }
+  constructor(private adminService: AdminService) {}
   ngOnDestroy(): void {
     this.dtTrigger.unsubscribe();
   }
@@ -26,18 +23,17 @@ export class ListamonitoresComponent implements OnInit {
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 3,
-      language:{
-        url: '//cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json'
+      language: {
+        url: '//cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json',
       },
-      responsive:true
+      responsive: true,
     };
- 
-      this.adminService.getMonitores().subscribe((clientes) => {
-        this.monitores = clientes;
-        this.dtTrigger.next();
-      });  
-    }
 
+    this.adminService.getMonitores().subscribe((clientes) => {
+      this.monitores = clientes;
+      this.dtTrigger.next();
+    });
+  }
 
   borrarMonitor(usuario: Usuario, i: number) {
     Swal.fire({
@@ -47,21 +43,22 @@ export class ListamonitoresComponent implements OnInit {
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
       confirmButtonText: 'Si, eliminar',
-      cancelButtonText: 'No, cancelar'
+      cancelButtonText: 'No, cancelar',
     }).then((result) => {
       if (result.isConfirmed) {
         this.adminService.borrarMonitor(usuario.email!).subscribe((usuario) => {
-          this.monitores.splice(i,1)
+          this.monitores.splice(i, 1);
         });
-        Swal.fire(
-          'Monitor eliminado!',
-          `Se ha borrado correctamente a ${usuario.nombre?.toUpperCase()} ${usuario.apellido1?.toUpperCase()}`,
-          'success'
-        )
 
-     
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Monitor eliminado!',
+          text: `Se ha borrado correctamente a ${usuario.nombre?.toUpperCase()} ${usuario.apellido1?.toUpperCase()}`,
+          showConfirmButton: false,
+          timer: 2000,
+        });
       }
-    })
-    
+    });
   }
 }

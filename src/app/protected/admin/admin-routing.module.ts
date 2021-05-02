@@ -20,12 +20,17 @@ const routes: Routes = [
   {
     path: 'listamonitores',
     loadChildren: () =>
-      import('./monitores/monitores.module').then((m) => m.MonitoresModule)
+      import('./monitores/monitores.module').then((m) => m.MonitoresModule),
   },
   {
-    path:'**',
-    redirectTo:''
-  }
+    path: 'centros',
+    loadChildren: () =>
+      import('./centros/centros.module').then((m) => m.CentrosModule),
+  },
+  {
+    path: '**',
+    redirectTo: '',
+  },
 ];
 
 @NgModule({

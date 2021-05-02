@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { Tarifa, Usuario } from '../../auth/interfaces/interface';
+import { Tarifa, Usuario, Centro } from '../../models/interface';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -20,9 +20,6 @@ export class AdminService {
     return this.htpp.get(`${this.baseUrl}/selectMonitores.php`);
   }
 
-  getCentro(id: number) {
-    return this.htpp.get(`${this.baseUrl}/selectCentro.php?id=${id}`);
-  }
 
   getUsuarioPorEmail(email: string): Observable<Usuario> {
     return this.htpp.get<Usuario>(
@@ -103,16 +100,36 @@ export class AdminService {
       `${this.baseUrl}/seleccionarTarifa.php?id=${id}`
     );
   }
-  // editarTarifa(tarifa: Tarifa) {
-  //   return this.htpp.post<Tarifa>(
-  //     `${this.baseUrl}/editarTarifa.php`,
-  //     JSON.stringify(tarifa)
-  //   );
-  // }
   editarTarifa(tarifa: Usuario) {
     return this.htpp.post(
       `${this.baseUrl}/editarTarifa.php`,
       JSON.stringify(tarifa)
+    );
+  }
+  getCentros(): Observable<Centro> {
+    return this.htpp.get(`${this.baseUrl}/selectCentros.php`);
+  }
+
+  addCentro(centro: Centro): Observable<Centro> {
+    return this.htpp.post(
+      `${this.baseUrl}/addCentro.php`,
+      JSON.stringify(centro)
+    );
+  }
+  
+  borrarCentro(id: number) {
+    return this.htpp.get<Tarifa>(`${this.baseUrl}/borrarCentro.php?id=${id}`);
+  }
+
+  getCentroPorId(id: number) {
+    return this.htpp.get<Centro>(
+      `${this.baseUrl}/seleccionarCentro.php?id=${id}`
+    );
+  }
+  editarCentro(centro: Centro) {
+    return this.htpp.post(
+      `${this.baseUrl}/editarCentro.php`,
+      JSON.stringify(centro)
     );
   }
 }

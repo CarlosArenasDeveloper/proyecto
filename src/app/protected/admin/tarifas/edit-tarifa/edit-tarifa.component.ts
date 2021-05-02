@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { AdminService } from '../../../services/admin.service';
-import { Tarifa } from '../../../../auth/interfaces/interface';
+import { Tarifa } from '../../../../models/interface';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 

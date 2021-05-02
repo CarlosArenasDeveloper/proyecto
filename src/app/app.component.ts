@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Usuario } from './auth/interfaces/interface';
+import { Usuario } from './models/interface';
 
 @Component({
   selector: 'app-root',

@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AdminService } from '../../../services/admin.service';
 import { ValidatorService } from '../../../../auth/services/validator.service';
 import { AuthService } from '../../../../auth/services/auth.service';
-import { Usuario } from '../../../../auth/interfaces/interface';
+import { Usuario } from '../../../../models/interface';
 import Swal from 'sweetalert2';
 import { switchMap } from 'rxjs/operators';
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Usuario } from '../../auth/interfaces/interface';
+import { Usuario } from '../../models/interface';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,7 +8,6 @@ import { Usuario } from '../../auth/interfaces/interface';
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
-
   panelOpenState = false;
 
   usuario!: Usuario;
@@ -16,7 +15,6 @@ export class DashboardComponent implements OnInit {
   constructor(private route: Router) {}
 
   ngOnInit(): void {
-
     const usuario = JSON.parse(sessionStorage.getItem('usuario')!);
     this.usuario = usuario;
   }
@@ -31,6 +29,9 @@ export class DashboardComponent implements OnInit {
 
   tarifas() {
     this.route.navigateByUrl('dashboard/admin/tarifas');
+  }
+  centros() {
+    this.route.navigateByUrl('dashboard/admin/centros');
   }
   sesion(): boolean {
     if (sessionStorage.getItem('usuario')) {

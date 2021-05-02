@@ -1,19 +1,19 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { AdminService } from '../../../services/admin.service';
-import { Usuario } from '../../../../models/interface';
-import Swal from 'sweetalert2';
-
 import { Subject } from 'rxjs';
+import { AdminService } from '../../../services/admin.service';
+import Swal from 'sweetalert2';
+import { Centro } from '../../../../models/interface';
 
 @Component({
-  selector: 'app-listaclientes',
-  templateUrl: './listaclientes.component.html',
-  styleUrls: ['./listaclientes.component.css'],
+  selector: 'app-lista-centros',
+  templateUrl: './lista-centros.component.html',
+  styleUrls: ['./lista-centros.component.css']
 })
-export class ListaclientesComponent implements OnInit, OnDestroy {
+export class ListaCentrosComponent implements OnInit,OnDestroy {
+
   dtOptions: DataTables.Settings = {};
   dtTrigger = new Subject();
-  clientes: any = [];
+  centros: any = [];
 
   constructor(private adminService: AdminService) {}
 
@@ -24,11 +24,12 @@ export class ListaclientesComponent implements OnInit, OnDestroy {
       language: {
         url: '//cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json',
       },
-      responsive: true,
+      responsive: true   
     };
 
-    this.adminService.getClientes().subscribe((clientes) => {
-      this.clientes = clientes;
+
+    this.adminService.getCentros().subscribe((centros) => {
+      this.centros = centros;
       this.dtTrigger.next();
     });
   }
@@ -37,9 +38,9 @@ export class ListaclientesComponent implements OnInit, OnDestroy {
     this.dtTrigger.unsubscribe();
   }
 
-  borrarCliente(usuario: Usuario, i: number) {
+  borrarCentro(centro: Centro, i: number) {
     Swal.fire({
-      title: `¿Estas seguro de querer eliminar a ${usuario.nombre?.toUpperCase()} ${usuario.apellido1?.toUpperCase()}?`,
+      title: `¿Estas seguro de querer eliminar el centro ${centro.nombre?.toUpperCase()}?`,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -48,18 +49,19 @@ export class ListaclientesComponent implements OnInit, OnDestroy {
       cancelButtonText: 'No, cancelar',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.adminService.borrarUsuario(usuario.email!).subscribe((usuario) => {
-          this.clientes.splice(i, 1);
+        this.adminService.borrarCentro(centro.id!).subscribe((centro) => {
+          this.centros.splice(i, 1);
         });
         Swal.fire({
           position: 'top-end',
           icon: 'success',
-          title: 'Cliente eliminado',
-          text: `Se ha borrado correctamente a ${usuario.nombre?.toUpperCase()} ${usuario.apellido1?.toUpperCase()}`,
+          title: 'Centro eliminado correctamente',
           showConfirmButton: false,
           timer: 2000,
         });
       }
     });
   }
+
+
 }

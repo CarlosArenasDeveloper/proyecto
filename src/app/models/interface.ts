@@ -1,7 +1,3 @@
-// export interface Usuario {
-//   email: string;
-//   password: string;
-// }
 
 export interface Usuario {
   dni?: string;
@@ -42,9 +38,3 @@ export interface Centro{
   telefono?:number;
 }
 
-export interface UserData {
-  id: string;
-  name: string;
-  progress: string;
-  color?: string;
-}

@@ -1,26 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Centro } from '../../../../models/interface';
 import { AdminService } from '../../../services/admin.service';
-import { Tarifa } from '../../../../models/interface';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-add-tarifa',
-  templateUrl: './add-tarifa.component.html',
-  styleUrls: ['./add-tarifa.component.css'],
+  selector: 'app-add-centro',
+  templateUrl: './add-centro.component.html',
+  styleUrls: ['./add-centro.component.css'],
 })
-export class AddTarifaComponent implements OnInit {
-  tarifa!: Tarifa;
+export class AddCentroComponent implements OnInit {
+  centro!: Centro;
   constructor(private fb: FormBuilder, private adminService: AdminService) {}
 
   ngOnInit(): void {}
 
   miFormulario: FormGroup = this.fb.group({
     nombre: ['', [Validators.required]],
-    descripcion: ['', [Validators.required]],
-    precio: [
+    direccion: ['', [Validators.required]],
+    telefono: [
       '',
-      [Validators.required, Validators.pattern('^[0-9]+([.][0-9]+)?$')],
+      [Validators.required, Validators.pattern('^[6-7]{1}[0-9]{8}$')],
     ],
   });
 
@@ -31,25 +31,25 @@ export class AddTarifaComponent implements OnInit {
     );
   }
 
-  get precioMessage(): string {
-    const errors = this.miFormulario.get('precio')?.errors;
+  get telefonoErrorMsg(): string {
+    const errors = this.miFormulario.get('telefono')?.errors;
     if (errors?.required) {
-      return 'El precio es requerido';
+      return 'El nº de telefono es requerido';
     } else if (errors?.pattern) {
-      return 'El valor introducido no corresponde con un precio valido';
+      return 'El valor ingresado no tiene formato de numero de telefono';
     }
     return '';
   }
 
-  addTarifa() {
-    this.tarifa = this.miFormulario.value;
-    this.adminService.addTarifa(this.tarifa).subscribe((resp) => {
+  addCentro() {
+    this.centro = this.miFormulario.value;
+    this.adminService.addCentro(this.centro).subscribe((resp) => {
       console.log(resp);
       if (resp == null) {
         Swal.fire({
           position: 'top-end',
           icon: 'success',
-          title: `La tarifa ${this.tarifa.nombre} se ha añadido correctamente!`,
+          title: `El centro ${this.centro.nombre} se ha añadido correctamente!`,
           showConfirmButton: false,
           timer: 2000,
         });

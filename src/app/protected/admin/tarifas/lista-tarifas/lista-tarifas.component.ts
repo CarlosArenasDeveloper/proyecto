@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { AdminService } from '../../../services/admin.service';
-import { Usuario, Tarifa } from '../../../../auth/interfaces/interface';
+import { Usuario, Tarifa } from '../../../../models/interface';
 import Swal from 'sweetalert2';
 
 @Component({

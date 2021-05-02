@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import { AdminService } from '../../../services/admin.service';
-import { Usuario } from '../../../../auth/interfaces/interface';
+import { Usuario } from '../../../../models/interface';
 import { Subject } from 'rxjs';
 
 @Component({

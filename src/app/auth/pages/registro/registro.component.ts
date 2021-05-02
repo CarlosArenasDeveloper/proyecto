@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-import { Usuario } from '../../interfaces/interface';
+import { Usuario } from '../../../models/interface';
 import { ValidatorService } from '../../services/validator.service';
 import { EmailValidatorService } from '../../services/email-validator.service';
 import Swal from 'sweetalert2';

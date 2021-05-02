@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Usuario } from '../../../../auth/interfaces/interface';
+import { Usuario } from '../../../../models/interface';
 import { switchMap } from 'rxjs/operators';
 import { AdminService } from '../../../services/admin.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';

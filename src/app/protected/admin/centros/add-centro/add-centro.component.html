@@ -1,9 +1,9 @@
-<h1>Añadiendo tarifa</h1>
+<h1>Añadiendo centro</h1>
 <hr />
-<form [formGroup]="miFormulario" (ngSubmit)="addTarifa()" autocomplete="off"> 
+<form [formGroup]="miFormulario" (ngSubmit)="addCentro()" autocomplete="off">
   <div class="mb-3">
     <label for="exampleFormControlInput1" class="form-label"
-      >Nombre de la tarifa:
+      >Nombre del centro:
     </label>
     <input
       [ngClass]="{
@@ -24,47 +24,47 @@
   </div>
   <div class="mb-3">
     <label for="exampleFormControlTextarea1" class="form-label"
-      >Descripcion:
+      >Direccion:
     </label>
     <textarea
       [ngClass]="{
-        'is-invalid': campoNoValido('descripcion')
+        'is-invalid': campoNoValido('direccion')
       }"
       class="form-control"
       id="exampleFormControlTextarea1"
-      rows="3"
-      formControlName="descripcion"
+      rows="2"
+      formControlName="direccion"
     ></textarea>
     <span
       class="form-text text-danger fst-italic"
-      *ngIf="campoNoValido('descripcion')"
+      *ngIf="campoNoValido('direccion')"
     >
       <br />
-      La descripcion es obligatoria
+      La direccion es obligatoria
     </span>
   </div>
   <div class="mb-3">
     <label for="exampleFormControlInput1" class="form-label"
-      >Precio (euros):
+      >Telefono de contacto:
     </label>
     <input
       [ngClass]="{
-        'is-invalid': campoNoValido('precio')
+        'is-invalid': campoNoValido('telefono')
       }"
-      formControlName="precio"
+      formControlName="telefono"
       type="text"
       class="form-control"
       id="exampleFormControlInput1"
     />
     <span
       class="form-text text-danger fst-italic"
-      *ngIf="campoNoValido('precio')"
+      *ngIf="campoNoValido('telefono')"
     >
       <br />
-      {{ precioMessage }}
+      {{ telefonoErrorMsg }}
     </span>
   </div>
-  <button type="submit" class="btn btn-danger mx-3" routerLink="tarifas">
+  <button type="submit" class="btn btn-danger mx-3" routerLink="centros">
     <i class="fas fa-arrow-circle-left"></i>
     Volver atrás
   </button>
@@ -76,3 +76,4 @@
     Añadir
   </button>
 </form>
+

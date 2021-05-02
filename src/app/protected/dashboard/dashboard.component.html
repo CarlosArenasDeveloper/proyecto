@@ -38,6 +38,12 @@
         </mat-nav-list>
       </mat-expansion-panel>
     </mat-accordion>
+    <mat-nav-list *ngIf="isAdmin()">
+      <a (click)="tarifas()" mat-list-item (click)="sidenav.toggle()">
+        <mat-icon mat-list-icon>label</mat-icon>
+        <span class="text-white">Tarifas</span>
+      </a>
+    </mat-nav-list>
 
     <!-- <mat-nav-list *ngIf="isAdmin() || isMonitor()">
       <a (click)="clientes()" mat-list-item (click)="sidenav.toggle()">

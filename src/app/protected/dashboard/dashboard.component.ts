@@ -8,18 +8,15 @@ import { Usuario } from '../../auth/interfaces/interface';
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
-  // nombre: string = '';
-  // constructor() {}
 
-  // ngOnInit(): void {
-
-  // }
   panelOpenState = false;
 
   usuario!: Usuario;
 
   constructor(private route: Router) {}
+
   ngOnInit(): void {
+
     const usuario = JSON.parse(sessionStorage.getItem('usuario')!);
     this.usuario = usuario;
   }
@@ -32,6 +29,9 @@ export class DashboardComponent implements OnInit {
     this.route.navigateByUrl('dashboard/admin/listaclientes');
   }
 
+  tarifas() {
+    this.route.navigateByUrl('dashboard/admin/tarifas');
+  }
   sesion(): boolean {
     if (sessionStorage.getItem('usuario')) {
       return true;

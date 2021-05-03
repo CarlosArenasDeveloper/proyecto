@@ -1,8 +1,9 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subject } from 'rxjs';
 import { AdminService } from '../../../services/admin.service';
 import { Usuario, Tarifa } from '../../../../models/interface';
 import Swal from 'sweetalert2';
+import { DataTableDirective } from 'angular-datatables';
 
 @Component({
   selector: 'app-lista-tarifas',
@@ -14,6 +15,8 @@ export class ListaTarifasComponent implements OnInit,OnDestroy {
   dtOptions: DataTables.Settings = {};
   dtTrigger = new Subject();
   tarifas: any = [];
+  @ViewChild(DataTableDirective, { static: false })
+  datatableElement!: DataTableDirective;
 
   constructor(private adminService: AdminService) {}
 
@@ -51,6 +54,20 @@ export class ListaTarifasComponent implements OnInit,OnDestroy {
       if (result.isConfirmed) {
         this.adminService.borrarTarifa(tarifa.id!).subscribe((tarifa) => {
           this.tarifas.splice(i, 1);
+          if (this.tarifas.length > 0) {
+            this.datatableElement.dtInstance.then(
+              (dtInstance: DataTables.Api) => {
+                dtInstance.destroy();
+                this.dtTrigger.next();
+              }
+            );
+          } else {
+            this.datatableElement.dtInstance.then(
+              (dtInstance: DataTables.Api) => {
+                dtInstance.destroy();
+              }
+            );
+          }
         });
         Swal.fire({
           position: 'top-end',

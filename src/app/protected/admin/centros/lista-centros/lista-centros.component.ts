@@ -1,8 +1,9 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit,ViewChild } from '@angular/core';
 import { Subject } from 'rxjs';
 import { AdminService } from '../../../services/admin.service';
 import Swal from 'sweetalert2';
 import { Centro } from '../../../../models/interface';
+import { DataTableDirective } from 'angular-datatables';
 
 @Component({
   selector: 'app-lista-centros',
@@ -14,13 +15,15 @@ export class ListaCentrosComponent implements OnInit,OnDestroy {
   dtOptions: DataTables.Settings = {};
   dtTrigger = new Subject();
   centros: any = [];
+  @ViewChild(DataTableDirective, { static: false })
+  datatableElement!: DataTableDirective;
 
   constructor(private adminService: AdminService) {}
 
   ngOnInit(): void {
     this.dtOptions = {
       pagingType: 'full_numbers',
-      pageLength: 5,
+      pageLength: 3,
       language: {
         url: '//cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json',
       },
@@ -51,6 +54,21 @@ export class ListaCentrosComponent implements OnInit,OnDestroy {
       if (result.isConfirmed) {
         this.adminService.borrarCentro(centro.id!).subscribe((centro) => {
           this.centros.splice(i, 1);
+          if (this.centros.length > 0) {
+            this.datatableElement.dtInstance.then(
+              (dtInstance: DataTables.Api) => {
+                dtInstance.destroy();
+                this.dtTrigger.next();
+              }
+            );
+          } else {
+            this.datatableElement.dtInstance.then(
+              (dtInstance: DataTables.Api) => {
+                dtInstance.destroy();
+              }
+            );
+          }
+  
         });
         Swal.fire({
           position: 'top-end',

@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import Swal from 'sweetalert2';
 import { AdminService } from '../../../services/admin.service';
 import { Usuario } from '../../../../models/interface';
 import { Subject } from 'rxjs';
+import { DataTableDirective } from 'angular-datatables';
 
 @Component({
   selector: 'app-listamonitores',
@@ -13,7 +14,8 @@ export class ListamonitoresComponent implements OnInit {
   dtOptions: DataTables.Settings = {};
   dtTrigger = new Subject();
   monitores: any = [];
-
+  @ViewChild(DataTableDirective, { static: false })
+  datatableElement!: DataTableDirective;
   constructor(private adminService: AdminService) {}
   ngOnDestroy(): void {
     this.dtTrigger.unsubscribe();
@@ -48,6 +50,20 @@ export class ListamonitoresComponent implements OnInit {
       if (result.isConfirmed) {
         this.adminService.borrarMonitor(usuario.email!).subscribe((usuario) => {
           this.monitores.splice(i, 1);
+          if (this.monitores.length > 0) {
+            this.datatableElement.dtInstance.then(
+              (dtInstance: DataTables.Api) => {
+                dtInstance.destroy();
+                this.dtTrigger.next();
+              }
+            );
+          } else {
+            this.datatableElement.dtInstance.then(
+              (dtInstance: DataTables.Api) => {
+                dtInstance.destroy();
+              }
+            );
+          }
         });
 
         Swal.fire({

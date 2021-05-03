@@ -29,14 +29,20 @@
 
         <mat-nav-list *ngIf="isAdmin() || isMonitor()">
           <a (click)="clientes()" mat-list-item (click)="sidenav.toggle()">
-            <mat-icon mat-list-icon>label</mat-icon>
-            <span class="text-white">Clientes</span>
+            <i class="far fa-user text-white ms-4"></i>
+            <span class="text-white ms-1">Clientes</span>
           </a>
         </mat-nav-list>
         <mat-nav-list *ngIf="isAdmin()">
           <a (click)="monitores()" mat-list-item (click)="sidenav.toggle()">
-            <mat-icon mat-list-icon>label</mat-icon>
-            <span class="text-white">Monitores</span>
+            <i class="fas fa-user-tie text-white ms-4"></i>
+            <span class="text-white ms-1">Monitores</span>
+          </a>
+        </mat-nav-list>
+        <mat-nav-list *ngIf="isAdmin()">
+          <a (click)="monitores()" mat-list-item (click)="sidenav.toggle()">
+            <i class="fas fa-user-shield text-white ms-4"></i>
+            <span class="text-white ms-1">Gerentes</span>
           </a>
         </mat-nav-list>
       </mat-expansion-panel>
@@ -61,13 +67,13 @@
 
         <mat-nav-list *ngIf="isAdmin() || isMonitor()">
           <a (click)="clientes()" mat-list-item (click)="sidenav.toggle()">
-            <i class="fas fa-dumbbell text-white"></i>
+            <i class="fas fa-dumbbell text-white ms-4"></i>
             <span class="ms-1 text-white">Ejercicios</span>
           </a>
         </mat-nav-list>
         <mat-nav-list *ngIf="isAdmin()">
           <a (click)="monitores()" mat-list-item (click)="sidenav.toggle()">
-            <i class="fas fa-heartbeat text-white"></i>
+            <i class="fas fa-heartbeat text-white ms-4"></i>
             <span class="ms-1 text-white">Musculos</span>
           </a>
         </mat-nav-list>
@@ -93,13 +99,13 @@
 
         <mat-nav-list *ngIf="isAdmin() || isMonitor()">
           <a (click)="clientes()" mat-list-item (click)="sidenav.toggle()">
-            <i class="far fa-list-alt text-white"></i>
+            <i class="far fa-list-alt text-white ms-4"></i>
             <span class="ms-1 text-white">Listado</span>
           </a>
         </mat-nav-list>
         <mat-nav-list *ngIf="isAdmin()">
           <a (click)="monitores()" mat-list-item (click)="sidenav.toggle()">
-            <i class="fas fa-tags text-white"></i>
+            <i class="fas fa-tags text-white ms-4"></i>
             <span class="ms-1 text-white">Categorias</span>
           </a>
         </mat-nav-list>
@@ -107,19 +113,21 @@
     </mat-accordion>
     <mat-nav-list *ngIf="isAdmin()">
       <a (click)="centros()" mat-list-item (click)="sidenav.toggle()">
-        <i class="fas fa-users-class"></i>
-        <span class="ms-1 text-white">Actividades</span>
+        <i class="fas fa-user-clock text-white fa-2x ms-4"></i>
+
+        <span class="ms-1 text-white ms-1">Actividades</span>
       </a>
     </mat-nav-list>
     <mat-nav-list *ngIf="isAdmin()">
       <a (click)="centros()" mat-list-item (click)="sidenav.toggle()">
-        <i class="far fa-building text-white fa-2x ms-4"></i>
-        <span class="ms-1 text-white">Salas</span>
+        <i class="fab fa-buromobelexperte text-white fa-2x ms-4"></i>
+        <span class="ms-1 text-white ms-1">Salas</span>
       </a>
     </mat-nav-list>
     <mat-nav-list *ngIf="isAdmin()">
       <a (click)="centros()" mat-list-item (click)="sidenav.toggle()">
-        <i class="far fa-building text-white fa-2x ms-4"></i>
+        <i class="far fa-calendar-alt text-white fa-2x ms-4"></i>
+
         <span class="ms-1 text-white">Sesiones</span>
       </a>
     </mat-nav-list>

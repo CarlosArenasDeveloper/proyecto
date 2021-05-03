@@ -66,13 +66,13 @@
         <mat-divider></mat-divider>
 
         <mat-nav-list *ngIf="isAdmin() || isMonitor()">
-          <a (click)="clientes()" mat-list-item (click)="sidenav.toggle()">
+          <a routerLink="./admin/ejercicios" mat-list-item (click)="sidenav.toggle()">
             <i class="fas fa-dumbbell text-white ms-4"></i>
             <span class="ms-1 text-white">Ejercicios</span>
           </a>
         </mat-nav-list>
         <mat-nav-list *ngIf="isAdmin()">
-          <a (click)="monitores()" mat-list-item (click)="sidenav.toggle()">
+          <a routerLink="./admin/musculos" mat-list-item (click)="sidenav.toggle()">
             <i class="fas fa-heartbeat text-white ms-4"></i>
             <span class="ms-1 text-white">Musculos</span>
           </a>

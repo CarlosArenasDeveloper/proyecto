@@ -28,6 +28,16 @@ const routes: Routes = [
       import('./centros/centros.module').then((m) => m.CentrosModule),
   },
   {
+    path: 'musculos',
+    loadChildren: () =>
+      import('./musculos/musculos.module').then((m) => m.MusculosModule),
+  },
+  {
+    path: 'ejercicios',
+    loadChildren: () =>
+      import('./ejercicios/ejercicios.module').then((m) => m.EjerciciosModule),
+  },
+  {
     path: '**',
     redirectTo: '',
   },

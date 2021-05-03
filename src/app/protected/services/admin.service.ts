@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { Tarifa, Usuario, Centro } from '../../models/interface';
+import { Tarifa, Usuario, Centro, Musculo } from '../../models/interface';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -116,7 +116,7 @@ export class AdminService {
       JSON.stringify(centro)
     );
   }
-  
+    
   borrarCentro(id: number) {
     return this.htpp.get<Tarifa>(`${this.baseUrl}/borrarCentro.php?id=${id}`);
   }
@@ -132,4 +132,33 @@ export class AdminService {
       JSON.stringify(centro)
     );
   }
+  
+  getMusculos(): Observable<Musculo> {
+    return this.htpp.get(`${this.baseUrl}/selectMusculos.php`);
+  }
+
+  addMusculo(musculo: Musculo): Observable<Musculo> {
+    return this.htpp.post(`${this.baseUrl}/addMusculo.php`, JSON.stringify(musculo)
+    );
+  }
+  
+  borrarMusculo(nombre: string) {
+    return this.htpp.get<Musculo>(`${this.baseUrl}/borrarMusculo.php?nombre=${nombre}`);
+  }
+
+  getMusculoPorNombre(nombre: string) {
+    return this.htpp.get<Musculo>(
+      `${this.baseUrl}/seleccionarMusculo.php?nombre=${nombre}`
+    );
+  }
+  editarMusculo(musculo: Musculo) {
+    return this.htpp.post(
+      `${this.baseUrl}/editarMusculo.php`,
+      JSON.stringify(musculo)
+    );
+  }
+
+
+
+
 }

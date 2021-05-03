@@ -38,3 +38,9 @@ export interface Centro{
   telefono?:number;
 }
 
+export interface Musculo{
+  nombre?:string;
+  descripcion?:string;
+  imagen?:string;
+}
+

@@ -33,8 +33,6 @@ export class ListaMusculosComponent implements OnInit,OnDestroy {
 
     this.adminService.getMusculos().subscribe((musculos) => {
       this.musculos = musculos;
-      console.log(this.musculos);
-
       this.dtTrigger.next();
     });
   }

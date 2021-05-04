@@ -5,9 +5,14 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class TextoPipe implements PipeTransform {
 
-  transform(texto: string, ...args: unknown[]): unknown {
-    
-    return null;
+  transform(texto: string): unknown {
+
+    const frase = texto.split("");
+    const longitud= frase.length;
+    if(longitud>150){
+        texto= texto.slice(0,150)+ " ...."
+    }
+    return texto;
   }
 
 }

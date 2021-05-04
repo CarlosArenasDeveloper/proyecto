@@ -32,7 +32,7 @@
               <td>{{ i+1 }}</td>
               
               <td>{{ ele.nombre | titlecase }}</td>
-              <td>{{ ele.descripcion | titlecase }}</td>
+              <td>{{ ele.descripcion|texto }}</td>
               <td>{{ ele.imagen | imagen}}</td>
               <td>
                 <button class="btn btn-danger" (click)="borrarMusculo(ele, i)">
@@ -44,7 +44,7 @@
               
                 <button
                   class="btn btn-warning ms-2"
-                  [routerLink]="['./editar-musculo', ele.id]"
+                  [routerLink]="['./editar-musculo', ele.nombre]"
                 >
                   <i class="fas fa-search-plus"></i>
                 </button>

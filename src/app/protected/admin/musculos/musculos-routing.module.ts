@@ -8,7 +8,7 @@ const routes: Routes = [
   { path: '', component: ListaMusculosComponent },
   { path: 'add-musculo', component: AddMusculoComponent },
   { path: 'editar-musculo/:nombre', component: EditMusculoComponent },
-  { path: '**', redirectTo:'' },
+  { path: '**', redirectTo:''},
 ];
 
 @NgModule({

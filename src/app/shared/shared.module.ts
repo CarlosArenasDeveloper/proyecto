@@ -15,7 +15,8 @@ import { TextoPipe } from './pipes/texto.pipe';
     RouterModule, MaterialModule ],
   exports:[
     NavegacionComponent,
-    ImagenPipe
+    ImagenPipe,
+    TextoPipe
   ]
 })
 export class SharedModule { }

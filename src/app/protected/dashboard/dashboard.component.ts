@@ -52,4 +52,24 @@ export class DashboardComponent implements OnInit {
     }
     return false;
   }
+  
+  panel(){
+    
+    if(!sessionStorage.getItem('usuario')){
+      this.route.navigateByUrl("dashboard")
+      return;
+    }
+
+    const usuario :Usuario = JSON.parse(sessionStorage.getItem('usuario')!);
+    if(usuario.role==1){
+      this.route.navigateByUrl("dashboard/admin")
+
+    }else if(usuario.role==2){
+      this.route.navigateByUrl("dashboard/cliente")
+
+    }else{
+      this.route.navigateByUrl("dashboard/monitor")
+
+    }
+  }
 }

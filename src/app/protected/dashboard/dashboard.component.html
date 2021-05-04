@@ -66,13 +66,21 @@
         <mat-divider></mat-divider>
 
         <mat-nav-list *ngIf="isAdmin() || isMonitor()">
-          <a routerLink="./admin/ejercicios" mat-list-item (click)="sidenav.toggle()">
+          <a
+            routerLink="./admin/ejercicios"
+            mat-list-item
+            (click)="sidenav.toggle()"
+          >
             <i class="fas fa-dumbbell text-white ms-4"></i>
             <span class="ms-1 text-white">Ejercicios</span>
           </a>
         </mat-nav-list>
         <mat-nav-list *ngIf="isAdmin()">
-          <a routerLink="./admin/musculos" mat-list-item (click)="sidenav.toggle()">
+          <a
+            routerLink="./admin/musculos"
+            mat-list-item
+            (click)="sidenav.toggle()"
+          >
             <i class="fas fa-heartbeat text-white ms-4"></i>
             <span class="ms-1 text-white">Musculos</span>
           </a>
@@ -144,8 +152,6 @@
       </a>
     </mat-nav-list>
 
-    
-
     <!-- <mat-nav-list *ngIf="isAdmin() || isMonitor()">
       <a (click)="clientes()" mat-list-item (click)="sidenav.toggle()">
         <mat-icon mat-list-icon>label</mat-icon>
@@ -165,6 +171,7 @@
     <button mat-icon-button (click)="sidenav.toggle()">
       <mat-icon>menu</mat-icon>
     </button>
+    <a (click)="panel()"> <i class="fas fa-home text-white"></i></a>
 
     <span class="spacer"></span>
 

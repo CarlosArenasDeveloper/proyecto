@@ -13,7 +13,7 @@ export class AdminService {
   constructor(private htpp: HttpClient) {}
 
   getClientes(): Observable<Usuario> {
-    return this.htpp.get(`${this.baseUrl}/index.php`);
+    return this.htpp.get(`${this.baseUrl}/selectClientes.php`);
   }
 
   getMonitores() {

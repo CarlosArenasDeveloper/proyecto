@@ -43,10 +43,8 @@ export class EditclienteComponent implements OnInit {
 
     if (day < 10) {
       if (month < 10) {
-        console.log(`${year}-0${month}-0${day}`);
         return `${year}-0${month}-0${day}`;
       } else {
-        console.log(`${year}-${month}-${day}`);
         return `${year}-${month}-0${day}`;
       }
     } else {
@@ -345,9 +343,9 @@ export class EditclienteComponent implements OnInit {
               Swal.fire({
                 position: 'top-end',
                 icon: 'success',
-                title: 'Datos correctamente actualizados',
+                title: 'Se ha dado de alta a '+ this.cliente.nombre?.toUpperCase(),
                 showConfirmButton: false,
-                timer: 2000,
+                timer: 1500,
               });
             });
           }
@@ -374,9 +372,9 @@ export class EditclienteComponent implements OnInit {
               Swal.fire({
                 position: 'top-end',
                 icon: 'success',
-                title: 'Datos correctamente actualizados',
+                title: 'Se ha dado de baja a '+ this.cliente.nombre?.toUpperCase(),
                 showConfirmButton: false,
-                timer: 2000,
+                timer: 1500,
               });
             });
           }
@@ -403,9 +401,9 @@ export class EditclienteComponent implements OnInit {
               Swal.fire({
                 position: 'top-end',
                 icon: 'success',
-                title: 'Datos correctamente actualizados',
+                title: 'Se ha bloqueado a '+ this.cliente.nombre?.toUpperCase(),
                 showConfirmButton: false,
-                timer: 2000,
+                timer: 1500,
               });
             });
           }

@@ -20,20 +20,23 @@
         <thead class="thead-dark" *ngIf="monitores.length > 0">
           <tr>
             <th scope="col">#</th>
-            <th scope="col">Email</th>
             <th scope="col">Nombre</th>
-            <th scope="col">1º Apellido</th>
-            <th scope="col">2º Apellido</th>
+            <th scope="col">Apellidos</th>
+            <th scope="col">Email</th>
+            <th scope="col">Centro</th>
             <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let ele of monitores; let i = index">
             <td>{{ i + 1 }}</td>
-            <td>{{ ele.email | titlecase }}</td>
             <td>{{ ele.nombre | titlecase }}</td>
-            <td>{{ ele.apellido1 | titlecase }}</td>
-            <td>{{ ele.apellido2 | titlecase }}</td>
+            <td>{{ ele.apellido1 | titlecase }} {{ ele.apellido2 | titlecase }}</td>
+            <td>{{ ele.email | titlecase }}</td>
+
+            <td [ngClass]="{
+              'text-warning': ele.id_centro == 'sin asignar'
+            }">{{ ele.id_centro | titlecase }}</td>
             <td>
               <button class="btn btn-danger" (click)="borrarMonitor(ele, i)">
                 <i class="fa fa-trash"></i>

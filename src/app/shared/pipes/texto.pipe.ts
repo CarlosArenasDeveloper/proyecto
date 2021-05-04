@@ -9,8 +9,8 @@ export class TextoPipe implements PipeTransform {
 
     const frase = texto.split("");
     const longitud= frase.length;
-    if(longitud>150){
-        texto= texto.slice(0,150)+ " ...."
+    if(longitud>180){
+        texto= texto.slice(0,180)+ " ...."
     }
     return texto;
   }

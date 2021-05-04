@@ -20,6 +20,7 @@ import { DataTablesModule } from 'angular-datatables';
     ReactiveFormsModule,
     MaterialModule,
     DataTablesModule,
-  ]
+  ],
+  exports:[ListaEjerciciosComponent, EditEjercicioComponent, AddEjercicioComponent]
 })
 export class EjerciciosModule { }

@@ -10,6 +10,13 @@ import { DataTablesModule } from 'angular-datatables';
 import { ClientesModule } from './clientes/clientes.module';
 import { MonitoresModule } from './monitores/monitores.module';
 import { CentrosModule } from './centros/centros.module';
+import { MusculosModule } from './musculos/musculos.module';
+import { EjerciciosModule } from './ejercicios/ejercicios.module';
+import { ActividadesModule } from './actividades/actividades.module';
+import { CategoriasModule } from './categorias/categorias.module';
+import { SalasModule } from './salas/salas.module';
+import { NoticiasModule } from './noticias/noticias.module';
+import { SesionesModule } from './sesiones/sesiones.module';
 
 
 @NgModule({
@@ -24,7 +31,14 @@ import { CentrosModule } from './centros/centros.module';
     TarifasModule,
     ClientesModule,
     MonitoresModule,
-    CentrosModule
+    CentrosModule,
+    MusculosModule,
+    EjerciciosModule,
+    ActividadesModule,
+    CategoriasModule,
+    SalasModule,
+    NoticiasModule,
+    SesionesModule
   ]
 })
 export class AdminModule { }

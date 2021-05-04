@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { Tarifa, Usuario, Centro, Musculo } from '../../models/interface';
+import { Tarifa, Usuario, Centro, Musculo, Ejercicio, Noticia } from '../../models/interface';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -158,7 +158,57 @@ export class AdminService {
     );
   }
 
+ 
+  getEjercicios(): Observable<Ejercicio> {
+    return this.htpp.get(`${this.baseUrl}/selectEjercicios.php`);
+  }
 
+  addEjercicio(ejercicio: Ejercicio): Observable<Ejercicio> {
+    return this.htpp.post(`${this.baseUrl}/addEjercicio.php`, JSON.stringify(ejercicio)
+    );
+  }
+  
+  borrarEjercicio(id:number) {
+    return this.htpp.get<Ejercicio>(`${this.baseUrl}/borrarEjercicio.php?id=${id}`);
+  }
+
+  getEjercicioPorId(id: number) {
+    return this.htpp.get<Ejercicio>(
+      `${this.baseUrl}/seleccionarEjercicio.php?id=${id}`
+    );
+  }
+  editarEjercicio(ejercicio: Ejercicio) {
+    return this.htpp.post(
+      `${this.baseUrl}/editarEjercicio.php`,
+      JSON.stringify(ejercicio)
+    );
+  }
+
+
+  getNoticias(): Observable<Noticia> {
+    return this.htpp.get(`${this.baseUrl}/selectNoticias.php`);
+  }
+
+  addNoticia(noticia: Noticia): Observable<Noticia> {
+    return this.htpp.post(`${this.baseUrl}/addNoticia.php`, JSON.stringify(noticia)
+    );
+  }
+  
+  borrarNoticia(id:number) {
+    return this.htpp.get<Noticia>(`${this.baseUrl}/borrarNoticia.php?id=${id}`);
+  }
+
+  getNoticiaPorId(id: number) {
+    return this.htpp.get<Noticia>(
+      `${this.baseUrl}/seleccionarNoticia.php?id=${id}`
+    );
+  }
+  editarNoticia(noticia: Noticia) {
+    return this.htpp.post(
+      `${this.baseUrl}/editarNoticia.php`,
+      JSON.stringify(noticia)
+    );
+  }
 
 
 }

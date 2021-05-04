@@ -1,4 +1,3 @@
-
 export interface Usuario {
   dni?: string;
   password?: string;
@@ -16,31 +15,81 @@ export interface Usuario {
   id_tarifa?: number;
   id_centro?: number;
   fecha_alta?: Date;
-  fecha_baja?:Date,
-  num_reservas?:number;
-  role?:any;
+  fecha_baja?: Date;
+  num_reservas?: number;
+  role?: any;
   estado?: string;
-  verificado?:number;
-
+  verificado?: number;
 }
 
-export interface Tarifa{
-  id?:number;
-  nombre?:string;
-  descripcion?:string;
-  precio?:number;
+export interface Tarifa {
+  id?: number;
+  nombre?: string;
+  descripcion?: string;
+  precio?: number;
 }
 
-export interface Centro{
-  id?:number;
-  nombre?:string;
-  direccion?:string;
-  telefono?:number;
+export interface Centro {
+  id?: number;
+  nombre?: string;
+  direccion?: string;
+  telefono?: number;
 }
 
-export interface Musculo{
-  nombre?:string;
-  descripcion?:string;
-  imagen?:string;
+export interface Musculo {
+  nombre?: string;
+  descripcion?: string;
+  imagen?: string;
 }
 
+export interface Ejercicio {
+  id?: number;
+  nombre?: string;
+  nombre_musculo?: string;
+  nivel?: string;
+  equipo?: string;
+  mecanica?: string;
+  descripcion?: string;
+  imagen?: string;
+}
+
+export interface Actividad {
+  id?: number;
+  email_monitor?: string;
+  id_tarifa?: number;
+  nombre?: string;
+  descripcion?: string;
+  duracion?: number;
+}
+
+export interface Sala {
+  id?: number;
+  aforo?: number;
+  id_actividad?: number;
+}
+
+export interface Sesion {
+  id?: number;
+  id_sala?: number;
+  fecha?: Date;
+  hora?: Date;
+  num_clientes?: number;
+  estado?: string;
+}
+
+export interface Noticia {
+  id?: number;
+  email_usuario?: string;
+  titulo?: string;
+  cuerpo?: string;
+  id_categoria?: number;
+  visible?: boolean;
+  fecha?: Date;
+  fecha_edit?: Date;
+  imagen?: string;
+}
+
+export interface Categoria {
+  id?: number;
+  nombre?: string;
+}

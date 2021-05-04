@@ -20,6 +20,7 @@ import { DataTablesModule } from 'angular-datatables';
     ReactiveFormsModule,
     MaterialModule,
     DataTablesModule,
-  ]
+  ],
+  exports: [AddMusculoComponent, EditMusculoComponent, ListaMusculosComponent]
 })
 export class MusculosModule { }

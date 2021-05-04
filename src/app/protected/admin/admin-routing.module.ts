@@ -38,6 +38,16 @@ const routes: Routes = [
       import('./ejercicios/ejercicios.module').then((m) => m.EjerciciosModule),
   },
   {
+    path: 'noticias',
+    loadChildren: () =>
+      import('./noticias/noticias.module').then((m) => m.NoticiasModule),
+  },
+  {
+    path: 'categorias',
+    loadChildren: () =>
+      import('./categorias/categorias.module').then((m) => m.CategoriasModule),
+  },
+  {
     path: '**',
     redirectTo: '',
   },

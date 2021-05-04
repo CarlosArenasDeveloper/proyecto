@@ -2,11 +2,11 @@
 <mat-sidenav-container *ngIf="sesion()">
   <mat-sidenav #sidenav mode="push" class="bg-dark">
     <mat-toolbar color="warn">
-      <span>Panel de administracion</span>
-      <span class="spacer"></span>
       <button mat-icon-button (click)="sidenav.toggle()">
         <mat-icon>menu</mat-icon>
       </button>
+      <span>Panel de administracion</span>
+      <span class="spacer"></span>
     </mat-toolbar>
 
     <mat-accordion>
@@ -106,13 +106,13 @@
         <mat-divider></mat-divider>
 
         <mat-nav-list *ngIf="isAdmin() || isMonitor()">
-          <a (click)="clientes()" mat-list-item (click)="sidenav.toggle()">
+          <a  routerLink="./admin/noticias" mat-list-item (click)="sidenav.toggle()">
             <i class="far fa-list-alt text-white ms-4"></i>
             <span class="ms-1 text-white">Listado</span>
           </a>
         </mat-nav-list>
         <mat-nav-list *ngIf="isAdmin()">
-          <a (click)="monitores()" mat-list-item (click)="sidenav.toggle()">
+          <a  routerLink="./admin/categorias" mat-list-item (click)="sidenav.toggle()">
             <i class="fas fa-tags text-white ms-4"></i>
             <span class="ms-1 text-white">Categorias</span>
           </a>

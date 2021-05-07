@@ -19,13 +19,15 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatDialogModule} from '@angular/material/dialog';
+
 
 
 
 
 
 @NgModule({
-  exports: [MatSlideToggleModule,MatCheckboxModule,MatExpansionModule,MatMenuModule,MatSortModule,MatTableModule,MatPaginatorModule,MatCardModule,MatListModule,MatSidenavModule,MatRadioModule,MatNativeDateModule
+  exports: [MatDialogModule,MatSlideToggleModule,MatCheckboxModule,MatExpansionModule,MatMenuModule,MatSortModule,MatTableModule,MatPaginatorModule,MatCardModule,MatListModule,MatSidenavModule,MatRadioModule,MatNativeDateModule
     ,MatDatepickerModule,MatFormFieldModule,MatSelectModule,MatInputModule,MatToolbarModule,MatIconModule,MatButtonModule,MatStepperModule],
 })
 export class MaterialModule {}

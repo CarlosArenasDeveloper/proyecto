@@ -18,7 +18,6 @@
       class="form-text text-danger fst-italic"
       *ngIf="campoNoValido('nombre')"
     >
-      <br />
       El nombre es requerido
     </span>
   </div>
@@ -39,12 +38,11 @@
       class="form-text text-danger fst-italic"
       *ngIf="campoNoValido('direccion')"
     >
-      <br />
       La direccion es obligatoria
     </span>
   </div>
   <div class="mb-3">
-    <label for="exampleFormControlInput1" class="form-label"
+    <label for="telefono" class="form-label"
       >Telefono de contacto:
     </label>
     <input
@@ -54,13 +52,12 @@
       formControlName="telefono"
       type="text"
       class="form-control"
-      id="exampleFormControlInput1"
+      id="telefono"
     />
     <span
       class="form-text text-danger fst-italic"
       *ngIf="campoNoValido('telefono')"
     >
-      <br />
       {{ telefonoErrorMsg }}
     </span>
   </div>

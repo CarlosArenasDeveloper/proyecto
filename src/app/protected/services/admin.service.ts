@@ -1,7 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { Tarifa, Usuario, Centro, Musculo, Ejercicio, Noticia } from '../../models/interface';
+import {
+  Tarifa,
+  Usuario,
+  Centro,
+  Musculo,
+  Ejercicio,
+  Noticia,
+  Categoria,
+} from '../../models/interface';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -19,7 +27,6 @@ export class AdminService {
   getMonitores() {
     return this.htpp.get(`${this.baseUrl}/selectMonitores.php`);
   }
-
 
   getUsuarioPorEmail(email: string): Observable<Usuario> {
     return this.htpp.get<Usuario>(
@@ -116,7 +123,7 @@ export class AdminService {
       JSON.stringify(centro)
     );
   }
-    
+
   borrarCentro(id: number) {
     return this.htpp.get<Tarifa>(`${this.baseUrl}/borrarCentro.php?id=${id}`);
   }
@@ -132,18 +139,22 @@ export class AdminService {
       JSON.stringify(centro)
     );
   }
-  
+
   getMusculos(): Observable<Musculo> {
     return this.htpp.get(`${this.baseUrl}/selectMusculos.php`);
   }
 
   addMusculo(musculo: Musculo): Observable<Musculo> {
-    return this.htpp.post(`${this.baseUrl}/addMusculo.php`, JSON.stringify(musculo)
+    return this.htpp.post(
+      `${this.baseUrl}/addMusculo.php`,
+      JSON.stringify(musculo)
     );
   }
-  
+
   borrarMusculo(nombre: string) {
-    return this.htpp.get<Musculo>(`${this.baseUrl}/borrarMusculo.php?nombre=${nombre}`);
+    return this.htpp.get<Musculo>(
+      `${this.baseUrl}/borrarMusculo.php?nombre=${nombre}`
+    );
   }
 
   getMusculoPorNombre(nombre: string) {
@@ -158,18 +169,21 @@ export class AdminService {
     );
   }
 
- 
   getEjercicios(): Observable<Ejercicio> {
     return this.htpp.get(`${this.baseUrl}/selectEjercicios.php`);
   }
 
   addEjercicio(ejercicio: Ejercicio): Observable<Ejercicio> {
-    return this.htpp.post(`${this.baseUrl}/addEjercicio.php`, JSON.stringify(ejercicio)
+    return this.htpp.post(
+      `${this.baseUrl}/addEjercicio.php`,
+      JSON.stringify(ejercicio)
     );
   }
-  
-  borrarEjercicio(id:number) {
-    return this.htpp.get<Ejercicio>(`${this.baseUrl}/borrarEjercicio.php?id=${id}`);
+
+  borrarEjercicio(id: number) {
+    return this.htpp.get<Ejercicio>(
+      `${this.baseUrl}/borrarEjercicio.php?id=${id}`
+    );
   }
 
   getEjercicioPorId(id: number) {
@@ -184,17 +198,18 @@ export class AdminService {
     );
   }
 
-
   getNoticias(): Observable<Noticia> {
     return this.htpp.get(`${this.baseUrl}/selectNoticias.php`);
   }
 
   addNoticia(noticia: Noticia): Observable<Noticia> {
-    return this.htpp.post(`${this.baseUrl}/addNoticia.php`, JSON.stringify(noticia)
+    return this.htpp.post(
+      `${this.baseUrl}/addNoticia.php`,
+      JSON.stringify(noticia)
     );
   }
-  
-  borrarNoticia(id:number) {
+
+  borrarNoticia(id: number) {
     return this.htpp.get<Noticia>(`${this.baseUrl}/borrarNoticia.php?id=${id}`);
   }
 
@@ -210,5 +225,19 @@ export class AdminService {
     );
   }
 
+  getCategorias(): Observable<Categoria> {
+    return this.htpp.get(`${this.baseUrl}/selectCategorias.php`);
+  }
 
+  getEditores(): Observable<Usuario> {
+    return this.htpp.get(`${this.baseUrl}/selectEditores.php`);
+  }
+
+  addCategoria(nombre: string): Observable<Categoria> {
+    return this.htpp.get(`${this.baseUrl}/addCategoria.php?nombre=${nombre}`);
+  }
+
+  borrarCategoria(id: number) {
+    return this.htpp.get<Categoria>(`${this.baseUrl}/borrarCategoria.php?id=${id}`);
+  }
 }

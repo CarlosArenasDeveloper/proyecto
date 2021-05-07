@@ -1,1 +1,145 @@
-<p>edit-ejercicio works!</p>
+<h1>Editar ejercicio</h1>
+<hr />
+<form [formGroup]="miFormulario" (ngSubmit)="editarEjercicio()" autocomplete="off">
+  <div class="mb-3">
+    <label for="exampleFormControlInput1" class="form-label"
+      >Nombre del ejercicio:
+    </label>
+    <input 
+      [ngClass]="{
+        'is-invalid': campoNoValido('nombre')
+      }"
+      formControlName="nombre"
+      type="text"
+      class="form-control"
+      id="exampleFormControlInput1"
+    />
+    <span
+      class="form-text text-danger fst-italic"
+      *ngIf="campoNoValido('nombre')"
+    >
+      El nombre es requerido
+    </span>
+  </div>
+  <div class="mb-3">
+    <span>¿Que musculo utiliza?:</span>
+    <select class="form-select mt-2" formControlName="nombre_musculo"  [ngClass]="{
+      'is-invalid': campoNoValido('nombre_musculo')
+    }">
+      <option value="">Seleccione un musculo ...</option>
+      <option *ngFor="let musculo of musculos" [value]="musculo.nombre">
+        {{ musculo.nombre | titlecase }}
+      </option>
+    </select>
+    <span
+      class="form-text text-danger fst-italic"
+      *ngIf="campoNoValido('nombre_musculo')"
+    >
+      El musculo es requerido
+    </span>
+  </div>
+  <div class="mb-3">
+    <span>¿Que nivel tiene?:</span>
+    <select class="form-select mt-2" formControlName="nivel"  [ngClass]="{
+      'is-invalid': campoNoValido('nivel')
+    }">
+      <option value="">Seleccione un nivel ...</option>
+      <option value="principiante">Principiante</option>
+      <option value="intermedio">Intermedio</option>
+      <option value="avanzado">Avanzado</option>
+    </select>
+    <span
+      class="form-text text-danger fst-italic"
+      *ngIf="campoNoValido('nivel')"
+    >
+      El nivel es requerido
+    </span>
+  </div>
+  <div class="mb-3">
+    <span>¿Que tipo de ejercicio es?:</span>
+    <select class="form-select mt-2" formControlName="tipo"  [ngClass]="{
+      'is-invalid': campoNoValido('tipo')
+    }">
+      <option value="">Seleccione un tipo ...</option>
+      <option value="basico">Basico</option>
+      <option value="multifuncional">Multifuncional</option>
+      <option value="analitico">Analitico</option>
+    </select>
+    <span
+      class="form-text text-danger fst-italic"
+      *ngIf="campoNoValido('tipo')"
+    >
+      El tipo es requerido</span
+    >
+  </div>
+  <div class="mb-3">
+    <label for="equipo" class="form-label"
+      >Equipo necesario para la realizacion del ejercicio:
+    </label>
+    <input
+      [ngClass]="{
+        'is-invalid': campoNoValido('equipo')
+      }"
+      formControlName="equipo"
+      type="text"
+      class="form-control"
+      id="equipo"
+    />
+    <span
+      class="form-text text-danger fst-italic"
+      *ngIf="campoNoValido('equipo')"
+    >
+      El equipo es requerido
+    </span>
+  </div>
+  <div class="mb-3">
+    <label for="exampleFormControlTextarea1" class="form-label mt-3"
+      >Descripcion:
+    </label>
+    <textarea
+      [ngClass]="{
+        'is-invalid': campoNoValido('descripcion')
+      }"
+      class="form-control"
+      id="exampleFormControlTextarea1"
+      rows="3"
+      formControlName="descripcion"
+    ></textarea>
+    <span
+      class="form-text text-danger fst-italic"
+      *ngIf="campoNoValido('descripcion')"
+    >
+      La descripcion es requerida
+    </span>
+  </div>
+  <div class="mb-3">
+    <label for="exampleFormControlInput1" class="form-label">Imagen: </label>
+    <input
+      formControlName="imagen"
+      type="text"
+      class="form-control"
+      id="exampleFormControlInput1"
+    />
+  </div>
+  <div class="mb-3">
+    <label for="video" class="form-label">Video: </label>
+    <input
+      formControlName="video"
+      type="text"
+      class="form-control"
+      id="video"
+    />
+  </div>
+  <button type="submit" class="btn btn-danger mx-3" routerLink="ejercicios">
+    <i class="fas fa-arrow-circle-left"></i>
+    Volver atrás
+  </button>
+  <button
+    type="submit"
+    [disabled]="miFormulario.invalid"
+    class="btn btn-primary"
+  >
+    Añadir
+  </button>
+</form>
+

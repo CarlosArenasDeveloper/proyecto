@@ -87,38 +87,7 @@
         </mat-nav-list>
       </mat-expansion-panel>
     </mat-accordion>
-    <mat-accordion *ngIf="isAdmin() || isMonitor()">
-      <mat-expansion-panel
-        (opened)="panelOpenState = true"
-        (closed)="panelOpenState = false"
-        class="bg-dark"
-      >
-        <mat-expansion-panel-header class="icono">
-          <mat-panel-title>
-            <mat-nav-list>
-              <a mat-list-item (click)="sidenav.toggle()">
-                <i class="far fa-newspaper fa-2x text-white"></i>
-                <span class="text-white ms-2">Noticias</span>
-              </a>
-            </mat-nav-list>
-          </mat-panel-title>
-        </mat-expansion-panel-header>
-        <mat-divider></mat-divider>
 
-        <mat-nav-list *ngIf="isAdmin() || isMonitor()">
-          <a  routerLink="./admin/noticias" mat-list-item (click)="sidenav.toggle()">
-            <i class="far fa-list-alt text-white ms-4"></i>
-            <span class="ms-1 text-white">Listado</span>
-          </a>
-        </mat-nav-list>
-        <mat-nav-list *ngIf="isAdmin()">
-          <a  routerLink="./admin/categorias" mat-list-item (click)="sidenav.toggle()">
-            <i class="fas fa-tags text-white ms-4"></i>
-            <span class="ms-1 text-white">Categorias</span>
-          </a>
-        </mat-nav-list>
-      </mat-expansion-panel>
-    </mat-accordion>
     <mat-nav-list *ngIf="isAdmin()">
       <a (click)="centros()" mat-list-item (click)="sidenav.toggle()">
         <i class="fas fa-user-clock text-white fa-2x ms-4"></i>
@@ -137,6 +106,12 @@
         <i class="far fa-calendar-alt text-white fa-2x ms-4"></i>
 
         <span class="ms-1 text-white">Sesiones</span>
+      </a>
+    </mat-nav-list>
+    <mat-nav-list *ngIf="isAdmin() || isMonitor()">
+      <a routerLink="./admin/noticias" mat-list-item (click)="sidenav.toggle()">
+        <i class="far fa-newspaper text-white ms-4 fa-2x"></i>
+        <span class="ms-1 text-white">Noticias</span>
       </a>
     </mat-nav-list>
     <mat-nav-list *ngIf="isAdmin()">

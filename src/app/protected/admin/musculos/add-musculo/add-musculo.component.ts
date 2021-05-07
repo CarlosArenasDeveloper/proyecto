@@ -30,7 +30,6 @@ export class AddMusculoComponent implements OnInit {
   }
 
   addMusculo() {
-    console.log(this.miFormulario.value);
     this.musculo = this.miFormulario.value;
     this.adminService.addMusculo(this.musculo).subscribe((resp) => {
       console.log(resp);

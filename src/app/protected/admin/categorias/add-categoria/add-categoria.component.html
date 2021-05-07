@@ -1,1 +1,22 @@
-<p>add-categoria works!</p>
+<h1 mat-dialog-title>Escriba el nombre de la nueva categoria</h1>
+<form [formGroup]="miFormulario" autocomplete="off">
+  <div mat-dialog-content>
+    <mat-form-field>
+      <mat-label>Categoria: </mat-label>
+      <input matInput autocomplete="off" formControlName="nombre" />
+    </mat-form-field>
+    <span
+      class="form-text text-danger fst-italic"
+      *ngIf="campoNoValido('nombre')"
+    >
+    <br>
+      El nombre es requerido
+    </span>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-raised-button color="warn" (click)="onNoClick()" cdkFocusInitial>Cancelar</button>
+    <button mat-raised-button type="submit" (click)="addCategoria()" color="primary" [disabled]="miFormulario.invalid">
+      Añadir
+    </button>
+  </div>
+</form>

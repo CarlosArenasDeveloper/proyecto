@@ -16,7 +16,8 @@ import { TextoPipe } from './pipes/texto.pipe';
   exports:[
     NavegacionComponent,
     ImagenPipe,
-    TextoPipe
+    TextoPipe,
+    
   ]
 })
 export class SharedModule { }

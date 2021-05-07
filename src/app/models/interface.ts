@@ -48,9 +48,10 @@ export interface Ejercicio {
   nombre_musculo?: string;
   nivel?: string;
   equipo?: string;
-  mecanica?: string;
+  tipo?: string;
   descripcion?: string;
   imagen?: string;
+  video?:string;
 }
 
 export interface Actividad {
@@ -87,6 +88,7 @@ export interface Noticia {
   fecha?: Date;
   fecha_edit?: Date;
   imagen?: string;
+  video?:string;
 }
 
 export interface Categoria {

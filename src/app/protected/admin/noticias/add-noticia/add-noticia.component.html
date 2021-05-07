@@ -1,1 +1,98 @@
-<p>add-noticia works!</p>
+<h1>Añadiendo noticia</h1>
+<hr />
+<form [formGroup]="miFormulario" (ngSubmit)="addNoticia()" autocomplete="off">
+  <div class="mb-3">
+    <label for="titulo" class="form-label"
+      >Titulo:
+    </label>
+    <input
+      [ngClass]="{
+        'is-invalid': campoNoValido('titulo')
+      }"
+      formControlName="titulo"
+      type="text"
+      class="form-control"
+      id="titulo"
+    />
+    <span
+      class="form-text text-danger fst-italic"
+      *ngIf="campoNoValido('titulo')"
+    >
+      El titulo es requerido
+    </span>
+  </div>
+  <div class="mb-3">
+    <span>¿Cual es la categoria de la noticia?:</span>  
+    <!-- <button (click)="addCategoria()" class="ms-2 btn btn-primary">
+      <i class="fas fa-tags"></i> Nueva categoria
+    </button> -->
+    <button mat-raised-button color="warn" class="ms-2" (click)="openDialog()"> <i class="fas fa-tags"></i>Añadir Categoria</button>
+    <select class="form-select mt-2" formControlName="id_categoria"  [ngClass]="{
+      'is-invalid': campoNoValido('id_categoria')
+    }">
+      <option value="">Seleccione una categoria ...</option>
+      <option *ngFor="let categoria of categorias" [value]="categoria.id">
+        {{ categoria.nombre | titlecase }}
+      </option>
+    </select>
+    <span
+      class="form-text text-danger fst-italic"
+      *ngIf="campoNoValido('id_categoria')"
+    >
+      La categoria es requerida
+    </span>
+  </div>
+  <div class="mb-3">
+    
+  </div>
+  <div class="mb-3">
+  
+  </div>
+  <div class="mb-3">
+
+  </div>
+  <div class="mb-3">
+    <label for="exampleFormControlTextarea1" class="form-label mt-3"
+      >Cuerpo:
+    </label>
+    <textarea
+      [ngClass]="{
+        'is-invalid': campoNoValido('cuerpo')
+      }"
+      class="form-control"
+      id="exampleFormControlTextarea1"
+      rows="3"
+      formControlName="cuerpo"
+    ></textarea>
+    <span
+      class="form-text text-danger fst-italic"
+      *ngIf="campoNoValido('cuerpo')"
+    >
+     El cuerpo de la noticia es requerido
+    </span>
+  </div>
+  <div class="mb-3">
+    <label for="exampleFormControlInput1" class="form-label">Imagen: </label>
+    <input
+      formControlName="imagen"
+      type="text"
+      class="form-control"
+      id="exampleFormControlInput1"
+    />
+  </div>
+  <div class="form-check form-switch">
+    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" formControlName="visible">
+    <label class="form-check-label" for="flexSwitchCheckDefault"><span>{{visible}}</span></label>
+  </div>
+  <button type="submit" class="btn btn-danger mx-3" routerLink="noticias">
+    <i class="fas fa-arrow-circle-left"></i>
+    Volver atrás
+  </button>
+  <button
+    type="submit"
+    [disabled]="miFormulario.invalid"
+    class="btn btn-primary"
+  >
+    Añadir
+  </button>
+</form>

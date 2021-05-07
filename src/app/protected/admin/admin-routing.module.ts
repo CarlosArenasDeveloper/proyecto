@@ -48,6 +48,11 @@ const routes: Routes = [
       import('./categorias/categorias.module').then((m) => m.CategoriasModule),
   },
   {
+    path: 'actividades',
+    loadChildren: () =>
+      import('./actividades/actividades.module').then((m) => m.ActividadesModule),
+  },
+  {
     path: '**',
     redirectTo: '',
   },

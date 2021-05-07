@@ -8,11 +8,10 @@ import { MaterialModule } from '../../../material/material.module';
 import { DataTablesModule } from 'angular-datatables';
 import { ListaCategoriasComponent } from './lista-categorias/lista-categorias.component';
 import { AddCategoriaComponent } from './add-categoria/add-categoria.component';
-import { EditCategoriaComponent } from './edit-categoria/edit-categoria.component';
 
 
 @NgModule({
-  declarations: [ListaCategoriasComponent, AddCategoriaComponent, EditCategoriaComponent],
+  declarations: [ListaCategoriasComponent, AddCategoriaComponent],
   imports: [
     CommonModule,
     CategoriasRoutingModule,
@@ -21,6 +20,6 @@ import { EditCategoriaComponent } from './edit-categoria/edit-categoria.componen
     MaterialModule,
     DataTablesModule,
   ],
-  exports:[ListaCategoriasComponent, AddCategoriaComponent, EditCategoriaComponent]
+  exports:[ListaCategoriasComponent, AddCategoriaComponent]
 })
 export class CategoriasModule { }

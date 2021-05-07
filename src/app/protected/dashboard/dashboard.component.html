@@ -89,7 +89,7 @@
     </mat-accordion>
 
     <mat-nav-list *ngIf="isAdmin()">
-      <a (click)="centros()" mat-list-item (click)="sidenav.toggle()">
+      <a routerLink="./admin/actividades" mat-list-item (click)="sidenav.toggle()">
         <i class="fas fa-user-clock text-white fa-2x ms-4"></i>
 
         <span class="ms-1 text-white ms-1">Actividades</span>

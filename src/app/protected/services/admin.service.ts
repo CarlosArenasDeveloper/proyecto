@@ -240,4 +240,9 @@ export class AdminService {
   borrarCategoria(id: number) {
     return this.htpp.get<Categoria>(`${this.baseUrl}/borrarCategoria.php?id=${id}`);
   }
+
+  getUsuariosGym(id:number){
+    return this.htpp.get(`${this.baseUrl}/verUsuariosGym.php?id=${id}`);
+
+  }
 }

@@ -17,7 +17,6 @@ export class AddEjercicioComponent implements OnInit {
 
   ngOnInit(): void {
       this.adminService.getMusculos().subscribe(musculo=>{
-        console.log(musculo);
         this.musculos=musculo;
       })
   }

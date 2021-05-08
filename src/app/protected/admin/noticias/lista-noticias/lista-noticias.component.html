@@ -38,10 +38,14 @@
           <tbody>
             <tr *ngFor="let ele of noticias; let i = index">
               <td>{{ i+1 }}</td>
-              <td>{{ ele.email_usuario | titlecase }}</td>
+              <td [ngClass]="{
+                'text-warning': ele.email_usuario == 'editor no asignado'
+              }">{{ ele.email_usuario | titlecase }}</td>
               <td>{{ ele.titulo | titlecase }}</td>
               <td>{{ ele.cuerpo|texto }}</td>
-              <td>{{ ele.id_categoria|titlecase}}</td>
+              <td  [ngClass]="{
+                'text-warning': ele.id_categoria == 'sin asignar'
+              }">{{ ele.id_categoria | titlecase }}</td>
               <td>{{ ele.fecha|date}}</td>
 
               <td ><span *ngIf="ele.fecha_edit!=null">{{ ele.fecha_edit|date}}</span>

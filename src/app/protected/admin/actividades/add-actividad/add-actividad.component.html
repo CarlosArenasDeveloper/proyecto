@@ -1,1 +1,113 @@
-<p>add-actividad works!</p>
+<div class="container">
+<h1>Añadiendo actividad</h1>
+<hr />
+<form [formGroup]="miFormulario" (ngSubmit)="addActividad()" autocomplete="off">
+  <div class="mb-3">
+    <label for="nombre" class="form-label"
+      >Nombre:
+    </label>
+    <input
+      [ngClass]="{
+        'is-invalid': campoNoValido('nombre')
+      }"
+      formControlName="nombre"
+      type="text"
+      class="form-control"
+      id="nombre"
+    />
+    <span
+      class="form-text text-danger fst-italic"
+      *ngIf="campoNoValido('nombre')"
+    >
+      El nombre es requerido
+    </span>
+  </div>
+  <div class="mb-3">
+    <span>¿Qué monitor impartira la actividad?:</span>  
+    <select class="form-select mt-2" formControlName="email_monitor"  [ngClass]="{
+      'is-invalid': campoNoValido('email_monitor')
+    }">
+      <option value="">Seleccion una monitor ...</option>
+      <option *ngFor="let monitor of monitores" [value]="monitor.email">
+        {{ monitor.nombre | titlecase }}
+        {{ monitor.apellido1 | titlecase }} 
+        {{ monitor.apellido2 | titlecase }}
+      </option>
+    </select>
+    <span
+      class="form-text text-danger fst-italic"
+      *ngIf="campoNoValido('email_monitor')"
+    >
+      La monitor es requerido
+    </span>
+  </div>
+  <div class="mb-3">
+    <span>¿Que tarifa minima incluira dicha actividad?:</span>  
+    <select class="form-select mt-2" formControlName="id_tarifa"  [ngClass]="{
+      'is-invalid': campoNoValido('id_tarifa')
+    }">
+      <option value="">Seleccione una tarifa ...</option>
+      <option *ngFor="let tarifa of tarifas" [value]="tarifa.id">
+        {{ tarifa.nombre | titlecase }}
+      </option>
+    </select>
+    <span
+      class="form-text text-danger fst-italic"
+      *ngIf="campoNoValido('id_tarifa')"
+    >
+      La tarifa es requerida
+    </span>
+  </div>
+  <div class="mb-3">
+    <label for="exampleFormControlTextarea1" class="form-label mt-3"
+      >Descripcion:
+    </label>
+    <textarea
+      [ngClass]="{
+        'is-invalid': campoNoValido('descripcion')
+      }"
+      class="form-control"
+      id="exampleFormControlTextarea1"
+      rows="3"
+      formControlName="descripcion"
+    ></textarea>
+    <span
+      class="form-text text-danger fst-italic"
+      *ngIf="campoNoValido('descripcion')"
+    >
+     El descripcion de la actividad es requerida
+    </span>
+  </div>
+  <div class="mb-3">
+    <label for="exampleFormControlInput1" class="form-label">Duracion (minutos): </label>
+    <input
+    [ngClass]="{
+      'is-invalid': campoNoValido('duracion')
+    }"
+      formControlName="duracion"
+      type="number"
+      min="0"
+      class="form-control"
+      id="exampleFormControlInput1"
+    />
+    <span
+    class="form-text text-danger fst-italic"
+    *ngIf="campoNoValido('duracion')"
+  >
+   {{duracionMessage}}
+  </span>
+  </div>
+  
+  <button type="button" class="btn btn-danger mx-3" routerLink="actividades">
+    <i class="fas fa-arrow-circle-left"></i>
+    Volver atrás
+  </button>
+  <button
+    type="submit"
+    [disabled]="miFormulario.invalid"
+    class="btn btn-primary"
+  >
+    Añadir
+  </button>
+</form>
+</div>

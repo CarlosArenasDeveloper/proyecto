@@ -3,7 +3,7 @@ import Swal from 'sweetalert2';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { Noticia } from '../../../../models/interface';
 import { AdminService } from '../../../services/admin.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 
 @Component({
@@ -21,7 +21,6 @@ export class EditNoticiaComponent implements OnInit {
     private fb: FormBuilder,
     private adminService: AdminService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -36,7 +35,6 @@ export class EditNoticiaComponent implements OnInit {
     this.activatedRoute.params
       .pipe(switchMap(({ id }) => this.adminService.getNoticiaPorId(id)))
       .subscribe((noticia) => {
-        console.log(noticia);
         this.noticia = noticia;
         this.id = noticia.id!;
         this.miFormulario.controls['titulo'].setValue(this.noticia.titulo);

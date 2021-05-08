@@ -11,6 +11,7 @@ import {
   Categoria,
 } from '../../models/interface';
 import { Observable } from 'rxjs';
+import { Actividad } from '../../models/interface';
 
 @Injectable({
   providedIn: 'root',
@@ -243,6 +244,32 @@ export class AdminService {
 
   getUsuariosGym(id:number){
     return this.htpp.get(`${this.baseUrl}/verUsuariosGym.php?id=${id}`);
+  }
 
+  getActividades(): Observable<Actividad> {
+    return this.htpp.get(`${this.baseUrl}/selectActividades.php`);
+  }
+
+  addActividad(actividad: Actividad): Observable<Actividad> {
+    return this.htpp.post(
+      `${this.baseUrl}/addActividad.php`,
+      JSON.stringify(actividad)
+    );
+  }
+
+  borrarActividad(id: number) {
+    return this.htpp.get<Actividad>(`${this.baseUrl}/borrarActividad.php?id=${id}`);
+  }
+
+  getActividadPorId(id: number) {
+    return this.htpp.get<Actividad>(
+      `${this.baseUrl}/seleccionarActividad.php?id=${id}`
+    );
+  }
+  editarActividad(actividad: Actividad) {
+    return this.htpp.post(
+      `${this.baseUrl}/editarActividad.php`,
+      JSON.stringify(actividad)
+    );
   }
 }

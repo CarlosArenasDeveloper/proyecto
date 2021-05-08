@@ -11,7 +11,7 @@ import {
   Categoria,
 } from '../../models/interface';
 import { Observable } from 'rxjs';
-import { Actividad } from '../../models/interface';
+import { Actividad, Sesion } from '../../models/interface';
 
 @Injectable({
   providedIn: 'root',
@@ -31,7 +31,7 @@ export class AdminService {
 
   getUsuarioPorEmail(email: string): Observable<Usuario> {
     return this.htpp.get<Usuario>(
-      `${this.baseUrl}/selectUsuario.php?email=${email}`
+      `${this.baseUrl}/seleccionarUsuario.php?email=${email}`
     );
   }
 
@@ -270,6 +270,33 @@ export class AdminService {
     return this.htpp.post(
       `${this.baseUrl}/editarActividad.php`,
       JSON.stringify(actividad)
+    );
+  }
+
+  getSesiones(): Observable<Sesion> {
+    return this.htpp.get(`${this.baseUrl}/selectSesiones.php`);
+  }
+
+  addSesion(sesion: Sesion): Observable<Sesion> {
+    return this.htpp.post(
+      `${this.baseUrl}/addActividad.php`,
+      JSON.stringify(sesion)
+    );
+  }
+
+  borrarSesion(id: number) {
+    return this.htpp.get<Sesion>(`${this.baseUrl}/borrarSesion.php?id=${id}`);
+  }
+
+  getSesionPorId(id: number) {
+    return this.htpp.get<Sesion>(
+      `${this.baseUrl}/seleccionarSesion.php?id=${id}`
+    );
+  }
+  editarSesion(sesion: Sesion) {
+    return this.htpp.post(
+      `${this.baseUrl}/editarSesion.php`,
+      JSON.stringify(sesion)
     );
   }
 }

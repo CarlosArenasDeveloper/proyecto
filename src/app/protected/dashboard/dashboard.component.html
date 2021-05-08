@@ -102,9 +102,8 @@
       </a>
     </mat-nav-list>
     <mat-nav-list *ngIf="isAdmin()">
-      <a (click)="centros()" mat-list-item (click)="sidenav.toggle()">
+      <a routerLink="./admin/sesiones" mat-list-item (click)="sidenav.toggle()">
         <i class="far fa-calendar-alt text-white fa-2x ms-4"></i>
-
         <span class="ms-1 text-white">Sesiones</span>
       </a>
     </mat-nav-list>

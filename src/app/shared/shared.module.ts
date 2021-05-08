@@ -5,11 +5,12 @@ import { RouterModule } from '@angular/router';
 import { MaterialModule } from '../material/material.module';
 import { ImagenPipe } from './pipes/imagen.pipe';
 import { TextoPipe } from './pipes/texto.pipe';
+import { HoraPipe } from './pipes/hora.pipe';
 
 
 
 @NgModule({
-  declarations: [NavegacionComponent, ImagenPipe, TextoPipe],
+  declarations: [NavegacionComponent, ImagenPipe, TextoPipe, HoraPipe],
   imports: [
     CommonModule,
     RouterModule, MaterialModule ],
@@ -17,6 +18,7 @@ import { TextoPipe } from './pipes/texto.pipe';
     NavegacionComponent,
     ImagenPipe,
     TextoPipe,  
+    HoraPipe
   ]
 })
 export class SharedModule { }

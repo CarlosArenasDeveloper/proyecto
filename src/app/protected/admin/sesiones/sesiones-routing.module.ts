@@ -7,7 +7,7 @@ import { EditSesionComponent } from './edit-sesion/edit-sesion.component';
 const routes: Routes = [
   {path:'',component: ListaSesionesComponent},
   {path:'add-sesion',component:AddSesionComponent},
-  {path:'edit-sesion/:id',component:EditSesionComponent},
+  {path:'editar-sesion/:id',component:EditSesionComponent},
   {path:'**',redirectTo:''}
 
 ];

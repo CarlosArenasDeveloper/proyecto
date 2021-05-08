@@ -14,5 +14,6 @@ export class TextoPipe implements PipeTransform {
     }
     return texto;
   }
+   
 
 }

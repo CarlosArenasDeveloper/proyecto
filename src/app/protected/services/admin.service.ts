@@ -11,7 +11,7 @@ import {
   Categoria,
 } from '../../models/interface';
 import { Observable } from 'rxjs';
-import { Actividad, Sesion } from '../../models/interface';
+import { Actividad, Sesion, Sala } from '../../models/interface';
 
 @Injectable({
   providedIn: 'root',
@@ -279,7 +279,7 @@ export class AdminService {
 
   addSesion(sesion: Sesion): Observable<Sesion> {
     return this.htpp.post(
-      `${this.baseUrl}/addActividad.php`,
+      `${this.baseUrl}/addSesion.php`,
       JSON.stringify(sesion)
     );
   }
@@ -298,5 +298,9 @@ export class AdminService {
       `${this.baseUrl}/editarSesion.php`,
       JSON.stringify(sesion)
     );
+  }
+
+  getSalas(): Observable<Sala> {
+    return this.htpp.get(`${this.baseUrl}/selectSalas.php`);
   }
 }

@@ -1,1 +1,68 @@
-<p>lista-sesiones works!</p>
+<div class="container">
+  <h1>Listado de sesiones</h1>
+  <hr />
+  <div class="row">
+    <div class="col text-right">
+      <button routerLink="./add-sesion" class="btn btn-primary">
+        <i class="fa fa-plus"></i> Añadir sesion
+      </button>
+    </div>
+  </div>
+  <div class="row mt-4">
+    <div class="col">
+      <table
+        datatable
+        [dtOptions]="dtOptions"
+        [dtTrigger]="dtTrigger"
+        class="table table-striped table-bordered row-border hover animated fadeIn faster"
+      >
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Sala</th>
+            <th scope="col">Fecha</th>
+            <th scope="col">Hora</th>
+            <th scope="col">Nº de socios</th>
+            <th scope="col">Estado</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let ele of sesiones; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td
+              [ngClass]="{
+                'text-warning': ele.id_sala == 'sin asignar'
+              }"
+            >
+              {{ ele.id_sala }}
+            </td>
+            <td>{{ ele.fecha | date }}</td>
+            <td>{{ ele.hora |hora}}</td>
+            <td>{{ ele.num_clientes }}</td>
+            <td [ngClass]="{
+              'text-success': ele.estado === 'incompleta',
+              'text-danger': ele.estado === 'completa',
+              'text-secondary':ele.estado==='finalizada'
+            }">{{ ele.estado |titlecase}}</td>
+
+            <td>
+              <button class="btn btn-danger" (click)="borrarSesion(ele, i)">
+                <i class="fa fa-trash"></i>
+              </button>
+            </td>
+            <td>
+              <button
+                class="btn btn-warning ms-2"
+                [routerLink]="['./editar-sesion', ele.id]"
+              >
+                <i class="fas fa-search-plus"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

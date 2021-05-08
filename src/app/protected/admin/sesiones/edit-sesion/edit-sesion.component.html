@@ -1,1 +1,113 @@
-<p>edit-sesion works!</p>
+<h1>Editando sesion</h1>
+<hr />
+<form [formGroup]="miFormulario" (ngSubmit)="editarSesion()" autocomplete="off">
+  <div class="mb-3">
+    <span>¿En que sala se realizara?:</span>
+    <select
+      class="form-select mt-2"
+      formControlName="id_sala"
+      [ngClass]="{
+        'is-invalid': campoNoValido('id_sala')
+      }"
+    >
+      <option value="">Seleccione un sala ...</option>
+      <option *ngFor="let sala of salas" [value]="sala.id">
+        Sala {{ sala.id }}
+      </option>
+    </select>
+    <span
+      class="form-text text-danger fst-italic"
+      *ngIf="campoNoValido('id_sala')"
+    >
+      La sala es requerida
+    </span>
+  </div>
+
+  <div class="mb-3">
+    <label for="fecha" class="form-label">Fecha: </label>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+    <input
+      [ngClass]="{
+        'is-invalid': campoNoValido('fecha')
+      }"
+      matInput
+      [min]="minDate"
+      [max]="maxDate"
+      [matDatepicker]="picker"
+      formControlName="fecha"
+      class="form-control"
+    />
+
+    <span
+      class="form-text text-danger fst-italic"
+      *ngIf="campoNoValido('fecha')"
+    >
+      La fecha es requerida
+    </span>
+  </div>
+
+  <div class="mb-3">
+    <label for="hora" class="form-label">Hora: </label>
+    <input
+      type="time"
+      formControlName="hora"
+      id="hora"
+      class="form-control"
+      [ngClass]="{
+        'is-invalid': campoNoValido('hora')
+      }"
+    />
+    <span
+      class="form-text text-danger fst-italic"
+      *ngIf="campoNoValido('hora')"
+    >
+      La hora es requerida
+    </span>
+  </div>
+  <div class="mb-3">
+    Estado actual :
+    <a class="btn btn-dark m-2" (click)="cambiarEstado()">
+      Cambiar estado </a
+    ><input
+      class="form-control"
+      [ngClass]="{
+        'text-success': sesion.estado === 'incompleta' ,
+        'text-danger': sesion.estado === 'completa',
+        'text-secondary': sesion.estado === 'finalizada'
+      }"
+      formControlName="estado"
+    />
+  </div>
+  <div class="mb-3">
+    <label for="num_clientes" class="form-label"
+      >Clientes que van a asistir a la sesion:
+    </label>
+    <input
+      [ngClass]="{
+        'is-invalid': campoNoValido('num_clientes')
+      }"
+      formControlName="num_clientes"
+      type="text"
+      class="form-control"
+      id="num_clientes"
+    />
+    <span
+      class="form-text text-danger fst-italic"
+      *ngIf="campoNoValido('num_clientes')"
+    >
+      El num_clientes es requerido
+    </span>
+  </div>
+  <button type="button" class="btn btn-danger mx-3" routerLink="sesiones">
+    <i class="fas fa-arrow-circle-left"></i>
+    Volver atrás
+  </button>
+  <button
+    type="submit"
+    [disabled]="miFormulario.invalid"
+    class="btn btn-primary"
+  >
+    Editar
+  </button>
+</form>

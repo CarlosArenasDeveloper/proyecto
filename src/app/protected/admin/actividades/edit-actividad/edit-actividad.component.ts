@@ -35,6 +35,7 @@ export class EditActividadComponent implements OnInit {
     this.activatedRoute.params
       .pipe(switchMap(({ id }) => this.adminService.getActividadPorId(id)))
       .subscribe((actividad) => {
+        console.log(actividad);
         this.actividad = actividad;
         this.id = actividad.id!;
         this.miFormulario.controls['nombre'].setValue(this.actividad.nombre);

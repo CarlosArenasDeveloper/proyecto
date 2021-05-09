@@ -27,7 +27,7 @@
     <select class="form-select mt-2" formControlName="email_monitor"  [ngClass]="{
       'is-invalid': campoNoValido('email_monitor')
     }">
-      <option value="">Seleccion una monitor ...</option>
+      <option value="">Seleccion un monitor ...</option>
       <option *ngFor="let monitor of monitores" [value]="monitor.email">
         {{ monitor.nombre | titlecase }}
         {{ monitor.apellido1 | titlecase }} 

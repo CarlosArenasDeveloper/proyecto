@@ -10,7 +10,7 @@
         'is-invalid': campoNoValido('id_sala')
       }"
     >
-      <option value="">Seleccione un sala ...</option>
+      <option value="null">Seleccione un sala ...</option>
       <option *ngFor="let sala of salas" [value]="sala.id">
         Sala {{ sala.id }}
       </option>

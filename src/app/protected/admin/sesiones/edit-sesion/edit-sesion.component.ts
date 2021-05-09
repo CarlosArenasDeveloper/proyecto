@@ -88,15 +88,50 @@ export class EditSesionComponent implements OnInit {
       denyButtonText: `COMPLETA`,
       cancelButtonText: `INCOMPLETA`,
       cancelButtonColor: `#2778c4`,
-      confirmButtonColor:`#757575`
+      confirmButtonColor: `#757575`,
     }).then((result) => {
-      if(result.isConfirmed){
-        this.miFormulario.get('estado')?.setValue('finalizada')        
-      }else if(result.isDenied){
-        this.miFormulario.get('estado')?.setValue('completa')
-      }
-      else{
-        this.miFormulario.get('estado')?.setValue('incompleta')
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: `¿Estas seguro de que querer cambiar el estado de la sesión a finalizada ?`,
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Si, cambiar',
+          cancelButtonText: 'No, cancelar',
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.miFormulario.get('estado')?.setValue('finalizada');
+          }
+        });
+      } else if (result.isDenied) {
+        Swal.fire({
+          title: `¿Estas seguro de que querer cambiar el estado de la sesión a completa ?`,
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Si, cambiar',
+          cancelButtonText: 'No, cancelar',
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.miFormulario.get('estado')?.setValue('completa');
+          }
+        });
+      } else {
+        Swal.fire({
+          title: `¿Estas seguro de que querer cambiar el estado de la sesión a incompleta ?`,
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Si, cambiar',
+          cancelButtonText: 'No, cancelar',
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.miFormulario.get('estado')?.setValue('incompleta');
+          }
+        });
       }
     });
   }

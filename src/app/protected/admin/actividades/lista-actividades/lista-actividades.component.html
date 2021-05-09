@@ -38,7 +38,7 @@
               <td>{{ ele.descripcion|texto }}</td>
               <td>{{ ele.duracion}}</td>
               <td [ngClass]="{
-                'text-warning': ele.id_tarifa == 'sin asignar'
+                'text-warning': ele.id_tarifa === 'sin asignar'
               }">{{ ele.id_tarifa|titlecase}}</td>
 
               <td>

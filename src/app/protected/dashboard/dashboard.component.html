@@ -39,12 +39,12 @@
             <span class="text-white ms-1">Monitores</span>
           </a>
         </mat-nav-list>
-        <mat-nav-list *ngIf="isAdmin()">
+        <!-- <mat-nav-list *ngIf="isAdmin()">
           <a (click)="monitores()" mat-list-item (click)="sidenav.toggle()">
             <i class="fas fa-user-shield text-white ms-4"></i>
             <span class="text-white ms-1">Gerentes</span>
           </a>
-        </mat-nav-list>
+        </mat-nav-list> -->
       </mat-expansion-panel>
     </mat-accordion>
     <mat-accordion *ngIf="isAdmin() || isMonitor()">

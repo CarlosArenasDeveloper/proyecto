@@ -27,7 +27,7 @@
         <select class="form-select mt-2" formControlName="email_monitor"  [ngClass]="{
           'is-invalid': campoNoValido('email_monitor')
         }">
-          <option value="">Seleccion una monitor ...</option>
+          <option value="null">Seleccion un monitor ...</option>
           <option *ngFor="let monitor of monitores" [value]="monitor.email">
             {{ monitor.nombre | titlecase }}
             {{ monitor.apellido1 | titlecase }} 
@@ -46,7 +46,7 @@
         <select class="form-select mt-2" formControlName="id_tarifa"  [ngClass]="{
           'is-invalid': campoNoValido('id_tarifa')
         }">
-          <option value="">Seleccione una tarifa ...</option>
+          <option value="null">Seleccione una tarifa ...</option>
           <option *ngFor="let tarifa of tarifas" [value]="tarifa.id">
             {{ tarifa.nombre | titlecase }}
           </option>

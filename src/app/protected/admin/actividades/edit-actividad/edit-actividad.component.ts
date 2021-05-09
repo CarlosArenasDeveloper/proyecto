@@ -78,7 +78,21 @@ export class EditActividadComponent implements OnInit {
     return '';
   }
   editarActividad() {
-    console.log(this.miFormulario.value);
+    
+    if (
+      this.miFormulario.get('email_monitor')?.value == 'null' || this.miFormulario.get('id_tarifa')?.value == 'null'
+    ) {
+      Swal.fire({
+        position: 'top-end',
+        icon: 'error',
+        title: 'Datos incompletos',
+        text:'Por favor, rellene todos los campos requeridos',
+        showConfirmButton: false,
+        timer: 2000,
+      });
+      return;
+    }
+
     this.actividad = this.miFormulario.value;
     this.actividad.id = this.id;
     this.adminService.editarActividad(this.actividad).subscribe((resp) => {

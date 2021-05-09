@@ -59,11 +59,26 @@ export class EditSesionComponent implements OnInit {
   campoNoValido(campo: string) {
     return (
       this.miFormulario.get(campo)?.invalid &&
-      this.miFormulario.get(campo)?.touched
+      this.miFormulario.get(campo)?.touched 
+
     );
   }
 
   editarSesion() {
+    if (
+      this.miFormulario.get('id_sala')?.value == 'null'
+    ) {
+      Swal.fire({
+        position: 'top-end',
+        icon: 'error',
+        title: 'Datos incompletos',
+        text:'Por favor, rellene todos los campos requeridos',
+        showConfirmButton: false,
+        timer: 2000,
+      });
+      return;
+    }
+
     this.sesion = this.miFormulario.value;
     this.sesion.id = this.id;
     this.adminService.editarSesion(this.sesion).subscribe((resp) => {

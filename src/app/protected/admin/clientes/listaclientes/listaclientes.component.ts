@@ -32,6 +32,7 @@ export class ListaclientesComponent implements OnInit, OnDestroy {
 
     this.adminService.getClientes().subscribe((clientes) => {
       this.clientes = clientes;
+      console.log(this.clientes);
       this.dtTrigger.next();
     });
   }

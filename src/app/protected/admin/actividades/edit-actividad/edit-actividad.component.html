@@ -36,7 +36,7 @@
         </select>
         <span
           class="form-text text-danger fst-italic"
-          *ngIf="campoNoValido('email_monitor')"
+          *ngIf="campoNoValido('email_monitor') || this.miFormulario.get('email_monitor')?.value=='null'"
         >
           La monitor es requerido
         </span>
@@ -53,7 +53,7 @@
         </select>
         <span
           class="form-text text-danger fst-italic"
-          *ngIf="campoNoValido('id_tarifa')"
+          *ngIf="campoNoValido('id_tarifa') || this.miFormulario.get('id_tarifa')?.value=='null'"
         >
           La tarifa es requerida
         </span>

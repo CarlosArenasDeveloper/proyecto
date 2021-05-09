@@ -13,14 +13,14 @@ import { switchMap } from 'rxjs/operators';
 })
 export class EditNoticiaComponent implements OnInit {
   categorias: any;
-  editores:any
+  editores: any;
   noticia: Noticia = {};
   id!: number;
   esVisible: any;
   constructor(
     private fb: FormBuilder,
     private adminService: AdminService,
-    private activatedRoute: ActivatedRoute,
+    private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -38,7 +38,9 @@ export class EditNoticiaComponent implements OnInit {
         this.noticia = noticia;
         this.id = noticia.id!;
         this.miFormulario.controls['titulo'].setValue(this.noticia.titulo);
-        this.miFormulario.controls['email_usuario'].setValue(this.noticia.email_usuario);
+        this.miFormulario.controls['email_usuario'].setValue(
+          this.noticia.email_usuario
+        );
         this.miFormulario.controls['cuerpo'].setValue(this.noticia.cuerpo);
         this.miFormulario.controls['id_categoria'].setValue(
           this.noticia.id_categoria
@@ -53,7 +55,6 @@ export class EditNoticiaComponent implements OnInit {
       });
   }
 
-  
   get visible(): string {
     if (
       this.miFormulario.get('visible')?.value == false ||
@@ -81,9 +82,24 @@ export class EditNoticiaComponent implements OnInit {
   }
 
   editarNoticia() {
+    if (
+      this.miFormulario.get('email_usuario')?.value == 'null' ||
+      this.miFormulario.get('id_categoria')?.value == 'null'
+    ) {
+      Swal.fire({
+        position: 'top-end',
+        icon: 'error',
+        title: 'Datos incompletos',
+        text:'Por favor, rellene todos los campos requeridos',
+        showConfirmButton: false,
+        timer: 2000,
+      });
+      return;
+    }
+
     this.noticia = this.miFormulario.value;
     this.noticia.id = this.id;
-    this.noticia.fecha_edit=new Date();
+    this.noticia.fecha_edit = new Date();
     this.adminService.editarNoticia(this.noticia).subscribe((resp) => {
       if (resp == null) {
         Swal.fire({

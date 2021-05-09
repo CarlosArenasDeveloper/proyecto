@@ -35,7 +35,7 @@
     </select>
     <span
       class="form-text text-danger fst-italic"
-      *ngIf="campoNoValido('email_usuario')"
+      *ngIf="campoNoValido('email_usuario')  || this.miFormulario.get('email_usuario')?.value=='null'"
     >
       El editor es requerido
     </span>
@@ -53,7 +53,7 @@
     </select>
     <span
       class="form-text text-danger fst-italic"
-      *ngIf="campoNoValido('id_categoria')"
+      *ngIf="campoNoValido('id_categoria') || this.miFormulario.get('id_categoria')?.value=='null' "
     >
       La categoria es requerida
     </span>

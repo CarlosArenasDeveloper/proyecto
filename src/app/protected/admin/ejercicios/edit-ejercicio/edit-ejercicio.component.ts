@@ -71,6 +71,21 @@ export class EditEjercicioComponent implements OnInit {
   }
 
   editarEjercicio() {
+
+    if (
+      this.miFormulario.get('nombre_musculo')?.value == 'null'
+    ) {
+      Swal.fire({
+        position: 'top-end',
+        icon: 'error',
+        title: 'Datos incompletos',
+        text:'Por favor, rellene todos los campos requeridos',
+        showConfirmButton: false,
+        timer: 2000,
+      });
+      return;
+    }
+
     this.ejercicio = this.miFormulario.value;
     this.ejercicio.id = this.id;
     this.adminService.editarEjercicio(this.ejercicio).subscribe((resp) => {

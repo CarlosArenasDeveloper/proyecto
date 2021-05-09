@@ -33,7 +33,7 @@
     </select>
     <span
       class="form-text text-danger fst-italic"
-      *ngIf="campoNoValido('nombre_musculo')"
+      *ngIf="campoNoValido('nombre_musculo') || this.miFormulario.get('nombre_musculo')?.value=='null'"
     >
       El musculo es requerido
     </span>

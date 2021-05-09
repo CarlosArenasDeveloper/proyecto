@@ -45,6 +45,8 @@ export class EditSalaComponent implements OnInit {
   }
 
   editarSala() {
+
+    
     this.sala = this.miFormulario.value;
     this.sala.id = this.data.id;
     this.adminService.editarSala(this.sala).subscribe((resp) => {

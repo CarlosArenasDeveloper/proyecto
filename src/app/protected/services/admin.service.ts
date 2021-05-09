@@ -303,4 +303,27 @@ export class AdminService {
   getSalas(): Observable<Sala> {
     return this.htpp.get(`${this.baseUrl}/selectSalas.php`);
   }
+  
+  addSala(sala: Sala): Observable<Sala> {
+    return this.htpp.post(
+      `${this.baseUrl}/addSala.php`,
+      JSON.stringify(sala)
+    );
+  }
+
+  borrarSala(id: number) {
+    return this.htpp.get<Sala>(`${this.baseUrl}/borrarSala.php?id=${id}`);
+  }
+
+  getSalaPorId(id: number) {
+    return this.htpp.get<Sala>(
+      `${this.baseUrl}/seleccionarSala.php?id=${id}`
+    );
+  }
+  editarSala(sala: Sala) {
+    return this.htpp.post(
+      `${this.baseUrl}/editarSala.php`,
+      JSON.stringify(sala)
+    );
+  }
 }

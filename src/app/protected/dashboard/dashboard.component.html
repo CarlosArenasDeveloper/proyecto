@@ -96,7 +96,7 @@
       </a>
     </mat-nav-list>
     <mat-nav-list *ngIf="isAdmin()">
-      <a (click)="centros()" mat-list-item (click)="sidenav.toggle()">
+      <a routerLink="./admin/salas" mat-list-item (click)="sidenav.toggle()">
         <i class="fab fa-buromobelexperte text-white fa-2x ms-4"></i>
         <span class="ms-1 text-white ms-1">Salas</span>
       </a>
@@ -125,20 +125,6 @@
         <span class="ms-1 text-white">Centros</span>
       </a>
     </mat-nav-list>
-
-    <!-- <mat-nav-list *ngIf="isAdmin() || isMonitor()">
-      <a (click)="clientes()" mat-list-item (click)="sidenav.toggle()">
-        <mat-icon mat-list-icon>label</mat-icon>
-        <span class="text-white">Clientes</span>
-      </a>
-    </mat-nav-list>
-    <mat-divider></mat-divider>
-    <mat-nav-list *ngIf="isAdmin()">
-      <a (click)="monitores()" mat-list-item (click)="sidenav.toggle()">
-        <mat-icon mat-list-icon>label</mat-icon>
-        <span class="text-white">Monitores</span>
-      </a>
-    </mat-nav-list> -->
   </mat-sidenav>
 
   <mat-toolbar color="warn">

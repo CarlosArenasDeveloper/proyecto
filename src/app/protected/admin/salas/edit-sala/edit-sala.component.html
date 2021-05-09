@@ -1,0 +1,23 @@
+<h1 mat-dialog-title>Actualizar Sala {{data.id}}</h1>
+<form [formGroup]="miFormulario" autocomplete="off">
+  <div mat-dialog-content>
+    <mat-form-field>
+      <mat-label>Aforo: </mat-label>
+      <input matInput autocomplete="off" formControlName="aforo" />
+    </mat-form-field>
+    <span
+      class="form-text text-danger fst-italic"
+      *ngIf="campoNoValido('aforo')"
+    >
+    <br>
+      El aforo es requerido
+    </span>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-raised-button color="warn" (click)="onNoClick()" cdkFocusInitial>Cancelar</button>
+    <button mat-raised-button type="submit" (click)="editarSala()" color="primary" [disabled]="miFormulario.invalid">
+      Actualizar
+    </button>
+  </div>
+</form>
+

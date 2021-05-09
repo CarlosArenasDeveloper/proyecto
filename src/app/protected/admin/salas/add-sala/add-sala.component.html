@@ -1,0 +1,23 @@
+<h1 mat-dialog-title>Escriba el aforo de la nueva sala</h1>
+<form [formGroup]="miFormulario" autocomplete="off">
+  <div mat-dialog-content>
+    <mat-form-field>
+      <mat-label>Sala: </mat-label>
+      <input matInput autocomplete="off" formControlName="aforo" />
+    </mat-form-field>
+    <span
+      class="form-text text-danger fst-italic"
+      *ngIf="campoNoValido('aforo')"
+    >
+    <br>
+      El aforo es requerido
+    </span>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-raised-button color="warn" (click)="onNoClick()" cdkFocusInitial>Cancelar</button>
+    <button mat-raised-button type="submit" (click)="addSala()" color="primary" [disabled]="miFormulario.invalid">
+      Añadir
+    </button>
+  </div>
+</form>
+

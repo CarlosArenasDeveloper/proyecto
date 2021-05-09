@@ -58,6 +58,11 @@ const routes: Routes = [
       import('./sesiones/sesiones.module').then((m) => m.SesionesModule),
   },
   {
+    path: 'salas',
+    loadChildren: () =>
+      import('./salas/salas.module').then((m) => m.SalasModule),
+  },
+  {
     path: '**',
     redirectTo: '',
   },

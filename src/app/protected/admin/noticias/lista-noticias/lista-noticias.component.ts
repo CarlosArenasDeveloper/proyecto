@@ -3,7 +3,7 @@ import { Subject } from 'rxjs';
 import { AdminService } from '../../../services/admin.service';
 import Swal from 'sweetalert2';
 import { DataTableDirective } from 'angular-datatables';
-import { Noticia } from '../../../../models/interface';
+import { Noticia, Usuario } from '../../../../models/interface';
 import { Router } from '@angular/router';
 
 @Component({
@@ -12,6 +12,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./lista-noticias.component.css'],
 })
 export class ListaNoticiasComponent implements OnInit, OnDestroy {
+  usuario!: Usuario;
+  editor!:any;
   dtOptions: DataTables.Settings = {};
   dtTrigger = new Subject();
   noticias: any = [];
@@ -21,6 +23,10 @@ export class ListaNoticiasComponent implements OnInit, OnDestroy {
   constructor(private adminService: AdminService,private router :Router) {}
 
   ngOnInit(): void {
+    const usuario = JSON.parse(sessionStorage.getItem('usuario')!);
+    this.usuario = usuario;
+    this.editor=`${this.usuario.nombre} ${this.usuario.apellido1} ${this.usuario.apellido2}`;
+
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 5,
@@ -41,7 +47,11 @@ export class ListaNoticiasComponent implements OnInit, OnDestroy {
   }
 
   categorias() {
-  this.router.navigateByUrl("dashboard/admin/categorias")
+    if(this.usuario.role==1){
+      this.router.navigateByUrl("dashboard/admin/categorias")
+    }else{
+      this.router.navigateByUrl("dashboard/monitor/categorias")
+    }
   }
 
   borrarNoticia(noticia: Noticia, i: number) {
@@ -81,5 +91,16 @@ export class ListaNoticiasComponent implements OnInit, OnDestroy {
         });
       }
     });
+  }
+
+  errorPermisos(){
+    Swal.fire({
+      position:'top-right',
+      icon: 'error',
+      title: 'Permisos insuficientes',
+      timer: 3000,
+      showConfirmButton: false,
+      text:'No puede modificar una noticia en la cual usted no sea el editor'
+      });
   }
 }

@@ -3,7 +3,7 @@ import { Subject } from 'rxjs';
 import { AdminService } from '../../../services/admin.service';
 import Swal from 'sweetalert2';
 import { DataTableDirective } from 'angular-datatables';
-import { Actividad } from '../../../../models/interface';
+import { Actividad, Usuario } from '../../../../models/interface';
 import { Router } from '@angular/router';
 
 
@@ -17,12 +17,17 @@ export class ListaActividadesComponent implements OnInit , OnDestroy{
   dtOptions: DataTables.Settings = {};
   dtTrigger = new Subject();
   actividades: any = [];
+  usuario!: Usuario;
+
   @ViewChild(DataTableDirective, { static: false })
   datatableElement!: DataTableDirective;
 
   constructor(private adminService: AdminService,private router :Router) {}
 
   ngOnInit(): void {
+    const usuario = JSON.parse(sessionStorage.getItem('usuario')!);
+    this.usuario = usuario;
+
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 5,
@@ -36,6 +41,12 @@ export class ListaActividadesComponent implements OnInit , OnDestroy{
       this.actividades = actividades;
       this.dtTrigger.next();
     });
+  }
+  isAdmin() {
+    if (this.usuario.role == 1) {
+      return true;
+    }
+    return false;
   }
 
   ngOnDestroy(): void {

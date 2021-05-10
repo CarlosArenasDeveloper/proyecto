@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subject } from 'rxjs';
 import { AdminService } from '../../../services/admin.service';
 import Swal from 'sweetalert2';
-import { Sala } from '../../../../models/interface';
+import { Sala, Usuario } from '../../../../models/interface';
 import { DataTableDirective } from 'angular-datatables';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -15,6 +15,7 @@ import { EditSalaComponent } from '../edit-sala/edit-sala.component';
   styleUrls: ['./lista-salas.component.css'],
 })
 export class ListaSalasComponent implements OnInit {
+  usuario!: Usuario;
   dtOptions: DataTables.Settings = {};
   dtTrigger = new Subject();
   salas: any = [];
@@ -31,7 +32,6 @@ export class ListaSalasComponent implements OnInit {
     const dialogRef = this.dialog.open(AddSalaComponent, {
       width: '350px',
     });
-    
 
     dialogRef.afterClosed().subscribe((result) => {
       this.adminService.getSalas().subscribe((salas) => {
@@ -54,12 +54,11 @@ export class ListaSalasComponent implements OnInit {
     });
   }
 
-  editar(sala:Sala): void {
-    const dialogRef = this.dialog.open(EditSalaComponent,  {
+  editar(sala: Sala): void {
+    const dialogRef = this.dialog.open(EditSalaComponent, {
       width: '350px',
-      data: {id:sala.id,aforo:sala.aforo}
+      data: { id: sala.id, aforo: sala.aforo },
     });
-    
 
     dialogRef.afterClosed().subscribe((result) => {
       this.adminService.getSalas().subscribe((salas) => {
@@ -83,6 +82,9 @@ export class ListaSalasComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    const usuario = JSON.parse(sessionStorage.getItem('usuario')!);
+    this.usuario = usuario;
+
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 5,
@@ -98,6 +100,12 @@ export class ListaSalasComponent implements OnInit {
     });
   }
 
+  isAdmin() {
+    if (this.usuario.role == 1) {
+      return true;
+    }
+    return false;
+  }
   ngOnDestroy(): void {
     this.dtTrigger.unsubscribe();
   }

@@ -21,14 +21,14 @@
             <tr>
               <th scope="col">ID</th>
               <th scope="col">Nombre</th>
-              <th scope="col"></th>
+              <th scope="col" *ngIf="isAdmin()"></th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let ele of categorias; let i = index">
               <td>{{ i+1 }}</td>
               <td>{{ ele.nombre | titlecase }}</td>
-              <td>
+              <td *ngIf="isAdmin()">
                 <button class="btn btn-danger" (click)="borrarCategoria(ele, i)">
                   <i class="fa fa-trash"></i>
                 </button>

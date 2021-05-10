@@ -1,7 +1,7 @@
 <div class="container">
   <h1>Listado de sesiones</h1>
   <hr />
-  <div class="row">
+  <div class="row" *ngIf="isAdmin()">
     <div class="col text-right">
       <button routerLink="./add-sesion" class="btn btn-primary">
         <i class="fa fa-plus"></i> Añadir sesion
@@ -24,8 +24,8 @@
             <th scope="col">Hora</th>
             <th scope="col">Nº de socios</th>
             <th scope="col">Estado</th>
-            <th scope="col"></th>
-            <th scope="col"></th>
+            <th scope="col"  *ngIf="isAdmin()"></th>
+            <th scope="col"  *ngIf="isAdmin()"></th>
           </tr>
         </thead>
         <tbody>
@@ -47,12 +47,12 @@
               'text-secondary':ele.estado==='finalizada'
             }">{{ ele.estado |titlecase}}</td>
 
-            <td>
+            <td  *ngIf="isAdmin()">
               <button class="btn btn-danger" (click)="borrarSesion(ele, i)">
                 <i class="fa fa-trash"></i>
               </button>
             </td>
-            <td>
+            <td  *ngIf="isAdmin()">
               <button
                 class="btn btn-warning ms-2"
                 [routerLink]="['./editar-sesion', ele.id]"

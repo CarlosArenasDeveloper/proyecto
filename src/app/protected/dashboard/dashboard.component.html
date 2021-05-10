@@ -28,13 +28,41 @@
         <mat-divider></mat-divider>
 
         <mat-nav-list *ngIf="isAdmin() || isMonitor()">
-          <a (click)="clientes()" mat-list-item (click)="sidenav.toggle()">
+          <a
+            *ngIf="isAdmin()"
+            routerLink="./admin/listaclientes"
+            mat-list-item
+            (click)="sidenav.toggle()"
+          >
+            <i class="far fa-user text-white ms-4"></i>
+            <span class="text-white ms-1">Clientes</span>
+          </a>
+          <a
+            *ngIf="isMonitor()"
+            routerLink="./monitor/listaclientes"
+            mat-list-item
+            (click)="sidenav.toggle()"
+          >
             <i class="far fa-user text-white ms-4"></i>
             <span class="text-white ms-1">Clientes</span>
           </a>
         </mat-nav-list>
-        <mat-nav-list *ngIf="isAdmin()">
-          <a (click)="monitores()" mat-list-item (click)="sidenav.toggle()">
+        <mat-nav-list *ngIf="isAdmin() || isMonitor()">
+          <a
+            *ngIf="isAdmin()"
+            routerLink="./admin/listamonitores"
+            mat-list-item
+            (click)="sidenav.toggle()"
+          >
+            <i class="fas fa-user-tie text-white ms-4"></i>
+            <span class="text-white ms-1">Monitores</span>
+          </a>
+          <a
+            *ngIf="isMonitor()"
+            routerLink="./monitor/listamonitores"
+            mat-list-item
+            (click)="sidenav.toggle()"
+          >
             <i class="fas fa-user-tie text-white ms-4"></i>
             <span class="text-white ms-1">Monitores</span>
           </a>
@@ -47,7 +75,7 @@
         </mat-nav-list> -->
       </mat-expansion-panel>
     </mat-accordion>
-    <mat-accordion *ngIf="isAdmin() || isMonitor()">
+    <mat-accordion>
       <mat-expansion-panel
         (opened)="panelOpenState = true"
         (closed)="panelOpenState = false"
@@ -67,6 +95,7 @@
 
         <mat-nav-list *ngIf="isAdmin() || isMonitor()">
           <a
+            *ngIf="isAdmin()"
             routerLink="./admin/ejercicios"
             mat-list-item
             (click)="sidenav.toggle()"
@@ -74,10 +103,31 @@
             <i class="fas fa-dumbbell text-white ms-4"></i>
             <span class="ms-1 text-white">Ejercicios</span>
           </a>
-        </mat-nav-list>
-        <mat-nav-list *ngIf="isAdmin()">
           <a
+            *ngIf="isMonitor()"
+            routerLink="./monitor/ejercicios"
+            mat-list-item
+            (click)="sidenav.toggle()"
+          >
+            <i class="fas fa-dumbbell text-white ms-4"></i>
+            <span class="ms-1 text-white">Ejercicios</span>
+          </a>
+        </mat-nav-list>
+
+        <mat-nav-list>
+          <a
+            *ngIf="isAdmin()"
             routerLink="./admin/musculos"
+            mat-list-item
+            (click)="sidenav.toggle()"
+          >
+            <i class="fas fa-heartbeat text-white ms-4"></i>
+            <span class="ms-1 text-white">Musculos</span>
+          </a>
+
+          <a
+            *ngIf="isMonitor()"
+            routerLink="./monitor/musculos"
             mat-list-item
             (click)="sidenav.toggle()"
           >
@@ -88,39 +138,102 @@
       </mat-expansion-panel>
     </mat-accordion>
 
-    <mat-nav-list *ngIf="isAdmin()">
-      <a routerLink="./admin/actividades" mat-list-item (click)="sidenav.toggle()">
+    <mat-nav-list>
+      <a
+        *ngIf="isAdmin()"
+        routerLink="./admin/actividades"
+        mat-list-item
+        (click)="sidenav.toggle()"
+      >
         <i class="fas fa-user-clock text-white fa-2x ms-4"></i>
-
+        <span class="ms-1 text-white ms-1">Actividades</span>
+      </a>
+      <a
+        *ngIf="isMonitor()"
+        routerLink="./monitor/actividades"
+        mat-list-item
+        (click)="sidenav.toggle()"
+      >
+        <i class="fas fa-user-clock text-white fa-2x ms-4"></i>
         <span class="ms-1 text-white ms-1">Actividades</span>
       </a>
     </mat-nav-list>
-    <mat-nav-list *ngIf="isAdmin()">
-      <a routerLink="./admin/salas" mat-list-item (click)="sidenav.toggle()">
+    <mat-nav-list>
+      <a
+        *ngIf="isAdmin()"
+        routerLink="./admin/salas"
+        mat-list-item
+        (click)="sidenav.toggle()"
+      >
+        <i class="fab fa-buromobelexperte text-white fa-2x ms-4"></i>
+        <span class="ms-1 text-white ms-1">Salas</span>
+      </a>
+      <a
+        *ngIf="isMonitor()"
+        routerLink="./monitor/salas"
+        mat-list-item
+        (click)="sidenav.toggle()"
+      >
         <i class="fab fa-buromobelexperte text-white fa-2x ms-4"></i>
         <span class="ms-1 text-white ms-1">Salas</span>
       </a>
     </mat-nav-list>
-    <mat-nav-list *ngIf="isAdmin()">
-      <a routerLink="./admin/sesiones" mat-list-item (click)="sidenav.toggle()">
+    <mat-nav-list>
+      <a
+        *ngIf="isAdmin()"
+        routerLink="./admin/sesiones"
+        mat-list-item
+        (click)="sidenav.toggle()"
+      >
+        <i class="far fa-calendar-alt text-white fa-2x ms-4"></i>
+        <span class="ms-1 text-white">Sesiones</span>
+      </a>
+      <a
+        *ngIf="isMonitor()"
+        routerLink="./monitor/sesiones"
+        mat-list-item
+        (click)="sidenav.toggle()"
+      >
         <i class="far fa-calendar-alt text-white fa-2x ms-4"></i>
         <span class="ms-1 text-white">Sesiones</span>
       </a>
     </mat-nav-list>
-    <mat-nav-list *ngIf="isAdmin() || isMonitor()">
-      <a routerLink="./admin/noticias" mat-list-item (click)="sidenav.toggle()">
+    <mat-nav-list>
+      <a *ngIf="isAdmin()" routerLink="./admin/noticias" mat-list-item (click)="sidenav.toggle()">
+        <i class="far fa-newspaper text-white ms-4 fa-2x"></i>
+        <span class="ms-1 text-white">Noticias</span>
+      </a>
+      <a *ngIf="isMonitor()" routerLink="./monitor/noticias" mat-list-item (click)="sidenav.toggle()">
         <i class="far fa-newspaper text-white ms-4 fa-2x"></i>
         <span class="ms-1 text-white">Noticias</span>
       </a>
     </mat-nav-list>
-    <mat-nav-list *ngIf="isAdmin()">
-      <a (click)="tarifas()" mat-list-item (click)="sidenav.toggle()">
+    <mat-nav-list>
+      <a
+        *ngIf="isAdmin()"
+        routerLink="./admin/tarifas"
+        mat-list-item
+        (click)="sidenav.toggle()"
+      >
+        <i class="fas fa-money-check-alt fa-2x text-white ms-4"></i>
+        <span class="text-white ms-1">Tarifas</span>
+      </a>
+      <a
+        *ngIf="isMonitor()"
+        routerLink="./monitor/tarifas"
+        mat-list-item
+        (click)="sidenav.toggle()"
+      >
         <i class="fas fa-money-check-alt fa-2x text-white ms-4"></i>
         <span class="text-white ms-1">Tarifas</span>
       </a>
     </mat-nav-list>
-    <mat-nav-list *ngIf="isAdmin()">
-      <a (click)="centros()" mat-list-item (click)="sidenav.toggle()">
+    <mat-nav-list>
+      <a *ngIf="isAdmin()" routerLink="./admin/centros" mat-list-item (click)="sidenav.toggle()">
+        <i class="far fa-building text-white fa-2x ms-4"></i>
+        <span class="ms-1 text-white">Centros</span>
+      </a>
+      <a *ngIf="isMonitor()" routerLink="./monitor/centros" mat-list-item (click)="sidenav.toggle()">
         <i class="far fa-building text-white fa-2x ms-4"></i>
         <span class="ms-1 text-white">Centros</span>
       </a>

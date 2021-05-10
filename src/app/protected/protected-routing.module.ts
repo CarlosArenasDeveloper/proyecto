@@ -9,21 +9,17 @@ const routes: Routes = [
     component: DashboardComponent,
     children: [
       { path: '', component: DashboardComponent },
-      // { path: 'admin', component: AdminComponent },
-      // {path:  'admin/listaclientes',component:ListaclientesComponent},
-      // { path: 'admin/listaclientes/altacliente', component: AltaclienteComponent },
-      // { path: 'admin/listaclientes/editcliente/:email', component: EditclienteComponent },
-      // { path: 'admin/listamonitores', component: ListamonitoresComponent },
-      // { path: 'admin/listamonitores/altamonitor', component: AltamonitorComponent },
-      // { path: 'admin/listamonitores/editmonitor/:email', component: EditmonitorComponent },
-      // { path: 'cliente', component: ClienteComponent },
-      // { path: 'monitor', component: MonitorComponent },
-
       {
         path: 'admin',
         //component: AdminComponent,
         loadChildren: () => import('./admin/admin.module').then((m)=>m.AdminModule)
       },
+      {
+        path: 'monitor',
+        //component: AdminComponent,
+        loadChildren: () => import('./monitor/monitor.module').then((m)=>m.MonitorModule)
+      },
+
       { path: '**', redirectTo: '' },
     ],
   },

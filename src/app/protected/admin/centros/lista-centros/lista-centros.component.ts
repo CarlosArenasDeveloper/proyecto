@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subject } from 'rxjs';
 import { AdminService } from '../../../services/admin.service';
 import Swal from 'sweetalert2';
-import { Centro } from '../../../../models/interface';
+import { Centro, Usuario } from '../../../../models/interface';
 import { DataTableDirective } from 'angular-datatables';
 
 @Component({
@@ -11,6 +11,7 @@ import { DataTableDirective } from 'angular-datatables';
   styleUrls: ['./lista-centros.component.css'],
 })
 export class ListaCentrosComponent implements OnInit, OnDestroy {
+  usuario!: Usuario;
   dtOptions: DataTables.Settings = {};
   dtTrigger = new Subject();
   centros: any = [];
@@ -20,6 +21,9 @@ export class ListaCentrosComponent implements OnInit, OnDestroy {
   constructor(private adminService: AdminService) {}
 
   ngOnInit(): void {
+    const usuario = JSON.parse(sessionStorage.getItem('usuario')!);
+    this.usuario = usuario;
+
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 5,
@@ -33,6 +37,13 @@ export class ListaCentrosComponent implements OnInit, OnDestroy {
       this.centros = centros;
       this.dtTrigger.next();
     });
+  }
+
+  isAdmin() {
+    if (this.usuario.role == 1) {
+      return true;
+    }
+    return false;
   }
 
   ngOnDestroy(): void {
@@ -120,9 +131,5 @@ export class ListaCentrosComponent implements OnInit, OnDestroy {
     });
   }
 
-  ventanaModal(){
-    
-  }
+  ventanaModal() {}
 }
-
-

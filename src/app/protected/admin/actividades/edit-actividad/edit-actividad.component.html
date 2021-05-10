@@ -1,13 +1,15 @@
 <div class="container">
-    <h1>Editando actividad</h1>
+    <h1 *ngIf="!isAdmin();else mas">Informacion sobre  {{actividad.nombre}} </h1>
+    <ng-template #mas> <h1>Editando {{actividad.nombre}}</h1></ng-template>
+
     <hr />
-    <form [formGroup]="miFormulario" (ngSubmit)="editarActividad()" autocomplete="off">
+    <form [formGroup]="miFormulario" (ngSubmit)="editarActividad()" autocomplete="off" >
       <div class="mb-3">
         <label for="nombre" class="form-label"
           >Nombre:
         </label>
-        <input
-          [ngClass]="{
+        <input 
+          [ngClass]="{ 
             'is-invalid': campoNoValido('nombre')
           }"
           formControlName="nombre"
@@ -102,12 +104,14 @@
         <i class="fas fa-arrow-circle-left"></i>
         Volver atrás
       </button>
-      <button
+      <button *ngIf="isAdmin()"
         type="submit"
         [disabled]="miFormulario.invalid"
         class="btn btn-primary"
       >
         Editar
+      <i class="fas fa-edit"></i>
+
       </button>
     </form>
     </div>

@@ -1,4 +1,4 @@
-<h1>Editar ejercicio</h1>
+<h1 >Editar {{ejercicio.nombre | titlecase}}</h1>
 <hr />
 <form [formGroup]="miFormulario" (ngSubmit)="editarEjercicio()" autocomplete="off">
   <div class="mb-3">
@@ -140,6 +140,8 @@
     class="btn btn-primary"
   >
     Editar
+    <i class="fas fa-edit"></i>
+
   </button>
 </form>
 

@@ -3,7 +3,7 @@ import { Subject } from 'rxjs';
 import { AdminService } from '../../../services/admin.service';
 import Swal from 'sweetalert2';
 import { DataTableDirective } from 'angular-datatables';
-import { Sesion } from '../../../../models/interface';
+import { Sesion, Usuario } from '../../../../models/interface';
 @Component({
   selector: 'app-lista-sesiones',
   templateUrl: './lista-sesiones.component.html',
@@ -11,6 +11,7 @@ import { Sesion } from '../../../../models/interface';
 })
 export class ListaSesionesComponent implements OnInit,OnDestroy {
 
+  usuario!:Usuario
   dtOptions: DataTables.Settings = {};
   dtTrigger = new Subject();
   sesiones: any = [];
@@ -20,6 +21,9 @@ export class ListaSesionesComponent implements OnInit,OnDestroy {
   constructor(private adminService: AdminService) {}
 
   ngOnInit(): void {
+    const usuario = JSON.parse(sessionStorage.getItem('usuario')!);
+    this.usuario = usuario;
+
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 5,
@@ -40,6 +44,12 @@ export class ListaSesionesComponent implements OnInit,OnDestroy {
   }
 
  
+  isAdmin(){
+    if (this.usuario.role == 1) {
+      return true;
+    }
+    return false;
+  }
 
   borrarSesion(sesion: Sesion, i: number) {
     Swal.fire({

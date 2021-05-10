@@ -1,7 +1,7 @@
 <div class="container">
   <h1>Listado de Tarifas</h1>
   <hr />
-  <div class="row">
+  <div class="row" *ngIf="isAdmin()">
     <div class="col text-right">
       <button routerLink="./add-tarifa" class="btn btn-primary">
         <i class="fa fa-plus"></i> Añadir tarifa
@@ -22,7 +22,7 @@
             <th scope="col">Nombre</th>
             <th scope="col">Descripcion</th>
             <th scope="col">Precio</th>
-            <th scope="col"></th>
+            <th scope="col" *ngIf="isAdmin()"></th>
           </tr>
         </thead>
         <tbody>
@@ -31,7 +31,7 @@
             <td>{{ ele.nombre | titlecase }}</td>
             <td>{{ ele.descripcion | titlecase }}</td>
             <td>{{ ele.precio | currency: "EUR" }}</td>
-            <td>
+            <td *ngIf="isAdmin()">
               <button class="btn btn-danger" (click)="borrarTarifa(ele, i)">
                 <i class="fa fa-trash"></i>
               </button>

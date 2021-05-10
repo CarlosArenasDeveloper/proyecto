@@ -1,7 +1,7 @@
 <div class="container">
     <h1>Listado de actividades</h1>
     <hr />
-    <div class="row">
+    <div *ngIf="isAdmin()" class="row">
       <div class="col text-right">
         <button routerLink="./add-actividad" class="btn btn-primary">
           <i class="fa fa-plus"></i> Añadir actividad
@@ -42,7 +42,7 @@
               }">{{ ele.id_tarifa|titlecase}}</td>
 
               <td>
-                <button class="btn btn-danger" (click)="borrarActividad(ele, i)">
+                <button *ngIf="isAdmin()" class="btn btn-danger" (click)="borrarActividad(ele, i)">
                   <i class="fa fa-trash"></i>
                 </button>
                 <button

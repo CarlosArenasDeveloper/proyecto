@@ -1,7 +1,7 @@
 <div class="container">
   <h1>Listado de Monitores</h1>
   <hr />
-  <div class="row">
+  <div class="row" *ngIf="isAdmin()">
     <div class="col text-right">
       <button routerLink="./altamonitor" class="btn btn-primary">
         <i class="fa fa-user-plus"></i>
@@ -24,7 +24,7 @@
             <th scope="col">Apellidos</th>
             <th scope="col">Email</th>
             <th scope="col">Centro</th>
-            <th scope="col"></th>
+            <th *ngIf="isAdmin()" scope="col"></th>
           </tr>
         </thead>
         <tbody>
@@ -37,7 +37,7 @@
             <td [ngClass]="{
               'text-warning': ele.id_centro == 'sin asignar'
             }">{{ ele.id_centro | titlecase }}</td>
-            <td>
+            <td *ngIf="isAdmin()">
               <button class="btn btn-danger" (click)="borrarMonitor(ele, i)">
                 <i class="fa fa-trash"></i>
               </button>  

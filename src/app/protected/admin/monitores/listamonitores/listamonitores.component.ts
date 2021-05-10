@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import Swal from 'sweetalert2';
 import { AdminService } from '../../../services/admin.service';
 import { Usuario } from '../../../../models/interface';
@@ -10,18 +10,24 @@ import { DataTableDirective } from 'angular-datatables';
   templateUrl: './listamonitores.component.html',
   styleUrls: ['./listamonitores.component.css'],
 })
-export class ListamonitoresComponent implements OnInit {
+export class ListamonitoresComponent implements OnInit,OnDestroy {
   dtOptions: DataTables.Settings = {};
   dtTrigger = new Subject();
   monitores: any = [];
+  usuario!: Usuario;
   @ViewChild(DataTableDirective, { static: false })
   datatableElement!: DataTableDirective;
+  
   constructor(private adminService: AdminService) {}
+
   ngOnDestroy(): void {
     this.dtTrigger.unsubscribe();
   }
 
   ngOnInit(): void {
+    const usuario = JSON.parse(sessionStorage.getItem('usuario')!);
+    this.usuario = usuario;
+    
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 5,
@@ -37,6 +43,13 @@ export class ListamonitoresComponent implements OnInit {
     });
   }
 
+  isAdmin() {
+    if (this.usuario.role == 1) {
+      return true;
+    }
+    return false;
+  }
+  
   borrarMonitor(usuario: Usuario, i: number) {
     Swal.fire({
       title: `¿Estas seguro de querer eliminar a ${usuario.nombre?.toUpperCase()} ${usuario.apellido1?.toUpperCase()}?`,

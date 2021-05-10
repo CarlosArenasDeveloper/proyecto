@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Actividad } from '../../../../models/interface';
+import { Actividad, Usuario } from '../../../../models/interface';
 import { AdminService } from '../../../services/admin.service';
 import Swal from 'sweetalert2';
 import { ActivatedRoute } from '@angular/router';
@@ -12,7 +12,7 @@ import { switchMap } from 'rxjs/operators';
   styleUrls: ['./edit-actividad.component.css'],
 })
 export class EditActividadComponent implements OnInit {
-  
+  usuario!: Usuario;
   id!: number;
   monitores: any;
   actividad!: Actividad;
@@ -24,6 +24,9 @@ export class EditActividadComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    const usuario = JSON.parse(sessionStorage.getItem('usuario')!);
+    this.usuario = usuario;
+
     this.adminService.getMonitores().subscribe((monitor) => {
       this.monitores = monitor;
     });
@@ -53,6 +56,13 @@ export class EditActividadComponent implements OnInit {
       });
   }
 
+  isAdmin() {
+    if (this.usuario.role == 1) {
+      return true;
+    }
+    return false;
+  }
+  
   miFormulario: FormGroup = this.fb.group({
     nombre: ['', [Validators.required]],
     email_monitor: ['', [Validators.required]],

@@ -13,7 +13,7 @@ import { switchMap } from 'rxjs/operators';
 })
 export class EditEjercicioComponent implements OnInit {
 
-  ejercicio: Ejercicio={};
+  ejercicio!: Ejercicio;
   id!: number;
   musculos: any;
 

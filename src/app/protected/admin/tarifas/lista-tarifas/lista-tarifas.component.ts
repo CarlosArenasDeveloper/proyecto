@@ -12,6 +12,7 @@ import { DataTableDirective } from 'angular-datatables';
 })
 export class ListaTarifasComponent implements OnInit,OnDestroy {
 
+  usuario!:Usuario
   dtOptions: DataTables.Settings = {};
   dtTrigger = new Subject();
   tarifas: any = [];
@@ -21,6 +22,9 @@ export class ListaTarifasComponent implements OnInit,OnDestroy {
   constructor(private adminService: AdminService) {}
 
   ngOnInit(): void {
+    const usuario = JSON.parse(sessionStorage.getItem('usuario')!);
+    this.usuario = usuario;
+    
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 5,
@@ -39,6 +43,13 @@ export class ListaTarifasComponent implements OnInit,OnDestroy {
 
   ngOnDestroy(): void {
     this.dtTrigger.unsubscribe();
+  }
+
+  isAdmin(){
+    if (this.usuario.role == 1) {
+      return true;
+    }
+    return false;
   }
 
   borrarTarifa(tarifa: Tarifa, i: number) {

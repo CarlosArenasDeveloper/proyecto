@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subject } from 'rxjs';
 import { AdminService } from '../../../services/admin.service';
 import Swal from 'sweetalert2';
-import { Categoria } from '../../../../models/interface';
+import { Categoria, Usuario } from '../../../../models/interface';
 import { DataTableDirective } from 'angular-datatables';
 import { MatDialog } from '@angular/material/dialog';
 import { AddCategoriaComponent } from '../add-categoria/add-categoria.component';
@@ -13,7 +13,8 @@ import { Router } from '@angular/router';
   templateUrl: './lista-categorias.component.html',
   styleUrls: ['./lista-categorias.component.css'],
 })
-export class ListaCategoriasComponent implements OnInit {
+export class ListaCategoriasComponent implements OnInit, OnDestroy {
+  usuario!: Usuario;
   dtOptions: DataTables.Settings = {};
   dtTrigger = new Subject();
   categorias: any = [];
@@ -47,11 +48,15 @@ export class ListaCategoriasComponent implements OnInit {
               dtInstance.destroy();
             }
           );
-        }      });
+        }
+      });
     });
   }
 
   ngOnInit(): void {
+    const usuario = JSON.parse(sessionStorage.getItem('usuario')!);
+    this.usuario = usuario;
+    
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 5,
@@ -71,9 +76,19 @@ export class ListaCategoriasComponent implements OnInit {
     this.dtTrigger.unsubscribe();
   }
 
-  noticias() {
-    this.router.navigateByUrl('dashboard/admin/noticias');
+  isAdmin() {
+    if (this.usuario.role == 1) {
+      return true;
+    }
+    return false;
   }
+
+  noticias() {
+    if(this.usuario.role==1){
+      this.router.navigateByUrl("dashboard/admin/noticias")
+    }else{
+      this.router.navigateByUrl("dashboard/monitor/noticias")
+    }  }
 
   borrarCategoria(categoria: Categoria, i: number) {
     Swal.fire({

@@ -2,7 +2,7 @@
 <div class="container">
     <h1>Listado de salas</h1>
     <hr />
-    <div class="row">
+    <div class="row" *ngIf="isAdmin()">
       <div class="col text-right">
         <button  class="ms-2 btn btn-primary" (click)="openDialog()"> <i class="fas fa-tags"></i>Añadir Sala</button>
       </div>
@@ -19,14 +19,14 @@
             <tr>
               <th scope="col">ID</th>
               <th scope="col">Aforo</th>
-              <th scope="col"></th>
+              <th scope="col" *ngIf="isAdmin()"></th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let ele of salas; let i = index">
               <td>Sala {{ ele.id }}</td>
               <td>{{ ele.aforo}}</td>
-              <td>
+              <td *ngIf="isAdmin()">
                 <button class="btn btn-danger" (click)="borrarSala(ele, i)">
                   <i class="fa fa-trash"></i>
                 </button>

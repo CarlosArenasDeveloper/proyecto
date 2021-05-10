@@ -54,14 +54,14 @@
               <td *ngIf="ele.visible==0">No</td>
               <td>{{ ele.imagen|imagen}}</td>
 
-              <td>
+
+              <td *ngIf="ele.email_usuario==editor || usuario.role==1;else error">
                 <button class="btn btn-danger" (click)="borrarNoticia(ele, i)">
                   <i class="fa fa-trash"></i>
                 </button>
                 
               </td>
-              <td>
-              
+              <td *ngIf="ele.email_usuario==editor || usuario.role==1; else error">
                 <button
                   class="btn btn-warning ms-2"
                   [routerLink]="['./editar-noticia', ele.id]"
@@ -69,6 +69,16 @@
                   <i class="fas fa-search-plus"></i>
                 </button>
               </td>
+              <ng-template #error>
+                <td>
+                  <button
+                    class="btn btn-secondary ms-2"
+                    (click)="errorPermisos()"
+                  >
+                  <i class="fas fa-ban"></i>
+                  </button>
+                </td>
+              </ng-template>
             </tr>
           </tbody>
         </table>

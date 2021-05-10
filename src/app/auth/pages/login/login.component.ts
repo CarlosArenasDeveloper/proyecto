@@ -78,7 +78,6 @@ export class LoginComponent {
               this.authService
                 .enviarVerificacionBis(email)
                 .subscribe((resp) => {
-                  console.log('enviar correo bis');
                 });
             }
           });

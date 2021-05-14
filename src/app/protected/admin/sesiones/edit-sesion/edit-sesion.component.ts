@@ -14,6 +14,7 @@ export class EditSesionComponent implements OnInit {
   sesion: Sesion = {};
   id!: number;
   salas: any;
+  actividades:any;
   minDate!: Date;
   maxDate!: any;
 
@@ -32,6 +33,9 @@ export class EditSesionComponent implements OnInit {
     this.adminService.getSalas().subscribe((sala) => {
       this.salas = sala;
     });
+    this.adminService.getActividades().subscribe((actividad)=>{
+      this.actividades=actividad
+    })
 
     this.activatedRoute.params
       .pipe(switchMap(({ id }) => this.adminService.getSesionPorId(id)))
@@ -39,6 +43,7 @@ export class EditSesionComponent implements OnInit {
         this.sesion = sesion;
         this.id = sesion.id!;
         this.miFormulario.controls['id_sala'].setValue(this.sesion.id_sala);
+        this.miFormulario.controls['id_actividad'].setValue(this.sesion.id_actividad);
         this.miFormulario.controls['fecha'].setValue(this.sesion.fecha);
         this.miFormulario.controls['hora'].setValue(this.sesion.hora);
         this.miFormulario.controls['num_clientes'].setValue(
@@ -51,6 +56,7 @@ export class EditSesionComponent implements OnInit {
   miFormulario: FormGroup = this.fb.group({
     fecha: ['', [Validators.required]],
     id_sala: ['', [Validators.required]],
+    id_actividad: ['', [Validators.required]],
     hora: ['', [Validators.required]],
     estado: ['', [Validators.required]],
     num_clientes: ['', [Validators.required]],
@@ -66,7 +72,7 @@ export class EditSesionComponent implements OnInit {
 
   editarSesion() {
     if (
-      this.miFormulario.get('id_sala')?.value == 'null'
+      this.miFormulario.get('id_sala')?.value == 'null' || this.miFormulario.get('id_actividad')?.value == 'null'
     ) {
       Swal.fire({
         position: 'top-end',
@@ -81,6 +87,7 @@ export class EditSesionComponent implements OnInit {
 
     this.sesion = this.miFormulario.value;
     this.sesion.id = this.id;
+    console.log(this.sesion);
     this.adminService.editarSesion(this.sesion).subscribe((resp) => {
       if (resp == null) {
         Swal.fire({

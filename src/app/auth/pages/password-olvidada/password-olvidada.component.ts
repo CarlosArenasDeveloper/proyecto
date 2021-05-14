@@ -1,24 +1,38 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { AdminService } from '../../../protected/services/admin.service';
 import Swal from 'sweetalert2';
+import { Usuario } from '../../../models/interface';
 
 @Component({
   selector: 'app-password-olvidada',
   templateUrl: './password-olvidada.component.html',
   styleUrls: ['./password-olvidada.component.css']
 })
-export class PasswordOlvidadaComponent  {
+export class PasswordOlvidadaComponent implements OnInit {
 
   datosIncorrectos: boolean = false;
-
+  usuario!:Usuario;
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
     private adminService: AdminService,
   ) {}
+
+  ngOnInit(): void {
+
+    const usuario = JSON.parse(sessionStorage.getItem('usuario')!);
+    this.usuario = usuario;
+  }
+
+  sesion(): boolean {
+    if (sessionStorage.getItem('usuario')) {
+      return true;
+    }
+    return false;
+  }
   miFormulario: FormGroup = this.fb.group({
     email: [
       '',
@@ -71,5 +85,6 @@ export class PasswordOlvidadaComponent  {
     })
 
   }
+
 
 }

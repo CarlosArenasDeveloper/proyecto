@@ -51,6 +51,7 @@ export class LoginComponent {
     const { email, password } = this.miFormulario.value;
     this.authService.login(email, password).subscribe((datosUsuario) => {
       if (datosUsuario != 'error') {
+        datosUsuario.password="************";
         sessionStorage.setItem('usuario', JSON.stringify(datosUsuario));
         if (datosUsuario.role == 1) {
           this.router.navigateByUrl('/dashboard/admin');

@@ -66,16 +66,24 @@ export interface Actividad {
 export interface Sala {
   id?: number;
   aforo?: number;
-  id_actividad?: number;
 }
 
 export interface Sesion {
   id?: number;
   id_sala?: number;
+  id_actividad?:number;
   fecha?: Date;
   hora?: Date;
   num_clientes?: number;
   estado?: string;
+  horarios?:Horario
+}
+
+export interface Horario{
+  sala?:number;
+  hora?:number;
+  inicio?:string;
+  fin?:string,
 }
 
 export interface Noticia {
@@ -94,4 +102,11 @@ export interface Noticia {
 export interface Categoria {
   id?: number;
   nombre?: string;
+}
+
+export interface PasswordPerfil{
+  email?:string;
+  passwordactual?:string;
+  password?:string;
+  password2?:string;
 }

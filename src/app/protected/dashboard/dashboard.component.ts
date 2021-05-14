@@ -40,6 +40,15 @@ export class DashboardComponent implements OnInit {
     return false;
   }
 
+  cerrarSesion(): void {
+    sessionStorage.removeItem('usuario')
+    this.route.navigateByUrl("/dashboard")
+  }
+
+  editarPerfil(){
+    this.route.navigateByUrl("/dashboard/admin/editar-perfil")
+  }
+  
   panel() {
     if (!sessionStorage.getItem('usuario')) {
       this.route.navigateByUrl('dashboard');

@@ -2,6 +2,28 @@
 <hr />
 <form [formGroup]="miFormulario" (ngSubmit)="addSesion()" autocomplete="off">
   <div class="mb-3">
+    <span>Elige la actividad:</span>
+    <select
+      class="form-select mt-2"
+      formControlName="id_actividad"
+      [ngClass]="{
+        'is-invalid': campoNoValido('id_actividad')
+      }"
+    >
+      <option value="">Seleccione un actividad ...</option>
+      <option *ngFor="let actividad of actividades" [value]="actividad.id">
+        {{ actividad.nombre |titlecase}}
+      </option>
+    </select>
+    <span
+      class="form-text text-danger fst-italic"
+      *ngIf="campoNoValido('id_actividad')"
+    >
+      La actividad es requerida
+    </span>
+  </div>
+
+  <div class="mb-3">
     <span>¿En que sala se realizara?:</span>
     <select
       class="form-select mt-2"
@@ -32,6 +54,7 @@
       'is-invalid': campoNoValido('fecha')
     }"
       matInput
+      type="date"
       [min]="minDate"
       [max]="maxDate"
       [matDatepicker]="picker"

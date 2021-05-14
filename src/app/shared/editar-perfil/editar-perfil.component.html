@@ -1,0 +1,279 @@
+<!-- <app-shared></app-shared> -->
+<form [formGroup]="miFormulario" (ngSubmit)="editar()">
+  <div class="row">
+    <div class="col my-4">
+      <h1>
+        Mi perfil: {{ usuario.nombre | titlecase }}
+        {{ usuario.apellido1 | titlecase }} {{ usuario.apellido2 | titlecase }}
+      </h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-5">
+      <img src="assets/perfil.png" class="img-fluid" />
+      <button
+        type="submit"
+        class="btn btn-primary float-end"
+        [disabled]="miFormulario.invalid"
+      >
+        Actualizar datos
+        <i class="fa fa-edit"></i>
+      </button>
+      <button
+        type="button"
+        class="btn btn-danger float-start"
+        (click)="cambiarPassword()"
+      >
+        Cambiar contraseña
+        <i class="fas fa-key"></i>
+      </button>
+
+      <form [formGroup]="formPassword" (ngSubmit)="confirmarPassword()">
+        <div class="row mt-5" *ngIf="cambiarPass">
+          <mat-form-field>
+            <mat-label>Contraseña actual</mat-label>
+            <input
+              type="password"
+              matInput
+              placeholder="Introduzca la contraseña actual"
+              formControlName="passwordactual"
+              required
+            />
+          </mat-form-field>
+          <span
+          class="form-text text-danger fst-italic"
+          *ngIf="campoNoValid('passwordactual')"
+        >
+          {{ passwordErrorActual }}
+        </span>
+          <div class="col mb-4">
+            <a routerLink="/auth/passwordOlvidada"
+              >¿Has olvidado tu contraseña?</a
+            >
+          </div>
+          <mat-form-field>
+            <mat-label>Nueva contraseña</mat-label>
+            <input
+              type="password"
+              matInput
+              placeholder="Introduzca la nueva contraseña"
+              formControlName="password"
+              required
+            />
+          </mat-form-field>
+          <span
+            class="form-text text-danger fst-italic"
+            *ngIf="campoNoValid('password')"
+          >
+            {{ passwordErrorMsg }}
+          </span>
+
+          <mat-form-field>
+            <mat-label>Confirmar contraseña</mat-label>
+            <input
+              type="password"
+              matInput
+              placeholder="Introduzca la nueva contraseña"
+              formControlName="password2"
+              required
+            />
+          </mat-form-field>
+          <span
+            class="form-text text-danger fst-italic"
+            *ngIf="campoNoValid('password2')"
+          >
+            Las contraseñas deben de ser iguales
+          </span>
+          <button
+          type="submit"
+          class="btn btn-primary float-end"
+          [disabled]="formPassword.invalid"
+        >
+          Actualizar contraseña
+          <i class="fa fa-edit"></i>
+        </button>
+        </div>
+      </form>
+    </div>
+
+    <div class="col-6">
+      <div class="row">
+        <div class="row">
+          <mat-form-field>
+            <mat-label>Email:(no se puede cambiar)</mat-label>
+            <input matInput formControlName="email" readonly />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Nombre:</mat-label>
+            <input
+              matInput
+              placeholder="Introduzca su nombre"
+              formControlName="nombre"
+              required
+            />
+          </mat-form-field>
+          <span
+            class="form-text text-danger fst-italic"
+            *ngIf="campoNoValido('nombre')"
+          >
+            El nombre es requerido
+          </span>
+
+          <mat-form-field>
+            <mat-label>Primer apellido:</mat-label>
+            <input
+              matInput
+              placeholder="Introduzca su primer apellido"
+              formControlName="apellido1"
+              required
+            />
+          </mat-form-field>
+          <span
+            class="form-text text-danger fst-italic"
+            *ngIf="campoNoValido('apellido1')"
+          >
+            El primer apellido es requerido
+          </span>
+
+          <mat-form-field>
+            <mat-label>Segundo apellido:</mat-label>
+            <input
+              matInput
+              placeholder="Introduzca su segundo apellido"
+              formControlName="apellido2"
+            />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>DNI/NIE:</mat-label>
+            <input
+              matInput
+              placeholder="Introduzca su dni"
+              formControlName="dni"
+              required
+            />
+          </mat-form-field>
+          <span
+            class="form-text text-danger fst-italic"
+            *ngIf="campoNoValido('dni')"
+          >
+            {{ dniErrorMsg }}
+          </span>
+
+          <mat-form-field>
+            <mat-label>Nº de cuenta bancaria (24 digitos): </mat-label>
+            <input
+              matInput
+              placeholder="Introduzca su numero de cuenta bancaria"
+              formControlName="cuenta_bancaria"
+            />
+          </mat-form-field>
+          <span
+            class="form-text text-danger fst-italic"
+            *ngIf="campoNoValido('cuenta_bancaria')"
+          >
+            {{ cuentaErrorMsg }}
+          </span>
+
+          <mat-radio-group formControlName="sexo" class="mb-4">
+            Sexo:
+            <br />
+            <mat-radio-button value="hombre" color="warn"
+              >Hombre</mat-radio-button
+            >
+            <br />
+            <mat-radio-button value="mujer" color="warn"
+              >Mujer</mat-radio-button
+            >
+          </mat-radio-group>
+
+          <mat-form-field>
+            <mat-label>Fecha de nacimiento: </mat-label>
+            <input
+              matInput
+              [min]="minDate"
+              [max]="maxDate"
+              [matDatepicker]="picker"
+              formControlName="fecha_nac"
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          <span
+            class="form-text text-danger fst-italic"
+            *ngIf="campoNoValido('fecha_nac')"
+          >
+            La fecha de nacimiento es requerida
+          </span>
+
+          <mat-form-field>
+            <mat-label
+              >Nº de telefono: <mat-icon>call_end</mat-icon>
+            </mat-label>
+            <input
+              matInput
+              placeholder="Introduzca su numero de telefono"
+              formControlName="telefono"
+            />
+          </mat-form-field>
+          <span
+            class="form-text text-danger fst-italic"
+            *ngIf="campoNoValido('telefono')"
+          >
+            {{ telefonoErrorMsg }}
+          </span>
+
+          <mat-form-field>
+            <mat-label>Ciudad:</mat-label>
+            <input
+              matInput
+              formControlName="ciudad"
+              placeholder="Introduzca la ciudad de su domicilio"
+              required
+            />
+          </mat-form-field>
+          <span
+            class="form-text text-danger fst-italic"
+            *ngIf="campoNoValido('ciudad')"
+          >
+            El ciudad es requerida
+          </span>
+
+          <mat-form-field>
+            <mat-label>Direccion:</mat-label>
+            <input
+              matInput
+              formControlName="direccion"
+              placeholder="Introduzca su direccion"
+              required
+            />
+          </mat-form-field>
+          <span
+            class="form-text text-danger fst-italic"
+            *ngIf="campoNoValido('direccion')"
+          >
+            La direccion es requerida
+          </span>
+          <mat-form-field>
+            <mat-label>Codigo postal:</mat-label>
+            <input
+              matInput
+              formControlName="cod_postal"
+              placeholder="Introduzca su codigo postal"
+              required
+            />
+          </mat-form-field>
+          <span
+            class="form-text text-danger fst-italic"
+            *ngIf="campoNoValido('cod_postal')"
+          >
+            El codigo postal es requerido
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

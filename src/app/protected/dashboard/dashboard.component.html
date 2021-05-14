@@ -251,8 +251,17 @@
     <span
       >Hola {{ usuario.nombre | titlecase }}!
       <!-- <i class="fas fa-user"></i> -->
-      <mat-icon>account_circle</mat-icon>
+    <!-- <button mat-button [matMenuTriggerFor]="menu"> <mat-icon>account_circle</mat-icon></button> -->
+     
     </span>
+    <button mat-button [matMenuTriggerFor]="beforeMenu"> <mat-icon>account_circle</mat-icon></button>
+    <mat-menu #beforeMenu="matMenu" xPosition="before">
+      <button  mat-menu-item   [routerLink]="['/dashboard/admin/editar-perfil', usuario.email]"
+      >Editar perfil </button>
+      <button mat-menu-item (click)="cerrarSesion()">Cerrar sesion</button>
+    </mat-menu>
+    
+
   </mat-toolbar>
 
   <div class="container-fluid">

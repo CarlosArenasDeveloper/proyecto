@@ -11,7 +11,7 @@ import {
   Categoria,
 } from '../../models/interface';
 import { Observable } from 'rxjs';
-import { Actividad, Sesion, Sala } from '../../models/interface';
+import { Actividad, Sesion, Sala, PasswordPerfil } from '../../models/interface';
 
 @Injectable({
   providedIn: 'root',
@@ -324,6 +324,20 @@ export class AdminService {
     return this.htpp.post(
       `${this.baseUrl}/editarSala.php`,
       JSON.stringify(sala)
+    );
+  }
+
+  editarAdmin(admin: Usuario) {
+    return this.htpp.post<Usuario>(
+      `${this.baseUrl}/editarAdmin.php`,
+      JSON.stringify(admin)
+    );
+  }
+
+  actualizarPassPerfil(passwordPerfil: PasswordPerfil){
+    return this.htpp.post<PasswordPerfil>(
+      `${this.baseUrl}/actualizarPassPerfil.php`,
+      JSON.stringify(passwordPerfil)
     );
   }
 }

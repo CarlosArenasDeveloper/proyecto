@@ -42,7 +42,7 @@ export class DashboardComponent implements OnInit {
 
   cerrarSesion(): void {
     sessionStorage.removeItem('usuario')
-    this.route.navigateByUrl("/dashboard")
+    this.route.navigateByUrl("/")
   }
 
   editarPerfil(){

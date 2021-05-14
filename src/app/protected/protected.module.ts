@@ -9,6 +9,7 @@ import { MaterialModule } from '../material/material.module';
 import { DataTablesModule } from "angular-datatables";
 import { MonitorComponent } from './monitor/monitor.component';
 import { ClientesModule } from './admin/clientes/clientes.module';
+import { NoticiasComponent } from '../shared/noticias/noticias.component';
 
 
 @NgModule({

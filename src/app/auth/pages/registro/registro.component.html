@@ -1,6 +1,64 @@
 <h1>Unete a Fit & Healthy, ¡De la manera más sencilla y segura!</h1>
 <mat-horizontal-stepper [linear]="true" #stepper>
-  
+  <mat-step [stepControl]="thirdFormGroup" label="Paso 3">
+    <form [formGroup]="thirdFormGroup" autocomplete="off">
+      <div class="row mt-5">
+        <div *ngFor="let tarifa of tarifas" class="col">
+          <div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">TARIFA {{tarifa.nombre|uppercase}}</h5>
+              <a (click)="elegirTarifa(tarifa.id)" class="btn btn-primary">{{tarifa.precio}} €</a>
+              <p class="card-text">{{tarifa.descripcion|titlecase}}</p>
+              <a (click)="verActividades(tarifa) " class="btn btn-warning">¿Qué actividades incluye esta tarifa?</a>          
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <mat-form-field appearance="fill">
+          <mat-label>Seleccione una tarifa: </mat-label>
+          <mat-select formControlName="id_tarifa">
+            <mat-option *ngFor="let tarifa of tarifas" [value]="tarifa.id">
+              {{tarifa.nombre|titlecase}} 
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <span
+        class="form-text text-danger fst-italic"
+        *ngIf="campoNoValido('id_tarifa')"
+      >
+        La eleccion de la tarifa es requerida
+      </span>
+      </div>
+        
+      <div class="row">
+        <mat-form-field appearance="fill">
+          <mat-label>Seleccione un centro: </mat-label>
+          <mat-select formControlName="id_centro">
+            <mat-option *ngFor="let centro of centros" [value]="centro.id">
+              {{centro.nombre|titlecase}} 
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <span
+        class="form-text text-danger fst-italic"
+        *ngIf="campoNoValido('id_centro')"
+      >
+        La eleccion del centro es requerida
+      </span>
+      </div>
+      <div class="mt-5">
+        <button mat-raised-button matStepperPrevious color="warn">
+          <i class="fas fa-arrow-circle-left"></i>
+          Anterior
+        </button>
+        <button mat-raised-button matStepperNext color="primary" class="mt-5 mx-2">
+          Siguiente
+          <i class="fas fa-arrow-circle-right"></i>
+          </button>
+    </div>
+    </form>
+  </mat-step>
   <mat-step [stepControl]="firstFormGroup">
     <form [formGroup]="firstFormGroup" autocomplete="off">
       <ng-template matStepLabel>Paso 1</ng-template>
@@ -292,65 +350,7 @@
     </form>
   </mat-step>
 
-  <mat-step [stepControl]="thirdFormGroup" label="Paso 3">
-    <form [formGroup]="thirdFormGroup" autocomplete="off">
-      <div class="row mt-5">
-        <div *ngFor="let tarifa of tarifas" class="col">
-          <div class="card" style="width: 18rem;">
-            <div class="card-body">
-              <h5 class="card-title">TARIFA {{tarifa.nombre|uppercase}}</h5>
-              <a (click)="elegirTarifa(tarifa.id)" class="btn btn-primary">{{tarifa.precio}} €</a>
-              <p class="card-text">{{tarifa.descripcion|titlecase}}</p>
-              <a (click)="verActividades(tarifa) " class="btn btn-warning">¿Qué actividades incluye esta tarifa?</a>          
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <mat-form-field appearance="fill">
-          <mat-label>Seleccione una tarifa: </mat-label>
-          <mat-select formControlName="id_tarifa">
-            <mat-option *ngFor="let tarifa of tarifas" [value]="tarifa.id">
-              {{tarifa.nombre|titlecase}} 
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <span
-        class="form-text text-danger fst-italic"
-        *ngIf="campoNoValido('id_tarifa')"
-      >
-        La eleccion de la tarifa es requerida
-      </span>
-      </div>
-        
-      <div class="row">
-        <mat-form-field appearance="fill">
-          <mat-label>Seleccione un centro: </mat-label>
-          <mat-select formControlName="id_centro">
-            <mat-option *ngFor="let centro of centros" [value]="centro.id">
-              {{centro.nombre|titlecase}} 
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <span
-        class="form-text text-danger fst-italic"
-        *ngIf="campoNoValido('id_centro')"
-      >
-        La eleccion del centro es requerida
-      </span>
-      </div>
-      <div class="mt-5">
-        <button mat-raised-button matStepperPrevious color="warn">
-          <i class="fas fa-arrow-circle-left"></i>
-          Anterior
-        </button>
-        <button mat-raised-button matStepperNext color="primary" class="mt-5 mx-2">
-          Siguiente
-          <i class="fas fa-arrow-circle-right"></i>
-          </button>
-    </div>
-    </form>
-  </mat-step>
+
   <mat-step>
     <ng-template matStepLabel>Hecho</ng-template>
     <p>Para terminar el registro, pulse el boton de confirmar</p>

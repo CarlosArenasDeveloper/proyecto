@@ -340,4 +340,8 @@ export class AdminService {
       JSON.stringify(passwordPerfil)
     );
   }
+
+  getActividadesPorTarifa(id_tarifa:number){
+    return this.htpp.get(`${this.baseUrl}/selectActividadesPorTarifa.php?id_tarifa=${id_tarifa}`);
+  }
 }

@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../../auth/services/auth.service';
-import { Usuario } from '../../../../models/interface';
+import { Usuario, Tarifa } from '../../../../models/interface';
 import { ValidatorService } from '../../../../auth/services/validator.service';
 import { EmailValidatorService } from '../../../../auth/services/email-validator.service';
 import Swal from 'sweetalert2';
 import { AdminService } from '../../../services/admin.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ActividadesPorTarifaComponent } from 'src/app/auth/pages/actividades-por-tarifa/actividades-por-tarifa.component';
 
 @Component({
   selector: 'app-altacliente',
@@ -24,6 +26,7 @@ export class AltaclienteComponent implements OnInit {
   centros:any;
 
   constructor(
+    public dialog: MatDialog,
     private fb: FormBuilder,
     private validatorService: ValidatorService,
     private emailValidatorService: EmailValidatorService,
@@ -187,5 +190,15 @@ export class AltaclienteComponent implements OnInit {
     this.thirdFormGroup.controls['id_tarifa'].setValue(id);
     this.thirdFormGroup.controls['id_centro'].setValue("");
 
+  }
+
+  verActividades(tarifa:Tarifa){
+    const dialogRef = this.dialog.open(ActividadesPorTarifaComponent, {
+      width: '550px',
+      data: { id: tarifa.id , nombre:tarifa.nombre},
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+
+    });
   }
 }

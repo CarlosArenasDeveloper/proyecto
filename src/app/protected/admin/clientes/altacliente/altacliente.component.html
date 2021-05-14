@@ -287,17 +287,18 @@
 
   <mat-step [stepControl]="thirdFormGroup" label="Paso 3">
     <form [formGroup]="thirdFormGroup" autocomplete="off">
-    <div class="row mt-5">
-      <div *ngFor="let tarifa of tarifas" class="col">
-        <div class="card" style="width: 18rem;">
-          <div class="card-body">
-            <h5 class="card-title">TARIFA {{tarifa.nombre|uppercase}}</h5>
-            <p class="card-text">{{tarifa.descripcion|titlecase}}</p>
-            <a (click)="elegirTarifa(tarifa.id)" class="btn btn-primary">{{tarifa.precio}} €</a>
+      <div class="row mt-5">
+        <div *ngFor="let tarifa of tarifas" class="col">
+          <div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">TARIFA {{tarifa.nombre|uppercase}}</h5>
+              <a (click)="elegirTarifa(tarifa.id)" class="btn btn-primary">{{tarifa.precio}} €</a>
+              <p class="card-text">{{tarifa.descripcion|titlecase}}</p>
+              <a (click)="verActividades(tarifa) " class="btn btn-warning">¿Qué actividades incluye esta tarifa?</a>          
+            </div>
           </div>
         </div>
       </div>
-    </div>
       <div class="row">
         <mat-form-field appearance="fill">
           <mat-label>Seleccione una tarifa: </mat-label>

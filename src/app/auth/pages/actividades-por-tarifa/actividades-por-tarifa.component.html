@@ -1,0 +1,6 @@
+<h4>Listado de actividades incluidas en la tarifa {{data.nombre}}</h4>
+<ul>
+  <li *ngFor="let actividad of actividades">
+    {{ actividad.nombre | titlecase }}
+  </li>
+</ul>

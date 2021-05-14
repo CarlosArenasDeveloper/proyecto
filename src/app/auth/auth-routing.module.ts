@@ -4,6 +4,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegistroComponent } from './pages/registro/registro.component';
 import { PasswordOlvidadaComponent } from './pages/password-olvidada/password-olvidada.component';
 import { ReestablecerPasswordComponent } from './pages/reestablecer-password/reestablecer-password.component';
+import { ActividadesPorTarifaComponent } from './pages/actividades-por-tarifa/actividades-por-tarifa.component';
 
 const routes: Routes = [
 
@@ -11,6 +12,7 @@ const routes: Routes = [
     path: '',
     children: [
       { path: 'registro', component: RegistroComponent },
+      { path: 'registro/actividades', component: ActividadesPorTarifaComponent },
       { path: 'login', component: LoginComponent },
       { path: 'passwordOlvidada', component: PasswordOlvidadaComponent },
       { path: 'reestablecerPassword/:email', component: ReestablecerPasswordComponent },

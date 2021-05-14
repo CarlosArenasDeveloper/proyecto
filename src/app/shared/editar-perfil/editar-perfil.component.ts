@@ -33,7 +33,11 @@ export class EditarPerfilComponent implements OnInit {
   tarifas: any;
   role!: number;
   cambiarPass: boolean = false;
-  passwordPerfil! : PasswordPerfil
+  passwordPerfil!: PasswordPerfil;
+  centro!: any;
+  tarifa!:any;
+  reservas!:any;
+  estado!:any;
 
   usuario: Usuario = {};
 
@@ -82,6 +86,7 @@ export class EditarPerfilComponent implements OnInit {
   ngOnInit(): void {
     this.authService.selectCentros().subscribe((resp) => {
       this.centros = resp;
+      console.log(this.centros);
     });
 
     this.authService.selectTarifas().subscribe((resp) => {
@@ -96,40 +101,54 @@ export class EditarPerfilComponent implements OnInit {
         this.usuario = usuario;
         if (this.usuario.role == 1) {
           this.role = 1;
-          this.miFormulario.controls['email'].setValue(this.usuario.email);
+        } else if (this.usuario.role == 3) {
+          this.adminService
+            .getCentroPorId(this.usuario.id_centro!)
+            .subscribe((centro) => {
+              this.centro = centro.nombre;
+            });
+          this.role = 3;
+        }else if(this.usuario.role==2){
+          this.adminService
+          .getCentroPorId(this.usuario.id_centro!)
+          .subscribe((centro) => {
+            this.centro = centro.nombre;
+          });
 
-          this.miFormulario.controls['dni'].setValue(this.usuario.dni);
-          this.miFormulario.controls['nombre'].setValue(this.usuario.nombre);
-          this.miFormulario.controls['apellido1'].setValue(
-            this.usuario.apellido1
-          );
-          this.miFormulario.controls['apellido2'].setValue(
-            this.usuario.apellido2
-          );
-          this.miFormulario.controls['fecha_nac'].setValue(
-            this.usuario.fecha_nac
-          );
-          this.miFormulario.controls['sexo'].setValue(this.usuario.sexo);
-          this.miFormulario.controls['telefono'].setValue(
-            this.usuario.telefono
-          );
-          this.miFormulario.controls['cuenta_bancaria'].setValue(
-            this.usuario.cuenta_bancaria
-          );
-          this.miFormulario.controls['ciudad'].setValue(this.usuario.ciudad);
-          this.miFormulario.controls['direccion'].setValue(
-            this.usuario.direccion
-          );
-          this.miFormulario.controls['cod_postal'].setValue(
-            this.usuario.cod_postal
-          );
+          this.adminService.getTarifaPorId(this.usuario.id_tarifa!).subscribe((tarifa)=>{
+            this.tarifa= tarifa.nombre
+          })
+        this.role = 2;
+        this.reservas=this.usuario.num_reservas
+        this.estado=this.usuario.estado
         }
 
-        // this.miFormulario.controls['id_centro'].setValue(
-        //   this.usuario.id_centro
-        // );
+        this.miFormulario.controls['email'].setValue(this.usuario.email);
 
-        // this.miFormulario.controls['role'].setValue(this.usuario.role);
+        this.miFormulario.controls['dni'].setValue(this.usuario.dni);
+        this.miFormulario.controls['nombre'].setValue(this.usuario.nombre);
+        this.miFormulario.controls['apellido1'].setValue(
+          this.usuario.apellido1
+        );
+        this.miFormulario.controls['apellido2'].setValue(
+          this.usuario.apellido2
+        );
+        this.miFormulario.controls['fecha_nac'].setValue(
+          this.usuario.fecha_nac
+        );
+        this.miFormulario.controls['sexo'].setValue(this.usuario.sexo);
+        this.miFormulario.controls['telefono'].setValue(this.usuario.telefono);
+        this.miFormulario.controls['cuenta_bancaria'].setValue(
+          this.usuario.cuenta_bancaria
+        );
+        this.miFormulario.controls['ciudad'].setValue(this.usuario.ciudad);
+        this.miFormulario.controls['direccion'].setValue(
+          this.usuario.direccion
+        );
+        this.miFormulario.controls['cod_postal'].setValue(
+          this.usuario.cod_postal
+        );
+
       });
   }
 
@@ -137,19 +156,6 @@ export class EditarPerfilComponent implements OnInit {
     this.usuario = this.miFormulario.value;
     this.usuario.role = this.role;
 
-    console.log(this.usuario);
-    if (this.usuario.role == 2) {
-      this.usuario.estado = 'activo';
-      this.usuario.fecha_alta = new Date();
-      this.usuario.num_reservas = 0;
-    }
-    this.usuario.estado = 'activo';
-    if (this.usuario.role == 3) {
-      this.usuario.id_tarifa = undefined;
-    }
-
-    if (this.usuario.role == 1) {
-      console.log(this.usuario);
       this.adminService.editarAdmin(this.usuario).subscribe((resp) => {
         if (resp) {
           Swal.fire({
@@ -162,7 +168,7 @@ export class EditarPerfilComponent implements OnInit {
         }
       });
     }
-  }
+  
 
   campoNoValido(campo: string) {
     return (
@@ -230,25 +236,26 @@ export class EditarPerfilComponent implements OnInit {
   }
 
   confirmarPassword() {
-    this.passwordPerfil=this.formPassword.value
-    this.passwordPerfil.email=this.usuario.email;
-    this.adminService.actualizarPassPerfil(this.passwordPerfil).subscribe((resp)=>{
-      if(resp!="error"){
-        Swal.fire({
-          position: 'top-end',
-          icon: 'success',
-          title: 'Contraseña correctamente actualizada',
-          showConfirmButton: false,
-          timer: 2000,
-        });
-      }else{
-        Swal.fire({
-          icon: 'error',
-          title: 'Error al intentar cambiar la contraseña!',
-          text:
-            'La contraseña que ingresaste no coincide con nuestros registros. Por favor, revisala e inténtelo de nuevo.',
-        });
-      }
-    })
+    this.passwordPerfil = this.formPassword.value;
+    this.passwordPerfil.email = this.usuario.email;
+    this.adminService
+      .actualizarPassPerfil(this.passwordPerfil)
+      .subscribe((resp) => {
+        if (resp != 'error') {
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Contraseña correctamente actualizada',
+            showConfirmButton: false,
+            timer: 2000,
+          });
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error al intentar cambiar la contraseña!',
+            text: 'La contraseña que ingresaste no coincide con nuestros registros. Por favor, revisala e inténtelo de nuevo.',
+          });
+        }
+      });
   }
 }

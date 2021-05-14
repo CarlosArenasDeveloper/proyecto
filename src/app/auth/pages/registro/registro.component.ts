@@ -2,10 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-import { Usuario } from '../../../models/interface';
+import { Usuario, Tarifa } from '../../../models/interface';
 import { ValidatorService } from '../../services/validator.service';
 import { EmailValidatorService } from '../../services/email-validator.service';
 import Swal from 'sweetalert2';
+import { AdminService } from '../../../protected/services/admin.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ActividadesPorTarifaComponent } from '../actividades-por-tarifa/actividades-por-tarifa.component';
 
 @Component({
   selector: 'app-registro',
@@ -27,10 +30,14 @@ import Swal from 'sweetalert2';
   ],
 })
 export class RegistroComponent implements OnInit {
+
+
+  
   cliente: Usuario = {};
   hide = true;
   oculto = true;
-
+  actividades!:any;
+  listaActividades:boolean=false;
   firstFormGroup!: FormGroup;
   secondFormGroup!: FormGroup;
   thirdFormGroup!: FormGroup;
@@ -40,11 +47,13 @@ export class RegistroComponent implements OnInit {
   centros:any;
 
   constructor(
+    public dialog: MatDialog,
     private fb: FormBuilder,
     private validatorService: ValidatorService,
     private emailValidatorService: EmailValidatorService,
     private authService:AuthService,
-    private router: Router
+    private router: Router,
+    private adminService:AdminService
   ) {
     const currentYear = new Date().getFullYear();
     this.minDate = new Date(currentYear - 100, 0, 1);
@@ -67,11 +76,11 @@ export class RegistroComponent implements OnInit {
     this.firstFormGroup = this.fb.group(
       {
         
-        nombre: ['', [Validators.required]],
-        apellido1: ['', [Validators.required]],
+        nombre: ['a', [Validators.required]],
+        apellido1: ['a', [Validators.required]],
         apellido2: [''],
         dni: [
-          '',
+          '31032580Z',
           [
             Validators.required,
             Validators.pattern(
@@ -80,15 +89,15 @@ export class RegistroComponent implements OnInit {
           ],
         ],
         email: [
-          '',
+          'c@asd.com',
           [
             Validators.required,
             Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
           ],
           [this.emailValidatorService],
         ],
-        password: ['', [Validators.required, Validators.minLength(6)]],
-        password2: ['', [Validators.required]],
+        password: ['123456', [Validators.required, Validators.minLength(6)]],
+        password2: ['123456', [Validators.required]],
       },
       {
         validators: [
@@ -97,13 +106,13 @@ export class RegistroComponent implements OnInit {
       }
     );
     this.secondFormGroup = this.fb.group({
-      fecha_nac: ['', [Validators.required]],
+      fecha_nac: ['23/06/1999', [Validators.required]],
       sexo: [''],
-      telefono: ['', [Validators.required,Validators.pattern('^[6-7]{1}[0-9]{8}$')]],
-      cuenta_bancaria: ['', [Validators.required,Validators.pattern('[a-zA-Z]{2}[0-9]{22}$')]],
-      ciudad: ['', [Validators.required]],
-      direccion: ['', [Validators.required]],
-      cod_postal: ['', [Validators.required]],
+      telefono: ['678789789', [Validators.required,Validators.pattern('^[6-7]{1}[0-9]{8}$')]],
+      cuenta_bancaria: ['ES1232132132132132132232', [Validators.required,Validators.pattern('[a-zA-Z]{2}[0-9]{22}$')]],
+      ciudad: ['c', [Validators.required]],
+      direccion: ['c', [Validators.required]],
+      cod_postal: ['c', [Validators.required]],
     });
     
     this.thirdFormGroup = this.fb.group({
@@ -200,5 +209,17 @@ export class RegistroComponent implements OnInit {
   elegirTarifa(id:number):void{
     this.thirdFormGroup.controls['id_tarifa'].setValue(id);
   }
+  
+  verActividades(tarifa:Tarifa){
+    const dialogRef = this.dialog.open(ActividadesPorTarifaComponent, {
+      width: '550px',
+      data: { id: tarifa.id , nombre:tarifa.nombre},
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+
+    });
+  }
+
+
   
 }

@@ -9,10 +9,11 @@ import { SharedModule } from '../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PasswordOlvidadaComponent } from './pages/password-olvidada/password-olvidada.component';
 import { ReestablecerPasswordComponent } from './pages/reestablecer-password/reestablecer-password.component';
+import { ActividadesPorTarifaComponent } from './pages/actividades-por-tarifa/actividades-por-tarifa.component';
 
 
 @NgModule({
-  declarations: [LoginComponent, RegistroComponent, PasswordOlvidadaComponent, ReestablecerPasswordComponent],
+  declarations: [LoginComponent, RegistroComponent, PasswordOlvidadaComponent, ReestablecerPasswordComponent, ActividadesPorTarifaComponent],
   imports: [
     CommonModule,
     AuthRoutingModule,

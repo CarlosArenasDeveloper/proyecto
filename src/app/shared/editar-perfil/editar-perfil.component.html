@@ -106,7 +106,7 @@
           </mat-form-field>
           <mat-form-field>
             <mat-label>Nombre:</mat-label>
-            <input
+            <input di
               matInput
               placeholder="Introduzca su nombre"
               formControlName="nombre"
@@ -272,6 +272,42 @@
           >
             El codigo postal es requerido
           </span>
+          <mat-form-field *ngIf="usuario.role!=1" >
+            <mat-label>Centro:</mat-label>
+            <input disabled
+              matInput
+              required
+              name="centro"
+              value="{{centro |titlecase}}"
+            />
+          </mat-form-field>
+          <mat-form-field *ngIf="usuario.role==2" >
+            <mat-label>Tarifa actual:</mat-label>
+            <input disabled
+              matInput
+              required
+              name="tarifa"
+              value="{{tarifa |titlecase}}"
+            />
+          </mat-form-field>
+          <mat-form-field *ngIf="usuario.role==2" >
+            <mat-label>Numero de reservas:</mat-label>
+            <input disabled
+              matInput
+              required
+              name="reservas"
+              value="{{reservas}}"
+            />
+          </mat-form-field>
+          <mat-form-field *ngIf="usuario.role==2" >
+            <mat-label>Estado actual:</mat-label>
+            <input disabled
+              matInput
+              required
+              name="estado"
+              value="{{estado|titlecase}}"
+            />
+          </mat-form-field>
         </div>
       </div>
     </div>

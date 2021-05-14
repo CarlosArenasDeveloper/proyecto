@@ -7,7 +7,7 @@ import { ImagenPipe } from './pipes/imagen.pipe';
 import { TextoPipe } from './pipes/texto.pipe';
 import { HoraPipe } from './pipes/hora.pipe';
 import { EditarPerfilComponent } from './editar-perfil/editar-perfil.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import {  ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [

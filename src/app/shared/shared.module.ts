@@ -15,6 +15,7 @@ import { CentrosComponent } from './centros/centros.component';
 import { ActividadesComponent } from './actividades/actividades.component';
 import { TarifasComponent } from './tarifas/tarifas.component';
 import { EjerciciosComponent } from './ejercicios/ejercicios.component';
+import { ReservasComponent } from './reservas/reservas.component';
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import { EjerciciosComponent } from './ejercicios/ejercicios.component';
     ActividadesComponent,
     TarifasComponent,
     EjerciciosComponent,
+    ReservasComponent,
   ],
   imports: [SharedRoutingModule,CommonModule, RouterModule, MaterialModule,ReactiveFormsModule],
   exports: [

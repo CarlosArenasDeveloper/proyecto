@@ -40,6 +40,13 @@ export class DashboardComponent implements OnInit {
     return false;
   }
 
+  isCliente() {
+    if (this.usuario.role == 2) {
+      return true;
+    }
+    return false;
+  }
+
   cerrarSesion(): void {
     sessionStorage.removeItem('usuario')
     this.route.navigateByUrl("/")

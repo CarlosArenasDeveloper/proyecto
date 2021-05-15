@@ -7,6 +7,7 @@ import { CentrosComponent } from '../shared/centros/centros.component';
 import { ActividadesComponent } from '../shared/actividades/actividades.component';
 import { TarifasComponent } from '../shared/tarifas/tarifas.component';
 import { EjerciciosComponent } from '../shared/ejercicios/ejercicios.component';
+import { ReservasComponent } from '../shared/reservas/reservas.component';
 
 const routes: Routes = [
   {
@@ -38,6 +39,10 @@ const routes: Routes = [
         component: EjerciciosComponent
       },
       {
+        path:'reservas',
+        component: ReservasComponent
+      },
+      {
         path: 'admin',
         //component: AdminComponent,
         loadChildren: () =>
@@ -48,6 +53,12 @@ const routes: Routes = [
         //component: AdminComponent,
         loadChildren: () =>
           import('./monitor/monitor.module').then((m) => m.MonitorModule),
+      },
+      {
+        path: 'cliente',
+        //component: AdminComponent,
+        loadChildren: () =>
+          import('./cliente/cliente.module').then((m) => m.ClienteModule),
       },
 
       { path: '**', redirectTo: '' },

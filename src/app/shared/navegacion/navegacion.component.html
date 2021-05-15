@@ -60,19 +60,19 @@
         </li>
         <li class="nav-item">
           <a
-          *ngIf="!sesion()"
-          class="nav-link text-white"
-          routerLinkActive="active"
-          routerLink="./actividades"
-          >ACTIVIDADES</a
-        >
-        <a
-          *ngIf="sesion()"
-          class="nav-link text-white"
-          routerLinkActive="active"
-          routerLink="./dashboard/actividades"
-          >ACTIVIDADES</a
-        >
+            *ngIf="!sesion()"
+            class="nav-link text-white"
+            routerLinkActive="active"
+            routerLink="./actividades"
+            >ACTIVIDADES</a
+          >
+          <a
+            *ngIf="sesion()"
+            class="nav-link text-white"
+            routerLinkActive="active"
+            routerLink="./dashboard/actividades"
+            >ACTIVIDADES</a
+          >
         </li>
         <li class="nav-item">
           <a
@@ -90,21 +90,29 @@
             >TARIFAS</a
           >
         </li>
-        <li *ngIf="sesion()" class="nav-item">
-          <a class="nav-link text-white" routerLinkActive="active"  routerLink="./dashboard/ejercicios"
+        <li *ngIf="sesion() && !cliente()" class="nav-item">
+          <a
+            class="nav-link text-white"
+            routerLinkActive="active"
+            routerLink="./dashboard/ejercicios"
             >EJERCICIOS</a
           >
         </li>
-        <li *ngIf="cliente()" class="nav-item">
+        <!-- <li *ngIf="cliente()" class="nav-item">
           <a class="nav-link text-white" routerLinkActive="active">RESERVAS</a>
-        </li>
-        <li *ngIf="!sesion()" class="nav-item ms-lg-5">
-          <a
+        </li> -->
+        <li class="nav-item ms-lg-5">
+          <a *ngIf="!sesion()"
             class="nav-link text-white"
             routerLink="./auth/login"
             routerLinkActive="active"
-            >AREA DE CLIENTES</a
-          >
+            >AREA DE CLIENTES
+          </a>
+          <a *ngIf="cliente()"
+          class="nav-link text-white active"
+          routerLink="./dashboard/cliente"
+          >AREA DE CLIENTES
+        </a>
         </li>
         <li *ngIf="!sesion()" class="nav-item">
           <a

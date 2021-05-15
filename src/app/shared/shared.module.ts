@@ -16,6 +16,8 @@ import { ActividadesComponent } from './actividades/actividades.component';
 import { TarifasComponent } from './tarifas/tarifas.component';
 import { EjerciciosComponent } from './ejercicios/ejercicios.component';
 import { ReservasComponent } from './reservas/reservas.component';
+import { PieComponent } from './pie/pie.component';
+import { CookieComponent } from './cookie/cookie.component';
 
 
 @NgModule({
@@ -32,6 +34,8 @@ import { ReservasComponent } from './reservas/reservas.component';
     TarifasComponent,
     EjerciciosComponent,
     ReservasComponent,
+    PieComponent,
+    CookieComponent,
   ],
   imports: [SharedRoutingModule,CommonModule, RouterModule, MaterialModule,ReactiveFormsModule],
   exports: [
@@ -40,7 +44,10 @@ import { ReservasComponent } from './reservas/reservas.component';
     TextoPipe,
     HoraPipe,
     EditarPerfilComponent,
-    NoticiasComponent
+    NoticiasComponent,
+    PieComponent,
+    CookieComponent
+
   ],
 })
 export class SharedModule {}

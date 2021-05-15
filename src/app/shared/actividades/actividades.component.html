@@ -1,1 +1,13 @@
-<p>actividades works!</p>
+<div class="row">
+  <div class="col-4" *ngFor="let actividad of actividades">
+    <div class="card">
+      <img src="../../../assets/no-image.png" class="card-img-top" />
+      <div class="card-body">
+        <p class="card-title">
+       {{actividad.nombre|titlecase}}
+            <button type="button" class="float-end btn btn-primary">Ver más</button>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

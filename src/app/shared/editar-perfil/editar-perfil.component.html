@@ -299,7 +299,7 @@
               value="{{reservas}}"
             />
           </mat-form-field>
-          <mat-form-field *ngIf="usuario.role==2" >
+          <!-- <mat-form-field *ngIf="usuario.role==2" >
             <mat-label>Estado actual:</mat-label>
             <input disabled
               matInput
@@ -307,7 +307,17 @@
               name="estado"
               value="{{estado|titlecase}}"
             />
-          </mat-form-field>
+          </mat-form-field> -->
+          <div *ngIf="usuario.role==2">
+            Estado actual :<span [ngClass]="{
+              'text-success': usuario.estado === 'activo',
+              'text-danger': usuario.estado === 'baja',
+              'text-secondary':usuario.estado==='bloqueado'
+            }">  {{ usuario.estado |titlecase }}</span>
+            <a class="btn btn-primary mx-3" (click)="cambiarEstado()">
+              Cambiar estado 
+                      </a>
+          </div>
         </div>
       </div>
     </div>

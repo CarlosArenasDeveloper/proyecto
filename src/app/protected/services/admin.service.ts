@@ -202,7 +202,10 @@ export class AdminService {
   getNoticias(): Observable<Noticia> {
     return this.htpp.get(`${this.baseUrl}/selectNoticias.php`);
   }
-
+  getNoticiasVisibles(): Observable<Noticia> {
+    return this.htpp.get(`${this.baseUrl}/selectNoticiasVisibles.php`);
+  }
+  
   addNoticia(noticia: Noticia): Observable<Noticia> {
     return this.htpp.post(
       `${this.baseUrl}/addNoticia.php`,

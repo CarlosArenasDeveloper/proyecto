@@ -38,8 +38,31 @@ export class EditarPerfilComponent implements OnInit {
   tarifa!:any;
   reservas!:any;
   estado!:any;
-
   usuario: Usuario = {};
+
+  fechaActual(): string {
+    let date = new Date();
+
+    let day = date.getDate();
+    let month = date.getMonth() + 1;
+    let year = date.getFullYear();
+
+    if (day < 10) {
+      if (month < 10) {
+        return `${year}-0${month}-0${day}`;
+      } else {
+        return `${year}-${month}-0${day}`;
+      }
+    } else {
+      if (month < 10) {
+        console.log(`${year}-0${month}-${day}`);
+        return `${year}-0${month}-${day}`;
+      } else {
+        console.log(`${year}-${month}-${day}`);
+        return `${year}-${month}-${day}`;
+      }
+    }
+  }
 
   formPassword: FormGroup = this.fb.group(
     {
@@ -258,4 +281,72 @@ export class EditarPerfilComponent implements OnInit {
         }
       });
   }
+  cambiarEstado() {
+    Swal.fire({
+      title: 'Cambiar estado',
+      showDenyButton: true,
+      confirmButtonText: `ALTA`,
+      denyButtonText: `BAJA`,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: `¿Estas seguro de que quieres darte de alta?`,
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Si, dar de alta',
+          cancelButtonText: 'No, cancelar',
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.usuario.estado = 'activo';
+            this.miFormulario.controls['estado'].setValue('activo');
+            this.miFormulario.controls['fecha_alta'].setValue(
+              this.fechaActual()
+            );
+            this.usuario = this.miFormulario.value;
+            this.adminService.darAlta(this.usuario).subscribe((resp) => {
+              Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Se ha dado de alta a '+ this.usuario.nombre?.toUpperCase(),
+                showConfirmButton: false,
+                timer: 1500,
+              });
+            });
+          }
+        });
+      } else if (result.isDenied) {
+        Swal.fire({
+          title: `¿Estas seguro de que quieres dar de baja a ${this.usuario.nombre?.toUpperCase()} ${this.usuario.apellido1?.toUpperCase()}?`,
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Si, dar de baja',
+          cancelButtonText: 'No, cancelar',
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.usuario.estado = 'baja';
+            this.miFormulario.controls['estado'].setValue('baja');
+            this.miFormulario.controls['fecha_baja'].setValue(
+              this.fechaActual()
+            );
+            this.miFormulario.controls['num_reservas'].setValue(0);
+            this.usuario = this.miFormulario.value;
+            this.adminService.darBaja(this.usuario).subscribe((resp) => {
+              Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Se ha dado de baja a '+ this.usuario.nombre?.toUpperCase(),
+                showConfirmButton: false,
+                timer: 1500,
+              });
+            });
+          }
+        });
+      } 
+    });
+   }
+
 }

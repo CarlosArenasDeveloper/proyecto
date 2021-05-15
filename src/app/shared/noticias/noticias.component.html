@@ -1,1 +1,17 @@
-<p>noticias works!</p>
+<div>
+
+<div class="card my-4" *ngFor="let noticia of noticias">
+  <div class="card-header">
+    {{ noticia.fecha | date }} | Creada por:
+    {{ noticia.email_usuario | titlecase }}
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">{{ noticia.titulo }}</h5>
+    <p class="card-text">{{ noticia.cuerpo | texto }}.</p>
+    <small>Categoria: {{ noticia.id_categoria | titlecase }}</small> <br />
+    <a href="#" class="btn btn-primary">Leer más</a>
+  </div>
+  
+</div>
+        
+</div>

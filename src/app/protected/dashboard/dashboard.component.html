@@ -1,5 +1,5 @@
 <mat-sidenav-container *ngIf="sesion()">
-  <mat-sidenav #sidenav mode="push" class="bg-dark" >
+  <mat-sidenav #sidenav mode="push" class="bg-dark">
     <mat-toolbar color="warn">
       <button mat-icon-button (click)="sidenav.toggle()">
         <mat-icon>menu</mat-icon>
@@ -198,11 +198,21 @@
       </a>
     </mat-nav-list>
     <mat-nav-list>
-      <a *ngIf="isAdmin()" routerLink="./admin/noticias" mat-list-item (click)="sidenav.toggle()">
+      <a
+        *ngIf="isAdmin()"
+        routerLink="./admin/noticias"
+        mat-list-item
+        (click)="sidenav.toggle()"
+      >
         <i class="far fa-newspaper text-white ms-4 fa-2x"></i>
         <span class="ms-1 text-white">Noticias</span>
       </a>
-      <a *ngIf="isMonitor()" routerLink="./monitor/noticias" mat-list-item (click)="sidenav.toggle()">
+      <a
+        *ngIf="isMonitor()"
+        routerLink="./monitor/noticias"
+        mat-list-item
+        (click)="sidenav.toggle()"
+      >
         <i class="far fa-newspaper text-white ms-4 fa-2x"></i>
         <span class="ms-1 text-white">Noticias</span>
       </a>
@@ -228,19 +238,33 @@
       </a>
     </mat-nav-list>
     <mat-nav-list>
-      <a *ngIf="isAdmin()" routerLink="./admin/centros" mat-list-item (click)="sidenav.toggle()">
+      <a
+        *ngIf="isAdmin()"
+        routerLink="./admin/centros"
+        mat-list-item
+        (click)="sidenav.toggle()"
+      >
         <i class="far fa-building text-white fa-2x ms-4"></i>
         <span class="ms-1 text-white">Centros</span>
       </a>
-      <a *ngIf="isMonitor()" routerLink="./monitor/centros" mat-list-item (click)="sidenav.toggle()">
+      <a
+        *ngIf="isMonitor()"
+        routerLink="./monitor/centros"
+        mat-list-item
+        (click)="sidenav.toggle()"
+      >
         <i class="far fa-building text-white fa-2x ms-4"></i>
         <span class="ms-1 text-white">Centros</span>
       </a>
     </mat-nav-list>
   </mat-sidenav>
 
-  <mat-toolbar color="warn" *ngIf="isMonitor() || isAdmin() ">
-    <button *ngIf="isAdmin() || isMonitor()" mat-icon-button (click)="sidenav.toggle()">
+  <mat-toolbar color="warn" *ngIf="isMonitor() || isAdmin()">
+    <button
+      *ngIf="isAdmin() || isMonitor()"
+      mat-icon-button
+      (click)="sidenav.toggle()"
+    >
       <mat-icon>menu</mat-icon>
     </button>
     <a (click)="panel()"> <i class="fas fa-home text-white"></i></a>
@@ -250,17 +274,22 @@
     <span
       >Hola {{ usuario.nombre | titlecase }}!
       <!-- <i class="fas fa-user"></i> -->
-    <!-- <button mat-button [matMenuTriggerFor]="menu"> <mat-icon>account_circle</mat-icon></button> -->
-     
+      <!-- <button mat-button [matMenuTriggerFor]="menu"> <mat-icon>account_circle</mat-icon></button> -->
     </span>
-    <button mat-button [matMenuTriggerFor]="beforeMenu"> <mat-icon>account_circle</mat-icon></button>
+    <button mat-button [matMenuTriggerFor]="beforeMenu">
+      <mat-icon>account_circle</mat-icon>
+    </button>
     <mat-menu #beforeMenu="matMenu" xPosition="before">
-      <button  mat-menu-item   [routerLink]="['/dashboard/admin/editar-perfil', usuario.email]"
-      >Editar perfil </button>
-      <button mat-menu-item (click)="cerrarSesion()">Cerrar sesion<i class="fas fa-sign-out-alt ms-2"></i></button>
+      <button
+        mat-menu-item
+        [routerLink]="['/dashboard/admin/editar-perfil', usuario.email]"
+      >
+        Editar perfil
+      </button>
+      <button mat-menu-item (click)="cerrarSesion()">
+        Cerrar sesion<i class="fas fa-sign-out-alt ms-2"></i>
+      </button>
     </mat-menu>
-    
-
   </mat-toolbar>
 
   <mat-toolbar color="warn" *ngIf="isCliente()">
@@ -270,42 +299,47 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a 
-              class="nav-link"
-              routerLinkActive="active"
-              routerLink="./ejercicios"
-              >Ejercicios</a
-            >
+              <a
+                class="nav-link"
+                routerLinkActive="active"
+                routerLink="./ejercicios"
+                >Ejercicios</a
+              >
             </li>
             <li class="nav-item">
               <a
-              class="nav-link"
-              routerLinkActive="active"
-              routerLink="./reservas"
-              >Reserva de actividades</a
-            >            </li>
-    
+                class="nav-link"
+                routerLinkActive="active"
+                routerLink="./reservas"
+                >Reserva de clases</a
+              >
+            </li>           
           </ul>
         </div>
       </div>
     </nav>
 
     <span class="spacer"></span>
-       
+
     <span
       >Hola {{ usuario.nombre | titlecase }}!
       <!-- <i class="fas fa-user"></i> -->
-    <!-- <button mat-button [matMenuTriggerFor]="menu"> <mat-icon>account_circle</mat-icon></button> -->
-     
+      <!-- <button mat-button [matMenuTriggerFor]="menu"> <mat-icon>account_circle</mat-icon></button> -->
     </span>
-    <button mat-button [matMenuTriggerFor]="beforeMenu"> <mat-icon>account_circle</mat-icon></button>
+    <button mat-button [matMenuTriggerFor]="beforeMenu">
+      <mat-icon>account_circle</mat-icon>
+    </button>
     <mat-menu #beforeMenu="matMenu" xPosition="before">
-      <button  mat-menu-item   [routerLink]="['/dashboard/admin/editar-perfil', usuario.email]"
-      >Editar perfil </button>
-      <button mat-menu-item (click)="cerrarSesion()">Cerrar sesion<i class="fas fa-sign-out-alt ms-2"></i></button>
+      <button
+        mat-menu-item
+        [routerLink]="['/dashboard/admin/editar-perfil', usuario.email]"
+      >
+        Editar perfil
+      </button>
+      <button mat-menu-item (click)="cerrarSesion()">
+        Cerrar sesion<i class="fas fa-sign-out-alt ms-2"></i>
+      </button>
     </mat-menu>
-    
-
   </mat-toolbar>
 
   <div class="container-fluid">

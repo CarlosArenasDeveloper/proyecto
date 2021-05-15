@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { AdminService } from '../../protected/services/admin.service';
 
 @Component({
   selector: 'app-noticias',
@@ -6,11 +8,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./noticias.component.css']
 })
 export class NoticiasComponent implements OnInit {
-
-  constructor() { }
+  
+  
+  noticias: any = [];
+  constructor(private adminService :AdminService) { }
 
   ngOnInit(): void {
-    console.log("object");
+    this.adminService.getNoticiasVisibles().subscribe((noticias) => {
+      this.noticias = noticias;
+      console.log(this.noticias);
+    });
   }
 
 }

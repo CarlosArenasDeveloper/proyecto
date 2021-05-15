@@ -74,22 +74,7 @@
             >ACTIVIDADES</a
           >
         </li>
-        <li class="nav-item">
-          <a
-            *ngIf="!sesion()"
-            class="nav-link text-white"
-            routerLinkActive="active"
-            routerLink="./tarifas"
-            >TARIFAS</a
-          >
-          <a
-            *ngIf="sesion()"
-            class="nav-link text-white"
-            routerLinkActive="active"
-            routerLink="./dashboard/tarifas"
-            >TARIFAS</a
-          >
-        </li>
+       
         <li *ngIf="sesion() && !cliente()" class="nav-item">
           <a
             class="nav-link text-white"

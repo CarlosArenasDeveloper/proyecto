@@ -205,7 +205,10 @@ export class AdminService {
   getNoticiasVisibles(): Observable<Noticia> {
     return this.htpp.get(`${this.baseUrl}/selectNoticiasVisibles.php`);
   }
-  
+
+   getNoticiasRelacionadas(nombre:any, id_noticia:number): Observable<Noticia> {
+    return this.htpp.get(`${this.baseUrl}/selectNoticiasRelacionadas.php?nombre=${nombre}&id_noticia=${id_noticia}`);
+  }
   addNoticia(noticia: Noticia): Observable<Noticia> {
     return this.htpp.post(
       `${this.baseUrl}/addNoticia.php`,
@@ -228,6 +231,8 @@ export class AdminService {
       `${this.baseUrl}/seleccionarNoticiaInicio.php?id=${id}`
     );
   }
+
+
   editarNoticia(noticia: Noticia) {
     return this.htpp.post(
       `${this.baseUrl}/editarNoticia.php`,
@@ -273,6 +278,12 @@ export class AdminService {
   getActividadPorId(id: number) {
     return this.htpp.get<Actividad>(
       `${this.baseUrl}/seleccionarActividad.php?id=${id}`
+    );
+  }
+
+  getActividadPorIdInicio(id: number) {
+    return this.htpp.get<Actividad>(
+      `${this.baseUrl}/seleccionarActividadInicio.php?id=${id}`
     );
   }
   editarActividad(actividad: Actividad) {

@@ -1,12 +1,14 @@
 <div class="row">
-  <div class="col-4" *ngFor="let actividad of actividades">
+  <div class="col-4 mb-3" *ngFor="let actividad of actividades">
     <div class="card">
       <img src="../../../assets/no-image.png" class="card-img-top" />
       <div class="card-body">
         <p class="card-title">
        {{actividad.nombre|titlecase}}
-            <button type="button" class="float-end btn btn-primary">Ver más</button>
-        </p>
+            <button *ngIf="sesion()" type="button" class="float-end btn btn-primary" [routerLink]="['/dashboard/actividades', actividad.id]"  >Ver más</button>
+            <button *ngIf="!sesion()" type="button" class="float-end btn btn-primary" [routerLink]="['/actividades', actividad.id]"  >Ver más</button>
+      
+          </p>
       </div>
     </div>
   </div>

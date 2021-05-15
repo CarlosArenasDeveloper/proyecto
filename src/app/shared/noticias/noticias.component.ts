@@ -16,7 +16,6 @@ export class NoticiasComponent implements OnInit {
   ngOnInit(): void {
     this.adminService.getNoticiasVisibles().subscribe((noticias) => {
       this.noticias = noticias;
-      console.log(this.noticias);
     });
   }
 

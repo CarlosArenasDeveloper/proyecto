@@ -5,10 +5,10 @@ import { DataTablesModule } from 'angular-datatables';
 import { NoticiasComponent } from '../shared/noticias/noticias.component';
 import { CentrosComponent } from '../shared/centros/centros.component';
 import { ActividadesComponent } from '../shared/actividades/actividades.component';
-import { TarifasComponent } from '../shared/tarifas/tarifas.component';
 import { EjerciciosComponent } from '../shared/ejercicios/ejercicios.component';
 import { ReservasComponent } from '../shared/reservas/reservas.component';
 import { NoticiaComponent } from '../shared/noticias/noticia/noticia.component';
+import { ActividadComponent } from '../shared/actividades/actividad/actividad.component';
 
 const routes: Routes = [
   {
@@ -34,8 +34,8 @@ const routes: Routes = [
         component: ActividadesComponent,
       },
       {
-        path: 'tarifas',
-        component: TarifasComponent,
+        path: 'actividades/:id',
+        component: ActividadComponent,
       },
       {
         path: 'ejercicios',

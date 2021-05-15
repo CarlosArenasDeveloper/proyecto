@@ -13,12 +13,12 @@ import { SharedRoutingModule } from './shared-routing.module';
 import { InicioComponent } from './inicio/inicio.component';
 import { CentrosComponent } from './centros/centros.component';
 import { ActividadesComponent } from './actividades/actividades.component';
-import { TarifasComponent } from './tarifas/tarifas.component';
 import { EjerciciosComponent } from './ejercicios/ejercicios.component';
 import { ReservasComponent } from './reservas/reservas.component';
 import { PieComponent } from './pie/pie.component';
 import { CookieComponent } from './cookie/cookie.component';
 import { NoticiaComponent } from './noticias/noticia/noticia.component';
+import { ActividadComponent } from './actividades/actividad/actividad.component';
 
 
 @NgModule({
@@ -32,12 +32,12 @@ import { NoticiaComponent } from './noticias/noticia/noticia.component';
     InicioComponent,
     CentrosComponent,
     ActividadesComponent,
-    TarifasComponent,
     EjerciciosComponent,
     ReservasComponent,
     PieComponent,
     CookieComponent,
     NoticiaComponent,
+    ActividadComponent,
   ],
   imports: [SharedRoutingModule,CommonModule, RouterModule, MaterialModule,ReactiveFormsModule],
   exports: [

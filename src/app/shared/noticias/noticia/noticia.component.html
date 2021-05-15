@@ -7,21 +7,64 @@
     <small>{{ noticia.email_usuario | titlecase }}</small>
 
     <div class="m-5">
-        <h2>{{ noticia.titulo | uppercase }}</h2>
-        <hr />
-          {{ noticia.cuerpo }}
+      <h2>{{ noticia.titulo | uppercase }}</h2>
+      <hr />
+      {{ noticia.cuerpo }}
     </div>
 
-    <button *ngIf="!sesion()" type="button" class="btn btn-danger me-3" routerLink="/noticias">
-        <i class="fas fa-arrow-circle-left"></i>
-        Volver atrás
-      </button>
-      <button *ngIf="sesion()" type="button" class="btn btn-danger me-3" routerLink="/dashboard/noticias">
-        <i class="fas fa-arrow-circle-left"></i>
-        Volver atrás
-      </button>
-      
-       <small *ngIf="noticia.fecha_edit!=null" style="float: right;">Ultima edicion el {{noticia.fecha_edit|date}}</small>
-   
+
+    <button
+      *ngIf="!sesion()"
+      type="button"
+      class="btn btn-danger me-3"
+      routerLink="/noticias"
+    >
+      <i class="fas fa-arrow-circle-left"></i>
+      Volver atrás
+    </button>
+    <button
+      *ngIf="sesion()"
+      type="button"
+      class="btn btn-danger me-3"
+      routerLink="/dashboard/noticias"
+    >
+      <i class="fas fa-arrow-circle-left"></i>
+      Volver atrás
+    </button>
+
+    <small *ngIf="noticia.fecha_edit != null" style="float: right"
+      >Ultima edicion el {{ noticia.fecha_edit | date }}</small
+    >
   </div>
+</div>
+<div class="row" *ngIf="noticias.length > 0" >
+  <H3 class="text-center">Noticias relacionadas</H3>
+  <div class="card col-3 m-3" *ngFor="let noticia of noticias">
+    <div class="card-header">
+      <i class="far fa-calendar-alt"></i> {{ noticia.fecha | date }} 
+      <br>
+      <i class="fas fa-user-edit"></i> {{ noticia.email_usuario | titlecase }}
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">{{ noticia.titulo }}</h5>
+      <p class="card-text">{{ noticia.cuerpo | texto }}.</p>
+      <button
+        *ngIf="sesion()"
+        class="btn btn-warning ms-2"
+        [routerLink]="['/dashboard/noticias', noticia.id]"
+      >
+        Leer más... <i class="fas fa-search-plus"></i>
+      </button>
+      <button
+        *ngIf="!sesion()"
+        class="btn btn-warning ms-2"
+        [routerLink]="['/noticias', noticia.id]"
+      >
+        Leer más... <i class="fas fa-search-plus"></i>
+      </button>
+      <br />
+      <small>Categoria: {{ noticia.id_categoria | titlecase }}</small> <br />
+    </div>
+  </div>
+  
 </div>

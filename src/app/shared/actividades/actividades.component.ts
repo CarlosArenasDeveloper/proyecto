@@ -14,8 +14,14 @@ export class ActividadesComponent implements OnInit {
   ngOnInit(): void {
     this.adminService.getActividades().subscribe((actividades) => {
       this.actividades = actividades;
-      console.log(this.actividades);
     });
+  }
+
+  sesion(): boolean {
+    if (sessionStorage.getItem('usuario')) {
+      return true;
+    }
+    return false;
   }
 
 }

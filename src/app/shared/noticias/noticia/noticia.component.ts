@@ -11,7 +11,7 @@ import { AdminService } from 'src/app/protected/services/admin.service';
 })
 export class NoticiaComponent implements OnInit {
   noticia: Noticia = {};
-
+  noticias: any = [];
   constructor(
     private adminService: AdminService,
     private activatedRoute: ActivatedRoute
@@ -22,7 +22,13 @@ export class NoticiaComponent implements OnInit {
       .pipe(switchMap(({ id }) => this.adminService.getNoticiaPorIdInicio(id)))
       .subscribe((noticia) => {
         this.noticia = noticia;
-        console.log(this.noticia);
+        this.adminService
+          .getNoticiasRelacionadas(this.noticia.id_categoria,this.noticia.id!)
+          .subscribe((noticias) => {
+            if(noticias!="error"){
+              this.noticias = noticias;
+            }
+          });
       });
   }
 

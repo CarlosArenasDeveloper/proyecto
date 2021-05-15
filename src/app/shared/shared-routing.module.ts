@@ -4,8 +4,8 @@ import { NoticiasComponent } from './noticias/noticias.component';
 import { InicioComponent } from './inicio/inicio.component';
 import { CentrosComponent } from './centros/centros.component';
 import { ActividadesComponent } from './actividades/actividades.component';
-import { TarifasComponent } from './tarifas/tarifas.component';
 import { NoticiaComponent } from './noticias/noticia/noticia.component';
+import { ActividadComponent } from './actividades/actividad/actividad.component';
 
 const routes: Routes = [
   {
@@ -26,10 +26,8 @@ const routes: Routes = [
     path:'actividades',
     component: ActividadesComponent
   },
-  {
-    path:'tarifas',
-    component: TarifasComponent
-  },
+  { path: 'actividades/:id', component: ActividadComponent },
+
   {
     path:'**',
     redirectTo:''

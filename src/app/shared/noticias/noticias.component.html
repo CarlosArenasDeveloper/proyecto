@@ -1,17 +1,23 @@
-<div>
-
-<div class="card my-4" *ngFor="let noticia of noticias">
+<div class="card" *ngFor="let noticia of noticias">
   <div class="card-header">
-    {{ noticia.fecha | date }} | Creada por:
-    {{ noticia.email_usuario | titlecase }}
+    <i class="far fa-calendar-alt"></i> {{ noticia.fecha | date }} |
+    <i class="fas fa-user-edit"></i> {{ noticia.email_usuario | titlecase }}
   </div>
   <div class="card-body">
     <h5 class="card-title">{{ noticia.titulo }}</h5>
     <p class="card-text">{{ noticia.cuerpo | texto }}.</p>
     <small>Categoria: {{ noticia.id_categoria | titlecase }}</small> <br />
-    <a href="#" class="btn btn-primary">Leer más</a>
+    <button *ngIf="sesion()"
+      class="btn btn-warning ms-2"
+      [routerLink]="['/dashboard/noticias', noticia.id]"
+    >
+      Leer más... <i class="fas fa-search-plus"></i>
+    </button>
+    <button *ngIf="!sesion()"
+    class="btn btn-warning ms-2"
+    [routerLink]="['/noticias', noticia.id]"
+  >
+    Leer más... <i class="fas fa-search-plus"></i>
+  </button>
   </div>
-  
-</div>
-        
 </div>

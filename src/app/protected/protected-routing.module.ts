@@ -8,6 +8,7 @@ import { ActividadesComponent } from '../shared/actividades/actividades.componen
 import { TarifasComponent } from '../shared/tarifas/tarifas.component';
 import { EjerciciosComponent } from '../shared/ejercicios/ejercicios.component';
 import { ReservasComponent } from '../shared/reservas/reservas.component';
+import { NoticiaComponent } from '../shared/noticias/noticia/noticia.component';
 
 const routes: Routes = [
   {
@@ -15,32 +16,34 @@ const routes: Routes = [
     component: DashboardComponent,
     children: [
       {
-        path:'noticias',
-        component:NoticiasComponent
+        path: 'noticias',
+        component: NoticiasComponent,
       },
+      { path: 'noticias/:id', component: NoticiaComponent },
+
       {
         path: 'noticias',
         component: NoticiasComponent,
       },
       {
-        path:'centros',
-        component: CentrosComponent
+        path: 'centros',
+        component: CentrosComponent,
       },
       {
-        path:'actividades',
-        component: ActividadesComponent
+        path: 'actividades',
+        component: ActividadesComponent,
       },
       {
-        path:'tarifas',
-        component: TarifasComponent
+        path: 'tarifas',
+        component: TarifasComponent,
       },
       {
-        path:'ejercicios',
-        component: EjerciciosComponent
+        path: 'ejercicios',
+        component: EjerciciosComponent,
       },
       {
-        path:'reservas',
-        component: ReservasComponent
+        path: 'reservas',
+        component: ReservasComponent,
       },
       {
         path: 'admin',
@@ -63,7 +66,7 @@ const routes: Routes = [
 
       { path: '**', redirectTo: '' },
     ],
-  }
+  },
 ];
 @NgModule({
   imports: [RouterModule.forChild(routes), DataTablesModule],

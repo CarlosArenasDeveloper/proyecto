@@ -20,4 +20,12 @@ export class NoticiasComponent implements OnInit {
     });
   }
 
+  
+  sesion(): boolean {
+    if (sessionStorage.getItem('usuario')) {
+      return true;
+    }
+    return false;
+  }
+
 }

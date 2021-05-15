@@ -18,6 +18,7 @@ import { EjerciciosComponent } from './ejercicios/ejercicios.component';
 import { ReservasComponent } from './reservas/reservas.component';
 import { PieComponent } from './pie/pie.component';
 import { CookieComponent } from './cookie/cookie.component';
+import { NoticiaComponent } from './noticias/noticia/noticia.component';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import { CookieComponent } from './cookie/cookie.component';
     ReservasComponent,
     PieComponent,
     CookieComponent,
+    NoticiaComponent,
   ],
   imports: [SharedRoutingModule,CommonModule, RouterModule, MaterialModule,ReactiveFormsModule],
   exports: [

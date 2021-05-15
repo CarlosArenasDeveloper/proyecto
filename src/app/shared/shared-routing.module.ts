@@ -5,6 +5,7 @@ import { InicioComponent } from './inicio/inicio.component';
 import { CentrosComponent } from './centros/centros.component';
 import { ActividadesComponent } from './actividades/actividades.component';
 import { TarifasComponent } from './tarifas/tarifas.component';
+import { NoticiaComponent } from './noticias/noticia/noticia.component';
 
 const routes: Routes = [
   {
@@ -15,6 +16,8 @@ const routes: Routes = [
     path: 'noticias',
     component: NoticiasComponent,
   },
+  { path: 'noticias/:id', component: NoticiaComponent },
+
   {
     path:'centros',
     component: CentrosComponent

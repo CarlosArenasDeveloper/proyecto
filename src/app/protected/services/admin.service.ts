@@ -222,6 +222,12 @@ export class AdminService {
       `${this.baseUrl}/seleccionarNoticia.php?id=${id}`
     );
   }
+
+  getNoticiaPorIdInicio(id: number) {
+    return this.htpp.get<Noticia>(
+      `${this.baseUrl}/seleccionarNoticiaInicio.php?id=${id}`
+    );
+  }
   editarNoticia(noticia: Noticia) {
     return this.htpp.post(
       `${this.baseUrl}/editarNoticia.php`,

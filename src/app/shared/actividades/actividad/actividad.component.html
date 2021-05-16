@@ -1,1 +1,35 @@
-<p>actividad works!</p>
+<div class="row">
+    <div class="col-6">
+        <img src="../../../assets/no-image.png" class="card-img-top" />
+        <button
+        *ngIf="!sesion()"
+        type="button"
+        class="btn btn-danger me-3"
+        routerLink="/actividades"
+      >
+        <i class="fas fa-arrow-circle-left"></i>
+        Volver atrás
+      </button>
+      <button
+        *ngIf="sesion()"
+        type="button"
+        class="btn btn-danger me-3"
+        routerLink="/dashboard/actividades"
+      >
+        <i class="fas fa-arrow-circle-left"></i>
+        Volver atrás
+      </button>
+    </div>
+    <div class="col-6">
+        <h3>{{actividad.nombre|uppercase}}</h3>
+        <i class="fas fa-stopwatch"></i> {{actividad.duracion}} minutos  <br>
+        Tarifa: {{actividad.id_tarifa}}
+        <br>
+        <span *ngIf="sesion()"><i class="fas fa-user-graduate"></i> : {{actividad.email_monitor}}</span>
+          <section>
+              <article>
+                  {{actividad.descripcion}}
+              </article>
+          </section>  
+    </div>
+</div>

@@ -1,4 +1,6 @@
-<h2>BIENVENID@ A FIT & HEALTHY</h2>
+<div style="background-color: rgb(255, 215, 215);" class="m-3">
+
+<h2 class="text-center pt-5 ">INICIAR SESIÓN <i class="fas fa-door-open"></i></h2>
 <hr />
 
 <div class="row">
@@ -7,11 +9,11 @@
       autocomplete="off"
       [formGroup]="miFormulario"
       (ngSubmit)="login()"
-      class="p-5 border border-primary"
+      class="m-5 p-5 border border-dark rounded border-2"
     >
       <!-- Email -->
       <div class="row mb-3">
-        <label class="col-sm-3 col-form-label">Email:</label>
+        <label class="col-sm-3 col-form-label"><i class="fas fa-at me-1"></i>Email:</label>
         <div class="col-sm-9">
           <input
             type="email"
@@ -27,7 +29,7 @@
       </div>
       <!-- Password -->
       <div class="row mb-3">
-        <label class="col-sm-3 col-form-label">Contraseña:</label>
+        <label class="col-sm-3 col-form-label"><i class="fas fa-key me-1"></i> Contraseña:</label>
         <div class="col-sm-9">
           <input
             type="password"
@@ -77,4 +79,5 @@
       </div>
     </form>
   </div>
+</div>
 </div>

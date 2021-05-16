@@ -1,23 +1,32 @@
-<h1>Unete a Fit & Healthy, ¡De la manera más sencilla y segura!</h1>
-<mat-horizontal-stepper [linear]="true" #stepper>
-  <mat-step [stepControl]="thirdFormGroup" label="Paso 3">
+<div class="m-5" style="background-color: rgb(255, 215, 215);">
+<h1 class="text-center pt-5">Únete a Fit & Healthy, ¡De la manera más sencilla y segura!</h1>
+<hr>
+<mat-horizontal-stepper [linear]="true" #stepper  color="warn" style="background-color: rgb(255, 215, 215);" class="m-5 p-5">  
+  
+  <mat-step [stepControl]="thirdFormGroup" >
     <form [formGroup]="thirdFormGroup" autocomplete="off">
-      <div class="row mt-5">
+      <ng-template matStepLabel>Paso 1</ng-template>
+
+      <div class="row my-4">
         <div *ngFor="let tarifa of tarifas" class="col">
-          <div class="card" style="width: 18rem;">
-            <div class="card-body">
-              <h5 class="card-title">TARIFA {{tarifa.nombre|uppercase}}</h5>
-              <a (click)="elegirTarifa(tarifa.id)" class="btn btn-primary">{{tarifa.precio}} €</a>
-              <p class="card-text">{{tarifa.descripcion|titlecase}}</p>
-              <a (click)="verActividades(tarifa) " class="btn btn-warning">¿Qué actividades incluye esta tarifa?</a>          
+          <div class="card border border-3 border-danger p-1 mb-3" style="background-color: rgb(255, 144, 144);">
+            <div class="card-body ">
+              <h5 class="card-title text-center">TARIFA {{tarifa.nombre|uppercase}}</h5>
+              <hr>
+              <a (click)="verActividades(tarifa) "  mat-raised-button color="primary">¿Qué actividades incluye esta tarifa?</a>          
+
+              <p class="card-text p-2 text-justify">
+                 {{tarifa.descripcion}}</p>
+              <a  mat-raised-button color="warn" (click)="elegirTarifa(tarifa.id)">Elígela por {{tarifa.precio}} €/mes</a>
+            
             </div>
           </div>
         </div>
       </div>
-      <div class="row">
-        <mat-form-field appearance="fill">
-          <mat-label>Seleccione una tarifa: </mat-label>
-          <mat-select formControlName="id_tarifa">
+      <div class="row" >
+        <mat-form-field appearance="fill" >
+          <mat-label> Seleccione una tarifa:  </mat-label>
+          <mat-select formControlName="id_tarifa" >
             <mat-option *ngFor="let tarifa of tarifas" [value]="tarifa.id">
               {{tarifa.nombre|titlecase}} 
             </mat-option>
@@ -47,8 +56,9 @@
         La eleccion del centro es requerida
       </span>
       </div>
+      
       <div class="mt-5">
-        <button mat-raised-button matStepperPrevious color="warn">
+        <button mat-raised-button matStepperPrevious color="warn" routerLink="/">
           <i class="fas fa-arrow-circle-left"></i>
           Anterior
         </button>
@@ -59,9 +69,9 @@
     </div>
     </form>
   </mat-step>
-  <mat-step [stepControl]="firstFormGroup">
+  
+  <mat-step [stepControl]="firstFormGroup" label="Paso 2"> 
     <form [formGroup]="firstFormGroup" autocomplete="off">
-      <ng-template matStepLabel>Paso 1</ng-template>
       <div class="row">
         <div class="col-12 col-md-6 col-lg-4">
           <mat-form-field>
@@ -197,7 +207,7 @@
         </div>
 
         <div class="col-12">  
-          <button mat-raised-button matStepperPrevious color="warn" routerLink="/dashboard">
+          <button mat-raised-button matStepperPrevious color="warn" >
             <i class="fas fa-arrow-circle-left"></i>
             Volver atras
           </button>
@@ -210,7 +220,9 @@
     </form>
   </mat-step>
 
-  <mat-step [stepControl]="secondFormGroup" label="Paso 2">
+
+
+  <mat-step [stepControl]="secondFormGroup" label="Paso 3">
     <form [formGroup]="secondFormGroup" autocomplete="off">
       <div class="row">
         <div class="col-12 col-md-6">
@@ -351,6 +363,7 @@
   </mat-step>
 
 
+
   <mat-step>
     <ng-template matStepLabel>Hecho</ng-template>
     <p>Para terminar el registro, pulse el boton de confirmar</p>
@@ -365,3 +378,4 @@
     </div>
   </mat-step>
 </mat-horizontal-stepper>
+</div>

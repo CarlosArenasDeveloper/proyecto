@@ -15,6 +15,7 @@ import { ActividadesPorTarifaComponent } from '../actividades-por-tarifa/activid
   templateUrl: './registro.component.html',
   styles: [
     `
+    
       .mat-stepper-horizontal {
         margin-top: 8px;
       }
@@ -22,60 +23,55 @@ import { ActividadesPorTarifaComponent } from '../actividades-por-tarifa/activid
       .mat-form-field {
         margin-top: 18px;
       }
-      
-      mat-form-field{
-    width: 100%;
-}
+
+      mat-form-field {
+        width: 100%;
+      }
+
     `,
   ],
 })
 export class RegistroComponent implements OnInit {
-
-
-  
   cliente: Usuario = {};
   hide = true;
   oculto = true;
-  actividades!:any;
-  listaActividades:boolean=false;
+  actividades!: any;
+  listaActividades: boolean = false;
   firstFormGroup!: FormGroup;
   secondFormGroup!: FormGroup;
   thirdFormGroup!: FormGroup;
   minDate!: Date;
   maxDate!: Date;
-  tarifas:any;
-  centros:any;
+  tarifas: any;
+  centros: any;
 
   constructor(
     public dialog: MatDialog,
     private fb: FormBuilder,
     private validatorService: ValidatorService,
     private emailValidatorService: EmailValidatorService,
-    private authService:AuthService,
+    private authService: AuthService,
     private router: Router,
-    private adminService:AdminService
+    private adminService: AdminService
   ) {
     const currentYear = new Date().getFullYear();
     this.minDate = new Date(currentYear - 100, 0, 1);
-    this.maxDate = new Date(currentYear - 18,0,0);
-    this.tarifas=[];
-    this.centros=[];
+    this.maxDate = new Date(currentYear - 18, 0, 0);
+    this.tarifas = [];
+    this.centros = [];
   }
 
-
   ngOnInit() {
+    this.authService.selectTarifas().subscribe((resp) => {
+      this.tarifas = resp;
+    });
 
-    this.authService.selectTarifas().subscribe(resp=>{
-      this.tarifas=resp;
-    })
+    this.authService.selectCentros().subscribe((resp) => {
+      this.centros = resp;
+    });
 
-    this.authService.selectCentros().subscribe(resp=>{
-      this.centros=resp;
-    })
-    
     this.firstFormGroup = this.fb.group(
       {
-        
         nombre: ['a', [Validators.required]],
         apellido1: ['a', [Validators.required]],
         apellido2: [''],
@@ -108,13 +104,19 @@ export class RegistroComponent implements OnInit {
     this.secondFormGroup = this.fb.group({
       fecha_nac: ['23/06/1999', [Validators.required]],
       sexo: [''],
-      telefono: ['678789789', [Validators.required,Validators.pattern('^[6-7]{1}[0-9]{8}$')]],
-      cuenta_bancaria: ['ES1232132132132132132232', [Validators.required,Validators.pattern('[a-zA-Z]{2}[0-9]{22}$')]],
+      telefono: [
+        '678789789',
+        [Validators.required, Validators.pattern('^[6-7]{1}[0-9]{8}$')],
+      ],
+      cuenta_bancaria: [
+        'ES1232132132132132132232',
+        [Validators.required, Validators.pattern('[a-zA-Z]{2}[0-9]{22}$')],
+      ],
       ciudad: ['c', [Validators.required]],
       direccion: ['c', [Validators.required]],
       cod_postal: ['c', [Validators.required]],
     });
-    
+
     this.thirdFormGroup = this.fb.group({
       id_tarifa: ['', [Validators.required]],
       id_centro: ['', [Validators.required]],
@@ -125,15 +127,20 @@ export class RegistroComponent implements OnInit {
     this.cliente = {
       ...this.firstFormGroup.value,
       ...this.secondFormGroup.value,
-      ...this.thirdFormGroup.value
+      ...this.thirdFormGroup.value,
     };
-    this.cliente.fecha_alta=new Date();
+    this.cliente.fecha_alta = new Date();
     this.authService.registro(this.cliente).subscribe((resp) => {
       if (resp != 'ERROR') {
         Swal.fire({
           position: 'top-end',
           icon: 'success',
-          title: 'Bienvenido ' + this.cliente.nombre?.toLocaleUpperCase()+ '. Se ha enviado un correo de verificacion a ' +this.cliente.email +'!' ,
+          title:
+            'Bienvenido ' +
+            this.cliente.nombre?.toLocaleUpperCase() +
+            '. Se ha enviado un correo de verificacion a ' +
+            this.cliente.email +
+            '!',
           showConfirmButton: false,
           timer: 4000,
         });
@@ -142,13 +149,12 @@ export class RegistroComponent implements OnInit {
     });
   }
 
-  campoNoValido(campo: string){
+  campoNoValido(campo: string) {
     return (
       (this.firstFormGroup.get(campo)?.invalid &&
         this.firstFormGroup.get(campo)?.touched) ||
       (this.secondFormGroup.get(campo)?.invalid &&
-        this.secondFormGroup.get(campo)?.touched)
-        ||
+        this.secondFormGroup.get(campo)?.touched) ||
       (this.thirdFormGroup.get(campo)?.invalid &&
         this.thirdFormGroup.get(campo)?.touched)
     );
@@ -206,20 +212,15 @@ export class RegistroComponent implements OnInit {
     return '';
   }
 
-  elegirTarifa(id:number):void{
+  elegirTarifa(id: number): void {
     this.thirdFormGroup.controls['id_tarifa'].setValue(id);
   }
-  
-  verActividades(tarifa:Tarifa){
+
+  verActividades(tarifa: Tarifa) {
     const dialogRef = this.dialog.open(ActividadesPorTarifaComponent, {
       width: '550px',
-      data: { id: tarifa.id , nombre:tarifa.nombre},
+      data: { id: tarifa.id, nombre: tarifa.nombre },
     });
-    dialogRef.afterClosed().subscribe((result) => {
-
-    });
+    dialogRef.afterClosed().subscribe((result) => {});
   }
-
-
-  
 }

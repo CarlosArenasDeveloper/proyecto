@@ -28,6 +28,8 @@
             <th scope="col">Estado</th>
             <th scope="col">Verificado</th>
             <th scope="col"></th>
+            <th scope="col"></th>
+
           </tr>
         </thead>
         <tbody>
@@ -58,14 +60,14 @@
               <button class="btn btn-danger" (click)="borrarCliente(ele, i)">
                 <i class="fa fa-trash"></i>
               </button>
-              <button
-                class="btn btn-warning ms-2"
-                [routerLink]="['./editcliente', ele.email]"
-              >
-                <i class="fas fa-search-plus"></i>
-              </button>
+              
             </td>
-
+            <td><button
+              class="btn btn-warning ms-2"
+              [routerLink]="['./editcliente', ele.email]"
+            >
+              <i class="fas fa-search-plus"></i>
+            </button></td>
           </tr>
         </tbody>
       </table>

@@ -23,6 +23,7 @@
             <th scope="col">Descripcion</th>
             <th scope="col">Precio</th>
             <th scope="col" *ngIf="isAdmin()"></th>
+            <th scope="col" *ngIf="isAdmin()"></th>
           </tr>
         </thead>
         <tbody>
@@ -35,6 +36,10 @@
               <button class="btn btn-danger" (click)="borrarTarifa(ele, i)">
                 <i class="fa fa-trash"></i>
               </button>
+  
+            </td>
+            <td *ngIf="isAdmin()">
+           
               <button
                 class="btn btn-warning ms-2"
                 [routerLink]="['./editar-tarifa', ele.id]"

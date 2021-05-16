@@ -23,6 +23,8 @@
               <th scope="col">Direccion</th>
               <th scope="col">Telefono</th>
               <th scope="col" *ngIf="isAdmin()"></th>
+              <th scope="col" *ngIf="isAdmin()"></th>
+
             </tr>
           </thead>
           <tbody>
@@ -35,6 +37,10 @@
                 <button class="btn btn-danger" (click)="borrarCentro(ele, i)">
                   <i class="fa fa-trash"></i>
                 </button>
+                
+              </td>
+              <td *ngIf="isAdmin()">
+               
                 <button
                   class="btn btn-warning ms-2"
                   [routerLink]="['./editar-centro', ele.id]"

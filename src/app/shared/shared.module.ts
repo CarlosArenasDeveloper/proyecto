@@ -19,6 +19,7 @@ import { PieComponent } from './pie/pie.component';
 import { CookieComponent } from './cookie/cookie.component';
 import { NoticiaComponent } from './noticias/noticia/noticia.component';
 import { ActividadComponent } from './actividades/actividad/actividad.component';
+import { MiniMapaComponent } from './centros/mini-mapa/mini-mapa.component';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import { ActividadComponent } from './actividades/actividad/actividad.component'
     CookieComponent,
     NoticiaComponent,
     ActividadComponent,
+    MiniMapaComponent,
   ],
   imports: [SharedRoutingModule,CommonModule, RouterModule, MaterialModule,ReactiveFormsModule],
   exports: [

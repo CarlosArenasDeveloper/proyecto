@@ -37,9 +37,9 @@
     >
   </div>
 </div>
-<div class="row" *ngIf="noticias.length > 0" >
+<div class="row  mt-4 p-5"  *ngIf="noticias.length > 0" >
   <H3 class="text-center">Noticias relacionadas</H3>
-  <div class="card col-3 m-3" *ngFor="let noticia of noticias">
+  <div class="card col-3 m-3 border border-3 border-danger" *ngFor="let noticia of noticias">
     <div class="card-header">
       <i class="far fa-calendar-alt"></i> {{ noticia.fecha | date }} 
       <br>
@@ -48,8 +48,7 @@
     <div class="card-body">
       <i class="fas fa-tag me-1 mb-1"></i>  
       <small>{{ noticia.id_categoria | titlecase }}</small> <br />
-      <h5 class="card-title">{{ noticia.titulo }}</h5>
-      <p class="card-text">{{ noticia.cuerpo | texto }}.</p>
+      <h5 class="card-title">{{ noticia.titulo |titlecase}}</h5>
       <button
         *ngIf="sesion()"
         class="btn btn-warning ms-2"

@@ -1,1 +1,25 @@
-<p>centros works!</p>
+<div style="background-color: rgb(255, 215, 215);" class="p-5 row">
+  <h1 class="text-center">Conoce todos nuestros centros</h1>
+  <hr>
+  <div *ngFor="let propiedad of propiedades" class="col-4 my-4">
+    <div class="card border border-3 border-danger">
+      <app-mini-mapa
+        [longitud]="propiedad.longitud"
+        [latitud]="propiedad.latitud"
+        class="card-img-top"
+      ></app-mini-mapa>
+      <div class="card-body">
+        <h5 class="card-title">{{ propiedad.nombre | titlecase }}</h5>
+        <hr />
+        <p class="card-text"> <i class="fas fa-map"></i> {{ propiedad.direccion }}</p>
+        <span><i class="fas fa-phone-alt"></i> {{ propiedad.telefono }}</span>
+        <a
+          class="btn btn-primary float-end"
+          [href]="propiedad.ubicacion"
+          target="_blank"
+          >IR <i class="fas fa-map-marked-alt"></i
+        ></a>
+      </div>
+    </div>
+  </div>
+</div>

@@ -24,7 +24,6 @@
               <th scope="col">#</th>
               <th scope="col">Editor</th>
               <th scope="col">Titulo</th>
-              <th scope="col">Cuerpo</th>
               <th scope="col">Categoria</th>
               <th scope="col">Fecha lanzamiento</th>
               <th scope="col">Ultima edicion</th>
@@ -42,7 +41,6 @@
                 'text-warning': ele.email_usuario == 'editor no asignado'
               }">{{ ele.email_usuario | titlecase }}</td>
               <td>{{ ele.titulo | titlecase }}</td>
-              <td>{{ ele.cuerpo|texto }}</td>
               <td  [ngClass]="{
                 'text-warning': ele.id_categoria == 'sin asignar'
               }">{{ ele.id_categoria | titlecase }}</td>

@@ -28,7 +28,12 @@ export class EditCentroComponent implements OnInit {
       .subscribe((centro) => {
         this.centro = centro;
         this.id = centro.id!;
+      
         this.miFormulario.controls['nombre'].setValue(this.centro.nombre);
+        this.miFormulario.controls['latitud'].setValue(this.centro.latitud);
+        this.miFormulario.controls['longitud'].setValue(this.centro.longitud);
+        this.miFormulario.controls['ubicacion'].setValue(this.centro.ubicacion);
+
         this.miFormulario.controls['direccion'].setValue(
           this.centro.direccion
         );
@@ -41,8 +46,11 @@ export class EditCentroComponent implements OnInit {
     direccion: ['', [Validators.required]],
     telefono: [
       '',
-      [Validators.required, Validators.pattern('^[6-7]{1}[0-9]{8}$')],
+      [Validators.required, Validators.pattern('^[6-7-9]{1}[0-9]{8}$')],
     ],
+    latitud: ['', [Validators.required]],
+    longitud: ['', [Validators.required]],
+    ubicacion: ['', [Validators.required]],
   });
 
   campoNoValido(campo: string) {

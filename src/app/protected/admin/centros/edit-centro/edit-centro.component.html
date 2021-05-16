@@ -2,7 +2,7 @@
 <hr />
 <form [formGroup]="miFormulario" (ngSubmit)="editarCentro()" autocomplete="off">
   <div class="mb-3">
-    <label for="exampleFormControlInput1" class="form-label"
+    <label for="nombre" class="form-label"
       >Nombre del centro:
     </label>
     <input
@@ -12,7 +12,7 @@
       formControlName="nombre"
       type="text"
       class="form-control"
-      id="exampleFormControlInput1"
+      id="nombre"
     />
     <span
       class="form-text text-danger fst-italic"
@@ -39,6 +39,66 @@
       *ngIf="campoNoValido('direccion')"
     >
       La direccion es obligatoria
+    </span>
+  </div>
+  <div class="mb-3">
+    <label for="latitud" class="form-label"
+      >Latitud:
+    </label>
+    <input
+      [ngClass]="{
+        'is-invalid': campoNoValido('latitud')
+      }"
+      formControlName="latitud"
+      type="text"
+      class="form-control"
+      id="latitud"
+    />
+    <span
+      class="form-text text-danger fst-italic"
+      *ngIf="campoNoValido('latitud')"
+    >
+      La latitud es requerida
+    </span>
+  </div>
+  <div class="mb-3">
+    <label for="longitud" class="form-label"
+      >Longitud:
+    </label>
+    <input
+      [ngClass]="{
+        'is-invalid': campoNoValido('longitud')
+      }"
+      formControlName="longitud"
+      type="text"
+      class="form-control"
+      id="longitud"
+    />
+    <span
+      class="form-text text-danger fst-italic"
+      *ngIf="campoNoValido('longitud')"
+    >
+      La longitud es requerida
+    </span>
+  </div>
+  <div class="mb-3">
+    <label for="ubicacion" class="form-label"
+      >Ubicacion del centro:
+    </label>
+    <input
+      [ngClass]="{
+        'is-invalid': campoNoValido('ubicacion')
+      }"
+      formControlName="ubicacion"
+      type="text"
+      class="form-control"
+      id="ubicacion"
+    />
+    <span
+      class="form-text text-danger fst-italic"
+      *ngIf="campoNoValido('ubicacion')"
+    >
+      La ubicacion es requerida
     </span>
   </div>
   <div class="mb-3">

@@ -54,14 +54,14 @@
         class="btn btn-warning ms-2"
         [routerLink]="['/dashboard/noticias', noticia.id]"
       >
-        Leer más... <i class="fas fa-search-plus"></i>
-      </button>
+      Ver la noticia completa... <i class="fas fa-search"></i>
+    </button>
       <button
         *ngIf="!sesion()"
         class="btn btn-warning ms-2"
         [routerLink]="['/noticias', noticia.id]"
       >
-        Leer más... <i class="fas fa-search-plus"></i>
+      Ver la noticia completa... <i class="fas fa-search"></i>
       </button>
       <br />
     

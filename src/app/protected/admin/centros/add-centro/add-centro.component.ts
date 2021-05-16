@@ -20,8 +20,13 @@ export class AddCentroComponent implements OnInit {
     direccion: ['', [Validators.required]],
     telefono: [
       '',
-      [Validators.required, Validators.pattern('^[6-7]{1}[0-9]{8}$')],
+      [Validators.required, Validators.pattern('^[6-7-9]{1}[0-9]{8}$')],
     ],
+    latitud: ['', [Validators.required]],
+    longitud: ['', [Validators.required]],
+    ubicacion: ['', [Validators.required]],
+
+
   });
 
   campoNoValido(campo: string) {

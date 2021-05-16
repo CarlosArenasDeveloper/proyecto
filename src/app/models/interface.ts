@@ -34,6 +34,9 @@ export interface Centro {
   nombre?: string;
   direccion?: string;
   telefono?: number;
+  latitud?:number;
+  longitud?:number;
+  ubicacion?:string;
 }
 
 export interface Musculo {

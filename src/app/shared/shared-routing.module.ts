@@ -13,12 +13,6 @@ const routes: Routes = [
     component: InicioComponent
   },
   {
-    path: 'noticias',
-    component: NoticiasComponent,
-  },
-  { path: 'noticias/:id', component: NoticiaComponent },
-
-  {
     path:'centros',
     component: CentrosComponent
   },

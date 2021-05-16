@@ -17,6 +17,8 @@ export class EditNoticiaComponent implements OnInit {
   noticia: Noticia = {};
   id!: number;
   esVisible: any;
+  estabaVisible: any;
+  fechaLanzamiento: any;
   constructor(
     private fb: FormBuilder,
     private adminService: AdminService,
@@ -35,7 +37,11 @@ export class EditNoticiaComponent implements OnInit {
     this.activatedRoute.params
       .pipe(switchMap(({ id }) => this.adminService.getNoticiaPorId(id)))
       .subscribe((noticia) => {
+        this.fechaLanzamiento = noticia.fecha;
+        this.estabaVisible = noticia.visible;
+
         this.noticia = noticia;
+
         this.id = noticia.id!;
         this.miFormulario.controls['titulo'].setValue(this.noticia.titulo);
         this.miFormulario.controls['email_usuario'].setValue(
@@ -90,7 +96,7 @@ export class EditNoticiaComponent implements OnInit {
         position: 'top-end',
         icon: 'error',
         title: 'Datos incompletos',
-        text:'Por favor, rellene todos los campos requeridos',
+        text: 'Por favor, rellene todos los campos requeridos',
         showConfirmButton: false,
         timer: 2000,
       });
@@ -98,6 +104,32 @@ export class EditNoticiaComponent implements OnInit {
     }
 
     this.noticia = this.miFormulario.value;
+
+    if (this.estabaVisible == 0 && this.noticia.visible == true) {
+      Swal.fire({
+        title: '¿Quieres que la noticia vuelva a ser de las recientes?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si',
+        cancelButtonText: 'No, mantener la fecha de lanzamiento',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.noticia.fecha = new Date();
+          this.confirmarCambios(this.noticia);
+        } else {
+          this.noticia.fecha = this.fechaLanzamiento;
+          this.confirmarCambios(this.noticia);
+        }
+      });
+    } else {
+      this.noticia.fecha = this.fechaLanzamiento;
+      this.confirmarCambios(this.noticia);
+    }
+  }
+
+  confirmarCambios(noticia: Noticia) {
     this.noticia.id = this.id;
     this.noticia.fecha_edit = new Date();
     this.adminService.editarNoticia(this.noticia).subscribe((resp) => {

@@ -4,6 +4,7 @@
     <i class="fas fa-user-edit"></i> {{ noticia.email_usuario | titlecase }}
   </div>
   <div class="card-body">
+    <small><i class="fas fa-tag me-1 mb-1"></i>{{ noticia.id_categoria | titlecase }}</small> <br />
     <h5 class="card-title">{{ noticia.titulo }}</h5>
     <p class="card-text">{{ noticia.cuerpo | texto }}.</p>
     <button
@@ -21,6 +22,5 @@
       Leer más... <i class="fas fa-search-plus"></i>
     </button>
     <br />
-    <small>Categoria: {{ noticia.id_categoria | titlecase }}</small> <br />
   </div>
 </div>

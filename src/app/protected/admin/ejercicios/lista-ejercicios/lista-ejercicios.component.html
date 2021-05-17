@@ -30,7 +30,7 @@
         <tbody>
           <tr *ngFor="let ele of ejercicios; let i = index">
             <td>{{ i + 1 }}</td>
-            <td>{{ ele.nombre | titlecase }}</td>
+            <td>{{ ele.nombre }}</td>
             <td [ngClass]="{
               'text-warning': ele.nombre_musculo == 'sin asignar'
             }">{{ ele.nombre_musculo | titlecase }}</td>

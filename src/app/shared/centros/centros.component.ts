@@ -14,15 +14,11 @@ export class CentrosComponent implements OnInit {
   propiedades: any;
 
   constructor(private adminService: AdminService) {
-
   }
 
   ngOnInit(): void {
     this.adminService.getCentros().subscribe((centros) => {
       this.propiedades = centros;
-      console.log(this.propiedades);
     });
-
-
   }
 }

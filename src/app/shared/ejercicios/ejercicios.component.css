@@ -1,0 +1,9 @@
+.consebox{
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.consebox:hover {
+    transform: translateY(-5px)!important;
+    box-shadow: 5px 10px #a52626;
+}

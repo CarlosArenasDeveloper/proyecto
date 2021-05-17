@@ -9,6 +9,8 @@ import { EjerciciosComponent } from '../shared/ejercicios/ejercicios.component';
 import { ReservasComponent } from '../shared/reservas/reservas.component';
 import { NoticiaComponent } from '../shared/noticias/noticia/noticia.component';
 import { ActividadComponent } from '../shared/actividades/actividad/actividad.component';
+import { MusculoComponent } from '../shared/ejercicios/musculo/musculo.component';
+import { EjercicioComponent } from '../shared/ejercicios/ejercicio/ejercicio.component';
 
 const routes: Routes = [
   {
@@ -40,6 +42,14 @@ const routes: Routes = [
       {
         path: 'ejercicios',
         component: EjerciciosComponent,
+      },
+      {
+        path: 'ejercicios/:nombre',
+        component: MusculoComponent,
+      },
+      {
+        path: 'ejercicios/:nombre/:id',
+        component: EjercicioComponent,
       },
       {
         path: 'reservas',

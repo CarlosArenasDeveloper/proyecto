@@ -1,0 +1,29 @@
+<div class="row" *ngIf="ejercicio">
+    <div class="col">    
+      <div class="m-5">
+        <h2>{{ ejercicio.nombre | uppercase }}</h2>
+        <hr />
+        <div class="col">
+            <ul class="fichastec">
+                <li><i class="fanicon tipo-fuerza"></i> <strong>Tipo:</strong> {{ejercicio.tipo|titlecase}}</li>
+                <li><i class="fanicon nivel-med"></i> <strong>Nivel:</strong> {{ejercicio.nivel|titlecase}}</li>
+                <li><i class="fanicon involucra"></i> <strong>Músculo principal: </strong> <a href="./dashboard/ejercicios/{{ejercicio.nombre_musculo}}">{{ ejercicio.nombre_musculo | titlecase}}</a></li>
+                <li><i class="fanicon equipo"></i> <strong>Equipo:</strong> {{ejercicio.equipo | titlecase}}</li>
+                </ul>
+        </div>
+        <div class="col">
+            <img src="../../../assets/no-image.png" class="card-img-top text-center" style="width: 500px;"/>
+          </div>
+
+          <article> {{ ejercicio.descripcion }}</article>    
+      </div>
+      <button
+      type="button"
+      class="btn btn-danger me-3"
+      routerLink="/dashboard/ejercicios/{{ejercicio.nombre_musculo}}"
+    >
+      <i class="fas fa-arrow-circle-left"></i>
+      Volver atras
+    </button>
+    </div>
+  </div>

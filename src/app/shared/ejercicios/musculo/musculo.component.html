@@ -1,0 +1,33 @@
+<div style="background-color: rgb(255, 215, 215)" class="m-3 p-5 row">
+  <div class="col-12">
+    <h1 class="text-center">Ejercicios para {{ musculo.nombre }}</h1>
+    <span>{{ musculo.descripcion }}</span>
+    <hr />
+  </div>
+  <div class="col-4 my-3" *ngFor="let ejercicio of ejercicios">
+    <div class="card border border-3 border-danger "  [routerLink]="[
+    '/dashboard/ejercicios/{{nombre_musculo}}',
+    ejercicio.id
+  ]">
+      <div class="card-body">
+        <p class="card-title">
+          <img src="../../../assets/no-image.png" class="card-img-top" />
+        </p>
+        <p class="card-text text-center">
+          {{ ejercicio.nombre }}
+        </p>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!existenEjercicios">
+    <h1>Sin ejercicios</h1>
+  </div>
+  <button
+  type="button"
+  class="btn btn-danger me-3"
+  routerLink="/dashboard/ejercicios"
+>
+  <i class="fas fa-arrow-circle-left"></i>
+  Volver atras
+</button>
+</div>

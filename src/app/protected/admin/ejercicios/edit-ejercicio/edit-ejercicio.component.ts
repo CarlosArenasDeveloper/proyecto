@@ -44,9 +44,6 @@ export class EditEjercicioComponent implements OnInit {
         this.miFormulario.controls['nivel'].setValue(this.ejercicio.nivel);
         this.miFormulario.controls['tipo'].setValue(this.ejercicio.tipo);
         this.miFormulario.controls['equipo'].setValue(this.ejercicio.equipo);
-
-
-
       });
   }
 

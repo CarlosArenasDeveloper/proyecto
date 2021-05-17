@@ -3,21 +3,23 @@
     height: 75px;
 } */
 
-li{
-    cursor:pointer;
+li {
+  cursor: pointer;
 }
 
-
-.active{
-    background-color: red;
+.active {
+  background-color: red;
+  border-radius: 30px;
 }
 
-.color{
-    background-color: #000000;
+a{
+  border-radius: 30px;
+}
+
+.color {
+  background-color: #000000;
 }
 
 .spacer {
-    flex: 1 1 auto;
-  }
-
-  
+  flex: 1 1 auto;
+}

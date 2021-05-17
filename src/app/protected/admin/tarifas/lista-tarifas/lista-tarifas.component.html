@@ -30,7 +30,7 @@
           <tr *ngFor="let ele of tarifas; let i = index">
             <td>{{ i+1 }}</td>
             <td>{{ ele.nombre | titlecase }}</td>
-            <td>{{ ele.descripcion | titlecase }}</td>
+            <td>{{ ele.descripcion }}</td>
             <td>{{ ele.precio | currency: "EUR" }}</td>
             <td *ngIf="isAdmin()">
               <button class="btn btn-danger" (click)="borrarTarifa(ele, i)">

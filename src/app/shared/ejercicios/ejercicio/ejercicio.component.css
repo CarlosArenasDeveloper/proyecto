@@ -1,0 +1,11 @@
+ul.fichastec li {
+    width: 48%;
+    margin-left: 1%;
+    border: 2px solid red;
+    padding: 10px;
+    margin-bottom: 8px;
+    display: inline-table;
+    border-radius: 8px;
+    list-style-type: none;
+}
+

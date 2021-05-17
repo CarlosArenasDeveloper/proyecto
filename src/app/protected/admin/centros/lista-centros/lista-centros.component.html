@@ -22,6 +22,7 @@
               <th scope="col">Nombre</th>
               <th scope="col">Direccion</th>
               <th scope="col">Telefono</th>
+              <th scope="col">Ubicacion</th>
               <th scope="col" *ngIf="isAdmin()"></th>
               <th scope="col" *ngIf="isAdmin()"></th>
 
@@ -31,8 +32,11 @@
             <tr *ngFor="let ele of centros; let i = index">
               <td>{{ i+1 }}</td>
               <td>{{ ele.nombre | titlecase }}</td>
-              <td>{{ ele.direccion | titlecase }}</td>
+              <td>{{ ele.direccion }}</td>
               <td>{{ ele.telefono }}</td>
+              <td>
+                <a [href]="ele.ubicacion" target="_blank"><i class="fas fa-map-marker-alt"></i></a>
+               </td>
               <td *ngIf="isAdmin()">
                 <button class="btn btn-danger" (click)="borrarCentro(ele, i)">
                   <i class="fa fa-trash"></i>

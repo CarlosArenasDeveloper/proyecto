@@ -37,7 +37,7 @@ export class AddMusculoComponent implements OnInit {
         Swal.fire({
           position: 'top-end',
           icon: 'success',
-          title: `El musculo ${this.musculo.nombre} se ha añadido correctamente!`,
+          title: `${this.musculo.nombre} se ha añadido correctamente a la lista de musculos!`,
           showConfirmButton: false,
           timer: 2000,
         });

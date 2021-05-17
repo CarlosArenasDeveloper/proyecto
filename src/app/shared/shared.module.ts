@@ -20,6 +20,8 @@ import { CookieComponent } from './cookie/cookie.component';
 import { NoticiaComponent } from './noticias/noticia/noticia.component';
 import { ActividadComponent } from './actividades/actividad/actividad.component';
 import { MiniMapaComponent } from './centros/mini-mapa/mini-mapa.component';
+import { MusculoComponent } from './ejercicios/musculo/musculo.component';
+import { EjercicioComponent } from './ejercicios/ejercicio/ejercicio.component';
 
 
 @NgModule({
@@ -40,6 +42,8 @@ import { MiniMapaComponent } from './centros/mini-mapa/mini-mapa.component';
     NoticiaComponent,
     ActividadComponent,
     MiniMapaComponent,
+    MusculoComponent,
+    EjercicioComponent,
   ],
   imports: [SharedRoutingModule,CommonModule, RouterModule, MaterialModule,ReactiveFormsModule],
   exports: [

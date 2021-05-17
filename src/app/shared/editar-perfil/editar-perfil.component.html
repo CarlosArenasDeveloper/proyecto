@@ -1,4 +1,3 @@
-<!-- <app-shared></app-shared> -->
 <form [formGroup]="miFormulario" (ngSubmit)="editar()">
   <div class="row">
     <div class="col my-4">
@@ -42,11 +41,11 @@
             />
           </mat-form-field>
           <span
-          class="form-text text-danger fst-italic"
-          *ngIf="campoNoValid('passwordactual')"
-        >
-          {{ passwordErrorActual }}
-        </span>
+            class="form-text text-danger fst-italic"
+            *ngIf="campoNoValid('passwordactual')"
+          >
+            {{ passwordErrorActual }}
+          </span>
           <div class="col mb-4">
             <a routerLink="/auth/passwordOlvidada"
               >¿Has olvidado tu contraseña?</a
@@ -86,13 +85,13 @@
             Las contraseñas deben de ser iguales
           </span>
           <button
-          type="submit"
-          class="btn btn-primary float-end"
-          [disabled]="formPassword.invalid"
-        >
-          Actualizar contraseña
-          <i class="fa fa-edit"></i>
-        </button>
+            type="submit"
+            class="btn btn-primary float-end"
+            [disabled]="formPassword.invalid"
+          >
+            Actualizar contraseña
+            <i class="fa fa-edit"></i>
+          </button>
         </div>
       </form>
     </div>
@@ -106,7 +105,8 @@
           </mat-form-field>
           <mat-form-field>
             <mat-label>Nombre:</mat-label>
-            <input di
+            <input
+              di
               matInput
               placeholder="Introduzca su nombre"
               formControlName="nombre"
@@ -272,51 +272,75 @@
           >
             El codigo postal es requerido
           </span>
-          <mat-form-field *ngIf="usuario.role!=1" >
+          <mat-form-field *ngIf="usuario.role != 1">
             <mat-label>Centro:</mat-label>
-            <input disabled
+            <input
+              disabled
               matInput
               required
               name="centro"
-              value="{{centro |titlecase}}"
+              value="{{ centro | titlecase }}"
             />
           </mat-form-field>
-          <mat-form-field *ngIf="usuario.role==2" >
+          <mat-form-field *ngIf="usuario.role == 2">
             <mat-label>Tarifa actual:</mat-label>
-            <input disabled
+            <input
+              disabled
               matInput
               required
               name="tarifa"
-              value="{{tarifa |titlecase}}"
+              value="{{ tarifa | titlecase }}"
             />
           </mat-form-field>
-          <mat-form-field *ngIf="usuario.role==2" >
+          <mat-form-field
+            *ngIf="usuario.role == 2 && usuario.estado == 'activo'"
+          >
             <mat-label>Numero de reservas:</mat-label>
-            <input disabled
+            <input
+              disabled
               matInput
               required
               name="reservas"
-              value="{{reservas}}"
+              value="{{ reservas }}"
             />
           </mat-form-field>
-          <!-- <mat-form-field *ngIf="usuario.role==2" >
-            <mat-label>Estado actual:</mat-label>
-            <input disabled
-              matInput
-              required
-              name="estado"
-              value="{{estado|titlecase}}"
-            />
-          </mat-form-field> -->
-          <div *ngIf="usuario.role==2">
-            Estado actual :<span [ngClass]="{
-              'text-success': usuario.estado === 'activo',
-              'text-danger': usuario.estado === 'baja',
-              'text-secondary':usuario.estado==='bloqueado'
-            }">  {{ usuario.estado |titlecase }}</span>
-            <a class="btn btn-primary mx-3" (click)="cambiarEstado()">
-              Cambiar estado 
-                      </a>
+
+          <mat-form-field
+            *ngIf="usuario.role == 2 && usuario.estado == 'activo'"
+          >
+            <mat-label>Fecha alta:</mat-label>
+            <input type="date" matInput formControlName="fecha_alta" readonly />
+          </mat-form-field>
+
+          <mat-form-field *ngIf="usuario.role == 2 && usuario.estado == 'baja'">
+            <mat-label>Fecha baja:</mat-label>
+            <input type="date" matInput formControlName="fecha_baja" readonly />
+          </mat-form-field>
+
+          <div *ngIf="usuario.role == 2">
+            Estado actual :<span
+              [ngClass]="{
+                'text-success': usuario.estado === 'activo',
+                'text-danger': usuario.estado === 'baja',
+                'text-secondary': usuario.estado === 'bloqueado'
+              }"
+            >
+              {{ usuario.estado | titlecase }}</span
+            >
+            <a
+              *ngIf="usuario.estado == 'activo'"
+              class="btn btn-primary mx-3"
+              (click)="darBaja()"
+            >
+              Solicitar baja
+            </a>
+            <a
+              *ngIf="usuario.estado == 'baja'"
+              class="btn btn-primary mx-3"
+              (click)="darAlta()"
+            >
+              Solicitar alta
+            </a>
           </div>
         </div>
       </div>

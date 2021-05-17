@@ -1,381 +1,451 @@
-<div class="m-5" style="background-color: rgb(255, 215, 215);">
-<h1 class="text-center pt-5">Únete a Fit & Healthy, ¡De la manera más sencilla y segura!</h1>
-<hr>
-<mat-horizontal-stepper [linear]="true" #stepper  color="warn" style="background-color: rgb(255, 215, 215);" class="m-5 p-5">  
-  
-  <mat-step [stepControl]="thirdFormGroup" >
-    <form [formGroup]="thirdFormGroup" autocomplete="off">
-      <ng-template matStepLabel>Paso 1</ng-template>
+<div class="m-3" style="background-color: rgb(255, 215, 215)">
+  <h1 class="text-center pt-5">
+    Únete a Fit & Healthy, ¡De la manera más sencilla y segura!
+  </h1>
+  <hr />
+  <mat-horizontal-stepper
+    [linear]="true"
+    #stepper
+    color="warn"
+    style="background-color: rgb(255, 215, 215)"
+    class="m-5 p-5"
+  >
+    <mat-step [stepControl]="thirdFormGroup">
+      <form [formGroup]="thirdFormGroup" autocomplete="off">
+        <ng-template matStepLabel>Paso 1</ng-template>
 
-      <div class="row my-4">
-        <div *ngFor="let tarifa of tarifas" class="col">
-          <div class="card border border-3 border-danger p-1 mb-3" style="background-color: rgb(255, 144, 144);">
-            <div class="card-body ">
-              <h5 class="card-title text-center">TARIFA {{tarifa.nombre|uppercase}}</h5>
-              <hr>
-              <a (click)="verActividades(tarifa) "  mat-raised-button color="primary">¿Qué actividades incluye esta tarifa?</a>          
+        <div class="row my-4">
+          <div *ngFor="let tarifa of tarifas" class="col">
+            <div
+              class="card border border-3 border-danger p-1 mb-3"
+              style="background-color: rgb(255, 144, 144)"
+            >
+              <div class="card-body">
+                <h5 class="card-title text-center">
+                  TARIFA {{ tarifa.nombre | uppercase }}
+                </h5>
+                <hr />
+                <a
+                  (click)="verActividades(tarifa)"
+                  mat-raised-button
+                  color="primary"
+                  >¿Qué actividades incluye esta tarifa?</a
+                >
 
-              <p class="card-text p-2 text-justify">
-                 {{tarifa.descripcion}}</p>
-              <a  mat-raised-button color="warn" (click)="elegirTarifa(tarifa.id)">Elígela por {{tarifa.precio}} €/mes</a>
-            
+                <p class="card-text p-2 text-justify">
+                  {{ tarifa.descripcion }}
+                </p>
+                <a
+                  mat-raised-button
+                  color="warn"
+                  (click)="elegirTarifa(tarifa.id)"
+                  >Elígela por {{ tarifa.precio }} €/mes</a
+                >
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="row" >
-        <mat-form-field appearance="fill" >
-          <mat-label> Seleccione una tarifa:  </mat-label>
-          <mat-select formControlName="id_tarifa" >
-            <mat-option *ngFor="let tarifa of tarifas" [value]="tarifa.id">
-              {{tarifa.nombre|titlecase}} 
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <span
-        class="form-text text-danger fst-italic"
-        *ngIf="campoNoValido('id_tarifa')"
-      >
-        La eleccion de la tarifa es requerida
-      </span>
-      </div>
-        
-      <div class="row">
-        <mat-form-field appearance="fill">
-          <mat-label>Seleccione un centro: </mat-label>
-          <mat-select formControlName="id_centro">
-            <mat-option *ngFor="let centro of centros" [value]="centro.id">
-              {{centro.nombre|titlecase}} 
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <span
-        class="form-text text-danger fst-italic"
-        *ngIf="campoNoValido('id_centro')"
-      >
-        La eleccion del centro es requerida
-      </span>
-      </div>
-      
-      <div class="mt-5">
-        <button mat-raised-button matStepperPrevious color="warn" routerLink="/">
-          <i class="fas fa-arrow-circle-left"></i>
-          Anterior
-        </button>
-        <button mat-raised-button matStepperNext color="primary" class="mt-5 mx-2">
-          Siguiente
-          <i class="fas fa-arrow-circle-right"></i>
-          </button>
-    </div>
-    </form>
-  </mat-step>
-  
-  <mat-step [stepControl]="firstFormGroup" label="Paso 2"> 
-    <form [formGroup]="firstFormGroup" autocomplete="off">
-      <div class="row">
-        <div class="col-12 col-md-6 col-lg-4">
-          <mat-form-field>
-            <mat-label>Nombre:</mat-label>
-            <input
-              matInput
-              placeholder="Introduzca su nombre"
-              formControlName="nombre"
-              required
-            />
+        <div class="row">
+          <mat-form-field appearance="fill">
+            <mat-label> Seleccione una tarifa: </mat-label>
+            <mat-select formControlName="id_tarifa">
+              <mat-option *ngFor="let tarifa of tarifas" [value]="tarifa.id">
+                {{ tarifa.nombre | titlecase }}
+              </mat-option>
+            </mat-select>
           </mat-form-field>
           <span
             class="form-text text-danger fst-italic"
-            *ngIf="campoNoValido('nombre')"
+            *ngIf="campoNoValido('id_tarifa')"
           >
-            <br />
-            El nombre es requerido
+            La eleccion de la tarifa es requerida
           </span>
         </div>
 
-        <div class="col-12 col-md-6 col-lg-4">
-          <mat-form-field>
-            <mat-label>Primer apellido:</mat-label>
-            <input
-              matInput
-              placeholder="Introduzca su primer apellido"
-              formControlName="apellido1"
-              required
-            />
+        <div class="row">
+          <mat-form-field appearance="fill">
+            <mat-label>Seleccione un centro: </mat-label>
+            <mat-select formControlName="id_centro">
+              <mat-option *ngFor="let centro of centros" [value]="centro.id">
+                {{ centro.nombre | titlecase }}
+              </mat-option>
+            </mat-select>
           </mat-form-field>
           <span
             class="form-text text-danger fst-italic"
-            *ngIf="campoNoValido('apellido1')"
+            *ngIf="campoNoValido('id_centro')"
           >
-            <br />
-            El primer apellido es requerido
+            La eleccion del centro es requerida
           </span>
         </div>
 
-        <div class="col-12 col-md-6 col-lg-4">
-          <mat-form-field>
-            <mat-label>Segundo apellido:</mat-label>
-            <input
-              matInput
-              placeholder="Introduzca su segundo apellido"
-              formControlName="apellido2"
-            />
-          </mat-form-field>
-        </div>
-
-        <div class="col-4">
-          <mat-form-field>
-            <mat-label>Email:</mat-label>
-            <input
-              matInput
-              placeholder="Introduzca su email"
-              formControlName="email"
-              required
-            />
-          </mat-form-field>
-          <br />
-          <span
-            class="form-text text-danger fst-italic"
-            *ngIf="campoNoValido('email')"
+        <div class="mt-4">
+          <button
+            mat-raised-button
+            matStepperPrevious
+            color="warn"
+            routerLink="/"
           >
-            {{ emailErrorMsg }}
-          </span>
-        </div>
-
-        <div class="col-6">
-          <mat-form-field>
-            <mat-label>DNI/NIE:</mat-label>
-            <input
-              matInput
-              placeholder="Introduzca su dni"
-              formControlName="dni"
-              required
-            />
-          </mat-form-field>
-          <span
-            class="form-text text-danger fst-italic"
-            *ngIf="campoNoValido('dni')"
-          >
-            <br />
-            {{ dniErrorMsg }}
-          </span>
-        </div>
-
-        <div class="col-6">
-          <mat-form-field>
-            <mat-label>Contraseña</mat-label>
-            <input
-              type="password"
-              matInput [type]="hide ? 'password' : 'text'"
-              placeholder="Introduzca su contraseña"
-              formControlName="password"
-              required
-            />
-            <a mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-            </a>
-          </mat-form-field>
-          <span
-            class="form-text text-danger fst-italic"
-            *ngIf="campoNoValido('password')"
-          >
-            <br />
-            {{ passwordErrorMsg }}
-          </span>
-        </div>
-
-        <div class="col">
-          <mat-form-field>
-            <mat-label>Confirmar contraseña</mat-label>
-            <input
-              type="password"
-              matInput [type]="oculto ? 'password' : 'text'"
-              placeholder="Introduzca su nombre"
-              formControlName="password2"
-              required
-            />
-            <a mat-icon-button matSuffix (click)="oculto = !oculto" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-            </a>
-          </mat-form-field>
-          <br />
-          <span
-            class="form-text text-danger fst-italic"
-            *ngIf="campoNoValido('password2')"
-          >
-            Las contraseñas deben de ser iguales
-          </span>
-        </div>
-
-        <div class="col-12">  
-          <button mat-raised-button matStepperPrevious color="warn" >
-            <i class="fas fa-arrow-circle-left"></i>
-            Volver atras
-          </button>
-          <button mat-raised-button matStepperNext color="primary" class="mt-5 mx-2">
-          Siguiente
-          <i class="fas fa-arrow-circle-right"></i>
-        </button></div>
-      
-      </div>
-    </form>
-  </mat-step>
-
-
-
-  <mat-step [stepControl]="secondFormGroup" label="Paso 3">
-    <form [formGroup]="secondFormGroup" autocomplete="off">
-      <div class="row">
-        <div class="col-12 col-md-6">
-          <mat-form-field>
-            <mat-label>Nº de cuenta bancaria (24 digitos): </mat-label>
-            <input
-              matInput #input maxlength="24"
-              placeholder="Introduzca su numero de cuenta bancaria"
-              formControlName="cuenta_bancaria"
-            />
-            <mat-hint align="end">{{input.value?.length || 0}}/24</mat-hint>
-          </mat-form-field>
-          <span
-            class="form-text text-danger fst-italic"
-            *ngIf="campoNoValido('cuenta_bancaria')"
-          >
-            <br />
-            {{ cuentaErrorMsg }}
-          </span>
-        </div>
-        <div class="col-12 col-md-6 mt-4">
-          <mat-radio-group formControlName="sexo">
-            Seleccione su sexo:
-            <br>
-            <mat-radio-button value="hombre" color="warn">Hombre</mat-radio-button>
-            <br>
-            <mat-radio-button value="mujer" color="warn">Mujer</mat-radio-button>
-          </mat-radio-group>
-        </div>
-
-        <div class="col-12 col-md-6">
-        <mat-form-field>
-          <mat-label>Fecha de nacimiento: </mat-label>
-          <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker"               formControlName="fecha_nac"
-          >
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
-          <span
-            class="form-text text-danger fst-italic"
-            *ngIf="campoNoValido('fecha_nac')"
-          >
-            <br />
-            La fecha de nacimiento es requerida
-          </span>
-        </div>
-
-        <div class="col-12 col-md-6">
-          <mat-form-field>
-            <mat-label
-              >Nº de telefono: <mat-icon>call_end</mat-icon>
-            </mat-label>
-            <input
-              matInput
-              placeholder="Introduzca su numero de telefono"
-              formControlName="telefono"
-            />
-          </mat-form-field>
-          <span
-            class="form-text text-danger fst-italic"
-            *ngIf="campoNoValido('telefono')"
-          >
-            <br />
-            {{ telefonoErrorMsg }}
-          </span>
-        </div>
-
-        <div class="col-12 col-md-6 col-lg-4">
-          <mat-form-field>
-            <mat-label>Ciudad:</mat-label>
-            <input
-              matInput
-              formControlName="ciudad"
-              placeholder="Introduzca la ciudad de su domicilio"
-              required
-            />
-          </mat-form-field>
-          <span
-            class="form-text text-danger fst-italic"
-            *ngIf="campoNoValido('ciudad')"
-          >
-            <br />
-            El ciudad es requerida
-          </span>
-        </div>
-
-        <div class="col-12 col-md-6">
-          <mat-form-field>
-            <mat-label>Direccion:</mat-label>
-            <input
-              matInput
-              formControlName="direccion"
-              placeholder="Introduzca su direccion"
-              required
-            />
-          </mat-form-field>
-          <span
-            class="form-text text-danger fst-italic"
-            *ngIf="campoNoValido('direccion')"
-          >
-            <br />
-            La direccion es requerida
-          </span>
-        </div>
-
-        <div class="col-12 col-md-6 col-lg-4">
-          <mat-form-field>
-            <mat-label>Codigo postal:</mat-label>
-            <input
-              matInput
-              formControlName="cod_postal"
-              placeholder="Introduzca su codigo postal"
-              required
-            />
-          </mat-form-field>
-          <span
-            class="form-text text-danger fst-italic"
-            *ngIf="campoNoValido('cod_postal')"
-          >
-            <br />
-            El codigo postal es requerido
-          </span>
-        </div>
-        
-
-        <div class="col-12">
-          <button mat-raised-button matStepperPrevious color="warn">
             <i class="fas fa-arrow-circle-left"></i>
             Anterior
           </button>
-          <button mat-raised-button matStepperNext color="primary" class="mt-5 mx-2">
+          <button mat-raised-button matStepperNext color="primary" class="mx-2">
             Siguiente
             <i class="fas fa-arrow-circle-right"></i>
-            </button>
+          </button>
         </div>
-      </div>
-    </form>
-  </mat-step>
+      </form>
+    </mat-step>
 
+    <mat-step [stepControl]="firstFormGroup" label="Paso 2">
+      <form [formGroup]="firstFormGroup" autocomplete="off">
+        <div class="row">
+          <div class="col-12 col-md-6 col-lg-4">
+            <mat-form-field>
+              <mat-label>Nombre:</mat-label>
+              <input
+                matInput
+                placeholder="Introduzca su nombre"
+                formControlName="nombre"
+                required
+              />
+            </mat-form-field>
+            <span
+              class="form-text text-danger fst-italic"
+              *ngIf="campoNoValido('nombre')"
+            >
+              <br />
+              El nombre es requerido
+            </span>
+          </div>
 
+          <div class="col-12 col-md-6 col-lg-4">
+            <mat-form-field>
+              <mat-label>Primer apellido:</mat-label>
+              <input
+                matInput
+                placeholder="Introduzca su primer apellido"
+                formControlName="apellido1"
+                required
+              />
+            </mat-form-field>
+            <span
+              class="form-text text-danger fst-italic"
+              *ngIf="campoNoValido('apellido1')"
+            >
+              <br />
+              El primer apellido es requerido
+            </span>
+          </div>
 
-  <mat-step>
-    <ng-template matStepLabel>Hecho</ng-template>
-    <p>Para terminar el registro, pulse el boton de confirmar</p>
-    <div>
-      <button mat-raised-button matStepperPrevious color="warn">
-        <i class="fas fa-arrow-circle-left"></i>
-        Anterior 
-      </button>
-      <button mat-raised-button matStepperNext color="primary" class="mt-5 mx-2" (click)="registrar()">
-        Confirmar <i class="fas fa-check-circle"></i>
+          <div class="col-12 col-md-6 col-lg-4">
+            <mat-form-field>
+              <mat-label>Segundo apellido:</mat-label>
+              <input
+                matInput
+                placeholder="Introduzca su segundo apellido"
+                formControlName="apellido2"
+              />
+            </mat-form-field>
+          </div>
+
+          <div class="col-4">
+            <mat-form-field>
+              <mat-label>Email:</mat-label>
+              <input
+                matInput
+                placeholder="Introduzca su email"
+                formControlName="email"
+                required
+              />
+            </mat-form-field>
+            <br />
+            <span
+              class="form-text text-danger fst-italic"
+              *ngIf="campoNoValido('email')"
+            >
+              {{ emailErrorMsg }}
+            </span>
+          </div>
+
+          <div class="col-6">
+            <mat-form-field>
+              <mat-label>DNI/NIE:</mat-label>
+              <input
+                matInput
+                placeholder="Introduzca su dni"
+                formControlName="dni"
+                required
+              />
+            </mat-form-field>
+            <span
+              class="form-text text-danger fst-italic"
+              *ngIf="campoNoValido('dni')"
+            >
+              <br />
+              {{ dniErrorMsg }}
+            </span>
+          </div>
+
+          <div class="col-6">
+            <mat-form-field>
+              <mat-label>Contraseña</mat-label>
+              <input
+                type="password"
+                matInput
+                [type]="hide ? 'password' : 'text'"
+                placeholder="Introduzca su contraseña"
+                formControlName="password"
+                required
+              />
+              <a
+                mat-icon-button
+                matSuffix
+                (click)="hide = !hide"
+                [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide"
+              >
+                <mat-icon>{{
+                  hide ? "visibility_off" : "visibility"
+                }}</mat-icon>
+              </a>
+            </mat-form-field>
+            <span
+              class="form-text text-danger fst-italic"
+              *ngIf="campoNoValido('password')"
+            >
+              <br />
+              {{ passwordErrorMsg }}
+            </span>
+          </div>
+
+          <div class="col">
+            <mat-form-field>
+              <mat-label>Confirmar contraseña</mat-label>
+              <input
+                type="password"
+                matInput
+                [type]="oculto ? 'password' : 'text'"
+                placeholder="Introduzca su nombre"
+                formControlName="password2"
+                required
+              />
+              <a
+                mat-icon-button
+                matSuffix
+                (click)="oculto = !oculto"
+                [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide"
+              >
+                <mat-icon>{{
+                  hide ? "visibility_off" : "visibility"
+                }}</mat-icon>
+              </a>
+            </mat-form-field>
+            <br />
+            <span
+              class="form-text text-danger fst-italic"
+              *ngIf="campoNoValido('password2')"
+            >
+              Las contraseñas deben de ser iguales
+            </span>
+          </div>
+
+          <div class="col-12">
+            <button mat-raised-button matStepperPrevious color="warn">
+              <i class="fas fa-arrow-circle-left"></i>
+              Volver atras
+            </button>
+            <button
+              mat-raised-button
+              matStepperNext
+              color="primary"
+              class="mt-5 mx-2"
+            >
+              Siguiente
+              <i class="fas fa-arrow-circle-right"></i>
+            </button>
+          </div>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step [stepControl]="secondFormGroup" label="Paso 3">
+      <form [formGroup]="secondFormGroup" autocomplete="off">
+        <div class="row">
+          <div class="col-12 col-md-6">
+            <mat-form-field>
+              <mat-label>Nº de cuenta bancaria (24 digitos): </mat-label>
+              <input
+                matInput
+                #input
+                maxlength="24"
+                placeholder="Introduzca su numero de cuenta bancaria"
+                formControlName="cuenta_bancaria"
+              />
+              <mat-hint align="end">{{ input.value?.length || 0 }}/24</mat-hint>
+            </mat-form-field>
+            <span
+              class="form-text text-danger fst-italic"
+              *ngIf="campoNoValido('cuenta_bancaria')"
+            >
+              <br />
+              {{ cuentaErrorMsg }}
+            </span>
+          </div>
+          <div class="col-12 col-md-6 mt-4">
+            <mat-radio-group formControlName="sexo">
+              Seleccione su sexo:
+              <br />
+              <mat-radio-button value="hombre" color="warn"
+                >Hombre</mat-radio-button
+              >
+              <br />
+              <mat-radio-button value="mujer" color="warn"
+                >Mujer</mat-radio-button
+              >
+            </mat-radio-group>
+          </div>
+
+          <div class="col-12 col-md-6">
+            <mat-form-field>
+              <mat-label>Fecha de nacimiento: </mat-label>
+              <input
+                matInput
+                [min]="minDate"
+                [max]="maxDate"
+                [matDatepicker]="picker"
+                formControlName="fecha_nac"
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <span
+              class="form-text text-danger fst-italic"
+              *ngIf="campoNoValido('fecha_nac')"
+            >
+              <br />
+              La fecha de nacimiento es requerida
+            </span>
+          </div>
+
+          <div class="col-12 col-md-6">
+            <mat-form-field>
+              <mat-label
+                >Nº de telefono: <mat-icon>call_end</mat-icon>
+              </mat-label>
+              <input
+                matInput
+                placeholder="Introduzca su numero de telefono"
+                formControlName="telefono"
+              />
+            </mat-form-field>
+            <span
+              class="form-text text-danger fst-italic"
+              *ngIf="campoNoValido('telefono')"
+            >
+              <br />
+              {{ telefonoErrorMsg }}
+            </span>
+          </div>
+
+          <div class="col-12 col-md-6 col-lg-4">
+            <mat-form-field>
+              <mat-label>Ciudad:</mat-label>
+              <input
+                matInput
+                formControlName="ciudad"
+                placeholder="Introduzca la ciudad de su domicilio"
+                required
+              />
+            </mat-form-field>
+            <span
+              class="form-text text-danger fst-italic"
+              *ngIf="campoNoValido('ciudad')"
+            >
+              <br />
+              El ciudad es requerida
+            </span>
+          </div>
+
+          <div class="col-12 col-md-6">
+            <mat-form-field>
+              <mat-label>Direccion:</mat-label>
+              <input
+                matInput
+                formControlName="direccion"
+                placeholder="Introduzca su direccion"
+                required
+              />
+            </mat-form-field>
+            <span
+              class="form-text text-danger fst-italic"
+              *ngIf="campoNoValido('direccion')"
+            >
+              <br />
+              La direccion es requerida
+            </span>
+          </div>
+
+          <div class="col-12 col-md-6 col-lg-4">
+            <mat-form-field>
+              <mat-label>Codigo postal:</mat-label>
+              <input
+                matInput
+                formControlName="cod_postal"
+                placeholder="Introduzca su codigo postal"
+                required
+              />
+            </mat-form-field>
+            <span
+              class="form-text text-danger fst-italic"
+              *ngIf="campoNoValido('cod_postal')"
+            >
+              <br />
+              El codigo postal es requerido
+            </span>
+          </div>
+
+          <div class="col-12">
+            <button mat-raised-button matStepperPrevious color="warn">
+              <i class="fas fa-arrow-circle-left"></i>
+              Anterior
+            </button>
+            <button
+              mat-raised-button
+              matStepperNext
+              color="primary"
+              class="mt-5 mx-2"
+            >
+              Siguiente
+              <i class="fas fa-arrow-circle-right"></i>
+            </button>
+          </div>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step>
+      <ng-template matStepLabel>Hecho</ng-template>
+      <p>Para terminar el registro, pulse el boton de confirmar</p>
+      <div>
+        <button mat-raised-button matStepperPrevious color="warn">
+          <i class="fas fa-arrow-circle-left"></i>
+          Anterior
         </button>
-    </div>
-  </mat-step>
-</mat-horizontal-stepper>
+        <button
+          mat-raised-button
+          matStepperNext
+          color="primary"
+          class="mt-5 mx-2"
+          (click)="registrar()"
+        >
+          Confirmar <i class="fas fa-check-circle"></i>
+        </button>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
 </div>

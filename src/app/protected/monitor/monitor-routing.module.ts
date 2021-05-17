@@ -1,11 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MonitorComponent } from './monitor.component';
+import { EditarPerfilComponent } from '../../shared/editar-perfil/editar-perfil.component';
 
 const routes: Routes = [
   {
     path: '',
     component: MonitorComponent,
+  },
+  {
+    path:'editar-perfil/:email',
+    component: EditarPerfilComponent
   },
   {
     path: 'listaclientes',

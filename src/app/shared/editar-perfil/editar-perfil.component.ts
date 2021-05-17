@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import Swal from 'sweetalert2';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, timeInterval } from 'rxjs/operators';
 import { AdminService } from '../../protected/services/admin.service';
 import { ValidatorService } from '../../auth/services/validator.service';
 import { AuthService } from '../../auth/services/auth.service';
@@ -35,9 +35,9 @@ export class EditarPerfilComponent implements OnInit {
   cambiarPass: boolean = false;
   passwordPerfil!: PasswordPerfil;
   centro!: any;
-  tarifa!:any;
-  reservas!:any;
-  estado!:any;
+  tarifa!: any;
+  reservas!: any;
+  estado!: any;
   usuario: Usuario = {};
 
   fechaActual(): string {
@@ -104,12 +104,13 @@ export class EditarPerfilComponent implements OnInit {
     direccion: ['', [Validators.required]],
     cod_postal: ['', [Validators.required]],
     email: [`${this.usuario.email}`],
+    fecha_alta: [''],
+    fecha_baja: [''],
   });
 
   ngOnInit(): void {
     this.authService.selectCentros().subscribe((resp) => {
       this.centros = resp;
-      console.log(this.centros);
     });
 
     this.authService.selectTarifas().subscribe((resp) => {
@@ -131,19 +132,27 @@ export class EditarPerfilComponent implements OnInit {
               this.centro = centro.nombre;
             });
           this.role = 3;
-        }else if(this.usuario.role==2){
+        } else if (this.usuario.role == 2) {
           this.adminService
-          .getCentroPorId(this.usuario.id_centro!)
-          .subscribe((centro) => {
-            this.centro = centro.nombre;
-          });
+            .getCentroPorId(this.usuario.id_centro!)
+            .subscribe((centro) => {
+              this.centro = centro.nombre;
+            });
 
-          this.adminService.getTarifaPorId(this.usuario.id_tarifa!).subscribe((tarifa)=>{
-            this.tarifa= tarifa.nombre
-          })
-        this.role = 2;
-        this.reservas=this.usuario.num_reservas
-        this.estado=this.usuario.estado
+          this.adminService
+            .getTarifaPorId(this.usuario.id_tarifa!)
+            .subscribe((tarifa) => {
+              this.tarifa = tarifa.nombre;
+            });
+          this.role = 2;
+          this.reservas = this.usuario.num_reservas;
+          this.estado = this.usuario.estado;
+          this.miFormulario.controls['fecha_alta'].setValue(
+            this.usuario.fecha_alta
+          );
+          this.miFormulario.controls['fecha_baja'].setValue(
+            this.usuario.fecha_baja
+          );
         }
 
         this.miFormulario.controls['email'].setValue(this.usuario.email);
@@ -171,7 +180,6 @@ export class EditarPerfilComponent implements OnInit {
         this.miFormulario.controls['cod_postal'].setValue(
           this.usuario.cod_postal
         );
-
       });
   }
 
@@ -179,19 +187,18 @@ export class EditarPerfilComponent implements OnInit {
     this.usuario = this.miFormulario.value;
     this.usuario.role = this.role;
 
-      this.adminService.editarAdmin(this.usuario).subscribe((resp) => {
-        if (resp) {
-          Swal.fire({
-            position: 'top-end',
-            icon: 'success',
-            title: 'Datos correctamente actualizados',
-            showConfirmButton: false,
-            timer: 2000,
-          });
-        }
-      });
-    }
-  
+    this.adminService.editarAdmin(this.usuario).subscribe((resp) => {
+      if (resp) {
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Datos correctamente actualizados',
+          showConfirmButton: false,
+          timer: 2000,
+        });
+      }
+    });
+  }
 
   campoNoValido(campo: string) {
     return (
@@ -281,72 +288,63 @@ export class EditarPerfilComponent implements OnInit {
         }
       });
   }
-  cambiarEstado() {
+  darAlta() {
     Swal.fire({
-      title: 'Cambiar estado',
-      showDenyButton: true,
-      confirmButtonText: `ALTA`,
-      denyButtonText: `BAJA`,
+      title: `¿Estas seguro de que quieres darte de alta?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, dar de alta',
+      cancelButtonText: 'No, cancelar',
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire({
-          title: `¿Estas seguro de que quieres darte de alta?`,
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Si, dar de alta',
-          cancelButtonText: 'No, cancelar',
-        }).then((result) => {
-          if (result.isConfirmed) {
-            this.usuario.estado = 'activo';
-            this.miFormulario.controls['estado'].setValue('activo');
-            this.miFormulario.controls['fecha_alta'].setValue(
-              this.fechaActual()
-            );
-            this.usuario = this.miFormulario.value;
-            this.adminService.darAlta(this.usuario).subscribe((resp) => {
-              Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: 'Se ha dado de alta a '+ this.usuario.nombre?.toUpperCase(),
-                showConfirmButton: false,
-                timer: 1500,
-              });
-            });
-          }
+        this.miFormulario.controls['fecha_alta'].setValue(this.fechaActual());
+        this.usuario = this.miFormulario.value;
+        this.usuario.estado = 'activo';
+        this.adminService.darAlta(this.usuario).subscribe((resp) => {
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Alta completada, te esperamos en nuestro centro!',
+            showConfirmButton: false,
+            timer: 1500,
+          }).then((result) => {
+            this.router.navigateByUrl(`/dashboard/cliente`);
+          });
         });
-      } else if (result.isDenied) {
-        Swal.fire({
-          title: `¿Estas seguro de que quieres dar de baja a ${this.usuario.nombre?.toUpperCase()} ${this.usuario.apellido1?.toUpperCase()}?`,
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Si, dar de baja',
-          cancelButtonText: 'No, cancelar',
-        }).then((result) => {
-          if (result.isConfirmed) {
-            this.usuario.estado = 'baja';
-            this.miFormulario.controls['estado'].setValue('baja');
-            this.miFormulario.controls['fecha_baja'].setValue(
-              this.fechaActual()
-            );
-            this.miFormulario.controls['num_reservas'].setValue(0);
-            this.usuario = this.miFormulario.value;
-            this.adminService.darBaja(this.usuario).subscribe((resp) => {
-              Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: 'Se ha dado de baja a '+ this.usuario.nombre?.toUpperCase(),
-                showConfirmButton: false,
-                timer: 1500,
-              });
-            });
-          }
-        });
-      } 
+      }
     });
-   }
+  }
 
+  darBaja() {
+    Swal.fire({
+      title: `¿Estas seguro de que quieres darte de baja?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, darme de baja',
+      cancelButtonText: 'No, cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.miFormulario.controls['fecha_baja'].setValue(this.fechaActual());
+        this.usuario = this.miFormulario.value;
+        this.usuario.estado = 'baja';
+        this.usuario.num_reservas = 0;
+        this.adminService.darBaja(this.usuario).subscribe((resp) => {
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title:
+              'Baja completada correctamente. Esperamos volver a verte pronto!',
+            showConfirmButton: false,
+            timer: 1500,
+          }).then((result) => {
+            this.router.navigateByUrl(`/dashboard/cliente`);
+          });
+        });
+      }
+    });
+  }
 }

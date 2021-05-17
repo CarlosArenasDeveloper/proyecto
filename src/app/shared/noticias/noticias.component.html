@@ -5,22 +5,22 @@
   </div>
   <div class="card-body">
     <small><i class="fas fa-tag me-1 mb-1"></i>{{ noticia.id_categoria | titlecase }}</small> <br />
-    <h5 class="card-title">{{ noticia.titulo | titlecase}}</h5>
-    <p class="card-text">{{ noticia.cuerpo | texto }}.</p>
+    <h5 class="card-title m-3">{{ noticia.titulo}}</h5>
+    <p class="card-text px-3">{{ noticia.cuerpo | texto }}.</p>
     <button
       *ngIf="sesion()"
       class="btn btn-warning ms-2"
       [routerLink]="['/dashboard/noticias', noticia.id]"
     >
-      Leer más... <i class="fas fa-search-plus"></i>
+      Seguir leyendo <i class="fas fa-search-plus"></i>
     </button>
     <button
       *ngIf="!sesion()"
       class="btn btn-warning ms-2"
       [routerLink]="['/noticias', noticia.id]"
     >
-      Leer más... <i class="fas fa-search-plus"></i>
-    </button>
+    Seguir leyendo <i class="fas fa-search-plus"></i>
+  </button>
     <br />
   </div>
 </div>

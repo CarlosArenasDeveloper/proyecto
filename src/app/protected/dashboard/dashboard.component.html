@@ -280,12 +280,18 @@
       <mat-icon>account_circle</mat-icon>
     </button>
     <mat-menu #beforeMenu="matMenu" xPosition="before">
-      <button
+      <button *ngIf="usuario.role==1"
         mat-menu-item
         [routerLink]="['/dashboard/admin/editar-perfil', usuario.email]"
       >
         Editar perfil
       </button>
+      <button *ngIf="usuario.role==3"
+      mat-menu-item
+      [routerLink]="['/dashboard/monitor/editar-perfil', usuario.email]"
+    >
+      Editar perfil
+    </button>
       <button mat-menu-item (click)="cerrarSesion()">
         Cerrar sesion<i class="fas fa-sign-out-alt ms-2"></i>
       </button>
@@ -330,12 +336,12 @@
       <mat-icon>account_circle</mat-icon>
     </button>
     <mat-menu #beforeMenu="matMenu" xPosition="before">
-      <button
-        mat-menu-item
-        [routerLink]="['/dashboard/admin/editar-perfil', usuario.email]"
-      >
-        Editar perfil
-      </button>
+      <button *ngIf="usuario.role==2"
+      mat-menu-item
+      [routerLink]="['/dashboard/cliente/editar-perfil', usuario.email]"
+    >
+      Editar perfil
+    </button>
       <button mat-menu-item (click)="cerrarSesion()">
         Cerrar sesion<i class="fas fa-sign-out-alt ms-2"></i>
       </button>

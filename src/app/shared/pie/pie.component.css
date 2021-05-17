@@ -1,0 +1,13 @@
+.list-group-mine .list-group-item:hover {
+    background-color: #212529;
+    color: white;
+  }
+  
+  /* .fondo{
+    background-color: #212529;
+  } */
+
+
+  li{
+      cursor: pointer;
+  }

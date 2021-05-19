@@ -15,18 +15,18 @@ export class EditSesionComponent implements OnInit {
   id!: number;
   salas: any;
   actividades:any;
-  minDate!: Date;
-  maxDate!: any;
+  // minDate!: Date;
+  // maxDate!: any;
 
   constructor(
     private fb: FormBuilder,
     private adminService: AdminService,
     private activatedRoute: ActivatedRoute
   ) {
-    const mes = new Date().getMonth();
-    const año = new Date().getFullYear();
-    this.minDate = new Date();
-    this.maxDate = new Date(año, mes + 2, 0);
+    // const mes = new Date().getMonth();
+    // const año = new Date().getFullYear();
+    // this.minDate = new Date();
+    // this.maxDate = new Date(año, mes + 2, 0);
   }
 
   ngOnInit(): void {
@@ -40,6 +40,7 @@ export class EditSesionComponent implements OnInit {
     this.activatedRoute.params
       .pipe(switchMap(({ id }) => this.adminService.getSesionPorId(id)))
       .subscribe((sesion) => {
+        console.log(sesion);
         this.sesion = sesion;
         this.id = sesion.id!;
         this.miFormulario.controls['id_sala'].setValue(this.sesion.id_sala);

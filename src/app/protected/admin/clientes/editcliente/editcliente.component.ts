@@ -260,58 +260,22 @@ export class EditclienteComponent implements OnInit {
     return '';
   }
 
-  // baja() {
-  //   Swal.fire({
-  //     title: `¿Estas seguro de que quieres dar de baja a ${this.cliente.nombre?.toUpperCase()} ${this.cliente.apellido1?.toUpperCase()}?`,
-  //     icon: 'warning',
-  //     showCancelButton: true,
-  //     confirmButtonColor: '#3085d6',
-  //     cancelButtonColor: '#d33',
-  //     confirmButtonText: 'Si, dar de baja',
-  //     cancelButtonText: 'No, cancelar',
-  //   }).then((result) => {
-  //     if (result.isConfirmed) {
-  //       this.cliente.estado = 'baja';
-  //       this.miFormulario.controls['estado'].setValue('baja');
-  //       this.miFormulario.controls['fecha_baja'].setValue(this.fechaActual());
-  //       this.miFormulario.controls['num_reservas'].setValue(0);
-  //       this.cliente = this.miFormulario.value;
-  //       this.adminService.darBaja(this.cliente).subscribe((resp) => {
-  //         Swal.fire(
-  //           'Baja completada!',
-  //           `Se ha dado de baja a ${this.cliente.nombre?.toUpperCase()} ${this.cliente.apellido1?.toUpperCase()}`,
-  //           'success'
-  //         );
-  //       });
-  //     }
-  //   });
-  // }
 
-  // alta() {
-  //   Swal.fire({
-  //     title: `¿Estas seguro de que quieres dar de alta a ${this.cliente.nombre?.toUpperCase()} ${this.cliente.apellido1?.toUpperCase()}?`,
-  //     icon: 'warning',
-  //     showCancelButton: true,
-  //     confirmButtonColor: '#3085d6',
-  //     cancelButtonColor: '#d33',
-  //     confirmButtonText: 'Si, dar de alta',
-  //     cancelButtonText: 'No, cancelar',
-  //   }).then((result) => {
-  //     if (result.isConfirmed) {
-  //       this.cliente.estado = 'activo';
-  //       this.miFormulario.controls['estado'].setValue('activo');
-  //       this.miFormulario.controls['fecha_alta'].setValue(this.fechaActual());
-  //       this.cliente = this.miFormulario.value;
-  //       this.adminService.darAlta(this.cliente).subscribe((resp) => {
-  //         Swal.fire(
-  //           'Alta completada!',
-  //           `Se ha dado de alta a ${this.cliente.nombre?.toUpperCase()} ${this.cliente.apellido1?.toUpperCase()}`,
-  //           'success'
-  //         );
-  //       });
-  //     }
-  //   });
-  // }
+  esMenor() {
+    const today: Date = new Date();
+    const birthDate: Date = new Date(this.miFormulario.get('fecha_nac')?.value);
+    let age: number = today.getFullYear() - birthDate.getFullYear();
+    const month: number = today.getMonth() - birthDate.getMonth();
+    if (month < 0 || (month === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+    if(age < 18){
+      this.miFormulario.get('fecha_nac')?.setErrors({ noIguales: true });
+      return true;
+    } else{
+      return "";
+    }
+}
 
   cambiarEstado() {
     Swal.fire({

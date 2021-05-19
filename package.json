@@ -27,6 +27,8 @@
     "datatables.net-dt": "^1.10.24",
     "jquery": "^3.6.0",
     "mapbox-gl": "^2.2.0",
+    "ngx-paypal": "^7.0.0",
+    "ngx-spinner": "^11.0.1",
     "rxjs": "~6.6.0",
     "sweetalert2": "^10.16.6",
     "tslib": "^2.0.0",

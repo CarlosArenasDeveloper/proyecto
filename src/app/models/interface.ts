@@ -75,7 +75,7 @@ export interface Sesion {
   id?: number;
   id_sala?: number;
   id_actividad?:number;
-  fecha?: Date;
+  fecha?: any;
   hora?: Date;
   num_clientes?: number;
   estado?: string;

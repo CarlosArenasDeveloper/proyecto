@@ -310,25 +310,14 @@
           <div class="col-12 col-md-6">
             <mat-form-field>
               <mat-label>Fecha de nacimiento: (+18) </mat-label>
-              <input
-                matInput
-                [min]="minDate"
-                [max]="maxDate"
-                [matDatepicker]="picker"
-                formControlName="fecha_nac"
-              />
-              <mat-datepicker-toggle
-                matSuffix
-                [for]="picker"
-              ></mat-datepicker-toggle>
-              <mat-datepicker #picker></mat-datepicker>
+              <input matInput type="date" formControlName="fecha_nac" />
             </mat-form-field>
             <span
               class="form-text text-danger fst-italic"
-              *ngIf="campoNoValido('fecha_nac')"
+              *ngIf="campoNoValido('fecha_nac') || esMenor()"
             >
               <br />
-              La fecha de nacimiento es requerida
+              La edad minima requerida son 18 años
             </span>
           </div>
 
@@ -430,13 +419,17 @@
 
     <mat-step>
       <ng-template matStepLabel>Hecho</ng-template>
-      <p>Para terminar el registro, pulse el boton de confirmar</p>
+      <p>Para finalizar, confirme el pago. </p>
       <div>
         <button mat-raised-button matStepperPrevious color="warn">
           <i class="fas fa-arrow-circle-left"></i>
           Anterior
         </button>
-        <button
+        <button   matStepperNext  mat-raised-button   color="primary"
+        class="mt-5 mx-2" *ngIf="!showPaypalButtons" (click)="pay()">
+          Pagar con paypal <i class="fab fa-paypal fa-2x"></i>
+        </button>
+        <!-- <button
           mat-raised-button
           matStepperNext
           color="primary"
@@ -444,7 +437,14 @@
           (click)="registrar()"
         >
           Confirmar <i class="fas fa-check-circle"></i>
-        </button>
+        </button> -->
+        <div *ngIf="showPaypalButtons" class="mt-5">
+          <h3>Elige que metodo utilizaras para realizar el primer pago</h3>
+
+          <ngx-paypal  [config]="payPalConfig">
+          </ngx-paypal>
+        </div>
+    
       </div>
     </mat-step>
   </mat-horizontal-stepper>

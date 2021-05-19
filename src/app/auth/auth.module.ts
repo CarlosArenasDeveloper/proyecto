@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { AuthRoutingModule } from './auth-routing.module';
@@ -10,7 +10,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { PasswordOlvidadaComponent } from './pages/password-olvidada/password-olvidada.component';
 import { ReestablecerPasswordComponent } from './pages/reestablecer-password/reestablecer-password.component';
 import { ActividadesPorTarifaComponent } from './pages/actividades-por-tarifa/actividades-por-tarifa.component';
-
+import { NgxPayPalModule } from 'ngx-paypal';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [LoginComponent, RegistroComponent, PasswordOlvidadaComponent, ReestablecerPasswordComponent, ActividadesPorTarifaComponent],
@@ -19,7 +20,11 @@ import { ActividadesPorTarifaComponent } from './pages/actividades-por-tarifa/ac
     AuthRoutingModule,
     MaterialModule,
     SharedModule,
-    ReactiveFormsModule
-  ]
+    ReactiveFormsModule,
+    NgxSpinnerModule,
+    NgxPayPalModule
+    
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AuthModule { }

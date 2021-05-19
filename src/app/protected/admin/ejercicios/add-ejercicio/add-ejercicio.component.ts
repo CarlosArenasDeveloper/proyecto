@@ -41,7 +41,9 @@ export class AddEjercicioComponent implements OnInit {
   }
 
   addEjercicio() {
+    console.log(this.miFormulario.value);
     this.ejercicio = this.miFormulario.value;
+    console.log(this.ejercicio);
     this.adminService.addEjercicio(this.ejercicio).subscribe((resp) => {
       console.log(resp);
       if (resp == null) {

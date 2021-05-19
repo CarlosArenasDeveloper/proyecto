@@ -39,6 +39,7 @@ export class EditarPerfilComponent implements OnInit {
   reservas!: any;
   estado!: any;
   usuario: Usuario = {};
+  user:any;
 
   fechaActual(): string {
     let date = new Date();
@@ -123,6 +124,7 @@ export class EditarPerfilComponent implements OnInit {
       )
       .subscribe((usuario) => {
         this.usuario = usuario;
+        this.user=usuario
         if (this.usuario.role == 1) {
           this.role = 1;
         } else if (this.usuario.role == 3) {
@@ -265,6 +267,23 @@ export class EditarPerfilComponent implements OnInit {
     this.cambiarPass = true;
   }
 
+
+  esMenor() {
+    const today: Date = new Date();
+    const birthDate: Date = new Date(this.miFormulario.get('fecha_nac')?.value);
+    let age: number = today.getFullYear() - birthDate.getFullYear();
+    const month: number = today.getMonth() - birthDate.getMonth();
+    if (month < 0 || (month === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+    if(age < 18){
+      this.miFormulario.get('fecha_nac')?.setErrors({ noIguales: true });
+      return true;
+    } else{
+      return "";
+    }
+}
+
   confirmarPassword() {
     this.passwordPerfil = this.formPassword.value;
     this.passwordPerfil.email = this.usuario.email;
@@ -309,9 +328,8 @@ export class EditarPerfilComponent implements OnInit {
             title: 'Alta completada, te esperamos en nuestro centro!',
             showConfirmButton: false,
             timer: 1500,
-          }).then((result) => {
-            this.router.navigateByUrl(`/dashboard/cliente`);
-          });
+          })
+          this.user.estado='activo'
         });
       }
     });
@@ -340,9 +358,9 @@ export class EditarPerfilComponent implements OnInit {
               'Baja completada correctamente. Esperamos volver a verte pronto!',
             showConfirmButton: false,
             timer: 1500,
-          }).then((result) => {
-            this.router.navigateByUrl(`/dashboard/cliente`);
-          });
+          })
+          this.user.estado='baja'
+
         });
       }
     });

@@ -1,4 +1,4 @@
-import { LOCALE_ID, NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule,CUSTOM_ELEMENTS_SCHEMA  } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { DataTablesModule } from "angular-datatables";
 
@@ -11,6 +11,8 @@ import { MaterialModule } from './material/material.module';
 import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
 registerLocaleData(localeEs);
+import { NgxPayPalModule } from 'ngx-paypal';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [
@@ -23,9 +25,12 @@ registerLocaleData(localeEs);
     BrowserAnimationsModule,
     SharedModule,
     DataTablesModule,
-    MaterialModule
+    MaterialModule,
+    NgxPayPalModule,
+    NgxSpinnerModule
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'es' }],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule { }

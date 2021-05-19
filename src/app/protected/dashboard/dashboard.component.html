@@ -277,20 +277,22 @@
       <!-- <button mat-button [matMenuTriggerFor]="menu"> <mat-icon>account_circle</mat-icon></button> -->
     </span>
     <button mat-button [matMenuTriggerFor]="beforeMenu">
-      <mat-icon>account_circle</mat-icon>
+      <i class="fas fa-chevron-down"></i>
     </button>
     <mat-menu #beforeMenu="matMenu" xPosition="before">
       <button *ngIf="usuario.role==1"
         mat-menu-item
         [routerLink]="['/dashboard/admin/editar-perfil', usuario.email]"
       >
-        Editar perfil
+        Editar perfil 
+      <mat-icon>account_circle</mat-icon>
       </button>
       <button *ngIf="usuario.role==3"
       mat-menu-item
       [routerLink]="['/dashboard/monitor/editar-perfil', usuario.email]"
     >
-      Editar perfil
+    Editar perfil 
+    <mat-icon>account_circle</mat-icon>
     </button>
       <button mat-menu-item (click)="cerrarSesion()">
         Cerrar sesion<i class="fas fa-sign-out-alt ms-2"></i>
@@ -333,14 +335,15 @@
       <!-- <button mat-button [matMenuTriggerFor]="menu"> <mat-icon>account_circle</mat-icon></button> -->
     </span>
     <button mat-button [matMenuTriggerFor]="beforeMenu">
-      <mat-icon>account_circle</mat-icon>
+      <i class="fas fa-chevron-down"></i>
     </button>
     <mat-menu #beforeMenu="matMenu" xPosition="before">
       <button *ngIf="usuario.role==2"
       mat-menu-item
       [routerLink]="['/dashboard/cliente/editar-perfil', usuario.email]"
     >
-      Editar perfil
+    Editar perfil 
+    <mat-icon>account_circle</mat-icon>
     </button>
       <button mat-menu-item (click)="cerrarSesion()">
         Cerrar sesion<i class="fas fa-sign-out-alt ms-2"></i>

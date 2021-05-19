@@ -13,25 +13,17 @@
   <div class="col-4 my-3" *ngFor="let actividad of actividades">
     <div
       class="card border border-3 border-danger"
-      *ngIf="sesion()"
-      [routerLink]="['/dashboard/actividades', actividad.id]"
+      [routerLink]="['/actividades', actividad.id]"
     >
-    <article>
-      <img src="../../../assets/no-image.png" class="card-img-top" />
-    </article>
+      <article>
+        <img src="../../../assets/no-image.png" class="card-img-top" />
+      </article>
       <div class="card-body">
         <p class="card-title text-center">
           {{ actividad.nombre | titlecase }}
-          <button
-            *ngIf="!sesion()"
-            type="button"
-            class="float-end btn btn-primary"
-            [routerLink]="['/actividades', actividad.id]"
-          >
-            Ver más
-          </button>
         </p>
       </div>
     </div>
   </div>
+  
 </div>

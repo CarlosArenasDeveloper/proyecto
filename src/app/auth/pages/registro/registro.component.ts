@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 import { AdminService } from '../../../protected/services/admin.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ActividadesPorTarifaComponent } from '../actividades-por-tarifa/actividades-por-tarifa.component';
+import { ICreateOrderRequest, IPayPalConfig } from 'ngx-paypal';
 
 @Component({
   selector: 'app-registro',
@@ -32,6 +33,7 @@ import { ActividadesPorTarifaComponent } from '../actividades-por-tarifa/activid
   ],
 })
 export class RegistroComponent implements OnInit {
+  showPaypalButtons:boolean= false;
   cliente: Usuario = {};
   hide = true;
   oculto = true;
@@ -44,6 +46,7 @@ export class RegistroComponent implements OnInit {
   maxDate!: Date;
   tarifas: any;
   centros: any;
+  tarifa!:Tarifa;
 
   constructor(
     public dialog: MatDialog,
@@ -62,6 +65,7 @@ export class RegistroComponent implements OnInit {
   }
 
   ngOnInit() {
+
     this.authService.selectTarifas().subscribe((resp) => {
       this.tarifas = resp;
     });
@@ -102,7 +106,7 @@ export class RegistroComponent implements OnInit {
       }
     );
     this.secondFormGroup = this.fb.group({
-      fecha_nac: ['23/06/1999', [Validators.required]],
+      fecha_nac: ['', [Validators.required]],
       sexo: [''],
       telefono: [
         '678789789',
@@ -114,7 +118,7 @@ export class RegistroComponent implements OnInit {
       ],
       ciudad: ['c', [Validators.required]],
       direccion: ['c', [Validators.required]],
-      cod_postal: ['c', [Validators.required]],
+      cod_postal: ['12', [Validators.required]],
     });
 
     this.thirdFormGroup = this.fb.group({
@@ -129,8 +133,9 @@ export class RegistroComponent implements OnInit {
       ...this.secondFormGroup.value,
       ...this.thirdFormGroup.value,
     };
-    this.cliente.fecha_alta = new Date();
     this.authService.registro(this.cliente).subscribe((resp) => {
+      console.log(this.cliente);
+      console.log(resp);
       if (resp != 'ERROR') {
         Swal.fire({
           position: 'top-end',
@@ -211,7 +216,24 @@ export class RegistroComponent implements OnInit {
     }
     return '';
   }
+  
+  
 
+   esMenor() {
+    const today: Date = new Date();
+    const birthDate: Date = new Date(this.secondFormGroup.get('fecha_nac')?.value);
+    let age: number = today.getFullYear() - birthDate.getFullYear();
+    const month: number = today.getMonth() - birthDate.getMonth();
+    if (month < 0 || (month === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+    if(age < 18){
+      this.secondFormGroup.get('fecha_nac')?.setErrors({ noIguales: true });
+      return true;
+    } else{
+      return "";
+    }
+}
   elegirTarifa(id: number): void {
     this.thirdFormGroup.controls['id_tarifa'].setValue(id);
   }
@@ -223,4 +245,104 @@ export class RegistroComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((result) => {});
   }
+
+  public payPalConfig?: IPayPalConfig;
+
+  private initConfig(): void {
+      console.log(this.tarifa);
+    this.payPalConfig = {
+
+      currency: 'EUR',
+      clientId: 'AQAwkSv02HKvahX2b6dCbOOfjL4N4knsgbZd5-Gb1JbTctNk4MuZEyAS8fMY-xFtrl2OAjzetUMgodcd',
+      createOrderOnClient: (data) =>
+
+        <ICreateOrderRequest>{
+         
+
+          intent: 'CAPTURE',
+          purchase_units: [
+            {
+
+              amount: {
+                currency_code: 'EUR',
+                value: this.tarifa.precio?.toString(),
+                breakdown: {
+                  item_total: {
+                    currency_code: 'EUR',
+                    value: this.tarifa.precio?.toString(),
+                  },
+                },
+              },
+              items: [
+                {
+                  name: "Tarifa "+this.tarifa.nombre?.toUpperCase(),
+                  quantity: "1",
+                  unit_amount: {
+                    currency_code: 'EUR',
+                    value: this.tarifa.precio?.toString(),
+                  },
+                },
+              ],
+            },
+          ],
+        },
+      advanced: {
+        commit: 'true',
+      },
+      style: {
+        label: 'paypal',
+        layout: 'vertical',
+      },
+      
+      onApprove: (data, actions) => {
+        console.log(
+          'onApprove - transaction was approved, but not authorized',
+          data,
+          actions
+        );
+        // actions.order.get().then(details => {
+        //     console.log('onApprove - you can get full order details inside onApprove: ', details);
+        // });
+      },
+      onClientAuthorization: (data) => {
+        
+        console.log(
+          'onClientAuthorization - you should probably inform your server about completed transaction at this point',
+          data
+        );
+        this.registrar();
+      },
+      onCancel: (data, actions) => {
+        console.log('OnCancel', data, actions);
+      },
+      onError: (err) => {
+        console.log('OnError', err);
+      },
+      onClick: (data, actions) => {
+        
+        console.log('onClick', data, actions);
+      
+      },
+    };
+  }
+
+  pay() {
+    this.showPaypalButtons = true;
+    this.cliente = {
+      ...this.firstFormGroup.value,
+      ...this.secondFormGroup.value,
+      ...this.thirdFormGroup.value,
+    };
+    this.adminService.getTarifaPorId(this.cliente.id_tarifa!).subscribe((tarifa)=>{
+      this.tarifa=tarifa;
+    })
+
+    this.initConfig();
+    console.log(this.tarifa);
+  }
+
+  back(){
+    this.showPaypalButtons = false;
+  }
+  
 }

@@ -188,26 +188,15 @@
           </mat-radio-group>
 
           <mat-form-field>
-            <mat-label>Fecha de nacimiento: </mat-label>
-            <input
-              matInput
-              [min]="minDate"
-              [max]="maxDate"
-              [matDatepicker]="picker"
-              formControlName="fecha_nac"
-            />
-            <mat-datepicker-toggle
-              matSuffix
-              [for]="picker"
-            ></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
+            <mat-label>Fecha de nacimiento: (+18) </mat-label>
+            <input matInput type="date" formControlName="fecha_nac" />
           </mat-form-field>
           <span
             class="form-text text-danger fst-italic"
-            *ngIf="campoNoValido('fecha_nac')"
+            *ngIf="campoNoValido('fecha_nac') || esMenor() "
           >
-            La fecha de nacimiento es requerida
-          </span>
+            La edad minima requerida son 18 años
+          </span>        
 
           <mat-form-field>
             <mat-label
@@ -272,7 +261,7 @@
           >
             El codigo postal es requerido
           </span>
-          <mat-form-field *ngIf="usuario.role != 1">
+          <mat-form-field *ngIf="role != 1">
             <mat-label>Centro:</mat-label>
             <input
               disabled
@@ -282,7 +271,7 @@
               value="{{ centro | titlecase }}"
             />
           </mat-form-field>
-          <mat-form-field *ngIf="usuario.role == 2">
+          <mat-form-field *ngIf="role == 2">
             <mat-label>Tarifa actual:</mat-label>
             <input
               disabled
@@ -293,7 +282,7 @@
             />
           </mat-form-field>
           <mat-form-field
-            *ngIf="usuario.role == 2 && usuario.estado == 'activo'"
+            *ngIf="role == 2 && user.estado == 'activo'"
           >
             <mat-label>Numero de reservas:</mat-label>
             <input
@@ -306,36 +295,38 @@
           </mat-form-field>
 
           <mat-form-field
-            *ngIf="usuario.role == 2 && usuario.estado == 'activo'"
+            *ngIf="role == 2 && user.estado == 'activo'"
           >
             <mat-label>Fecha alta:</mat-label>
             <input type="date" matInput formControlName="fecha_alta" readonly />
           </mat-form-field>
 
-          <mat-form-field *ngIf="usuario.role == 2 && usuario.estado == 'baja'">
+          <mat-form-field *ngIf="role == 2 && user.estado == 'baja'">
             <mat-label>Fecha baja:</mat-label>
             <input type="date" matInput formControlName="fecha_baja" readonly />
           </mat-form-field>
 
-          <div *ngIf="usuario.role == 2">
+          <div *ngIf="role == 2">
             Estado actual :<span
               [ngClass]="{
-                'text-success': usuario.estado === 'activo',
-                'text-danger': usuario.estado === 'baja',
-                'text-secondary': usuario.estado === 'bloqueado'
+                'text-success': user.estado === 'activo',
+                'text-danger': user.estado === 'baja',
+                'text-secondary': user.estado === 'bloqueado'
               }"
             >
-              {{ usuario.estado | titlecase }}</span
+              {{ user.estado | titlecase }}</span
             >
             <a
-              *ngIf="usuario.estado == 'activo'"
+            type="button"
+              *ngIf="user.estado == 'activo'"
               class="btn btn-primary mx-3"
               (click)="darBaja()"
             >
               Solicitar baja
             </a>
             <a
-              *ngIf="usuario.estado == 'baja'"
+            type="button"
+              *ngIf="user.estado == 'baja'"
               class="btn btn-primary mx-3"
               (click)="darAlta()"
             >

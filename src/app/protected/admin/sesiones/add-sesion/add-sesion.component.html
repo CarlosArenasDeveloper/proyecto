@@ -47,17 +47,13 @@
 
   <div class="mb-3">
     <label for="fecha" class="form-label">Fecha: </label>
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
     <input
+    type="date"
     [ngClass]="{
       'is-invalid': campoNoValido('fecha')
     }"
       matInput
-      type="date"
-      [min]="minDate"
-      [max]="maxDate"
-      [matDatepicker]="picker"
+      type="datetime-local"
       formControlName="fecha"
     class="form-control"
     />
@@ -95,3 +91,4 @@
     Añadir
   </button>
 </form>
+{{miFormulario.value|json}}

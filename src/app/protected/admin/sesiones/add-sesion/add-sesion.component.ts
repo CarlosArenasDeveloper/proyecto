@@ -15,13 +15,13 @@ export class AddSesionComponent implements OnInit {
   horario!: Horario;
 
   salas: any;
-  minDate!: Date;
-  maxDate!: any;
+  // minDate!: Date;
+  // maxDate!: any;
   constructor(private fb: FormBuilder, private adminService: AdminService) {
-    const mes = new Date().getMonth();
-    const año = new Date().getFullYear();
-    this.minDate = new Date();
-    this.maxDate = new Date(año, mes + 2, 0);
+    // const mes = new Date().getMonth();
+    // const año = new Date().getFullYear();
+    // this.minDate = new Date();
+    // this.maxDate = new Date(año, mes + 2, 0);
   }
 
   ngOnInit(): void {
@@ -49,16 +49,18 @@ export class AddSesionComponent implements OnInit {
   }
 
   addSesion() {
+    
    this.horario ={
      hora:1,
      sala:2,
      inicio:"21:00",
      fin:"22:00"
    }
-    console.log(this.horario);
     this.sesion = this.miFormulario.value;
+    const fecha = this.miFormulario.get('fecha')?.value.toString();
+    this.sesion.fecha=fecha;
     this.sesion.horarios = this.horario;
-
+    
      console.log(this.sesion);
     this.adminService.addSesion(this.sesion).subscribe((resp) => {
       if (resp == null) {

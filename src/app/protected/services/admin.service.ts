@@ -376,4 +376,19 @@ export class AdminService {
   getGraficaUsuariosPorGym(){
     return this.htpp.get(`${this.baseUrl}/graficaCentros.php`);
   }
+
+  getGraficaSexoMonitores(){
+    return this.htpp.get(`${this.baseUrl}/graficaSexoMonitores.php`);
+  }
+
+  getGraficaSexoPorGimnasio(id_centro:number){
+    return this.htpp.get(`${this.baseUrl}/graficaSexoPorGimnasio.php?id_centro=${id_centro}`);
+  }
+
+  getGraficaSexoMonitoresPorGimnasio(id_centro:number){
+    return this.htpp.get(`${this.baseUrl}/graficaSexoMonitoresPorGimnasio.php?id_centro=${id_centro}`);
+  }
+  getGraficaMonitoresPorGym(){
+    return this.htpp.get(`${this.baseUrl}/graficaCentrosMonitores.php`);
+  }
 }

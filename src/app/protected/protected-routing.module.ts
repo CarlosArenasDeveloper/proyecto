@@ -11,6 +11,9 @@ import { NoticiaComponent } from '../shared/noticias/noticia/noticia.component';
 import { ActividadComponent } from '../shared/actividades/actividad/actividad.component';
 import { MusculoComponent } from '../shared/ejercicios/musculo/musculo.component';
 import { EjercicioComponent } from '../shared/ejercicios/ejercicio/ejercicio.component';
+import { AdminGuard } from './admin/guards/admin.guard';
+import { ClienteGuard } from './cliente/guards/cliente.guard';
+import { MonitorGuard } from './monitor/guards/monitor.guard';
 
 const routes: Routes = [
   {
@@ -60,18 +63,24 @@ const routes: Routes = [
         //component: AdminComponent,
         loadChildren: () =>
           import('./admin/admin.module').then((m) => m.AdminModule),
+          canLoad: [ AdminGuard ],
+          canActivate: [ AdminGuard ]
       },
       {
         path: 'monitor',
         //component: AdminComponent,
         loadChildren: () =>
           import('./monitor/monitor.module').then((m) => m.MonitorModule),
+          canLoad: [ MonitorGuard ],
+          canActivate: [ MonitorGuard ]
       },
       {
         path: 'cliente',
         //component: AdminComponent,
         loadChildren: () =>
           import('./cliente/cliente.module').then((m) => m.ClienteModule),
+          canLoad: [ ClienteGuard ],
+          canActivate: [ ClienteGuard ]
       },
 
       { path: '**', redirectTo: '' },

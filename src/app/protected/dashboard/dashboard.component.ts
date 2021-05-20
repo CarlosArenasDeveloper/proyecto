@@ -58,7 +58,7 @@ export class DashboardComponent implements OnInit {
   
   panel() {
     if (!sessionStorage.getItem('usuario')) {
-      this.route.navigateByUrl('dashboard');
+      this.route.navigateByUrl('/');
       return;
     }
 

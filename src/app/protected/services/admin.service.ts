@@ -367,6 +367,13 @@ export class AdminService {
 
   getEjerciciosPorMusculo(nombre_musculo: string){
     return this.htpp.get(`${this.baseUrl}/selectEjerciciosPorMusculo.php?nombre_musculo=${nombre_musculo}`);
+  }
 
+  getGraficaSexo(){
+    return this.htpp.get(`${this.baseUrl}/graficaSexo.php`);
+  }
+
+  getGraficaUsuariosPorGym(){
+    return this.htpp.get(`${this.baseUrl}/graficaCentros.php`);
   }
 }

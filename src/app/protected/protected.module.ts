@@ -10,7 +10,7 @@ import { DataTablesModule } from "angular-datatables";
 import { MonitorComponent } from './monitor/monitor.component';
 import { ClientesModule } from './admin/clientes/clientes.module';
 import { NoticiasComponent } from '../shared/noticias/noticias.component';
-
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -25,6 +25,7 @@ import { NoticiasComponent } from '../shared/noticias/noticias.component';
     ReactiveFormsModule,
     MaterialModule,
     DataTablesModule,
+    ChartsModule
   ],
 })
 export class ProtectedModule {}

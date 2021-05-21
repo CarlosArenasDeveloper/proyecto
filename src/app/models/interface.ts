@@ -113,3 +113,8 @@ export interface PasswordPerfil{
   password?:string;
   password2?:string;
 }
+
+export interface Grafica{
+  altas?:number;
+  bajas?:number;
+}

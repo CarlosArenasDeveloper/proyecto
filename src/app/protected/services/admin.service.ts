@@ -11,7 +11,12 @@ import {
   Categoria,
 } from '../../models/interface';
 import { Observable } from 'rxjs';
-import { Actividad, Sesion, Sala, PasswordPerfil } from '../../models/interface';
+import {
+  Actividad,
+  Sesion,
+  Sala,
+  PasswordPerfil,
+} from '../../models/interface';
 
 @Injectable({
   providedIn: 'root',
@@ -206,8 +211,13 @@ export class AdminService {
     return this.htpp.get(`${this.baseUrl}/selectNoticiasVisibles.php`);
   }
 
-   getNoticiasRelacionadas(nombre:any, id_noticia:number): Observable<Noticia> {
-    return this.htpp.get(`${this.baseUrl}/selectNoticiasRelacionadas.php?nombre=${nombre}&id_noticia=${id_noticia}`);
+  getNoticiasRelacionadas(
+    nombre: any,
+    id_noticia: number
+  ): Observable<Noticia> {
+    return this.htpp.get(
+      `${this.baseUrl}/selectNoticiasRelacionadas.php?nombre=${nombre}&id_noticia=${id_noticia}`
+    );
   }
   addNoticia(noticia: Noticia): Observable<Noticia> {
     return this.htpp.post(
@@ -232,7 +242,6 @@ export class AdminService {
     );
   }
 
-
   editarNoticia(noticia: Noticia) {
     return this.htpp.post(
       `${this.baseUrl}/editarNoticia.php`,
@@ -253,10 +262,12 @@ export class AdminService {
   }
 
   borrarCategoria(id: number) {
-    return this.htpp.get<Categoria>(`${this.baseUrl}/borrarCategoria.php?id=${id}`);
+    return this.htpp.get<Categoria>(
+      `${this.baseUrl}/borrarCategoria.php?id=${id}`
+    );
   }
 
-  getUsuariosGym(id:number){
+  getUsuariosGym(id: number) {
     return this.htpp.get(`${this.baseUrl}/verUsuariosGym.php?id=${id}`);
   }
 
@@ -272,7 +283,9 @@ export class AdminService {
   }
 
   borrarActividad(id: number) {
-    return this.htpp.get<Actividad>(`${this.baseUrl}/borrarActividad.php?id=${id}`);
+    return this.htpp.get<Actividad>(
+      `${this.baseUrl}/borrarActividad.php?id=${id}`
+    );
   }
 
   getActividadPorId(id: number) {
@@ -323,12 +336,9 @@ export class AdminService {
   getSalas(): Observable<Sala> {
     return this.htpp.get(`${this.baseUrl}/selectSalas.php`);
   }
-  
+
   addSala(sala: Sala): Observable<Sala> {
-    return this.htpp.post(
-      `${this.baseUrl}/addSala.php`,
-      JSON.stringify(sala)
-    );
+    return this.htpp.post(`${this.baseUrl}/addSala.php`, JSON.stringify(sala));
   }
 
   borrarSala(id: number) {
@@ -336,9 +346,7 @@ export class AdminService {
   }
 
   getSalaPorId(id: number) {
-    return this.htpp.get<Sala>(
-      `${this.baseUrl}/seleccionarSala.php?id=${id}`
-    );
+    return this.htpp.get<Sala>(`${this.baseUrl}/seleccionarSala.php?id=${id}`);
   }
   editarSala(sala: Sala) {
     return this.htpp.post(
@@ -354,41 +362,59 @@ export class AdminService {
     );
   }
 
-  actualizarPassPerfil(passwordPerfil: PasswordPerfil){
+  actualizarPassPerfil(passwordPerfil: PasswordPerfil) {
     return this.htpp.post<PasswordPerfil>(
       `${this.baseUrl}/actualizarPassPerfil.php`,
       JSON.stringify(passwordPerfil)
     );
   }
 
-  getActividadesPorTarifa(id_tarifa:number){
-    return this.htpp.get(`${this.baseUrl}/selectActividadesPorTarifa.php?id_tarifa=${id_tarifa}`);
+  getActividadesPorTarifa(id_tarifa: number) {
+    return this.htpp.get(
+      `${this.baseUrl}/selectActividadesPorTarifa.php?id_tarifa=${id_tarifa}`
+    );
   }
 
-  getEjerciciosPorMusculo(nombre_musculo: string){
-    return this.htpp.get(`${this.baseUrl}/selectEjerciciosPorMusculo.php?nombre_musculo=${nombre_musculo}`);
+  getEjerciciosPorMusculo(nombre_musculo: string) {
+    return this.htpp.get(
+      `${this.baseUrl}/selectEjerciciosPorMusculo.php?nombre_musculo=${nombre_musculo}`
+    );
   }
 
-  getGraficaSexo(){
+  getGraficaSexo() {
     return this.htpp.get(`${this.baseUrl}/graficaSexo.php`);
   }
 
-  getGraficaUsuariosPorGym(){
+  getGraficaUsuariosPorGym() {
     return this.htpp.get(`${this.baseUrl}/graficaCentros.php`);
   }
 
-  getGraficaSexoMonitores(){
+  getGraficaSexoMonitores() {
     return this.htpp.get(`${this.baseUrl}/graficaSexoMonitores.php`);
   }
 
-  getGraficaSexoPorGimnasio(id_centro:number){
-    return this.htpp.get(`${this.baseUrl}/graficaSexoPorGimnasio.php?id_centro=${id_centro}`);
+  getGraficaSexoPorGimnasio(id_centro: number) {
+    return this.htpp.get(
+      `${this.baseUrl}/graficaSexoPorGimnasio.php?id_centro=${id_centro}`
+    );
   }
 
-  getGraficaSexoMonitoresPorGimnasio(id_centro:number){
-    return this.htpp.get(`${this.baseUrl}/graficaSexoMonitoresPorGimnasio.php?id_centro=${id_centro}`);
+  getGraficaSexoMonitoresPorGimnasio(id_centro: number) {
+    return this.htpp.get(
+      `${this.baseUrl}/graficaSexoMonitoresPorGimnasio.php?id_centro=${id_centro}`
+    );
   }
-  getGraficaMonitoresPorGym(){
+  getGraficaMonitoresPorGym() {
     return this.htpp.get(`${this.baseUrl}/graficaCentrosMonitores.php`);
+  }
+  getGraficaClientesFecha(mes: number, anio: number) {
+    return this.htpp.get(
+      `${this.baseUrl}/graficaClientesFecha.php?mes=${mes}&anio=${anio}`
+    );
+  }
+  getGraficaClientesFechaBis(anio: number) {
+    return this.htpp.get(
+      `${this.baseUrl}/graficaPrueba.php?anio=${anio}`
+    );
   }
 }

@@ -1,78 +1,104 @@
-<div class="row">
-    <div class="col-6">
-        <h1 class="text-center">Clientes por gimnasio</h1>
-        <hr>
-            <div style="display: block">
-                <canvas baseChart
-                  [data]="doughnutChartData"
-                  [labels]="doughnutChartLabels"
-                  [chartType]="doughnutChartType"
-                  [colors]="colors"
-                                    >
-                </canvas>
-            </div>
-            <span class="float-end text-primary">
-                Total clientes: {{clientes}}
-            </span>
-    </div>
-    <div class="col-6">
-        <h1 class="text-center">Sexo clientes</h1>
-        <hr>
-            <div style="display: block">
-                <canvas baseChart
-                  [data]="dataSexo"
-                  [labels]="labelsSexo"
-                  [chartType]="doughnutChartType"
-                  [colors]="colors"
->
-                </canvas>
-            </div>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-6">
-        <h1 class="text-center">Monitores por gimnasio</h1>
-        <hr>
-            <div style="display: block">
-                <canvas baseChart
-                  [data]="doughnutChartDataMonitores"
-                  [labels]="doughnutChartLabelsMonitores"
-                  [chartType]="doughnutChartType"
-                  [colors]="colors"
-                                    >
-                </canvas>
-            </div>
-            <span class="float-end text-primary">
-                Total monitores: {{monitores}}
-            </span>
-    </div>
-    <div class="col-6">
-        <h1 class="text-center">Sexo Monitores</h1>
-        <hr>
-            <div style="display: block">
-                <canvas baseChart
-                  [data]="dataSexoMonitores"
-                  [labels]="labelsSexoMonitores"
-                  [chartType]="doughnutChartType"
-                  [colors]="colors"
-                                    >
-                </canvas>
-            </div>
-    </div>
-</div>
-
-
 <div>
+  <div>
     <div>
-      <div>
-        <div style="display: block">
-          <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
-            [legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)"
-            ></canvas>
-        </div>
-        <button mat-button mat-raised-button color="primary" (click)="randomize()">Update</button>
+      <div class="text-center mt-4">
+          <h2>ALTAS Y BAJAS DE CLIENTES POR MES Y AÑO</h2>
+          <hr>
+        <button type="button" class="btn btn-danger" (click)="anterior()">
+          -1
+        </button>
+        <button
+          type="button"
+          class="mx-3 btn btn-secondary"
+          (click)="verDatos()"
+        >
+          Ver estadistica del año {{ anioActual }}
+        </button>
+        <button type="button" class="btn btn-primary" (click)="siguiente()">
+          +1
+        </button>
       </div>
+
+      <div style="display: block">
+        <canvas
+          baseChart
+          [datasets]="barChartData"
+          [labels]="barChartLabels"
+          [options]="barChartOptions"
+          [legend]="barChartLegend"
+          [chartType]="barChartType"
+          (chartHover)="chartHovered($event)"
+        ></canvas>
+      </div>
+      <button mat-button mat-raised-button color="warn" (click)="randomize()">
+        Cambiar vista
+      </button>
     </div>
   </div>
+</div>
 
+<div class="row mt-5">
+  <div class="col-6">
+    <h1 class="text-center">Clientes por gimnasio</h1>
+    <hr />
+    <div style="display: block">
+      <canvas
+        baseChart
+        [data]="doughnutChartData"
+        [labels]="doughnutChartLabels"
+        [chartType]="doughnutChartType"
+        [colors]="colors"
+      >
+      </canvas>
+    </div>
+    <span class="float-end text-primary"> Total clientes: {{ clientes }} </span>
+  </div>
+  <div class="col-6">
+    <h1 class="text-center">Sexo clientes</h1>
+    <hr />
+    <div style="display: block">
+      <canvas
+        baseChart
+        [data]="dataSexo"
+        [labels]="labelsSexo"
+        [chartType]="doughnutChartType"
+        [colors]="colors"
+      >
+      </canvas>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-6">
+    <h1 class="text-center">Monitores por gimnasio</h1>
+    <hr />
+    <div style="display: block">
+      <canvas
+        baseChart
+        [data]="doughnutChartDataMonitores"
+        [labels]="doughnutChartLabelsMonitores"
+        [chartType]="doughnutChartType"
+        [colors]="colors"
+      >
+      </canvas>
+    </div>
+    <span class="float-end text-primary">
+      Total monitores: {{ monitores }}
+    </span>
+  </div>
+  <div class="col-6">
+    <h1 class="text-center">Sexo Monitores</h1>
+    <hr />
+    <div style="display: block">
+      <canvas
+        baseChart
+        [data]="dataSexoMonitores"
+        [labels]="labelsSexoMonitores"
+        [chartType]="doughnutChartType"
+        [colors]="colors"
+      >
+      </canvas>
+    </div>
+  </div>
+</div>

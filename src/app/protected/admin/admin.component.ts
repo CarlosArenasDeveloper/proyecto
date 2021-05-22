@@ -32,6 +32,10 @@ export class AdminComponent implements OnInit {
   monitores: number = 0;
   consultaMonitores!: any;
   anioActual = new Date().getFullYear();
+  anioFijo = new Date().getFullYear();
+  numAltas: number = 0;
+  numBajas: number = 0;
+
   public colors: Color[] = [
     {
       backgroundColor: ['#0075ED', '#e6e718', '#11C40E', '#C40E32'],
@@ -51,10 +55,14 @@ export class AdminComponent implements OnInit {
       .getGraficaClientesFechaBis(this.anioActual)
       .subscribe((resp) => {
         this.arrayMeses = resp;
-        console.log(resp);
+        for (let i = 0; i < this.arrayMeses.length; i++) {
+          this.numAltas += parseInt(this.arrayMeses[i].altas);
+          this.numBajas += parseInt(this.arrayMeses[i].bajas);
+          this.altas.push(this.arrayMeses[i].altas);
+          this.bajas.push(this.arrayMeses[i].bajas);
+        }
       });
 
-    //  this.arrayMeses.shift();
     this.adminService.getGraficaSexo().subscribe((resp) => {
       this.labelsSexo = Object.keys(resp);
       this.dataSexo = Object.values(resp);
@@ -87,9 +95,9 @@ export class AdminComponent implements OnInit {
       this.doughnutChartDataMonitores = this.dataMonitores;
     });
   }
+
   public barChartOptions: ChartOptions = {
     responsive: true,
-    // We use these empty structures as placeholders for dynamic theming.
     scales: { xAxes: [{}], yAxes: [{}] },
   };
   public barChartLabels: Label[] = [
@@ -110,11 +118,12 @@ export class AdminComponent implements OnInit {
   public barChartLegend = true;
 
   public barChartData: ChartDataSets[] = [
+    { data: this.bajas, label: 'Bajas' },
+
     {
       data: this.altas,
       label: 'Altas',
     },
-    { data: this.bajas, label: 'Bajas' },
   ];
 
   // events
@@ -142,30 +151,14 @@ export class AdminComponent implements OnInit {
     this.barChartType = this.barChartType === 'bar' ? 'line' : 'bar';
   }
 
-  verDatos() {
-    if (this.altas.length > 0 && this.bajas.length > 0) {
-      this.altas = [];
-      this.bajas = [];
-      for (let i = 0; i < this.arrayMeses.length; i++) {
-        this.altas.push(this.arrayMeses[i].altas);
-        this.bajas.push(this.arrayMeses[i].bajas);
-      }
-      this.barChartData = [
-        {
-          data: this.altas,
-          label: 'Altas',
-        },
-        { data: this.bajas, label: 'Bajas' },
-      ];
-    }
-
-    for (let i = 0; i < this.arrayMeses.length; i++) {
-      this.altas.push(this.arrayMeses[i].altas);
-      this.bajas.push(this.arrayMeses[i].bajas);
-    }
-  }
-
   siguiente() {
+    if (this.anioFijo <= this.anioActual + 1) {
+      $('#siguiente').prop('disabled', true);
+    }
+    const anio = new Date().getFullYear();
+    if (anio <= this.anioActual) {
+      return;
+    }
     this.arrayMeses = [];
 
     let anioProximo = this.anioActual + 1;
@@ -175,26 +168,62 @@ export class AdminComponent implements OnInit {
       .getGraficaClientesFechaBis(anioProximo)
       .subscribe((resp) => {
         this.arrayMeses = resp;
-        console.log(resp);
+        this.anioActual = this.anioActual + 1;
+        if (this.altas.length > 0 && this.bajas.length > 0) {
+          this.altas = [];
+          this.bajas = [];
+          this.numAltas = 0;
+          this.numBajas = 0;
+          for (let i = 0; i < this.arrayMeses.length; i++) {
+            this.numAltas += parseInt(this.arrayMeses[i].altas);
+            this.numBajas += parseInt(this.arrayMeses[i].bajas);
+            this.altas.push(this.arrayMeses[i].altas);
+            this.bajas.push(this.arrayMeses[i].bajas);
+          }
+          this.barChartData = [
+            { data: this.bajas, label: 'Bajas' },
+
+            {
+              data: this.altas,
+              label: 'Altas',
+            },
+          ];
+        }
       });
-    console.log(this.arrayMeses);
-    this.anioActual = this.anioActual + 1;
-    this.verDatos();
+    //this.verDatos();
   }
 
   anterior() {
+    $('#siguiente').prop('disabled', false);
+
     this.arrayMeses = [];
 
     let anioAnterior = this.anioActual - 1;
-    console.log(anioAnterior);
 
     this.adminService
       .getGraficaClientesFechaBis(anioAnterior)
       .subscribe((resp) => {
         this.arrayMeses = resp;
-        console.log(resp);
+        this.anioActual = this.anioActual - 1;
+        if (this.altas.length > 0 && this.bajas.length > 0) {
+          this.altas = [];
+          this.bajas = [];
+          this.numAltas = 0;
+          this.numBajas = 0;
+          for (let i = 0; i < this.arrayMeses.length; i++) {
+            this.numAltas += parseInt(this.arrayMeses[i].altas);
+            this.numBajas += parseInt(this.arrayMeses[i].bajas);
+            this.altas.push(this.arrayMeses[i].altas);
+            this.bajas.push(this.arrayMeses[i].bajas);
+          }
+          this.barChartData = [
+            { data: this.bajas, label: 'Bajas' },
+            {
+              data: this.altas,
+              label: 'Altas',
+            },
+          ];
+        }
       });
-    this.anioActual = this.anioActual - 1;
-    this.verDatos();
   }
 }

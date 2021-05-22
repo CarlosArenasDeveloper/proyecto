@@ -407,14 +407,16 @@ export class AdminService {
   getGraficaMonitoresPorGym() {
     return this.htpp.get(`${this.baseUrl}/graficaCentrosMonitores.php`);
   }
-  getGraficaClientesFecha(mes: number, anio: number) {
-    return this.htpp.get(
-      `${this.baseUrl}/graficaClientesFecha.php?mes=${mes}&anio=${anio}`
-    );
-  }
+ 
   getGraficaClientesFechaBis(anio: number) {
     return this.htpp.get(
       `${this.baseUrl}/graficaPrueba.php?anio=${anio}`
+    );
+  }
+
+  getGraficaAltasBajasPorGimnasio(anio: number, id_centro:number) {
+    return this.htpp.get(
+      `${this.baseUrl}/graficaAltasBajasPorGimnasio.php?anio=${anio}&id_centro=${id_centro}`
     );
   }
 }

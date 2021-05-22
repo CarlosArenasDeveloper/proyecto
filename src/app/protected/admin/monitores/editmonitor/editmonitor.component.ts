@@ -36,6 +36,30 @@ export class EditmonitorComponent implements OnInit {
 
   monitor: Usuario = {};
 
+  fechaActual(): string {
+    let date = new Date();
+
+    let day = date.getDate();
+    let month = date.getMonth() + 1;
+    let year = date.getFullYear();
+
+    if (day < 10) {
+      if (month < 10) {
+        return `${year}-0${month}-0${day}`;
+      } else {
+        return `${year}-${month}-0${day}`;
+      }
+    } else {
+      if (month < 10) {
+        console.log(`${year}-0${month}-${day}`);
+        return `${year}-0${month}-${day}`;
+      } else {
+        console.log(`${year}-${month}-${day}`);
+        return `${year}-${month}-${day}`;
+      }
+    }
+  }
+
 
   miFormulario: FormGroup = this.fb.group(
     {
@@ -129,7 +153,7 @@ export class EditmonitorComponent implements OnInit {
     this.monitor = this.miFormulario.value;
     if(this.monitor.role==2){
       this.monitor.estado="activo"
-      this.monitor.fecha_alta=new Date();
+      this.monitor.fecha_alta=this.fechaActual();
       this.monitor.num_reservas=0;
     }
        this.monitor.estado="activo"

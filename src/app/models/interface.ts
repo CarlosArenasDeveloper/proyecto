@@ -14,7 +14,7 @@ export interface Usuario {
   cod_postal?: number;
   id_tarifa?: number;
   id_centro?: number;
-  fecha_alta?: Date;
+  fecha_alta?: any;
   fecha_baja?: Date;
   num_reservas?: number;
   role?: any;

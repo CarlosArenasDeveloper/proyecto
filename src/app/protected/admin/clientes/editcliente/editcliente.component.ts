@@ -359,7 +359,6 @@ export class EditclienteComponent implements OnInit {
             this.miFormulario.controls['fecha_baja'].setValue(
               this.fechaActual()
             );
-            this.miFormulario.controls['num_reservas'].setValue(0);
             this.cliente = this.miFormulario.value;
             this.adminService.darBaja(this.cliente).subscribe((resp) => {
               Swal.fire({

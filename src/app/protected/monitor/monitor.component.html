@@ -1,6 +1,45 @@
-<div class="row">
-  <div class="col-6">
-    <h2 class="text-center">Clientes por gimnasio</h2>
+<div>
+  <div>
+    <div>
+      <div class="text-center mt-2">
+          <h3>Altas y bajas de {{nombre|titlecase}} por mes y año</h3>
+          <hr>
+        <button type="button" class="btn btn-danger" (click)="anterior()">
+            <i class="fas fa-backward"></i> Año anterior
+        </button>
+        <button 
+          class="mx-3 btn btn-secondary" disabled
+        >
+          Año {{ anioActual }}
+        </button>
+        <button type="button" id="siguiente" disabled class="btn btn-primary" (click)="siguiente()">
+          Siguiente año <i class="fas fa-forward"></i>
+        </button>
+      </div>
+
+      <div style="display: block">
+        <canvas
+          baseChart
+          [datasets]="barChartData"
+          [labels]="barChartLabels"
+          [options]="barChartOptions"
+          [legend]="barChartLegend"
+          [chartType]="barChartType"
+          (chartHover)="chartHovered($event)"
+        ></canvas>
+      </div>
+      <button mat-button mat-raised-button color="warn" (click)="randomize()">
+        Cambiar vista
+      </button>
+      <span class="float-end text-primary"> Total altas por año: {{ numAltas }} </span>
+      <br>
+      <span class="float-end text-primar" style="color: #d63384;"> Total bajas por año: {{ numBajas}} </span>
+    </div>
+  </div>
+</div>
+<div class="row mt-5">
+  <div class="col-12 col-md-6" >
+    <h3 class="text-center">Clientes por gimnasio</h3>
     <hr />
     <div style="display: block">
       <canvas
@@ -14,8 +53,8 @@
     </div>
     <span class="float-end text-primary"> Total clientes: {{ clientes }} </span>
   </div>
-  <div class="col-6">
-    <h2 class="text-center">Sexo clientes {{nombre}}</h2>
+  <div class="col-12 col-md-6">
+    <h3 class="text-center">Sexo clientes {{nombre}}</h3>
     <hr />
     <div style="display: block">
       <canvas
@@ -31,9 +70,9 @@
   
 </div>
 
-<div class="row">
-  <div class="col-6">
-    <h2 class="text-center">Monitores por gimnasio</h2>
+<div class="row mt-5">
+  <div class="col-12 col-md-6">
+    <h3 class="text-center">Monitores por gimnasio</h3>
     <hr />
     <div style="display: block">
       <canvas
@@ -49,8 +88,8 @@
       Total monitores: {{ monitores }}
     </span>
   </div>
-  <div class="col-6">
-    <h2 class="text-center">Sexo Monitores {{nombre}}</h2>
+  <div class="col-12 col-md-6">
+    <h3 class="text-center">Sexo monitores {{nombre}}</h3>
     <hr />
     <div style="display: block">
       <canvas

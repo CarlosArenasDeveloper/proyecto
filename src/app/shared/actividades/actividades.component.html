@@ -12,11 +12,14 @@
   </div>
   <div class="col-4 my-3" *ngFor="let actividad of actividades">
     <div
-      class="card border border-3 border-danger"
+      class="card border border-3 border-danger bg-dark text-white"
       [routerLink]="['/actividades', actividad.id]"
     >
       <article>
-        <img src="../../../assets/no-image.png" class="card-img-top" />
+        <div  class="col text-center">
+          <!-- <img src="../../../assets/no-image.png" class="card-img-top text-center" style="width: 500px;"/> -->
+          <img [src]="actividad.imagen!|imagen" class="card-img-top"/>      
+        </div>
       </article>
       <div class="card-body">
         <p class="card-title text-center">

@@ -4,14 +4,22 @@ import { AdminService } from '../../../services/admin.service';
 import Swal from 'sweetalert2';
 import { DataTableDirective } from 'angular-datatables';
 import { Sesion, Usuario } from '../../../../models/interface';
+import { EventSettingsModel } from '@syncfusion/ej2-schedule';
+import {
+  DataManager,
+  WebApiAdaptor,
+  ODataV4Adaptor,
+  Query,
+} from '@syncfusion/ej2-data';
+
 @Component({
   selector: 'app-lista-sesiones',
   templateUrl: './lista-sesiones.component.html',
-  styleUrls: ['./lista-sesiones.component.css']
+  styleUrls: ['./lista-sesiones.component.css'],
 })
-export class ListaSesionesComponent implements OnInit,OnDestroy {
-
-  usuario!:Usuario
+export class ListaSesionesComponent implements OnInit, OnDestroy {
+  usuario!: Usuario;
+  pruebas!: any;
   dtOptions: DataTables.Settings = {};
   dtTrigger = new Subject();
   sesiones: any = [];
@@ -23,6 +31,11 @@ export class ListaSesionesComponent implements OnInit,OnDestroy {
   ngOnInit(): void {
     const usuario = JSON.parse(sessionStorage.getItem('usuario')!);
     this.usuario = usuario;
+
+    this.adminService.getPrueba().subscribe((resp) => {
+      this.pruebas = resp;
+      console.log(this.pruebas);
+    });
 
     this.dtOptions = {
       pagingType: 'full_numbers',
@@ -43,8 +56,7 @@ export class ListaSesionesComponent implements OnInit,OnDestroy {
     this.dtTrigger.unsubscribe();
   }
 
- 
-  isAdmin(){
+  isAdmin() {
     if (this.usuario.role == 1) {
       return true;
     }
@@ -88,6 +100,21 @@ export class ListaSesionesComponent implements OnInit,OnDestroy {
         });
       }
     });
-  }
+    // }
 
+    // public weekFirstDay: number = 1;
+    // private dataManager: DataManager = new DataManager({
+    //   url: "https://www.iestrassierra.net/alumnado/curso2021/DAW/daw2021a2/fitandhealthy/prueba.php",
+    //   adaptor: new WebApiAdaptor,
+    //   crossDomain: true
+    // });
+
+    // public selectedDate: Date = new Date(2019, 12, 1);
+    // public eventSettings: EventSettingsModel = {
+    //   dataSource: this.dataManager,
+    //   editFollowingEvents: true,
+    // };
+
+    // public views: Array<string> = ['Day', 'Week', 'Month'];
+  }
 }

@@ -11,7 +11,7 @@
   ]">
       <div class="card-body">
         <p class="card-title">
-          <img src="../../../assets/no-image.png" class="card-img-top" />
+          <img [src]="ejercicio.imagen!|imagen" class="card-img-top border-rounded" style="height: 250px;"/>
         </p>
         <p class="card-text text-center">
           {{ ejercicio.nombre }}

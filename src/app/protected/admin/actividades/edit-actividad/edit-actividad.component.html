@@ -1,6 +1,6 @@
 <div class="container">
-    <h1 *ngIf="!isAdmin();else mas">Informacion sobre  {{actividad.nombre}} </h1>
-    <ng-template #mas> <h1>Editando {{actividad.nombre}}</h1></ng-template>
+  <h1 *ngIf="!isAdmin();else mas">Informacion sobre  {{actividad.nombre}} </h1>
+  <ng-template #mas> <h1>Editando {{actividad.nombre}}</h1></ng-template>
 
     <hr />
     <form [formGroup]="miFormulario" (ngSubmit)="editarActividad()" autocomplete="off" >
@@ -81,7 +81,7 @@
         </span>
       </div>
       <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">Duracion (minutos): </label>
+        <label for="d" class="form-label">Duracion (minutos): </label>
         <input
         [ngClass]="{
           'is-invalid': campoNoValido('duracion')
@@ -90,7 +90,7 @@
           type="number"
           min="0"
           class="form-control"
-          id="exampleFormControlInput1"
+          id="d"
         />
         <span
         class="form-text text-danger fst-italic"
@@ -99,7 +99,30 @@
        {{duracionMessage}}
       </span>
       </div>
-      
+      <div *ngIf="actividad.imagen" class="col text-center">
+        <img
+          [src]="actividad.imagen! | imagen"
+          class="img-fluid img-thumbnail"
+          style="width: 400px; height: 400px"
+        />
+      </div>
+    
+    
+      <div class="my-3">
+        <div class="mb-0" *ngIf="previsualizacion">
+          <img [src]="previsualizacion" style="width: 300px; height: 300px" />
+        </div>
+    
+        <label for="formFile" class="form-label"></label>
+        <input
+          id="formFile"
+          [formControl]="file"
+          (change)="fileChange($event)"
+          type="file"
+          placeholder="File"
+          class="form-control"
+        />
+      </div>
       <button type="button" class="btn btn-danger mx-3" routerLink="actividades">
         <i class="fas fa-arrow-circle-left"></i>
         Volver atrás

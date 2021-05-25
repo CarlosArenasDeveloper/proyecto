@@ -112,13 +112,28 @@
       La descripcion es requerida
     </span>
   </div>
-  <div class="mb-3">
+  <!-- <div class="mb-3">
     <label for="exampleFormControlInput1" class="form-label">Imagen: </label>
     <input
       formControlName="imagen"
       type="file"
       class="form-control"
       id="exampleFormControlInput1"
+    />
+  </div> -->
+  <div class="my-3">
+    <div class="mb-0" *ngIf="previsualizacion">
+      <img [src]="previsualizacion" style="width: 300px; height: 300px" />
+    </div>
+
+    <label for="formFile" class="form-label"></label>
+    <input
+      id="formFile"
+      [formControl]="file"
+      (change)="fileChange($event)"
+      type="file"
+      placeholder="File"
+      class="form-control"
     />
   </div>
   <div class="mb-3">
@@ -142,4 +157,3 @@
     Añadir
   </button>
 </form>
-{{miFormulario.value|json}}

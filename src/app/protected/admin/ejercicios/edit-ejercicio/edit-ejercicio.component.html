@@ -112,13 +112,26 @@
       La descripcion es requerida
     </span>
   </div>
-  <div class="mb-3">
-    <label for="exampleFormControlInput1" class="form-label">Imagen: </label>
+  <div class="my-3">
+    <div *ngIf="ejercicio.imagen" class="col text-center">
+      <img
+        [src]="ejercicio.imagen! | imagen"
+        class="img-fluid img-thumbnail"
+        style="width: 400px; height: 400px"
+      />
+    </div>
+    <div class="mb-0" *ngIf="previsualizacion">
+      <img [src]="previsualizacion" style="width: 300px; height: 300px" />
+    </div>
+
+    <label for="formFile" class="form-label"></label>
     <input
-      formControlName="imagen"
-      type="text"
+      id="formFile"
+      [formControl]="file"
+      (change)="fileChange($event)"
+      type="file"
+      placeholder="File"
       class="form-control"
-      id="exampleFormControlInput1"
     />
   </div>
   <div class="mb-3">

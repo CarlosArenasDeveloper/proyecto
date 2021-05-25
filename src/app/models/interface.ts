@@ -64,6 +64,8 @@ export interface Actividad {
   nombre?: string;
   descripcion?: string;
   duracion?: number;
+  imagen?: string;
+
 }
 
 export interface Sala {
@@ -95,9 +97,9 @@ export interface Noticia {
   titulo?: string;
   cuerpo?: string;
   id_categoria?: number;
-  visible?: boolean;
-  fecha?: Date;
-  fecha_edit?: Date;
+  visible?: any;
+  fecha?: any;
+  fecha_edit?: any;
   imagen?: string;
   video?:string;
 }

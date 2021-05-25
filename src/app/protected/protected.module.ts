@@ -11,7 +11,19 @@ import { MonitorComponent } from './monitor/monitor.component';
 import { ClientesModule } from './admin/clientes/clientes.module';
 import { NoticiasComponent } from '../shared/noticias/noticias.component';
 import { ChartsModule } from 'ng2-charts';
-
+import {
+  MonthAgendaService,
+  ScheduleModule,
+  TimelineMonthService,
+  TimelineViewsService,
+} from '@syncfusion/ej2-angular-schedule';
+import {
+  DayService,
+  WeekService,
+  WorkWeekService,
+  MonthService,
+  AgendaService,
+} from '@syncfusion/ej2-angular-schedule';
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -25,7 +37,18 @@ import { ChartsModule } from 'ng2-charts';
     ReactiveFormsModule,
     MaterialModule,
     DataTablesModule,
-    ChartsModule
+    ChartsModule,
+    ScheduleModule,
+  ],
+  providers: [
+    DayService,
+    WeekService,
+    WorkWeekService,
+    MonthService,
+    AgendaService,
+    MonthAgendaService,
+    TimelineViewsService,
+    TimelineMonthService,
   ],
 })
 export class ProtectedModule {}

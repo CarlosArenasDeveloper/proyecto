@@ -22,6 +22,7 @@ import { ActividadComponent } from './actividades/actividad/actividad.component'
 import { MiniMapaComponent } from './centros/mini-mapa/mini-mapa.component';
 import { MusculoComponent } from './ejercicios/musculo/musculo.component';
 import { EjercicioComponent } from './ejercicios/ejercicio/ejercicio.component';
+import { ImgPipe } from './pipes/img.pipe';
 
 
 @NgModule({
@@ -44,6 +45,7 @@ import { EjercicioComponent } from './ejercicios/ejercicio/ejercicio.component';
     MiniMapaComponent,
     MusculoComponent,
     EjercicioComponent,
+    ImgPipe,
   ],
   imports: [SharedRoutingModule,CommonModule, RouterModule, MaterialModule,ReactiveFormsModule],
   exports: [
@@ -54,7 +56,8 @@ import { EjercicioComponent } from './ejercicios/ejercicio/ejercicio.component';
     EditarPerfilComponent,
     NoticiasComponent,
     PieComponent,
-    CookieComponent
+    CookieComponent,
+    ImgPipe
 
   ],
 })

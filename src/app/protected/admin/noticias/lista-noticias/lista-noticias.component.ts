@@ -66,6 +66,7 @@ export class ListaNoticiasComponent implements OnInit, OnDestroy {
     }).then((result) => {
       if (result.isConfirmed) {
         this.adminService.borrarNoticia(noticia.id!).subscribe((noticia) => {
+          
           this.noticias.splice(i, 1);
           if (this.noticias.length > 0) {
             this.datatableElement.dtInstance.then(
@@ -82,6 +83,9 @@ export class ListaNoticiasComponent implements OnInit, OnDestroy {
             );
           }
         });
+        // this.adminService.borrarFile(noticia.imagen).subscribe(resp=>{
+        //   console.log(resp);
+        // })
         Swal.fire({
           position: 'top-end',
           icon: 'success',
@@ -103,4 +107,6 @@ export class ListaNoticiasComponent implements OnInit, OnDestroy {
       text:'No puede modificar una noticia en la cual usted no sea el editor'
       });
   }
+
+  
 }

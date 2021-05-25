@@ -28,7 +28,6 @@
               <th scope="col">Fecha lanzamiento</th>
               <th scope="col">Ultima edicion</th>
               <th scope="col">¿Esta visible?</th>
-              <th scope="col">Imagen</th>
               <th scope="col"></th>
               <th scope="col"></th>
 
@@ -50,7 +49,6 @@
                 <span *ngIf="ele.fecha_edit==null">Sin editar</span></td>
               <td *ngIf="ele.visible==1">Si</td>
               <td *ngIf="ele.visible==0">No</td>
-              <td>{{ ele.imagen|imagen}}</td>
 
 
               <td *ngIf="ele.email_usuario==editor || usuario.role==1;else error">

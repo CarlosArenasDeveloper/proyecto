@@ -97,6 +97,22 @@
    {{duracionMessage}}
   </span>
   </div>
+
+  <div class="my-3">
+    <div class="mb-0" *ngIf="previsualizacion">
+      <img [src]="previsualizacion" style="width: 300px; height: 300px" />
+    </div>
+
+    <label for="formFile" class="form-label"></label>
+    <input
+      id="formFile"
+      [formControl]="file"
+      (change)="fileChange($event)"
+      type="file"
+      placeholder="File"
+      class="form-control"
+    />
+  </div>
   
   <button type="button" class="btn btn-danger mx-3" routerLink="actividades">
     <i class="fas fa-arrow-circle-left"></i>

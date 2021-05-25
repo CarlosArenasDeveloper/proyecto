@@ -1,10 +1,12 @@
 <h1>Editando noticia</h1>
 <hr />
-<form [formGroup]="miFormulario" (ngSubmit)="editarNoticia()" autocomplete="off">
+<form
+  [formGroup]="miFormulario"
+  (ngSubmit)="editarNoticia()"
+  autocomplete="off"
+>
   <div class="mb-3">
-    <label for="titulo" class="form-label"
-      >Titulo:
-    </label>
+    <label for="titulo" class="form-label">Titulo: </label>
     <input
       [ngClass]="{
         'is-invalid': campoNoValido('titulo')
@@ -23,29 +25,40 @@
   </div>
   <div class="mb-3">
     <span>¿Quién es el editor?:</span>
-    <select class="form-select mt-2" formControlName="email_usuario"  [ngClass]="{
-      'is-invalid': campoNoValido('email_usuario')
-    }">
+    <select
+      class="form-select mt-2"
+      formControlName="email_usuario"
+      [ngClass]="{
+        'is-invalid': campoNoValido('email_usuario')
+      }"
+    >
       <option value="null">Seleccione un editor ...</option>
       <option *ngFor="let editor of editores" [value]="editor.email">
-        {{ editor.nombre | titlecase }} 
-        {{ editor.apellido1 | titlecase }} 
-        {{ editor.apellido2 | titlecase }} 
+        {{ editor.nombre | titlecase }}
+        {{ editor.apellido1 | titlecase }}
+        {{ editor.apellido2 | titlecase }}
       </option>
     </select>
     <span
       class="form-text text-danger fst-italic"
-      *ngIf="campoNoValido('email_usuario')  || this.miFormulario.get('email_usuario')?.value=='null'"
+      *ngIf="
+        campoNoValido('email_usuario') ||
+        this.miFormulario.get('email_usuario')?.value == 'null'
+      "
     >
       El editor es requerido
     </span>
   </div>
   <div class="mb-3">
     <span>¿Cual es la categoria de la noticia?:</span>
-    
-    <select class="form-select mt-2" formControlName="id_categoria"  [ngClass]="{
-      'is-invalid': campoNoValido('id_categoria')
-    }">
+
+    <select
+      class="form-select mt-2"
+      formControlName="id_categoria"
+      [ngClass]="{
+        'is-invalid': campoNoValido('id_categoria')
+      }"
+    >
       <option value="null">Seleccione una categoria ...</option>
       <option *ngFor="let categoria of categorias" [value]="categoria.id">
         {{ categoria.nombre | titlecase }}
@@ -53,7 +66,10 @@
     </select>
     <span
       class="form-text text-danger fst-italic"
-      *ngIf="campoNoValido('id_categoria') || this.miFormulario.get('id_categoria')?.value=='null' "
+      *ngIf="
+        campoNoValido('id_categoria') ||
+        this.miFormulario.get('id_categoria')?.value == 'null'
+      "
     >
       La categoria es requerida
     </span>
@@ -75,22 +91,44 @@
       class="form-text text-danger fst-italic"
       *ngIf="campoNoValido('cuerpo')"
     >
-     El cuerpo de la noticia es requerido
+      El cuerpo de la noticia es requerido
     </span>
   </div>
-  <div class="mb-3">
-    <label for="imagen" class="form-label">Imagen: </label>
+  <div *ngIf="noticia.imagen" class="col text-center">
+    <img
+      [src]="noticia.imagen! | imagen"
+      class="img-fluid img-thumbnail"
+      style="width: 400px; height: 400px"
+    />
+  </div>
+
+
+  <div class="my-3">
+    <div class="mb-0" *ngIf="previsualizacion">
+      <img [src]="previsualizacion" style="width: 300px; height: 300px" />
+    </div>
+
+    <label for="formFile" class="form-label"></label>
     <input
-      formControlName="imagen"
-      type="text"
+      id="formFile"
+      [formControl]="file"
+      (change)="fileChange($event)"
+      type="file"
+      placeholder="File"
       class="form-control"
-      id="imagen"
     />
   </div>
 
   <div class="form-check form-switch">
-    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" formControlName="visible">
-    <label class="form-check-label" for="flexSwitchCheckDefault"><span>{{visible}}</span></label>
+    <input
+      class="form-check-input"
+      type="checkbox"
+      id="flexSwitchCheckDefault"
+      formControlName="visible"
+    />
+    <label class="form-check-label" for="flexSwitchCheckDefault"
+      ><span>{{ visible }}</span></label
+    >
   </div>
   <button type="button" class="btn btn-danger mx-3" routerLink="noticias">
     <i class="fas fa-arrow-circle-left"></i>

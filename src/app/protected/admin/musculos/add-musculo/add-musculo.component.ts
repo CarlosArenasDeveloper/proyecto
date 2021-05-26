@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AdminService } from '../../../services/admin.service';
 import { Musculo } from '../../../../models/interface';
 import Swal from 'sweetalert2';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-add-musculo',
@@ -11,15 +12,26 @@ import Swal from 'sweetalert2';
 })
 export class AddMusculoComponent implements OnInit {
 
+  previsualizacion!: string;
+  public archivos: any = [];
+  file=new FormControl('');
+  archivo = {
+    nombre: '',
+    nombreArchivo: '',
+    base64textString: ''
+  }
+  file_data:any='';
+  nombreFichero:string='';
+
   musculo!: Musculo;
-  constructor(private fb: FormBuilder, private adminService: AdminService) {}
+  constructor(private fb: FormBuilder, private adminService: AdminService,
+    private sanitizer: DomSanitizer) {}
 
   ngOnInit(): void {}
 
   miFormulario: FormGroup = this.fb.group({
     nombre: ['', [Validators.required]],
     descripcion: ['', [Validators.required]],
-    imagen: ['']
   });
 
   campoNoValido(campo: string) {
@@ -31,6 +43,8 @@ export class AddMusculoComponent implements OnInit {
 
   addMusculo() {
     this.musculo = this.miFormulario.value;
+    this.musculo.imagen=this.nombreFichero;
+
     this.adminService.addMusculo(this.musculo).subscribe((resp) => {
       console.log(resp);
       if (resp == null) {
@@ -43,6 +57,74 @@ export class AddMusculoComponent implements OnInit {
         });
       }
     });
+    if (this.musculo.imagen != '') {
+      this.uploadFile();
+    }
   }
+  fileChange(event:any) {
+
+    const archivoCapturado = event.target.files[0];
+    this.extraerBase64(archivoCapturado).then((imagen: any) => {
+      this.previsualizacion = imagen.base;
+    });
+    this.archivos.push(archivoCapturado);
+
+    const fileList: FileList = event.target.files;
+    //check whether file is selected or not
+    if (fileList.length > 0) {
+
+        const file = fileList[0];
+        //get file information such as name, size and type
+        console.log('finfo',file.name,file.size,file.type);
+        //max file size is 4 mb
+        this.nombreFichero = file.name;
+        if((file.size/1048576)<=4)
+        {
+          let formData = new FormData();
+          let info={id:2,name:'raja'}
+          formData.append('file', file, file.name);
+          formData.append('id','2');
+          formData.append('tz',new Date().toISOString())
+          formData.append('update','2')
+          formData.append('info',JSON.stringify(info))
+          this.file_data=formData
+          //this.noticia.imagen=file.name
+        }else{
+          //this.snackBar.open('File size exceeds 4 MB. Please choose less than 4 MB','',{duration: 2000});
+        }
+
+    }
+
+  }
+  uploadFile(){
+    this.adminService.uploadFile(this.file_data).subscribe(resp=>{
+      console.log(resp);
+    })
+  } 
+
+  
+  extraerBase64 = async ($event: any) =>
+    new Promise((resolve, reject) => {
+      try {
+        const unsafeImg = window.URL.createObjectURL($event);
+        const image = this.sanitizer.bypassSecurityTrustUrl(unsafeImg);
+        const reader = new FileReader();
+        reader.readAsDataURL($event);
+        reader.onload = () => {
+          resolve({
+            base: reader.result,
+          });
+        };
+        reader.onerror = (error) => {
+          resolve({
+            base: null,
+          });
+        };
+
+        return '';
+      } catch (e) {
+        return null;
+      }
+    });
 
 }

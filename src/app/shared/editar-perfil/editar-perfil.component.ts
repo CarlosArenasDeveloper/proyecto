@@ -7,20 +7,36 @@ import { AdminService } from '../../protected/services/admin.service';
 import { ValidatorService } from '../../auth/services/validator.service';
 import { AuthService } from '../../auth/services/auth.service';
 import { Usuario, PasswordPerfil } from '../../models/interface';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { DomSanitizer } from '@angular/platform-browser';
 @Component({
   selector: 'app-editar-perfil',
   templateUrl: './editar-perfil.component.html',
   styleUrls: ['./editar-perfil.component.css'],
 })
 export class EditarPerfilComponent implements OnInit {
+  previsualizacion!: string;
+  mostrarImagen: boolean = false;
+  public archivos: any = [];
+  file = new FormControl('');
+  archivo = {
+    nombre: '',
+    nombreArchivo: '',
+    base64textString: '',
+  };
+  file_data: any = '';
+  nombreFichero: string = '';
+  imagenGuardada:string='';
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private adminService: AdminService,
     private fb: FormBuilder,
     private validatorService: ValidatorService,
-    private authService: AuthService
+    private authService: AuthService,
+    private sanitizer: DomSanitizer
+
   ) {
     const currentYear = new Date().getFullYear();
     this.minDate = new Date(currentYear - 100, 0, 1);
@@ -125,6 +141,8 @@ export class EditarPerfilComponent implements OnInit {
       .subscribe((usuario) => {
         this.usuario = usuario;
         this.user=usuario
+        this.imagenGuardada=this.usuario.imagen!
+        this.nombreFichero=this.usuario.imagen!
         if (this.usuario.role == 1) {
           this.role = 1;
         } else if (this.usuario.role == 3) {
@@ -188,6 +206,7 @@ export class EditarPerfilComponent implements OnInit {
   editar(): void {
     this.usuario = this.miFormulario.value;
     this.usuario.role = this.role;
+    this.usuario.imagen = this.nombreFichero;
 
     this.adminService.editarAdmin(this.usuario).subscribe((resp) => {
       if (resp) {
@@ -200,6 +219,12 @@ export class EditarPerfilComponent implements OnInit {
         });
       }
     });
+    if (this.usuario.imagen != '' && this.nombreFichero!=this.imagenGuardada) {
+      this.uploadFile();
+    }
+    if (this.nombreFichero == this.imagenGuardada) {
+      this.previsualizacion = '';
+    }
   }
 
   campoNoValido(campo: string) {
@@ -365,4 +390,84 @@ export class EditarPerfilComponent implements OnInit {
       }
     });
   }
+
+  fileChange(event: any) {
+    const archivoCapturado = event.target.files[0];
+    this.extraerBase64(archivoCapturado).then((imagen: any) => {
+      this.previsualizacion = imagen.base;
+    });
+    this.archivos.push(archivoCapturado);
+
+    const fileList: FileList = event.target.files;
+    //check whether file is selected or not
+    if (fileList.length > 0) {
+      const file = fileList[0];
+      //get file information such as name, size and type
+      //max file size is 4 mb
+      this.nombreFichero = file.name;
+      if (file.size / 1048576 <= 4) {
+        let formData = new FormData();
+        let info = { id: 2, name: 'raja' };
+        formData.append('file', file, file.name);
+        formData.append('id', '2');
+        formData.append('tz', new Date().toISOString());
+        formData.append('update', '2');
+        formData.append('info', JSON.stringify(info));
+        this.file_data = formData;
+        console.log(this.file_data);
+      } else {
+        //this.snackBar.open('File size exceeds 4 MB. Please choose less than 4 MB','',{duration: 2000});
+      }
+    }
+  }
+  
+  uploadFile() {
+    this.previsualizacion = '';
+    this.mostrarImagen = true;
+    this.usuario.imagen=this.nombreFichero;
+    this.adminService.uploadFile(this.file_data).subscribe((resp) => {
+      this.activatedRoute.params
+        .pipe(switchMap(({ email }) => this.adminService.getUsuarioPorEmail(email)))
+        .subscribe((cliente) => {
+        this.usuario = cliente;
+        console.log(this.usuario);
+        });
+      this.usuario.imagen = '';
+    });
+    this.usuario.imagen = '';
+  }
+
+  capturarFile(event: any): any {
+   // this.previsualizacion2 = '';
+    const archivoCapturado = event.target.files[0];
+    this.extraerBase64(archivoCapturado).then((imagen: any) => {
+      this.previsualizacion = imagen.base;
+     // this.previsualizacion2 = imagen.base;
+    });
+    this.archivos.push(archivoCapturado);
+  }
+
+  extraerBase64 = async ($event: any) =>
+    new Promise((resolve, reject) => {
+      try {
+        const unsafeImg = window.URL.createObjectURL($event);
+        const image = this.sanitizer.bypassSecurityTrustUrl(unsafeImg);
+        const reader = new FileReader();
+        reader.readAsDataURL($event);
+        reader.onload = () => {
+          resolve({
+            base: reader.result,
+          });
+        };
+        reader.onerror = (error) => {
+          resolve({
+            base: null,
+          });
+        };
+
+        return '';
+      } catch (e) {
+        return null;
+      }
+    });
 }

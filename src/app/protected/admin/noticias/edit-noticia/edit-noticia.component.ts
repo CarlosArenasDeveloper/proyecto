@@ -29,6 +29,7 @@ export class EditNoticiaComponent implements OnInit {
   };
   file_data: any = '';
   nombreFichero: string = '';
+  imagenGuardada:string='';
 
   categorias: any;
   editores: any;
@@ -63,7 +64,8 @@ export class EditNoticiaComponent implements OnInit {
         this.estabaVisible = noticia.visible;
 
         this.noticia = noticia;
-
+        this.imagenGuardada=this.noticia.imagen!
+        this.nombreFichero=this.noticia.imagen!
         this.id = noticia.id!;
         this.miFormulario.controls['titulo'].setValue(this.noticia.titulo);
         this.miFormulario.controls['email_usuario'].setValue(
@@ -192,8 +194,11 @@ export class EditNoticiaComponent implements OnInit {
         });
       }
     });
-    if (this.noticia.imagen != '') {
+    if (this.noticia.imagen != '' && this.nombreFichero!=this.imagenGuardada) {
       this.uploadFile();
+    }
+    if (this.nombreFichero == this.imagenGuardada) {
+      this.previsualizacion = '';
     }
   }
 

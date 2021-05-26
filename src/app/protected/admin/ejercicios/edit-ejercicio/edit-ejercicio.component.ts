@@ -24,6 +24,7 @@ export class EditEjercicioComponent implements OnInit {
   };
   file_data: any = '';
   nombreFichero: string = '';
+  imagenGuardada:string='';
 
 
   ejercicio: Ejercicio={};
@@ -48,6 +49,9 @@ export class EditEjercicioComponent implements OnInit {
       .pipe(switchMap(({ id }) => this.adminService.getEjercicioPorId(id)))
       .subscribe((ejercicio) => {
         this.ejercicio = ejercicio;
+        this.imagenGuardada=this.ejercicio.imagen!
+        this.nombreFichero=this.ejercicio.imagen!
+
         this.id = ejercicio.id!;
         this.miFormulario.controls['nombre'].setValue(this.ejercicio.nombre);
         this.miFormulario.controls['descripcion'].setValue(
@@ -99,7 +103,7 @@ export class EditEjercicioComponent implements OnInit {
     this.ejercicio = this.miFormulario.value;
     this.ejercicio.id = this.id;
     this.ejercicio.imagen = this.nombreFichero;
-
+    console.log(this.ejercicio);
     this.adminService.editarEjercicio(this.ejercicio).subscribe((resp) => {
       if (resp == null) {
         Swal.fire({
@@ -111,8 +115,12 @@ export class EditEjercicioComponent implements OnInit {
         });
       }
     });
-    if (this.ejercicio.imagen != '') {
+
+    if (this.ejercicio.imagen != '' && this.nombreFichero!=this.imagenGuardada) {
       this.uploadFile();
+    }
+    if (this.nombreFichero == this.imagenGuardada) {
+      this.previsualizacion = '';
     }
   }
 
@@ -156,10 +164,12 @@ export class EditEjercicioComponent implements OnInit {
         .pipe(switchMap(({ id }) => this.adminService.getEjercicioPorId(id)))
         .subscribe((ejercicio) => {
         this.ejercicio = ejercicio;
+        console.log(this.ejercicio);
+        //this.ejercicio.imagen=this.nombreFichero
         });
-      this.ejercicio.imagen = '';
+      //this.ejercicio.imagen = '';
     });
-    this.ejercicio.imagen = '';
+    //this.ejercicio.imagen = '';
   }
 
   capturarFile(event: any): any {
@@ -193,4 +203,15 @@ export class EditEjercicioComponent implements OnInit {
         return null;
       }
     });
+    getVideoIframe(url:any) {
+      var video, results;
+   
+      if (url === null) {
+          return '';
+      }
+      results = url.match('[\\?&]v=([^&#]*)');
+      video   = (results === null) ? url : results[1];
+   
+      return this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/' + video);   
+  }
 }

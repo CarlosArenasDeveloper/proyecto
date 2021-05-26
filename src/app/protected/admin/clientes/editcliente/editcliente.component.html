@@ -7,20 +7,38 @@
 </h1>
 <div class="row">
   <div class="col-5">
-    <img src="assets/no-image.png" class="img-fluid" />
-   
-    <button
-      type="button"
-      class="btn btn-danger mx-3"
-      routerLink="./listaclientes"
-    >
-    <i class="fas fa-arrow-circle-left"></i>
-      Volver atrás
-        </button>
-    <button type="submit" class="btn btn-primary" [disabled]="miFormulario.invalid">
-      Actualizar datos 
-      <i class="fa fa-edit"></i>
-    </button>
+    <div *ngIf="cliente.imagen" class="col text-center">
+      <img
+        [src]="cliente.imagen! | imagen"
+        class="img-fluid img-thumbnail"
+        style="width: 400px; height: 400px"
+      />
+    </div>
+    <div *ngIf="cliente.imagen =='' || cliente.imagen==null" class="col text-center">
+      <img
+        src="http://www.iestrassierra.net/alumnado/curso2021/DAW/daw2021a2/assets/no-image.png"
+        class="img-fluid img-thumbnail"
+        style="width: 400px; height: 400px"
+      />
+    </div>
+  
+  
+    <div class="my-3">
+      <div class="mb-0" *ngIf="previsualizacion">
+        <img [src]="previsualizacion" style="width: 300px; height: 300px" />
+      </div>
+  
+      <label for="formFile" class="form-label">Foto del cliente:</label>
+      <input
+        id="formFile"
+        [formControl]="file"
+        (change)="fileChange($event)"
+        type="file"
+        placeholder="File"
+        class="form-control"
+      />
+    </div>
+ 
 
     
 
@@ -69,8 +87,20 @@
         La eleccion del rol es requerida
       </span>
     </div>
-    <mat-checkbox formControlName="verificado" color="warn">Verificar cliente</mat-checkbox>
-    
+    <mat-checkbox formControlName="verificado" color="warn" class="mb-4">Verificar cliente</mat-checkbox>
+    <br>
+    <button
+    type="button"
+    class="btn btn-danger mx-3"
+    routerLink="./listaclientes"
+  >
+  <i class="fas fa-arrow-circle-left"></i>
+    Volver atrás
+      </button>
+  <button type="submit" class="btn btn-primary" [disabled]="miFormulario.invalid">
+    Actualizar datos 
+    <i class="fa fa-edit"></i>
+  </button>
   </div>
 
   <div class="col-6">

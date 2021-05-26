@@ -20,6 +20,8 @@ export interface Usuario {
   role?: any;
   estado?: string;
   verificado?: number;
+  imagen?: string;
+
 }
 
 export interface Tarifa {

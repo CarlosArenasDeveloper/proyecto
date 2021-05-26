@@ -54,9 +54,7 @@ export class AddEjercicioComponent implements OnInit {
   }
 
   addEjercicio() {
-    console.log(this.miFormulario.value);
     this.ejercicio = this.miFormulario.value;
-    console.log(this.ejercicio);
     this.ejercicio.imagen=this.nombreFichero;
     this.adminService.addEjercicio(this.ejercicio).subscribe((resp) => {
       console.log(resp);
@@ -141,5 +139,18 @@ export class AddEjercicioComponent implements OnInit {
         return null;
       }
     });
+
+
+    getVideoIframe(url:any) {
+      var video, results;
+   
+      if (url === null) {
+          return '';
+      }
+      results = url.match('[\\?&]v=([^&#]*)');
+      video   = (results === null) ? url : results[1];
+   
+      return this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/' + video);   
+  }
 
 }

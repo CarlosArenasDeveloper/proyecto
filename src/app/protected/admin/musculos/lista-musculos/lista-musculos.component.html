@@ -21,7 +21,6 @@
               <th scope="col">#</th>
               <th scope="col">Nombre</th>
               <th scope="col">Descripcion</th>
-              <th scope="col">Imagen</th>
               <th scope="col"></th>
               <th scope="col"></th>
 
@@ -33,7 +32,6 @@
               
               <td>{{ ele.nombre | titlecase }}</td>
               <td>{{ ele.descripcion|texto }}</td>
-              <td>{{ ele.imagen | imagen}}</td>
               <td>
                 <button class="btn btn-danger" (click)="borrarMusculo(ele, i)">
                   <i class="fa fa-trash"></i>

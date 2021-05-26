@@ -24,6 +24,8 @@ export class EditActividadComponent implements OnInit {
   };
   file_data: any = '';
   nombreFichero: string = '';
+  imagenGuardada:string='';
+
   
 
   usuario!: Usuario;
@@ -49,6 +51,9 @@ export class EditActividadComponent implements OnInit {
       .subscribe((actividad) => {
         console.log(actividad);
         this.actividad = actividad;
+        this.imagenGuardada=this.actividad.imagen!
+        this.nombreFichero=this.actividad.imagen!
+
         this.id = actividad.id!;
         this.miFormulario.controls['nombre'].setValue(this.actividad.nombre);
         this.miFormulario.controls['email_monitor'].setValue(
@@ -135,8 +140,11 @@ export class EditActividadComponent implements OnInit {
         });
       }
     });
-    if (this.actividad.imagen != '') {
+    if (this.actividad.imagen != '' && this.nombreFichero!=this.imagenGuardada) {
       this.uploadFile();
+    }
+    if (this.nombreFichero == this.imagenGuardada) {
+      this.previsualizacion = '';
     }
   }
 

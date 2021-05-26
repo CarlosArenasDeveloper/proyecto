@@ -12,7 +12,6 @@
       {{ noticia.cuerpo }}
       
       <div  *ngIf="noticia.imagen" class="col text-center mt-3">
-        <!-- <img src="../../../assets/no-image.png" class="card-img-top text-center" style="width: 500px;"/> -->
         <img [src]="noticia.imagen!|imagen" class="img-fluid img-thumbnail"/>
       
       </div>

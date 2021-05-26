@@ -10,7 +10,40 @@
 
   <div class="row">
     <div class="col-5">
-      <img src="assets/perfil.png" class="img-fluid" />
+
+
+      <div *ngIf="usuario.imagen" class="col text-center">
+        <img
+          [src]="usuario.imagen! | imagen"
+          class="img-fluid img-thumbnail"
+          style="width: 400px; height: 400px"
+        />
+      </div>
+      <div *ngIf="usuario.imagen =='' || usuario.imagen==null" class="col text-center">
+        <img
+          src="http://www.iestrassierra.net/alumnado/curso2021/DAW/daw2021a2/assets/no-image.png"
+          class="img-fluid img-thumbnail"
+          style="width: 400px; height: 400px"
+        />
+      </div>
+    
+    
+      <div class="my-3">
+        <div class="mb-0" *ngIf="previsualizacion">
+          <img [src]="previsualizacion" style="width: 300px; height: 300px" />
+        </div>
+    
+        <label for="formFile" class="form-label">Foto:</label>
+        <input
+          id="formFile"
+          [formControl]="file"
+          (change)="fileChange($event)"
+          type="file"
+          placeholder="File"
+          class="form-control"
+        />
+      </div>
+
       <button
         type="submit"
         class="btn btn-primary float-end"
@@ -27,7 +60,7 @@
         Cambiar contraseña
         <i class="fas fa-key"></i>
       </button>
-
+        <br>
       <form [formGroup]="formPassword" (ngSubmit)="confirmarPassword()">
         <div class="row mt-5" *ngIf="cambiarPass">
           <mat-form-field>

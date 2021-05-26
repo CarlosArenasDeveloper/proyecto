@@ -124,7 +124,7 @@
       <img [src]="previsualizacion" style="width: 300px; height: 300px" />
     </div>
 
-    <label for="formFile" class="form-label"></label>
+    <label for="formFile" class="form-label">Imagen:</label>
     <input
       id="formFile"
       [formControl]="file"
@@ -143,6 +143,11 @@
       id="video"
     />
   </div>
+  <div *ngIf="miFormulario.controls['video'].value!=''" class="row">
+    <div class="col text-center">
+        <iframe width="560" height="315" [src]="getVideoIframe(miFormulario.controls['video'].value)" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div> 
+  </div>
   <button type="button" class="btn btn-danger mx-3" routerLink="ejercicios">
     <i class="fas fa-arrow-circle-left"></i>
     Volver atrás
@@ -157,4 +162,3 @@
 
   </button>
 </form>
-

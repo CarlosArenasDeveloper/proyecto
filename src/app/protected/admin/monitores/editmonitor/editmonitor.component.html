@@ -7,21 +7,36 @@
 </h1>
 <div class="row">
   <div class="col-5">
-    <img src="assets/no-image.png" class="img-fluid" />
-   
-    <button
-    type="button"
-    class="btn btn-danger mx-3"
-    routerLink="/dashboard/admin/listamonitores"
-  >
-  <i class="fas fa-arrow-circle-left"></i>
-    Volver atrás
-      </button>
-  <button type="submit" class="btn btn-primary" [disabled]="miFormulario.invalid">
-    Actualizar datos 
-    <i class="fa fa-edit"></i>
-  </button>
+    <div *ngIf="monitor.imagen" class="col text-center">
+      <img
+        [src]="monitor.imagen! | imagen"
+        class="img-fluid img-thumbnail"
+        style="width: 400px; height: 400px"
+      />
+    </div>
+    <div *ngIf="monitor.imagen =='' || monitor.imagen==null" class="col text-center">
+      <img
+        src="http://www.iestrassierra.net/alumnado/curso2021/DAW/daw2021a2/assets/no-image.png"
+        class="img-fluid img-thumbnail"
+        style="width: 400px; height: 400px"
+      />
+    </div>
 
+    <div class="my-3">
+      <div class="mb-0" *ngIf="previsualizacion">
+        <img [src]="previsualizacion" style="width: 300px; height: 300px" />
+      </div>
+  
+      <label for="formFile" class="form-label">Foto del monitor:</label>
+      <input
+        id="formFile"
+        [formControl]="file"
+        (change)="fileChange($event)"
+        type="file"
+        placeholder="File"
+        class="form-control"
+      />
+    </div>
     <div class="row mt-5">
       <mat-form-field appearance="fill">
         <mat-label>Seleccione un centro: </mat-label>
@@ -68,6 +83,18 @@
         La eleccion de la tarifa es requerida
       </span>
     </div>
+    <button
+    type="button"
+    class="btn btn-danger mx-3 mt-4"
+    routerLink="/dashboard/admin/listamonitores"
+  >
+  <i class="fas fa-arrow-circle-left"></i>
+    Volver atrás
+      </button>
+  <button type="submit" class="btn btn-primary mt-4" [disabled]="miFormulario.invalid">
+    Actualizar datos 
+    <i class="fa fa-edit"></i>
+  </button>
   </div>
 
   <div class="col-6">

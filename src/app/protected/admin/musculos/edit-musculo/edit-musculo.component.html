@@ -44,20 +44,27 @@
       La descripcion es obligatoria
     </span>
   </div>
-  <div class="mb-3">
-    <label for="imagen" class="form-label"
-      >Imagen:
-    </label>
+  <div class="my-3">
+    <div *ngIf="musculo.imagen" class="col text-center">
+      <img
+        [src]="musculo.imagen! | imagen"
+        class="img-fluid img-thumbnail"
+        style="width: 400px; height: 400px"
+      />
+    </div>
+    <div class="mb-0" *ngIf="previsualizacion">
+      <img [src]="previsualizacion" style="width: 300px; height: 300px" />
+    </div>
+
+    <label for="formFile" class="form-label"></label>
     <input
-      [ngClass]="{
-        'is-invalid': campoNoValido('imagen')
-      }"
-      formControlName="imagen"
-      type="text"
+      id="formFile"
+      [formControl]="file"
+      (change)="fileChange($event)"
+      type="file"
+      placeholder="File"
       class="form-control"
-      id="imagen"
     />
-   
   </div>
   <button type="button" class="btn btn-danger mx-3" routerLink="musculos">
     <i class="fas fa-arrow-circle-left"></i>

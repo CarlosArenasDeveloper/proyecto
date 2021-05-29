@@ -9,19 +9,7 @@ import { SharedModule } from '../../../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../../../material/material.module';
 import { DataTablesModule } from 'angular-datatables';
-import {
-  MonthAgendaService,
-  ScheduleModule,
-  TimelineMonthService,
-  TimelineViewsService,
-} from '@syncfusion/ej2-angular-schedule';
-import {
-  DayService,
-  WeekService,
-  WorkWeekService,
-  MonthService,
-  AgendaService,
-} from '@syncfusion/ej2-angular-schedule';
+
 
 
 @NgModule({
@@ -33,18 +21,10 @@ import {
     ReactiveFormsModule,
     MaterialModule,
     DataTablesModule,
-    ScheduleModule
   ],
   exports:[ListaSesionesComponent, AddSesionComponent, EditSesionComponent],
   providers: [
-    DayService,
-    WeekService,
-    WorkWeekService,
-    MonthService,
-    AgendaService,
-    MonthAgendaService,
-    TimelineViewsService,
-    TimelineMonthService,
+
   ],
 })
 export class SesionesModule { }

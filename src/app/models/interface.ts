@@ -65,7 +65,7 @@ export interface Actividad {
   id_tarifa?: number;
   nombre?: string;
   descripcion?: string;
-  duracion?: number;
+  color?: string;
   imagen?: string;
 
 }
@@ -76,24 +76,14 @@ export interface Sala {
 }
 
 export interface Sesion {
-  // id?: number;
-  // id_sala?: number;
-  // id_actividad?:number;
-  // fecha?: any;
-  // hora?: Date;
-  // num_clientes?: number;
-  // estado?: string;
-  // horarios?:Horario
   id?: string;
-  title: string;
-  start: string;
+  title?: string;
+  start?: string;
   end?: string;
-  description: string;
-  className: string;
-  url: string;
-  sala:number;
-  actividad:number;
-  color:string;
+  sala?:number;
+  color?:string;
+  num_clientes?:number;
+  estado?:string;
 }
 
 export interface Horario{

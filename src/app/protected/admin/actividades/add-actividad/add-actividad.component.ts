@@ -46,7 +46,7 @@ export class AddActividadComponent implements OnInit {
     email_monitor: ['', [Validators.required]],
     id_tarifa: ['', [Validators.required]],
     descripcion: ['', [Validators.required]],
-    duracion: ['',[Validators.required,Validators.pattern('^[0-9]{2}$')]]
+    color: ['']
   });
 
   campoNoValido(campo: string) {
@@ -56,15 +56,6 @@ export class AddActividadComponent implements OnInit {
     );
   }
 
-  get duracionMessage(): string {
-    const errors = this.miFormulario.get('duracion')?.errors;
-    if (errors?.required) {
-      return 'El precio es requerido';
-    } else if (errors?.pattern) {
-      return 'El valor introducido no corresponde con una duracion valida';
-    }
-    return '';
-  }
   addActividad() {
     console.log(this.miFormulario.value);
     this.actividad = this.miFormulario.value;

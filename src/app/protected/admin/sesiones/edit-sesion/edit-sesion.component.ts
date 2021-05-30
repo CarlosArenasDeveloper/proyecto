@@ -244,16 +244,28 @@ export class EditSesionComponent implements OnInit {
   }
 
   borrar() {
-    this.adminService.borrarPrueba(this.sesion.id).subscribe((resp) => {
-      if (resp == null) {
-        Swal.fire({
-          position: 'top-end',
-          icon: 'success',
-          title: 'Evento borrado correctamente',
-          showConfirmButton: false,
-          timer: 2000,
-        }).then((result) => {
-          this.router.navigateByUrl('dashboard/admin/sesiones');
+    Swal.fire({
+      title: `¿Estas seguro de querer eliminar la sesion?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, eliminar',
+      cancelButtonText: 'No, cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.adminService.borrarPrueba(this.sesion.id).subscribe((resp) => {
+          if (resp == null) {
+            Swal.fire({
+              position: 'top-end',
+              icon: 'success',
+              title: 'Sesion eliminada correctamente',
+              showConfirmButton: false,
+              timer: 2000,
+            }).then((result) => {
+              this.router.navigateByUrl('dashboard/admin/sesiones');
+            });
+          }
         });
       }
     });

@@ -140,6 +140,14 @@
       <div class="col-12">
         <h1>Editando sesion</h1>
         <hr>
+        <button
+        type="button"
+        class="btn btn-danger mx-3 float-end"
+        routerLink="sesiones"
+      >
+        <i class="fas fa-arrow-circle-left"></i>
+        Volver atrás
+      </button>
       </div>
     </div>
 
@@ -193,7 +201,7 @@
             </span>
           </div>
 
-          <div class="mb-5">
+          <div class="mb-5" *ngIf="sesion" >
             Estado actual :
             <a class="btn btn-dark m-2" (click)="cambiarEstado()">
               Cambiar estado </a
@@ -273,15 +281,14 @@
 
           <div class="mt-3 row form-group">
             <div class="col-12">
+        
               <button
-                type="button"
-                class="btn btn-danger mx-3"
-                routerLink="sesiones"
-              >
-                <i class="fas fa-arrow-circle-left"></i>
-                Volver atrás
-              </button>
-
+              type="button"
+              class="btn btn-danger btn-block mx-3"
+              (click)="borrar()"
+            >
+              Borrar sesion <i class="fa fa-trash"></i>
+            </button>
               <button type="submit" class="btn btn-primary btn-block" [disabled]="miFormulario.invalid">
                 Actualizar <i class="fa fa-edit"></i>
               </button>

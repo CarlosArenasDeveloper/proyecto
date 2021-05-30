@@ -80,25 +80,7 @@
          El descripcion de la actividad es requerida
         </span>
       </div>
-      <div class="mb-3">
-        <label for="d" class="form-label">Duracion (minutos): </label>
-        <input
-        [ngClass]="{
-          'is-invalid': campoNoValido('duracion')
-        }"
-          formControlName="duracion"
-          type="number"
-          min="0"
-          class="form-control"
-          id="d"
-        />
-        <span
-        class="form-text text-danger fst-italic"
-        *ngIf="campoNoValido('duracion')"
-      >
-       {{duracionMessage}}
-      </span>
-      </div>
+
       <div *ngIf="actividad.imagen" class="col text-center">
         <img
           [src]="actividad.imagen! | imagen"
@@ -121,6 +103,15 @@
           type="file"
           placeholder="File"
           class="form-control"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="d" class="form-label">Color de referencia: </label>
+        <input
+          formControlName="color"
+          type="text"
+          class="form-control"
+          id="d"
         />
       </div>
       <button type="button" class="btn btn-danger mx-3" routerLink="actividades">

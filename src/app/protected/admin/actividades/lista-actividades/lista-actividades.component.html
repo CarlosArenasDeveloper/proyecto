@@ -29,7 +29,6 @@
             <th scope="col">Monitor</th>
             <th scope="col">Nombre</th>
             <th scope="col">Descripcion</th>
-            <th scope="col">Duracion (min)</th>
             <th scope="col">Tarifa</th>
             <th scope="col" *ngIf="isAdmin()"></th>
             <th scope="col"></th>
@@ -47,7 +46,6 @@
             </td>
             <td>{{ ele.nombre | titlecase }}</td>
             <td>{{ ele.descripcion | texto }}</td>
-            <td>{{ ele.duracion }}</td>
             <td
               [ngClass]="{
                 'text-warning': ele.id_tarifa === 'sin asignar'

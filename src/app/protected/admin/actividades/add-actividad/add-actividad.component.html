@@ -79,23 +79,13 @@
     </span>
   </div>
   <div class="mb-3">
-    <label for="exampleFormControlInput1" class="form-label">Duracion (minutos): </label>
+    <label for="d" class="form-label">Color de referencia: </label>
     <input
-    [ngClass]="{
-      'is-invalid': campoNoValido('duracion')
-    }"
-      formControlName="duracion"
-      type="number"
-      min="0"
+      formControlName="color"
+      type="text"
       class="form-control"
-      id="exampleFormControlInput1"
+      id="d"
     />
-    <span
-    class="form-text text-danger fst-italic"
-    *ngIf="campoNoValido('duracion')"
-  >
-   {{duracionMessage}}
-  </span>
   </div>
 
   <div class="my-3">

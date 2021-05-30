@@ -9,7 +9,8 @@ import { SharedModule } from '../../../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../../../material/material.module';
 import { DataTablesModule } from 'angular-datatables';
-
+import {FullCalendarModule} from 'primeng/fullcalendar';
+import { CalendarModule } from 'primeng/calendar';
 
 
 @NgModule({
@@ -21,10 +22,10 @@ import { DataTablesModule } from 'angular-datatables';
     ReactiveFormsModule,
     MaterialModule,
     DataTablesModule,
-  ],
-  exports:[ListaSesionesComponent, AddSesionComponent, EditSesionComponent],
-  providers: [
+    FullCalendarModule,
+    CalendarModule,
 
   ],
+  exports:[ListaSesionesComponent, AddSesionComponent, EditSesionComponent],
 })
 export class SesionesModule { }

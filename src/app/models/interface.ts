@@ -76,14 +76,24 @@ export interface Sala {
 }
 
 export interface Sesion {
-  id?: number;
-  id_sala?: number;
-  id_actividad?:number;
-  fecha?: any;
-  hora?: Date;
-  num_clientes?: number;
-  estado?: string;
-  horarios?:Horario
+  // id?: number;
+  // id_sala?: number;
+  // id_actividad?:number;
+  // fecha?: any;
+  // hora?: Date;
+  // num_clientes?: number;
+  // estado?: string;
+  // horarios?:Horario
+  id?: string;
+  title: string;
+  start: string;
+  end?: string;
+  description: string;
+  className: string;
+  url: string;
+  sala:number;
+  actividad:number;
+  color:string;
 }
 
 export interface Horario{

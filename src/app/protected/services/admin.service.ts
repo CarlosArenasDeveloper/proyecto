@@ -306,32 +306,32 @@ export class AdminService {
     );
   }
 
-  getSesiones(): Observable<Sesion> {
-    return this.htpp.get(`${this.baseUrl}/selectSesiones.php`);
-  }
+  // getSesiones(): Observable<Sesion> {
+  //   return this.htpp.get(`${this.baseUrl}/selectSesiones.php`);
+  // }
 
-  addSesion(sesion: Sesion): Observable<Sesion> {
-    return this.htpp.post(
-      `${this.baseUrl}/addSesion.php`,
-      JSON.stringify(sesion)
-    );
-  }
+  // addSesion(sesion: Sesion): Observable<Sesion> {
+  //   return this.htpp.post(
+  //     `${this.baseUrl}/addSesion.php`,
+  //     JSON.stringify(sesion)
+  //   );
+  // }
 
-  borrarSesion(id: number) {
-    return this.htpp.get<Sesion>(`${this.baseUrl}/borrarSesion.php?id=${id}`);
-  }
+  // borrarSesion(id: number) {
+  //   return this.htpp.get<Sesion>(`${this.baseUrl}/borrarSesion.php?id=${id}`);
+  // }
 
-  getSesionPorId(id: number) {
-    return this.htpp.get<Sesion>(
-      `${this.baseUrl}/seleccionarSesion.php?id=${id}`
-    );
-  }
-  editarSesion(sesion: Sesion) {
-    return this.htpp.post(
-      `${this.baseUrl}/editarSesion.php`,
-      JSON.stringify(sesion)
-    );
-  }
+  // getSesionPorId(id: number) {
+  //   return this.htpp.get<Sesion>(
+  //     `${this.baseUrl}/seleccionarSesion.php?id=${id}`
+  //   );
+  // }
+  // editarSesion(sesion: Sesion) {
+  //   return this.htpp.post(
+  //     `${this.baseUrl}/editarSesion.php`,
+  //     JSON.stringify(sesion)
+  //   );
+  // }
 
   getSalas(): Observable<Sala> {
     return this.htpp.get(`${this.baseUrl}/selectSalas.php`);
@@ -418,14 +418,36 @@ export class AdminService {
     );
   }
 
-  getPrueba() {
-    return this.htpp.get(`${this.baseUrl}/prueba.php`);
-  }
+  // getPrueba() {
+  //   return this.htpp.get(`${this.baseUrl}/prueba.php`);
+  // }
   uploadFile(file_data: any) {
     return this.htpp.post(this.baseUrl + '/subirArchivo.php', file_data);
   }
   borrarFile(file: any) {
-    return this.htpp.get(
-      `${this.baseUrl}/borrarArchivo?file=${file}`
-    );  }
+    return this.htpp.get(`${this.baseUrl}/borrarArchivo?file=${file}`);
+  }
+
+  getPrueba() {
+    return this.htpp.get(`${this.baseUrl}/prueba.php`);
+  }
+  borrarPrueba(id: number) {
+    return this.htpp.get(`${this.baseUrl}/borrarPrueba.php?id=${id}`);
+  }
+  getPruebaID(id: number) {
+    return this.htpp.get(`${this.baseUrl}/seleccionarPrueba.php?id=${id}`);
+  }
+
+  editarSesion(sesion: any) {
+    return this.htpp.post(
+      `${this.baseUrl}/editarPrueba.php`,
+      JSON.stringify(sesion)
+    );
+  }
+  addSesion(sesion: any) {
+    return this.htpp.post(
+      `${this.baseUrl}/comprobarPrueba.php`,
+      JSON.stringify(sesion)
+    );
+  }
 }

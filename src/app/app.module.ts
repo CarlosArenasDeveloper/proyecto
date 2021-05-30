@@ -13,6 +13,7 @@ import { registerLocaleData } from '@angular/common';
 registerLocaleData(localeEs);
 import { NgxPayPalModule } from 'ngx-paypal';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { FullCalendarModule } from 'primeng/fullcalendar';
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,7 +26,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     DataTablesModule,
     MaterialModule,
     NgxPayPalModule,
-    NgxSpinnerModule,
+    FullCalendarModule,
+    NgxSpinnerModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'es' },

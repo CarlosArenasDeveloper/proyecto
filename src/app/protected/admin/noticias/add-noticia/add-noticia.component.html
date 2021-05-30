@@ -81,7 +81,8 @@
       class="form-control"
     />
   </div>
-  <div class="form-check form-switch">
+  <span>¿Quieres que aparezca en la seccion de noticias?<br></span>
+  <div class="form-check form-switch mt-2">
     <input
       class="form-check-input"
       type="checkbox"
@@ -89,17 +90,18 @@
       formControlName="visible"
     />
     <label class="form-check-label" for="flexSwitchCheckDefault"
-      ><span>{{ visible }}</span></label
+      >
+      <span>{{ visible }}</span></label
     >
   </div>
-  <button type="button" class="btn btn-danger mx-3" routerLink="noticias">
+  <button type="button" class="btn btn-danger mt-3 mx-3" routerLink="noticias">
     <i class="fas fa-arrow-circle-left"></i>
     Volver atrás
   </button>
   <button
     type="submit"
     [disabled]="miFormulario.invalid"
-    class="btn btn-primary"
+    class="btn btn-primary mt-3 "
   >
     Añadir
   </button>

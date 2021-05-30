@@ -6,3 +6,62 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+html body .ui-calendar {
+  display: block;
+}
+
+
+body .tooltip-inner{
+  background-color: transparent;
+  color: #000;
+
+}
+
+.popper, .tooltip {
+  position: absolute;
+  z-index: 9999;
+  background: rgb(255, 172, 172);
+  opacity: 1 !important;
+  color: black;
+  top: -15px !important;
+  border-radius: 3px;
+  border:  1px solid red ;
+  box-shadow: 0 0 2px rgba(0,0,0,0.5);
+  padding: 10px;
+  text-align: center;
+}
+
+.popper .popper__arrow,
+.tooltip .tooltip-arrow {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  position: absolute;
+  margin: 5px;
+}
+
+
+.popper[x-placement^="top"] .popper__arrow,
+.tooltip[x-placement^="top"] .tooltip-arrow {
+  border-width: 5px 5px 0 5px;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  bottom: -5px;
+  left: calc(50% - 5px);
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.tooltip .tooltip-arrow,
+.popper .popper__arrow {
+  border-color:red;
+}
+.style5 .tooltip .tooltip-arrow {
+  border-color: #1E252B;
+}
+.popper[x-placement^="top"],
+.tooltip[x-placement^="top"] {
+  margin-bottom: 5px;
+}

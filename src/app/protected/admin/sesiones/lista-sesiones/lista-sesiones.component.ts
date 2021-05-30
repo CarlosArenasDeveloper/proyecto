@@ -4,95 +4,203 @@ import { AdminService } from '../../../services/admin.service';
 import Swal from 'sweetalert2';
 import { DataTableDirective } from 'angular-datatables';
 import { Sesion, Usuario } from '../../../../models/interface';
-
+import dayGridPlugin from '@fullcalendar/daygrid';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import interactionPlugin from '@fullcalendar/interaction';
+import listPlugin from '@fullcalendar/list';
+import esLocale from '@fullcalendar/core/locales/es';
+import { Router } from '@angular/router';
+import Tooltip from 'tooltip.js';
 
 @Component({
   selector: 'app-lista-sesiones',
   templateUrl: './lista-sesiones.component.html',
-  styleUrls: ['./lista-sesiones.component.css'],
+  styles: [`
+
+*{
+    cursor: pointer;
+}
+ 
+  /* .popper,
+  .tooltip {
+    position: absolute;
+    z-index: 9999;
+    background: #e97a92;
+    color: black;
+    width: 150px;
+    border-radius: 5px;
+    border-color: solid;
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);
+    padding: 10px;
+    text-align: justify;
+  }
+  .style5 .tooltip {
+    background: #1E252B;
+    color: #FFFFFF;
+    max-width: 200px;
+    width: auto;
+    font-size: .8rem;
+    padding: .5em 1em;
+  }
+  .popper .popper__arrow,
+  .tooltip .tooltip-arrow {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    position: absolute;
+    margin: 5px;
+  }
+  
+  .tooltip .tooltip-arrow,
+  .popper .popper__arrow {
+    border-color: #ff077b;
+  }
+  .style5 .tooltip .tooltip-arrow {
+    border-color: #1E252B;
+  }
+  .popper[x-placement^="top"],
+  .tooltip[x-placement^="top"] {
+    margin-bottom: 5px;
+  }
+  .popper[x-placement^="top"] .popper__arrow,
+  .tooltip[x-placement^="top"] .tooltip-arrow {
+    border-width: 5px 5px 0 5px;
+    border-left-color: transparent;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    bottom: -5px;
+    left: calc(50% - 5px);
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  .popper[x-placement^="bottom"],
+  .tooltip[x-placement^="bottom"] {
+    margin-top: 5px;
+  }
+  .tooltip[x-placement^="bottom"] .tooltip-arrow,
+  .popper[x-placement^="bottom"] .popper__arrow {
+    border-width: 0 5px 5px 5px;
+    border-left-color: transparent;
+    border-right-color: transparent;
+    border-top-color: transparent;
+    top: -5px;
+    left: calc(50% - 5px);
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  .tooltip[x-placement^="right"],
+  .popper[x-placement^="right"] {
+    margin-left: 5px;
+  }
+  .popper[x-placement^="right"] .popper__arrow,
+  .tooltip[x-placement^="right"] .tooltip-arrow {
+    border-width: 5px 5px 5px 0;
+    border-left-color: transparent;
+    border-top-color: transparent;
+    border-bottom-color: transparent;
+    left: -5px;
+    top: calc(50% - 5px);
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .popper[x-placement^="left"],
+  .tooltip[x-placement^="left"] {
+    margin-right: 5px;
+  }
+  .popper[x-placement^="left"] .popper__arrow,
+  .tooltip[x-placement^="left"] .tooltip-arrow {
+    border-width: 5px 0 5px 5px;
+    border-top-color: transparent;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    right: -5px;
+    top: calc(50% - 5px);
+    margin-left: 0;
+    margin-right: 0;
+  } */
+  `
+  ],
 })
-export class ListaSesionesComponent implements OnInit, OnDestroy {
-  usuario!: Usuario;
-  pruebas!: any;
-  dtOptions: DataTables.Settings = {};
-  dtTrigger = new Subject();
-  sesiones: any = [];
-  @ViewChild(DataTableDirective, { static: false })
-  datatableElement!: DataTableDirective;
+export class ListaSesionesComponent {
+  public events: any;
 
-  constructor(private adminService: AdminService) {}
-
-  ngOnInit(): void {
-    const usuario = JSON.parse(sessionStorage.getItem('usuario')!);
-    this.usuario = usuario;
-
-    this.adminService.getPrueba().subscribe((resp) => {
-      this.pruebas = resp;
-      console.log(this.pruebas);
+  public optionsMonth: any;
+  public optionsList: any;
+  numero:number=3;
+  constructor(private router: Router,private adminService:AdminService) {
+    this.adminService.getPrueba().subscribe((events) => {
+      this.events = events;
+      console.log(this.events);
     });
-
-    this.dtOptions = {
-      pagingType: 'full_numbers',
-      pageLength: 5,
-      language: {
-        url: '//cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json',
+    this.optionsList = {
+      contentHeight: 700,
+      plugins: [dayGridPlugin, listPlugin, interactionPlugin],
+      defaultDate: new Date(),
+      duration: { days: 7 },
+      defaultView: 'list',
+      locale: esLocale,
+      header: {
+        left: '',
+        center: 'title',
+        right: ''
       },
-      responsive: true,
+      editable: false,
+      eventClick: function (info: any) {
+        event!.preventDefault();
+        const id = parseInt(info.event.id);
+        router.navigateByUrl(`/dashboard/admin/sesiones/editar-sesion/${id}`);
+      },
     };
-
-    this.adminService.getSesiones().subscribe((sesiones) => {
-      this.sesiones = sesiones;
-      this.dtTrigger.next();
-    });
-  }
-
-  ngOnDestroy(): void {
-    this.dtTrigger.unsubscribe();
-  }
-
-  isAdmin() {
-    if (this.usuario.role == 1) {
-      return true;
-    }
-    return false;
-  }
-
-  borrarSesion(sesion: Sesion, i: number) {
-    Swal.fire({
-      title: `¿Estas seguro de querer eliminar la sesion?`,
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Si, eliminar',
-      cancelButtonText: 'No, cancelar',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.adminService.borrarSesion(sesion.id!).subscribe((sesion) => {
-          this.sesiones.splice(i, 1);
-          if (this.sesiones.length > 0) {
-            this.datatableElement.dtInstance.then(
-              (dtInstance: DataTables.Api) => {
-                dtInstance.destroy();
-                this.dtTrigger.next();
-              }
-            );
-          } else {
-            this.datatableElement.dtInstance.then(
-              (dtInstance: DataTables.Api) => {
-                dtInstance.destroy();
-              }
-            );
-          }
+    this.optionsMonth = {
+      hemeSystem: 'lumen',
+      eventLimit: true,
+      showNonCurrentDates: false,
+      selectable: true,
+      plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
+      defaultDate: new Date(),
+       locale: esLocale,
+      header: {
+        left: "prev,next",
+        center: "title",
+        right: "dayGridMonth, dayGridWeek, dayGridDay",
+      },
+      dateClick: function (info:any) {
+        console.log(info);
+        localStorage.setItem("fecha", info.date);
+        router.navigateByUrl(`/dashboard/admin/sesiones/add-sesion`);
+      },
+        editable: false,
+      eventClick: function (info:any) {
+        event!.preventDefault();
+        const id = parseInt(info.event.id);
+        router.navigateByUrl(`/dashboard/admin/sesiones/editar-sesion/${id}`);
+      },
+      eventRender: function (e:any) {
+        var tooltip = new Tooltip(e.el, {
+          title:
+            "<h6>" +
+            e.event.title +
+            "</h6>" +
+            "<hr>"
+            +
+            "<span>Sala "+
+            e.event.extendedProps.sala 
+            +"</span>"+
+            
+            "<br><span><i class='fas fa-stopwatch'></i>: "+
+            (((Math.abs(e.event.start - e.event.end)/1000)/60)) 
+            +" minutos </span>"+
+            "<br>"+
+            "<span>Estado: "+
+            e.event.extendedProps.estado
+            +"</span>"+
+            "<br>",
+          placement: "top",
+          trigger: "hover",
+          container: "body",
+          html: true,
         });
-        Swal.fire({
-          position: 'top-end',
-          icon: 'success',
-          title: 'Sesion eliminada correctamente',
-          showConfirmButton: false,
-          timer: 2000,
-        });
-      }
-    });
+      },
+    };
   }
 }

@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container">
   <h1>Listado de sesiones</h1>
   <hr />
   <div class="row" *ngIf="isAdmin()">
@@ -73,6 +73,16 @@
       </table>
     </div>
   </div>
+</div> -->
+
+<div class="row  p-1 bg-white">
+  <h1>Listado de sesiones</h1>
+  <hr>
+  <div class="mt-5 col-md-9 col-12">
+    <p-fullCalendar [events]="events" [options]="optionsMonth" ></p-fullCalendar>
+  </div>
+  <div class="mt-5  col-md-3 col-12">
+    <p-fullCalendar [events]="events" [options]="optionsList"></p-fullCalendar>
+  </div>
 </div>
-<!-- <ejs-schedule  [selectedDate]="selectedDate" 
-[eventSettings]="eventSettings"  > </ejs-schedule> -->
+

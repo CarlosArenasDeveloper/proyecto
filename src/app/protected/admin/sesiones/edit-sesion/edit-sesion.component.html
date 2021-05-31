@@ -292,7 +292,15 @@
               (click)="borrar()"
             >
               Borrar sesion <i class="fa fa-trash"></i>
+            </button>        
+              <button
+              type="button"
+              class="btn btn-danger btn-block mx-3"
+              (click)="cancelar()"
+            >
+              Cancelar sesion <i class="fas fa-window-close"></i>
             </button>
+
               <button type="submit" class="btn btn-primary btn-block" [disabled]="miFormulario.invalid">
                 Actualizar <i class="fa fa-edit"></i>
               </button>

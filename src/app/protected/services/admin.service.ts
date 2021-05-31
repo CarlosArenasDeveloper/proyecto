@@ -462,4 +462,14 @@ export class AdminService {
       JSON.stringify(reserva)
     );
   }
+
+  getReservasCliente(email:string){
+    return this.htpp.get(`${this.baseUrl}/seleccionarReservasCliente.php?email_cliente=${email}`)
+  }
+
+  cancelarSesion(id: number) {
+    return this.htpp.get(`${this.baseUrl}/cancelarSesion.php?id=${id}`);
+  }
+
+
 }

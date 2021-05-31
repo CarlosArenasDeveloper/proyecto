@@ -175,29 +175,36 @@ export class ListaSesionesComponent {
       eventRender: function (e:any) {
         var tooltip = new Tooltip(e.el, {
           title:
-            "<h6>" +
+            '<h6>' +
             e.event.title +
-            "</h6>" +
-            "<hr>"
-            +
-            "<span>Sala "+
-            e.event.extendedProps.sala 
-            +"</span>"+
-            
-            "<br><span><i class='fas fa-stopwatch'></i>: "+
-            (((Math.abs(e.event.start - e.event.end)/1000)/60)) 
-            +" minutos </span>"+
-            "<br>"+
-            "<span>Plazas disponibles: "+ 
-            (e.event.extendedProps.aforo -  e.event.extendedProps.num_clientes)
-            +"<br></span>"+
-            "<span>Estado: "+
-            e.event.extendedProps.estado
-            +"</span>"+
-            "<br>",
-          placement: "top",
-          trigger: "hover",
-          container: "body",
+            '</h6>' +
+            '<h6>' +
+            ('0' + e.event.start.getHours()).substr(-2) +
+            ':' +
+            ('0' + e.event.start.getMinutes()).substr(-2) +
+            ' - ' +
+            ('0' + e.event.end.getHours()).substr(-2) +
+            ':' +
+            ('0' + e.event.end.getMinutes()).substr(-2) +
+            '</h6>' +
+            '<hr>' +
+            '<span>Sala ' +
+            e.event.extendedProps.sala +
+            '</span>' +
+            "<br><span><i class='fas fa-stopwatch'></i>: " +
+            Math.abs(e.event.start - e.event.end) / 1000 / 60 +
+            ' minutos </span>' +
+            '<br>' +
+            '<span>Plazas disponibles: ' +
+            (e.event.extendedProps.aforo - e.event.extendedProps.num_clientes) +
+            '<br></span>' +
+            '<span>Estado: ' +
+            e.event.extendedProps.estado +
+            '</span>' +
+            '<br>',
+          placement: 'top',
+          trigger: 'hover',
+          container: 'body',
           html: true,
         });
       },

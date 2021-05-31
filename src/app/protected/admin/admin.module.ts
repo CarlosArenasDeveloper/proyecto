@@ -17,7 +17,6 @@ import { CategoriasModule } from './categorias/categorias.module';
 import { SalasModule } from './salas/salas.module';
 import { NoticiasModule } from './noticias/noticias.module';
 import { SesionesModule } from './sesiones/sesiones.module';
-import { ListaclientesComponent } from './clientes/listaclientes/listaclientes.component';
 import { FullCalendarModule } from 'primeng/fullcalendar';
 
 

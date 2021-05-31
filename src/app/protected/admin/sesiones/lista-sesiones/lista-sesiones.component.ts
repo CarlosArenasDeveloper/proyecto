@@ -1,8 +1,6 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { Subject } from 'rxjs';
 import { AdminService } from '../../../services/admin.service';
 import Swal from 'sweetalert2';
-import { DataTableDirective } from 'angular-datatables';
 import { Sesion, Usuario } from '../../../../models/interface';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
@@ -126,7 +124,6 @@ export class ListaSesionesComponent {
 
   public optionsMonth: any;
   public optionsList: any;
-  numero:number=3;
   constructor(private router: Router,private adminService:AdminService) {
     this.adminService.getPrueba().subscribe((events) => {
       this.events = events;
@@ -191,6 +188,9 @@ export class ListaSesionesComponent {
             (((Math.abs(e.event.start - e.event.end)/1000)/60)) 
             +" minutos </span>"+
             "<br>"+
+            "<span>Plazas disponibles: "+ 
+            (e.event.extendedProps.aforo -  e.event.extendedProps.num_clientes)
+            +"<br></span>"+
             "<span>Estado: "+
             e.event.extendedProps.estado
             +"</span>"+

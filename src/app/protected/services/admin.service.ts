@@ -11,6 +11,7 @@ import {
   Categoria,
 } from '../../models/interface';
 import { Observable } from 'rxjs';
+import { Reserva } from '../../models/interface';
 import {
   Actividad,
   Sesion,
@@ -431,6 +432,10 @@ export class AdminService {
   getPrueba() {
     return this.htpp.get(`${this.baseUrl}/prueba.php`);
   }
+
+  getSesionesDisponibles() {
+    return this.htpp.get(`${this.baseUrl}/verPruebaCliente.php`);
+  }
   borrarPrueba(id: number) {
     return this.htpp.get(`${this.baseUrl}/borrarPrueba.php?id=${id}`);
   }
@@ -448,6 +453,13 @@ export class AdminService {
     return this.htpp.post(
       `${this.baseUrl}/comprobarPrueba.php`,
       JSON.stringify(sesion)
+    );
+  }
+
+  addReserva(reserva: Reserva) {
+    return this.htpp.post(
+      `${this.baseUrl}/addReserva.php`,
+      JSON.stringify(reserva)
     );
   }
 }

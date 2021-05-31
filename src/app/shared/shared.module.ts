@@ -23,7 +23,9 @@ import { MiniMapaComponent } from './centros/mini-mapa/mini-mapa.component';
 import { MusculoComponent } from './ejercicios/musculo/musculo.component';
 import { EjercicioComponent } from './ejercicios/ejercicio/ejercicio.component';
 import { ImgPipe } from './pipes/img.pipe';
-
+import {FullCalendarModule} from 'primeng/fullcalendar';
+import { CalendarModule } from 'primeng/calendar';
+import { ReservarSesionComponent } from './reservas/reservar-sesion/reservar-sesion.component';
 
 @NgModule({
   declarations: [
@@ -46,8 +48,10 @@ import { ImgPipe } from './pipes/img.pipe';
     MusculoComponent,
     EjercicioComponent,
     ImgPipe,
+    ReservarSesionComponent,
   ],
-  imports: [SharedRoutingModule,CommonModule, RouterModule, MaterialModule,ReactiveFormsModule],
+  imports: [SharedRoutingModule,CommonModule, RouterModule, MaterialModule,ReactiveFormsModule,    FullCalendarModule,
+    CalendarModule],
   exports: [
     NavegacionComponent,
     ImagenPipe,
@@ -58,7 +62,6 @@ import { ImgPipe } from './pipes/img.pipe';
     PieComponent,
     CookieComponent,
     ImgPipe
-
   ],
 })
 export class SharedModule {}

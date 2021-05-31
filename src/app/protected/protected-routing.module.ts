@@ -14,6 +14,7 @@ import { EjercicioComponent } from '../shared/ejercicios/ejercicio/ejercicio.com
 import { AdminGuard } from './admin/guards/admin.guard';
 import { ClienteGuard } from './cliente/guards/cliente.guard';
 import { MonitorGuard } from './monitor/guards/monitor.guard';
+import { ReservarSesionComponent } from '../shared/reservas/reservar-sesion/reservar-sesion.component';
 
 const routes: Routes = [
   {
@@ -57,6 +58,10 @@ const routes: Routes = [
       {
         path: 'reservas',
         component: ReservasComponent,
+      },
+      {
+        path: 'reservar-sesion/:id',
+        component: ReservarSesionComponent,
       },
       {
         path: 'admin',

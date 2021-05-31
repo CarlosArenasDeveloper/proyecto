@@ -122,3 +122,10 @@ export interface Grafica{
   altas?:number;
   bajas?:number;
 }
+
+export interface Reserva{
+  id?:number;
+  email_cliente?:string;
+  id_sesion?:number;
+  estado?:string;
+}

@@ -32,7 +32,7 @@ export class AddActividadComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.adminService.getMonitores().subscribe((monitor) => {
+    this.adminService.getMonitoresDisponibles().subscribe((monitor) => {
       this.monitores = monitor;
     });
 

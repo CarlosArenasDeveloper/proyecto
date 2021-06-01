@@ -26,7 +26,7 @@ export class EditActividadComponent implements OnInit {
   nombreFichero: string = '';
   imagenGuardada:string='';
 
-  
+  emailMonitor!:string;
 
   usuario!: Usuario;
   id!: number;
@@ -51,6 +51,7 @@ export class EditActividadComponent implements OnInit {
       .subscribe((actividad) => {
         console.log(actividad);
         this.actividad = actividad;
+      //  this.emailMonitor!=this.actividad.email_monitor;
         this.imagenGuardada=this.actividad.imagen!
         this.nombreFichero=this.actividad.imagen!
 
@@ -121,6 +122,7 @@ export class EditActividadComponent implements OnInit {
     this.actividad = this.miFormulario.value;
     this.actividad.id = this.id;
     this.actividad.imagen = this.nombreFichero;
+   // this.actividad.email_monitor=this.emailMonitor;
     this.adminService.editarActividad(this.actividad).subscribe((resp) => {
       if (resp == null) {
         Swal.fire({
@@ -218,4 +220,19 @@ export class EditActividadComponent implements OnInit {
         return null;
       }
     });
+
+    cambiarMonitor(){
+      this.actividad.id = this.id;
+      this.adminService.cambiarMonitor(this.actividad).subscribe((resp) => {
+        if (resp == null) {
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'El monitor seleccionado ha sido dado de baja de la actividad',
+            showConfirmButton: false,
+            timer: 2000,
+          });
+        }
+      });
+    }
 }

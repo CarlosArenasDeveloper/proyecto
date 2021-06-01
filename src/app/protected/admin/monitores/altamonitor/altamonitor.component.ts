@@ -167,4 +167,20 @@ export class AltamonitorComponent implements OnInit {
       }
     });
   }
+
+  esMenor() {
+    const today: Date = new Date();
+    const birthDate: Date = new Date(this.secondFormGroup.get('fecha_nac')?.value);
+    let age: number = today.getFullYear() - birthDate.getFullYear();
+    const month: number = today.getMonth() - birthDate.getMonth();
+    if (month < 0 || (month === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+    if(age < 18){
+      this.secondFormGroup.get('fecha_nac')?.setErrors({ noIguales: true });
+      return true;
+    } else{
+      return "";
+    }
+}
 }

@@ -176,22 +176,20 @@
           </mat-radio-group>
         </div>
 
-        <div class="col-12 col-md-6">
-        <mat-form-field>
-          <mat-label>Fecha de nacimiento: </mat-label>
-          <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker"               formControlName="fecha_nac"
-          >
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
+        <div class="col-12 col-md-6 mt-4">
+          <mat-form-field>
+            <mat-label>Fecha de nacimiento: (+18) </mat-label>
+            <input matInput type="date" formControlName="fecha_nac" />
+          </mat-form-field>
           <span
             class="form-text text-danger fst-italic"
-            *ngIf="campoNoValido('fecha_nac')"
+            *ngIf="campoNoValido('fecha_nac') || esMenor() "
           >
             <br />
-            La fecha de nacimiento es requerida
-          </span>
+            La edad minima requerida son 18 años
+          </span>        
         </div>
+
 
         <div class="col-12 col-md-6">
           <mat-form-field>

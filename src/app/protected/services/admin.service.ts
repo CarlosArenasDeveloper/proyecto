@@ -35,6 +35,17 @@ export class AdminService {
     return this.htpp.get(`${this.baseUrl}/selectMonitores.php`);
   }
 
+   cambiarMonitor(actividad: Actividad) {
+    return this.htpp.post(
+      `${this.baseUrl}/cambiarMonitor.php`,
+      JSON.stringify(actividad)
+    );
+  }
+
+  getMonitoresDisponibles() {
+    return this.htpp.get(`${this.baseUrl}/selectMonitoresDisponibles.php`);
+  }
+
   getUsuarioPorEmail(email: string): Observable<Usuario> {
     return this.htpp.get<Usuario>(
       `${this.baseUrl}/seleccionarUsuario.php?email=${email}`

@@ -3,7 +3,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
-import esLocale from '@fullcalendar/core/locales/es';
+//import esLocale from '@fullcalendar/core/locales/es';
 import { Router } from '@angular/router';
 import Tooltip from 'tooltip.js';
 import { AdminService } from 'src/app/protected/services/admin.service';

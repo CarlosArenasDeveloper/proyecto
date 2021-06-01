@@ -25,7 +25,7 @@
         </span>
       </div>
       <div class="mb-3">
-        <span>¿Qué monitor impartira la actividad?:</span>  
+        <span>¿Qué monitor impartira la actividad?:</span>   <button type="button" class="btn btn-danger" (click)="cambiarMonitor()">Cambiar de monitor</button>
         <select class="form-select mt-2" formControlName="email_monitor"  [ngClass]="{
           'is-invalid': campoNoValido('email_monitor')
         }">

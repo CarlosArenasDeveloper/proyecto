@@ -46,6 +46,11 @@ export class AdminService {
     return this.htpp.get(`${this.baseUrl}/selectMonitoresDisponibles.php`);
   }
 
+  getMonitoresDisponiblesEdit(email:string) {
+    return this.htpp.get(`${this.baseUrl}/selectMonitoresDisponiblesEdit.php?email=${email}`);
+  }
+
+
   getUsuarioPorEmail(email: string): Observable<Usuario> {
     return this.htpp.get<Usuario>(
       `${this.baseUrl}/seleccionarUsuario.php?email=${email}`
@@ -447,6 +452,10 @@ export class AdminService {
   getSesionesDisponibles() {
     return this.htpp.get(`${this.baseUrl}/verPruebaCliente.php`);
   }
+
+  getSesionesDisponiblesPorTarifa(id_tarifa:number) {
+    return this.htpp.get(`${this.baseUrl}/verPruebaClienteTarifas.php?id_tarifa=${id_tarifa}`);
+  }
   borrarPrueba(id: number) {
     return this.htpp.get(`${this.baseUrl}/borrarPrueba.php?id=${id}`);
   }
@@ -478,9 +487,31 @@ export class AdminService {
     return this.htpp.get(`${this.baseUrl}/seleccionarReservasCliente.php?email_cliente=${email}`)
   }
 
+  getReservasClienteIDSesion(email:string){
+    return this.htpp.get(`${this.baseUrl}/seleccionarIdSesionCliente.php?email_cliente=${email}`)
+  }
+
   cancelarSesion(id: number) {
     return this.htpp.get(`${this.baseUrl}/cancelarSesion.php?id=${id}`);
   }
+
+  seleccionarSesionesMonitor(email_monitor:string){
+    return this.htpp.get(`${this.baseUrl}/seleccionarReservasMonitor.php?email_monitor=${email_monitor}`);
+
+  }
+
+  seleccionarSesionesCliente(email_cliente:string){
+    return this.htpp.get(`${this.baseUrl}/seleccionarReservasCliente.php?email_cliente=${email_cliente}`);
+
+  }
+
+  borrarReserva(reserva: Reserva) {
+    return this.htpp.post(
+      `${this.baseUrl}/borrarReserva.php`,
+      JSON.stringify(reserva)
+    );
+  }
+
 
 
 }

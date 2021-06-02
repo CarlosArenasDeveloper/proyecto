@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { SesionesRoutingModule } from './sesiones-routing.module';
 import { ListaSesionesComponent } from './lista-sesiones/lista-sesiones.component';
 import { AddSesionComponent } from './add-sesion/add-sesion.component';

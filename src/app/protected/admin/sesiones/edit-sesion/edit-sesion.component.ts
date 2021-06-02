@@ -118,6 +118,20 @@ export class EditSesionComponent implements OnInit {
   }
 
   editarSesion() {
+    if (
+      this.miFormulario.get('title')?.value == 'null' || this.miFormulario.get('sala')?.value=='null'
+    ) {
+      Swal.fire({
+        position: 'top-end',
+        icon: 'error',
+        title: 'Datos incompletos',
+        text:'Por favor, rellene todos los campos requeridos',
+        showConfirmButton: false,
+        timer: 2000,
+      });
+      return;
+    }
+
     this.sesion = this.miFormulario.value;
     this.sesion.id = this.id;
     this.adminService.editarSesion(this.sesion).subscribe((resp) => {
@@ -139,33 +153,33 @@ export class EditSesionComponent implements OnInit {
     });
   }
 
-  borrar() {
-    Swal.fire({
-      title: `¿Estas seguro de querer eliminar la sesion?`,
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Si, eliminar',
-      cancelButtonText: 'No, cancelar',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.adminService.borrarPrueba(this.sesion.id).subscribe((resp) => {
-          if (resp == null) {
-            Swal.fire({
-              position: 'top-end',
-              icon: 'success',
-              title: 'Sesion eliminada correctamente',
-              showConfirmButton: false,
-              timer: 2000,
-            }).then((result) => {
-              this.router.navigateByUrl('dashboard/admin/sesiones');
-            });
-          }
-        });
-      }
-    });
-  }
+  // borrar() {
+  //   Swal.fire({
+  //     title: `¿Estas seguro de querer eliminar la sesion?`,
+  //     icon: 'warning',
+  //     showCancelButton: true,
+  //     confirmButtonColor: '#3085d6',
+  //     cancelButtonColor: '#d33',
+  //     confirmButtonText: 'Si, eliminar',
+  //     cancelButtonText: 'No, cancelar',
+  //   }).then((result) => {
+  //     if (result.isConfirmed) {
+  //       this.adminService.borrarPrueba(this.sesion.id).subscribe((resp) => {
+  //         if (resp == null) {
+  //           Swal.fire({
+  //             position: 'top-end',
+  //             icon: 'success',
+  //             title: 'Sesion eliminada correctamente',
+  //             showConfirmButton: false,
+  //             timer: 2000,
+  //           }).then((result) => {
+  //             this.router.navigateByUrl('dashboard/admin/sesiones');
+  //           });
+  //         }
+  //       });
+  //     }
+  //   });
+  // }
 
   campoNoValido(campo: string) {
     return (
@@ -173,62 +187,62 @@ export class EditSesionComponent implements OnInit {
       this.miFormulario.get(campo)?.touched
     );
   }
-  cambiarEstado() {
-    Swal.fire({
-      title: 'Cambiar estado',
-      showDenyButton: true,
-      showCancelButton: true,
-      confirmButtonText: `FINALIZADA`,
-      denyButtonText: `COMPLETA`,
-      cancelButtonText: `INCOMPLETA`,
-      cancelButtonColor: `#2778c4`,
-      confirmButtonColor: `#757575`,
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire({
-          title: `¿Estas seguro de que querer cambiar el estado de la sesión a finalizada ?`,
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Si, cambiar',
-          cancelButtonText: 'No, cancelar',
-        }).then((result) => {
-          if (result.isConfirmed) {
-            this.miFormulario.get('estado')?.setValue('finalizada');
-          }
-        });
-      } else if (result.isDenied) {
-        Swal.fire({
-          title: `¿Estas seguro de que querer cambiar el estado de la sesión a completa ?`,
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Si, cambiar',
-          cancelButtonText: 'No, cancelar',
-        }).then((result) => {
-          if (result.isConfirmed) {
-            this.miFormulario.get('estado')?.setValue('completa');
-          }
-        });
-      } else {
-        Swal.fire({
-          title: `¿Estas seguro de que querer cambiar el estado de la sesión a incompleta ?`,
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Si, cambiar',
-          cancelButtonText: 'No, cancelar',
-        }).then((result) => {
-          if (result.isConfirmed) {
-            this.miFormulario.get('estado')?.setValue('incompleta');
-          }
-        });
-      }
-    });
-  }
+  // cambiarEstado() {
+  //   Swal.fire({
+  //     title: 'Cambiar estado',
+  //     showDenyButton: true,
+  //     showCancelButton: true,
+  //     confirmButtonText: `FINALIZADA`,
+  //     denyButtonText: `COMPLETA`,
+  //     cancelButtonText: `INCOMPLETA`,
+  //     cancelButtonColor: `#2778c4`,
+  //     confirmButtonColor: `#757575`,
+  //   }).then((result) => {
+  //     if (result.isConfirmed) {
+  //       Swal.fire({
+  //         title: `¿Estas seguro de que querer cambiar el estado de la sesión a finalizada ?`,
+  //         icon: 'warning',
+  //         showCancelButton: true,
+  //         confirmButtonColor: '#3085d6',
+  //         cancelButtonColor: '#d33',
+  //         confirmButtonText: 'Si, cambiar',
+  //         cancelButtonText: 'No, cancelar',
+  //       }).then((result) => {
+  //         if (result.isConfirmed) {
+  //           this.miFormulario.get('estado')?.setValue('finalizada');
+  //         }
+  //       });
+  //     } else if (result.isDenied) {
+  //       Swal.fire({
+  //         title: `¿Estas seguro de que querer cambiar el estado de la sesión a completa ?`,
+  //         icon: 'warning',
+  //         showCancelButton: true,
+  //         confirmButtonColor: '#3085d6',
+  //         cancelButtonColor: '#d33',
+  //         confirmButtonText: 'Si, cambiar',
+  //         cancelButtonText: 'No, cancelar',
+  //       }).then((result) => {
+  //         if (result.isConfirmed) {
+  //           this.miFormulario.get('estado')?.setValue('completa');
+  //         }
+  //       });
+  //     } else {
+  //       Swal.fire({
+  //         title: `¿Estas seguro de que querer cambiar el estado de la sesión a incompleta ?`,
+  //         icon: 'warning',
+  //         showCancelButton: true,
+  //         confirmButtonColor: '#3085d6',
+  //         cancelButtonColor: '#d33',
+  //         confirmButtonText: 'Si, cambiar',
+  //         cancelButtonText: 'No, cancelar',
+  //       }).then((result) => {
+  //         if (result.isConfirmed) {
+  //           this.miFormulario.get('estado')?.setValue('incompleta');
+  //         }
+  //       });
+  //     }
+  //   });
+  // }
 
   cancelar(){
     Swal.fire({

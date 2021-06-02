@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Actividad, Usuario } from '../../../../models/interface';
 import { AdminService } from '../../../services/admin.service';
 import Swal from 'sweetalert2';
@@ -24,60 +29,67 @@ export class EditActividadComponent implements OnInit {
   };
   file_data: any = '';
   nombreFichero: string = '';
-  imagenGuardada:string='';
+  imagenGuardada: string = '';
 
-  emailMonitor!:string;
+  emailMonitor!: string;
 
   usuario!: Usuario;
   id!: number;
   monitores: any;
-  actividad: Actividad={};
+  actividad: Actividad = {};
   tarifas: any;
   constructor(
     private fb: FormBuilder,
     private adminService: AdminService,
     private activatedRoute: ActivatedRoute,
     private sanitizer: DomSanitizer
-
   ) {}
 
   ngOnInit(): void {
     const usuario = JSON.parse(sessionStorage.getItem('usuario')!);
     this.usuario = usuario;
 
-    
     this.activatedRoute.params
       .pipe(switchMap(({ id }) => this.adminService.getActividadPorId(id)))
       .subscribe((actividad) => {
         console.log(actividad);
         this.actividad = actividad;
-      //  this.emailMonitor!=this.actividad.email_monitor;
-        this.imagenGuardada=this.actividad.imagen!
-        this.nombreFichero=this.actividad.imagen!
+        //  this.emailMonitor!=this.actividad.email_monitor;
+        this.imagenGuardada = this.actividad.imagen!;
+        this.nombreFichero = this.actividad.imagen!;
 
         this.id = actividad.id!;
         this.miFormulario.controls['nombre'].setValue(this.actividad.nombre);
         this.miFormulario.controls['email_monitor'].setValue(
           this.actividad.email_monitor
         );
-        this.miFormulario.controls['id_tarifa'].setValue(this.actividad.id_tarifa);
+        this.miFormulario.controls['id_tarifa'].setValue(
+          this.actividad.id_tarifa
+        );
         this.miFormulario.controls['descripcion'].setValue(
           this.actividad.descripcion
         );
-        this.miFormulario.controls['color'].setValue(
-          this.actividad.color
-        );
-     
+        this.miFormulario.controls['color'].setValue(this.actividad.color);
+
+        if(this.actividad.email_monitor!=null){
+          this.adminService
+          .getMonitoresDisponiblesEdit(this.actividad.email_monitor!)
+          .subscribe((monitor) => {
+            this.monitores = monitor;
+          });
+        }else{
+          this.adminService
+          .getMonitoresDisponibles()
+          .subscribe((monitor) => {
+            this.monitores = monitor;
+          });
+        }
+       
       });
-      
-    this.adminService.getMonitores().subscribe((monitor) => {
-      this.monitores = monitor;
-    });
 
     this.adminService.getTarifas().subscribe((tarifa) => {
       this.tarifas = tarifa;
     });
-
   }
 
   isAdmin() {
@@ -86,7 +98,7 @@ export class EditActividadComponent implements OnInit {
     }
     return false;
   }
-  
+
   miFormulario: FormGroup = this.fb.group({
     nombre: ['', [Validators.required]],
     email_monitor: ['', [Validators.required]],
@@ -102,17 +114,16 @@ export class EditActividadComponent implements OnInit {
     );
   }
 
-
   editarActividad() {
-    
     if (
-      this.miFormulario.get('email_monitor')?.value == 'null' || this.miFormulario.get('id_tarifa')?.value == 'null'
+      this.miFormulario.get('email_monitor')?.value == 'null' ||
+      this.miFormulario.get('id_tarifa')?.value == 'null'
     ) {
       Swal.fire({
         position: 'top-end',
         icon: 'error',
         title: 'Datos incompletos',
-        text:'Por favor, rellene todos los campos requeridos',
+        text: 'Por favor, rellene todos los campos requeridos',
         showConfirmButton: false,
         timer: 2000,
       });
@@ -122,7 +133,7 @@ export class EditActividadComponent implements OnInit {
     this.actividad = this.miFormulario.value;
     this.actividad.id = this.id;
     this.actividad.imagen = this.nombreFichero;
-   // this.actividad.email_monitor=this.emailMonitor;
+    // this.actividad.email_monitor=this.emailMonitor;
     this.adminService.editarActividad(this.actividad).subscribe((resp) => {
       if (resp == null) {
         Swal.fire({
@@ -134,7 +145,10 @@ export class EditActividadComponent implements OnInit {
         });
       }
     });
-    if (this.actividad.imagen != '' && this.nombreFichero!=this.imagenGuardada) {
+    if (
+      this.actividad.imagen != '' &&
+      this.nombreFichero != this.imagenGuardada
+    ) {
       this.uploadFile();
     }
     if (this.nombreFichero == this.imagenGuardada) {
@@ -171,16 +185,16 @@ export class EditActividadComponent implements OnInit {
       }
     }
   }
-  
+
   uploadFile() {
     this.previsualizacion = '';
     this.mostrarImagen = true;
-    this.actividad.imagen=this.nombreFichero;
+    this.actividad.imagen = this.nombreFichero;
     this.adminService.uploadFile(this.file_data).subscribe((resp) => {
       this.activatedRoute.params
         .pipe(switchMap(({ id }) => this.adminService.getActividadPorId(id)))
         .subscribe((actividad) => {
-        this.actividad = actividad;
+          this.actividad = actividad;
         });
       this.actividad.imagen = '';
     });
@@ -188,11 +202,11 @@ export class EditActividadComponent implements OnInit {
   }
 
   capturarFile(event: any): any {
-   // this.previsualizacion2 = '';
+    // this.previsualizacion2 = '';
     const archivoCapturado = event.target.files[0];
     this.extraerBase64(archivoCapturado).then((imagen: any) => {
       this.previsualizacion = imagen.base;
-     // this.previsualizacion2 = imagen.base;
+      // this.previsualizacion2 = imagen.base;
     });
     this.archivos.push(archivoCapturado);
   }
@@ -221,18 +235,19 @@ export class EditActividadComponent implements OnInit {
       }
     });
 
-    cambiarMonitor(){
-      this.actividad.id = this.id;
-      this.adminService.cambiarMonitor(this.actividad).subscribe((resp) => {
-        if (resp == null) {
-          Swal.fire({
-            position: 'top-end',
-            icon: 'success',
-            title: 'El monitor seleccionado ha sido dado de baja de la actividad',
-            showConfirmButton: false,
-            timer: 2000,
-          });
-        }
-      });
-    }
+  cambiarMonitor() {
+    this.actividad.id = this.id;
+    this.adminService.cambiarMonitor(this.actividad).subscribe((resp) => {
+      if (resp == null) {
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'El monitor seleccionado ha sido dado de baja de la actividad',
+          showConfirmButton: false,
+          timer: 2000,
+        });
+        this.miFormulario.controls['email_monitor'].setValue(null);
+      }
+    });
+  }
 }

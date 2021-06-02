@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MonitorComponent } from './monitor.component';
 import { EditarPerfilComponent } from '../../shared/editar-perfil/editar-perfil.component';
+import { SesionesMonitorModule } from './../monitor/sesiones-monitor/sesiones-monitor.module';
 
 const routes: Routes = [
   {
@@ -11,6 +12,11 @@ const routes: Routes = [
   {
     path:'editar-perfil/:email',
     component: EditarPerfilComponent
+  },
+  {
+      path:'lista-sesiones',
+      loadChildren:()=>
+      import('./../monitor/sesiones-monitor/sesiones-monitor.module').then((m)=>m.SesionesMonitorModule)
   },
   {
     path: 'listaclientes',
@@ -41,11 +47,6 @@ const routes: Routes = [
     path: 'salas',
     loadChildren: () =>
       import('./../admin/salas/salas.module').then((m)=>m.SalasModule)
-  },
-  {
-    path: 'sesiones',
-    loadChildren: () =>
-      import('./../admin/sesiones/sesiones.module').then((m)=>m.SesionesModule)
   },
   {
     path: 'tarifas',

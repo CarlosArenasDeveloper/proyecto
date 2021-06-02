@@ -3,7 +3,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
-//import esLocale from '@fullcalendar/core/locales/es';
+import esLocale from '@fullcalendar/core/locales/es';
 import { Router } from '@angular/router';
 import Tooltip from 'tooltip.js';
 import { AdminService } from 'src/app/protected/services/admin.service';
@@ -21,13 +21,14 @@ export class ReservasComponent implements OnInit {
   public optionsMonth: any;
   public optionsList: any;
   constructor(private router: Router, private adminService: AdminService) {
-    this.adminService.getSesionesDisponibles().subscribe((events) => {
-      this.events = events;
-      console.log(this.events);
-    });
-
     const usuario = JSON.parse(sessionStorage.getItem('usuario')!);
     this.usuario = usuario;
+
+    this.adminService.getSesionesDisponiblesPorTarifa(this.usuario.id_tarifa).subscribe((events) => {
+      this.events = events;
+    });
+
+ 
 
     this.optionsList = {
       contentHeight: 700,
@@ -58,16 +59,25 @@ export class ReservasComponent implements OnInit {
       editable: false,
       eventClick: function (info: any) {
         adminService
-          .getReservasCliente(usuario.email)
+          .getReservasClienteIDSesion(usuario.email)
           .subscribe((reservas: any) => {
             this.reservas = reservas;
-            if (reservas.includes(info.event.id)) {
+            if (info.event.extendedProps.estado!='cancelada' && reservas.includes(info.event.id)) {
               Swal.fire({
                 position: 'top-end',
                 icon: 'warning',
                 title: 'Ya ha realizado la reserva de esta sesion',
                 showConfirmButton: false,
                 timer: 2000,
+              });
+            }else if(info.event.extendedProps.estado=='cancelada' && reservas.includes(info.event.id)){
+              Swal.fire({
+                position: 'top-end',
+                icon: 'warning',
+                title: 'Sesion cancelada ',
+                text: `Lo sentimos, la sesion y la reserva realizada anteriormente han sido canceladas, disculpe las molestias.`,
+                showConfirmButton: false,
+                timer: 3500,
               });
             } else {
               switch (info.event.extendedProps.estado) {
@@ -106,8 +116,10 @@ export class ReservasComponent implements OnInit {
                               title: 'Reserva realizada con exito',
                               showConfirmButton: false,
                               timer: 2000,
-                            });
-                            location.reload();
+                            }).then(()=>{
+                              router.navigateByUrl('/dashboard/cliente')
+
+                            })
                           }
                         });
                     }
@@ -128,9 +140,10 @@ export class ReservasComponent implements OnInit {
                   Swal.fire({
                     position: 'top-end',
                     icon: 'error',
-                    title: 'La sesion se ha cancelado, disculpe las molestias',
+                    title: 'Sesion cancelada',
+                    text:`No se puede realizar la reserva ya que la sesion ha sido cancelada, disculpe las molestias.`,
                     showConfirmButton: false,
-                    timer: 2000,
+                    timer: 3500,
                   });
                   break;
               }
@@ -178,19 +191,19 @@ export class ReservasComponent implements OnInit {
     };
   }
   ngOnInit(): void {
-    console.log('hola');
+    $('.tooltip').remove();
+
     const usuario = JSON.parse(sessionStorage.getItem('usuario')!);
     this.usuario = usuario;
     this.adminService
-      .getReservasCliente(this.usuario.email)
+      .getReservasClienteIDSesion(this.usuario.email)
       .subscribe((reservas) => {
         this.reservas = reservas;
         console.log(this.reservas);
       });
 
-    this.adminService.getSesionesDisponibles().subscribe((events) => {
-      this.events = events;
-      console.log(this.events);
-    });
+      this.adminService.getSesionesDisponiblesPorTarifa(this.usuario.id_tarifa).subscribe((events) => {
+        this.events = events;
+      });
   }
 }

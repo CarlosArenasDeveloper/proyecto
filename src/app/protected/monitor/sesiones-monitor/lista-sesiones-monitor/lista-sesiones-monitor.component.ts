@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AdminService } from '../services/admin.service';
+import { AdminService } from '../../../services/admin.service';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import listPlugin from '@fullcalendar/list';
 import interactionPlugin from '@fullcalendar/interaction';
@@ -10,12 +10,11 @@ import Swal from 'sweetalert2';
 import Tooltip from 'tooltip.js';
 
 @Component({
-  selector: 'app-cliente',
-  templateUrl: './cliente.component.html',
-  styleUrls: ['./cliente.component.css']
+  selector: 'app-lista-sesiones-monitor',
+  templateUrl: './lista-sesiones-monitor.component.html',
+  styleUrls: ['./lista-sesiones-monitor.component.css'],
 })
-export class ClienteComponent implements OnInit {
-
+export class ListaSesionesMonitorComponent implements OnInit {
   public events: any;
   email!: string;
   usuario!: any;
@@ -27,10 +26,10 @@ export class ClienteComponent implements OnInit {
     this.usuario = usuario;
 
     this.adminService
-    .seleccionarSesionesCliente(this.usuario.email)
-    .subscribe((events) => {
-      this.events = events;
-    });
+      .seleccionarSesionesMonitor(this.usuario.email)
+      .subscribe((events) => {
+        this.events = events;
+      });
 
     this.optionsList = {
       contentHeight: 700,
@@ -38,7 +37,7 @@ export class ClienteComponent implements OnInit {
       defaultDate: new Date(),
       duration: { days: 7 },
       defaultView: 'list',
-      locale: esLocale,
+      locale: esLocale!,
       header: {
         left: '',
         center: 'title',
@@ -83,7 +82,7 @@ export class ClienteComponent implements OnInit {
             break;
           default:
             Swal.fire({
-              title: `¿Estas seguro de querer eliminar la reserva?`,
+              title: `¿Estas seguro de querer cancelar la sesion?`,
               icon: 'warning',
               showCancelButton: true,
               confirmButtonColor: '#3085d6',
@@ -92,16 +91,12 @@ export class ClienteComponent implements OnInit {
               cancelButtonText: 'No',
             }).then((result) => {
               if (result.isConfirmed) {
-                const reserva={
-                  id_sesion: info.event.id,
-                  email_cliente: usuario.email
-                }  
-                adminService.borrarReserva(reserva).subscribe((resp) => {
+                adminService.cancelarSesion(info.event.id).subscribe((resp) => {
                   if (resp == null) {
                     Swal.fire({
                       position: 'top-end',
                       icon: 'success',
-                      title: 'Reserva cancelada correctamente',
+                      title: 'Sesion cancelada correctamente',
                       showConfirmButton: false,
                       timer: 2000,
                     }).then((result) => {
@@ -161,10 +156,9 @@ export class ClienteComponent implements OnInit {
     this.usuario = usuario;
 
     this.adminService
-      .seleccionarSesionesCliente(this.usuario.email)
+      .seleccionarSesionesMonitor(this.usuario.email)
       .subscribe((events) => {
         this.events = events;
       });
   }
-
 }

@@ -17,6 +17,8 @@ import Tooltip from 'tooltip.js';
 export class ClienteComponent implements OnInit {
 
   public events: any;
+  public eventsPendientes: any;
+
   email!: string;
   usuario!: any;
   reservas!: any;
@@ -32,11 +34,16 @@ export class ClienteComponent implements OnInit {
       this.events = events;
     });
 
+    this.adminService
+    .seleccionarSesionesPendientesCliente(this.usuario.email)
+    .subscribe((eventos) => {
+      this.eventsPendientes = eventos;
+    });
     this.optionsList = {
       contentHeight: 700,
       plugins: [dayGridPlugin, listPlugin, interactionPlugin],
       defaultDate: new Date(),
-      duration: { days: 7 },
+      duration: { days: 14 },
       defaultView: 'list',
       locale: esLocale,
       header: {
@@ -45,6 +52,37 @@ export class ClienteComponent implements OnInit {
         right: '',
       },
       editable: false,
+      eventClick:function(info:any){
+        Swal.fire({
+          title: `¿Estas seguro de querer eliminar la reserva?`,
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Si, cancelar',
+          cancelButtonText: 'No',
+        }).then((result) => {
+          if (result.isConfirmed) {
+            const reserva={
+              id_sesion: info.event.id,
+              email_cliente: usuario.email
+            }  
+            adminService.borrarReserva(reserva).subscribe((resp) => {
+              if (resp == null) {
+                Swal.fire({
+                  position: 'top-end',
+                  icon: 'success',
+                  title: 'Reserva cancelada correctamente',
+                  showConfirmButton: false,
+                  timer: 2000,
+                }).then((result) => {
+                  location.reload();
+                });
+              }
+            });
+          }
+        });
+      }
     };
     this.optionsMonth = {
       hemeSystem: 'lumen',
@@ -164,6 +202,12 @@ export class ClienteComponent implements OnInit {
       .seleccionarSesionesCliente(this.usuario.email)
       .subscribe((events) => {
         this.events = events;
+      });
+
+      this.adminService
+      .seleccionarSesionesPendientesCliente(this.usuario.email)
+      .subscribe((eventos) => {
+        this.eventsPendientes = eventos;
       });
   }
 

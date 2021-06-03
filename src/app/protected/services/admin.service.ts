@@ -478,10 +478,16 @@ export class AdminService {
 
   addReserva(reserva: Reserva) {
     return this.htpp.post(
-      `${this.baseUrl}/addReserva.php`,
+      `${this.baseUrl}/addReservaEmail.php`,
       JSON.stringify(reserva)
     );
   }
+  // addReserva(reserva: Reserva) {
+  //   return this.htpp.post(
+  //     `${this.baseUrl}/addReserva.php`,
+  //     JSON.stringify(reserva)
+  //   );
+  // }
 
   getReservasCliente(email:string){
     return this.htpp.get(`${this.baseUrl}/seleccionarReservasCliente.php?email_cliente=${email}`)
@@ -492,8 +498,12 @@ export class AdminService {
   }
 
   cancelarSesion(id: number) {
-    return this.htpp.get(`${this.baseUrl}/cancelarSesion.php?id=${id}`);
+    return this.htpp.get(`${this.baseUrl}/cancelarSesionBIS.php?id=${id}`);
   }
+
+  // cancelarSesion(id: number) {
+  //   return this.htpp.get(`${this.baseUrl}/cancelarSesion.php?id=${id}`);
+  // }
 
   seleccionarSesionesMonitor(email_monitor:string){
     return this.htpp.get(`${this.baseUrl}/seleccionarReservasMonitor.php?email_monitor=${email_monitor}`);
@@ -505,6 +515,10 @@ export class AdminService {
 
   }
 
+  seleccionarSesionesPendientesCliente(email_cliente:string){
+    return this.htpp.get(`${this.baseUrl}/seleccionarReservasPendientes.php?email_cliente=${email_cliente}`);
+
+  }
   borrarReserva(reserva: Reserva) {
     return this.htpp.post(
       `${this.baseUrl}/borrarReserva.php`,

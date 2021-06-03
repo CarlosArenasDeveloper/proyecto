@@ -1,7 +1,5 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { AdminService } from '../../../services/admin.service';
-import Swal from 'sweetalert2';
-import { Sesion, Usuario } from '../../../../models/interface';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';

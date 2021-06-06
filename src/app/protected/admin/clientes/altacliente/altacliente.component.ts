@@ -106,7 +106,7 @@ export class AltaclienteComponent implements OnInit {
     };
 
     this.adminService.addCliente(this.cliente).subscribe((resp) => {
-      console.log(this.cliente);
+      //console.log(this.cliente);
       if (resp != 'ERROR') {
         Swal.fire({
           position: 'top-end',

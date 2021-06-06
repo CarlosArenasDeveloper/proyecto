@@ -25,7 +25,7 @@ export class MonitorComponent implements OnInit {
   public dataMonitores: MultiDataSet = [];
   public dataSexo: MultiDataSet = [];
   public dataSexoMonitores: MultiDataSet = [];
-
+  isSpanish:boolean=true;
   public doughnutChartType: ChartType = 'doughnut';
   consulta!: any;
   clientes: number = 0;
@@ -45,7 +45,11 @@ export class MonitorComponent implements OnInit {
       backgroundColor: ['#0075ED', '#e6e718', '#11C40E', '#C40E32'],
     },
   ];
-  constructor(private adminService: AdminService) {}
+  constructor(private adminService: AdminService) {
+    if (localStorage.getItem('lang') == 'en') {
+      this.isSpanish = false;
+    } 
+  }
   ngOnInit(): void {
     const usuario: Usuario = JSON.parse(sessionStorage.getItem('usuario')!);
     this.monitor=usuario;
@@ -120,6 +124,20 @@ export class MonitorComponent implements OnInit {
     'Noviembre',
     'Diciembre',
   ];
+  public barChartLabelsIngles: Label[] = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ];
   public barChartType: ChartType = 'bar';
   public barChartLegend = true;
 
@@ -130,6 +148,15 @@ export class MonitorComponent implements OnInit {
       label: 'Altas',
     },
   ];
+  public barChartDataIngles: ChartDataSets[] = [
+    { data: this.bajas, label: 'Unsubscribe' },
+
+    {
+      data: this.altas,
+      label: 'Admission',
+    },
+  ];
+
 
   // events
   public chartClicked({
@@ -139,7 +166,7 @@ export class MonitorComponent implements OnInit {
     event: MouseEvent;
     active: {}[];
   }): void {
-    console.log(event, active);
+    //console.log(event, active);
   }
 
   public chartHovered({
@@ -149,7 +176,7 @@ export class MonitorComponent implements OnInit {
     event: MouseEvent;
     active: {}[];
   }): void {
-    console.log(event, active);
+    //console.log(event, active);
   }
 
   public randomize(): void {
@@ -193,6 +220,14 @@ export class MonitorComponent implements OnInit {
               label: 'Altas',
             },
           ];
+          this.barChartDataIngles = [
+            { data: this.bajas, label: 'Unsubscribe' },
+        
+            {
+              data: this.altas,
+              label: 'Admission',
+            },
+          ];
         }
       });
     //this.verDatos();
@@ -227,6 +262,14 @@ export class MonitorComponent implements OnInit {
             {
               data: this.altas,
               label: 'Altas',
+            },
+          ];
+          this.barChartDataIngles = [
+            { data: this.bajas, label: 'Unsubscribe' },
+        
+            {
+              data: this.altas,
+              label: 'Admission',
             },
           ];
         }

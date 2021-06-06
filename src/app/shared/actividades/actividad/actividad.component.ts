@@ -23,7 +23,7 @@ export class ActividadComponent implements OnInit {
       .pipe(switchMap(({ id }) => this.adminService.getActividadPorIdInicio(id)))
       .subscribe((actividad) => {
         this.actividad = actividad;
-        console.log(this.actividad);
+        //console.log(this.actividad);
       });
   }
 

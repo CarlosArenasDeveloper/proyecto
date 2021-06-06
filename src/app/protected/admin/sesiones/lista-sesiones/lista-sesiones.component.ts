@@ -30,7 +30,7 @@ export class ListaSesionesComponent {
   constructor(private router: Router, private adminService: AdminService) {
     this.adminService.getPrueba().subscribe((events) => {
       this.events = events;
-      console.log(this.events);
+      //console.log(this.events);
     });
 
     if (localStorage.getItem('lang') == 'es') {
@@ -72,7 +72,7 @@ export class ListaSesionesComponent {
         right: 'dayGridMonth, dayGridWeek, dayGridDay',
       },
       dateClick: function (info: any) {
-        console.log(info);
+        //console.log(info);
         localStorage.setItem('fecha', info.date);
         router.navigateByUrl(`/dashboard/admin/sesiones/add-sesion`);
       },

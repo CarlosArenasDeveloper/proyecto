@@ -133,8 +133,6 @@ export class RegistroComponent implements OnInit {
       ...this.thirdFormGroup.value,
     };
     this.authService.registro(this.cliente).subscribe((resp) => {
-      console.log(this.cliente);
-      console.log(resp);
       if (resp != 'ERROR') {
         Swal.fire({
           position: 'top-end',
@@ -251,7 +249,6 @@ export class RegistroComponent implements OnInit {
   public payPalConfig?: IPayPalConfig;
 
   private initConfig(): void {
-    console.log(this.tarifa);
     this.payPalConfig = {
       currency: 'EUR',
       clientId:
@@ -293,30 +290,16 @@ export class RegistroComponent implements OnInit {
       },
 
       onApprove: (data, actions) => {
-        console.log(
-          'onApprove - transaction was approved, but not authorized',
-          data,
-          actions
-        );
-        // actions.order.get().then(details => {
-        //     console.log('onApprove - you can get full order details inside onApprove: ', details);
-        // });
       },
       onClientAuthorization: (data) => {
-        console.log(
-          'onClientAuthorization - you should probably inform your server about completed transaction at this point',
-          data
-        );
+ 
         this.registrar();
       },
       onCancel: (data, actions) => {
-        console.log('OnCancel', data, actions);
       },
       onError: (err) => {
-        console.log('OnError', err);
       },
       onClick: (data, actions) => {
-        console.log('onClick', data, actions);
       },
     };
   }
@@ -335,7 +318,6 @@ export class RegistroComponent implements OnInit {
       });
 
     this.initConfig();
-    console.log(this.tarifa);
   }
 
   back() {

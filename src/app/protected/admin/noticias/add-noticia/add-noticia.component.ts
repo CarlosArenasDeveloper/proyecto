@@ -97,10 +97,10 @@ export class AddNoticiaComponent implements OnInit {
       }
     } else {
       if (month < 10) {
-        console.log(`${year}-0${month}-${day}`);
+        //console.log(`${year}-0${month}-${day}`);
         return `${year}-0${month}-${day}`;
       } else {
-        console.log(`${year}-${month}-${day}`);
+       // console.log(`${year}-${month}-${day}`);
         return `${year}-${month}-${day}`;
       }
     }
@@ -144,7 +144,7 @@ export class AddNoticiaComponent implements OnInit {
 
         const file = fileList[0];
         //get file information such as name, size and type
-        console.log('finfo',file.name,file.size,file.type);
+        //console.log('finfo',file.name,file.size,file.type);
         //max file size is 4 mb
         this.nombreFichero = file.name;
         if((file.size/1048576)<=4)

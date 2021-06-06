@@ -1,9 +1,9 @@
-<h1>Editar tarifa {{this.tarifa.nombre}}</h1>
+<h1>{{'Editar tarifa'|translate}} {{this.tarifa.nombre}}</h1>
 <hr />
 <form [formGroup]="miFormulario" (ngSubmit)="editarTarifa()">
   <div class="mb-3">
-    <label for="exampleFormControlInput1" class="form-label"
-      >Nombre de la tarifa:
+    <label for="nombre" class="form-label"
+      >{{'Nombre de la tarifa'|translate}}:
     </label>
     <input
       [ngClass]="{
@@ -12,18 +12,18 @@
       formControlName="nombre"
       type="text"
       class="form-control"
-      id="exampleFormControlInput1"
+      id="nombre"
     />
     <span
       class="form-text text-danger fst-italic"
       *ngIf="campoNoValido('nombre')"
     >
-      El nombre es requerido
+      {{'El nombre es requerido'|translate}}
     </span>
   </div>
   <div class="mb-3">
     <label for="descripcion" class="form-label"
-      >Descripcion:
+      >{{'Descripcion'|translate}}:
     </label>
     <textarea
       [ngClass]="{
@@ -38,12 +38,12 @@
       class="form-text text-danger fst-italic"
       *ngIf="campoNoValido('descripcion')"
     >
-      La descripcion es obligatoria
+      {{'La descripcion es obligatoria'|translate}}
     </span>
   </div>
   <div class="mb-3">
-    <label for="exampleFormControlInput1" class="form-label"
-      >Precio (euros):
+    <label for="precio" class="form-label"
+      >{{'Precio (euros)'|translate}}:
     </label>
     <input
       [ngClass]="{
@@ -52,7 +52,7 @@
       formControlName="precio"
       type="text"
       class="form-control"
-      id="exampleFormControlInput1"
+      id="precio"
     />
     <span
       class="form-text text-danger fst-italic"
@@ -63,14 +63,14 @@
   </div>
   <button type="button" class="btn btn-danger mx-3" routerLink="tarifas">
     <i class="fas fa-arrow-circle-left"></i>
-    Volver atrás
+    {{'Volver atrás'|translate}}
   </button>
   <button
     type="submit"
     [disabled]="miFormulario.invalid"
     class="btn btn-primary"
   >
-    Editar
+    {{'Editar tarifa'|translate}}
     <i class="fas fa-edit"></i>
 
   </button>

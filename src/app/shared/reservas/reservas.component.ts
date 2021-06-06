@@ -238,7 +238,7 @@ export class ReservasComponent implements OnInit {
       .getReservasClienteIDSesion(this.usuario.email)
       .subscribe((reservas) => {
         this.reservas = reservas;
-        console.log(this.reservas);
+        //console.log(this.reservas);
       });
 
     this.adminService

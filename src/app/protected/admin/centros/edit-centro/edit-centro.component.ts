@@ -5,6 +5,7 @@ import { Centro } from '../../../../models/interface';
 import { AdminService } from '../../../services/admin.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-edit-centro',
@@ -19,21 +20,19 @@ export class EditCentroComponent implements OnInit {
     private fb: FormBuilder,
     private adminService: AdminService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
-  ) {}
+    private translateService:TranslateService
+    ) {}
 
   ngOnInit(): void {
     this.activatedRoute.params
       .pipe(switchMap(({ id }) => this.adminService.getCentroPorId(id)))
       .subscribe((centro) => {
         this.centro = centro;
-        this.id = centro.id!;
-      
+        this.id = centro.id!;   
         this.miFormulario.controls['nombre'].setValue(this.centro.nombre);
         this.miFormulario.controls['latitud'].setValue(this.centro.latitud);
         this.miFormulario.controls['longitud'].setValue(this.centro.longitud);
         this.miFormulario.controls['ubicacion'].setValue(this.centro.ubicacion);
-
         this.miFormulario.controls['direccion'].setValue(
           this.centro.direccion
         );
@@ -63,9 +62,9 @@ export class EditCentroComponent implements OnInit {
   get telefonoErrorMsg(): string {
     const errors = this.miFormulario.get('telefono')?.errors;
     if (errors?.required) {
-      return 'El nº de telefono es requerido';
+      return this.translateService.instant('El nº de telefono es requerido');
     } else if (errors?.pattern) {
-      return 'El valor ingresado no tiene formato de numero de telefono';
+      return this.translateService.instant('El valor ingresado no tiene formato de numero de telefono');
     }
     return '';
   }
@@ -78,7 +77,7 @@ export class EditCentroComponent implements OnInit {
         Swal.fire({
           position: 'top-end',
           icon: 'success',
-          title: 'Datos correctamente actualizados',
+          title: `${this.translateService.instant('Datos correctamente actualizados')}`,
           showConfirmButton: false,
           timer: 2000,
         });

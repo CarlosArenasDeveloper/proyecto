@@ -103,7 +103,7 @@ export class EditSesionComponent implements OnInit {
       .subscribe((sesion) => {
         this.sesion = sesion;
         this.id = this.sesion.id;
-        console.log(this.id);
+        //console.log(this.id);
         this.fin = new Date(this.sesion.start);
 
         this.miFormulario.controls['title'].setValue(this.sesion.title);
@@ -260,7 +260,7 @@ export class EditSesionComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         const idsesion = parseInt(this.sesion.id)
-        console.log(idsesion);
+        //console.log(idsesion);
         this.adminService.cancelarSesion(idsesion).subscribe((resp) => {
           if (resp == null) {
             Swal.fire({

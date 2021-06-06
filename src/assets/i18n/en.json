@@ -22,6 +22,11 @@
     "Paso 2":"Step 2",
     "Paso 3":"Step 3"
   },
+  "title":{
+    "Borrar":"Delete",
+    "Ver más":"See more",
+    "Ir a google maps":"Go to google maps"
+  },
   "inscribete ya": "sign up now",
   "inscribete ahora": "sign up now",
   "area de clientes": "users area",
@@ -209,7 +214,53 @@
 "Total monitores":"Total monitors",
 "Clientes por sexo":"Clients by gender",
 "Monitores por gimnasio":"Monitors per gym",
-"Monitores por sexo":"Monitors by gender"
+"Monitores por sexo":"Monitors by gender",
+"Listado de Tarifas":"List of rates",
+"Añadir tarifa":"Add rate",
+"Descripcion":"Description",
+"Precio":"Price",
+"Añadiendo tarifa":"Adding rate",
+"Nombre de la tarifa":"Rate name",
+"La descripcion es obligatoria":"The description is required",
+"Precio (euros)":"Price (euros)",
+"Añadir":"Add",
+"El precio es requerido":"Price is required",
+"El valor introducido no corresponde con un precio valido":"The entered value does not correspond to a valid price",
+"La tarifa":"The rate",
+"se ha añadido correctamente":"has been added successfully",
+"Editar tarifa":"Edit rate",
+"Tarifa añadida":"Rate added",
+"Tarifa actualizada":"Updated rate",
+"Estas seguro de querer eliminar la tarifa":"Are you sure you want to eliminate the rate",
+"Si, eliminar":"Yes, delete",
+"Tarifa eliminada correctamente":"Rate successfully removed",
+"Eliminar tarifa":"Delete rate",
+"Listado de Centros":"List of Centers",
+"Añadir centro":"Add center",
+"Ubicacion":"Location",
+"Los usuarios serán eliminados al borrar el centro, estás seguro de querer eliminarlo":"Users will be deleted when deleting the center, you are sure you want to delete it",
+"Centro eliminado correctamente":"Center removed successfully",
+"Estas seguro de querer eliminar":"Are you sure you want to delete",
+"Borrar centro":"Delete center",
+"usuarios pertenecen al centro":"users belong to the center",
+"Editar centro":"Edit center",
+"Nombre del centro":"Name of the center",
+"La direccion es obligatoria":"The address is required",
+"Latitud":"Latitude",
+"La latitud es requerida":"Latitude is required",
+"Longitud":"Length",
+"La longitud es requerida":"Length is required",
+"Ubicacion del centro":"Downtown location",
+"La ubicacion es requerida":"The location is required",
+"Telefono de contacto":"Telephone contact",
+"Añadiendo centro":"Adding center",
+"Centro añadido":"Added center"
+
+
+
+
+
+
 
 
 

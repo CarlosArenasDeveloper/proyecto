@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Centro } from '../../../../models/interface';
 import { AdminService } from '../../../services/admin.service';
 import Swal from 'sweetalert2';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-add-centro',
@@ -11,7 +12,7 @@ import Swal from 'sweetalert2';
 })
 export class AddCentroComponent implements OnInit {
   centro!: Centro;
-  constructor(private fb: FormBuilder, private adminService: AdminService) {}
+  constructor(private fb: FormBuilder, private adminService: AdminService,private translateService:TranslateService) {}
 
   ngOnInit(): void {}
 
@@ -39,9 +40,9 @@ export class AddCentroComponent implements OnInit {
   get telefonoErrorMsg(): string {
     const errors = this.miFormulario.get('telefono')?.errors;
     if (errors?.required) {
-      return 'El nº de telefono es requerido';
+      return this.translateService.instant('El nº de telefono es requerido');
     } else if (errors?.pattern) {
-      return 'El valor ingresado no tiene formato de numero de telefono';
+      return this.translateService.instant('El valor ingresado no tiene formato de numero de telefono');
     }
     return '';
   }
@@ -49,12 +50,13 @@ export class AddCentroComponent implements OnInit {
   addCentro() {
     this.centro = this.miFormulario.value;
     this.adminService.addCentro(this.centro).subscribe((resp) => {
-      console.log(resp);
+      //console.log(resp);
       if (resp == null) {
         Swal.fire({
           position: 'top-end',
           icon: 'success',
-          title: `El centro ${this.centro.nombre} se ha añadido correctamente!`,
+          title:`${this.translateService.instant('Centro añadido')}`,
+          text: `${this.centro.nombre} ${this.translateService.instant('se ha añadido correctamente')}!`,
           showConfirmButton: false,
           timer: 2000,
         });

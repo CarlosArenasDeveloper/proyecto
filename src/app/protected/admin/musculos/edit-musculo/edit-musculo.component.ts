@@ -40,7 +40,7 @@ export class EditMusculoComponent implements OnInit {
       .pipe(switchMap(({ nombre }) => this.adminService.getMusculoPorNombre(nombre)))
       .subscribe((musculo) => {
         this.musculo = musculo;
-        console.log(this.musculo);
+        //console.log(this.musculo);
         this.imagenGuardada=musculo.imagen!
         this.nombreFichero=musculo.imagen!
         this.miFormulario.controls['nombre'].setValue(this.musculo.nombre);
@@ -123,7 +123,7 @@ export class EditMusculoComponent implements OnInit {
         .pipe(switchMap(({ nombre }) => this.adminService.getMusculoPorNombre(nombre)))
         .subscribe((musculo) => {
         this.musculo = musculo;
-        console.log(this.musculo);
+        //console.log(this.musculo);
         });
         this.musculo.imagen = '';
     });

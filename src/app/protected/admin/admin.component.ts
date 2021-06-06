@@ -35,6 +35,7 @@ export class AdminComponent implements OnInit {
   anioFijo = new Date().getFullYear();
   numAltas: number = 0;
   numBajas: number = 0;
+  isSpanish:boolean=true;
 
   public colors: Color[] = [
     {
@@ -48,7 +49,11 @@ export class AdminComponent implements OnInit {
   public altas: any = [];
   public bajas: any = [];
 
-  constructor(private adminService: AdminService) {}
+  constructor(private adminService: AdminService) {
+    if (localStorage.getItem('lang') == 'en') {
+      this.isSpanish = false;
+    } 
+  }
 
   ngOnInit(): void {
     this.adminService
@@ -114,6 +119,20 @@ export class AdminComponent implements OnInit {
     'Noviembre',
     'Diciembre',
   ];
+  public barChartLabelsIngles: Label[] = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ];
   public barChartType: ChartType = 'bar';
   public barChartLegend = true;
 
@@ -126,6 +145,15 @@ export class AdminComponent implements OnInit {
     },
   ];
 
+  public barChartDataIngles: ChartDataSets[] = [
+    { data: this.bajas, label: 'Unsubscribe' },
+
+    {
+      data: this.altas,
+      label: 'Admission',
+    },
+  ];
+
   // events
   public chartClicked({
     event,
@@ -134,7 +162,6 @@ export class AdminComponent implements OnInit {
     event: MouseEvent;
     active: {}[];
   }): void {
-    console.log(event, active);
   }
 
   public chartHovered({
@@ -144,7 +171,6 @@ export class AdminComponent implements OnInit {
     event: MouseEvent;
     active: {}[];
   }): void {
-    console.log(event, active);
   }
 
   public randomize(): void {
@@ -162,7 +188,7 @@ export class AdminComponent implements OnInit {
     this.arrayMeses = [];
 
     let anioProximo = this.anioActual + 1;
-    console.log(anioProximo);
+    //console.log(anioProximo);
 
     this.adminService
       .getGraficaClientesFechaBis(anioProximo)
@@ -186,6 +212,15 @@ export class AdminComponent implements OnInit {
             {
               data: this.altas,
               label: 'Altas',
+            },
+          ];
+
+           this.barChartDataIngles = [
+            { data: this.bajas, label: 'Unsubscribe' },
+        
+            {
+              data: this.altas,
+              label: 'Admission',
             },
           ];
         }
@@ -221,6 +256,14 @@ export class AdminComponent implements OnInit {
             {
               data: this.altas,
               label: 'Altas',
+            },
+          ];
+          this.barChartDataIngles = [
+            { data: this.bajas, label: 'Unsubscribe' },
+        
+            {
+              data: this.altas,
+              label: 'Admission',
             },
           ];
         }

@@ -46,7 +46,7 @@ export class AddMusculoComponent implements OnInit {
     this.musculo.imagen=this.nombreFichero;
 
     this.adminService.addMusculo(this.musculo).subscribe((resp) => {
-      console.log(resp);
+      //console.log(resp);
       if (resp == null) {
         Swal.fire({
           position: 'top-end',
@@ -75,7 +75,7 @@ export class AddMusculoComponent implements OnInit {
 
         const file = fileList[0];
         //get file information such as name, size and type
-        console.log('finfo',file.name,file.size,file.type);
+        //console.log('finfo',file.name,file.size,file.type);
         //max file size is 4 mb
         this.nombreFichero = file.name;
         if((file.size/1048576)<=4)
@@ -98,7 +98,7 @@ export class AddMusculoComponent implements OnInit {
   }
   uploadFile(){
     this.adminService.uploadFile(this.file_data).subscribe(resp=>{
-      console.log(resp);
+      //console.log(resp);
     })
   } 
 

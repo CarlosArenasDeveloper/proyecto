@@ -57,12 +57,12 @@ export class AddActividadComponent implements OnInit {
   }
 
   addActividad() {
-    console.log(this.miFormulario.value);
+    //console.log(this.miFormulario.value);
     this.actividad = this.miFormulario.value;
     this.actividad.imagen=this.nombreFichero;
 
     this.adminService.addActividad(this.actividad).subscribe((resp) => {
-      console.log(resp);
+      //console.log(resp);
       if (resp == null) {
         Swal.fire({
           position: 'top-end',
@@ -92,7 +92,7 @@ export class AddActividadComponent implements OnInit {
 
         const file = fileList[0];
         //get file information such as name, size and type
-        console.log('finfo',file.name,file.size,file.type);
+        //console.log('finfo',file.name,file.size,file.type);
         //max file size is 4 mb
         this.nombreFichero = file.name;
         if((file.size/1048576)<=4)
@@ -115,7 +115,7 @@ export class AddActividadComponent implements OnInit {
   }
   uploadFile(){
     this.adminService.uploadFile(this.file_data).subscribe(resp=>{
-      console.log(resp);
+      //console.log(resp);
     })
   } 
 

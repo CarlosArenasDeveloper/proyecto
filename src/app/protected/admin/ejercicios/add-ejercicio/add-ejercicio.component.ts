@@ -57,7 +57,7 @@ export class AddEjercicioComponent implements OnInit {
     this.ejercicio = this.miFormulario.value;
     this.ejercicio.imagen=this.nombreFichero;
     this.adminService.addEjercicio(this.ejercicio).subscribe((resp) => {
-      console.log(resp);
+      //console.log(resp);
       if (resp == null) {
         Swal.fire({
           position: 'top-end',
@@ -88,7 +88,7 @@ export class AddEjercicioComponent implements OnInit {
 
         const file = fileList[0];
         //get file information such as name, size and type
-        console.log('finfo',file.name,file.size,file.type);
+        //console.log('finfo',file.name,file.size,file.type);
         //max file size is 4 mb
         this.nombreFichero = file.name;
         if((file.size/1048576)<=4)
@@ -111,7 +111,7 @@ export class AddEjercicioComponent implements OnInit {
   }
   uploadFile(){
     this.adminService.uploadFile(this.file_data).subscribe(resp=>{
-      console.log(resp);
+      //console.log(resp);
     })
   } 
 

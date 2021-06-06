@@ -1,9 +1,9 @@
-<h1>Añadiendo tarifa</h1>
+<h1>{{'Añadiendo tarifa'|translate}}</h1>
 <hr />
 <form [formGroup]="miFormulario" (ngSubmit)="addTarifa()" autocomplete="off"> 
   <div class="mb-3">
     <label for="exampleFormControlInput1" class="form-label"
-      >Nombre de la tarifa:
+      >{{'Nombre de la tarifa'|translate}}:
     </label>
     <input
       [ngClass]="{
@@ -18,12 +18,12 @@
       class="form-text text-danger fst-italic"
       *ngIf="campoNoValido('nombre')"
     >
-      El nombre es requerido
+      {{'El nombre es requerido'|translate}}
     </span>
   </div>
   <div class="mb-3">
     <label for="exampleFormControlTextarea1" class="form-label"
-      >Descripcion:
+      >{{'Descripcion'|translate}}:
     </label>
     <textarea
       [ngClass]="{
@@ -38,12 +38,12 @@
       class="form-text text-danger fst-italic"
       *ngIf="campoNoValido('descripcion')"
     >
-      La descripcion es obligatoria
+      {{'La descripcion es obligatoria'|translate}}
     </span>
   </div>
   <div class="mb-3">
     <label for="exampleFormControlInput1" class="form-label"
-      >Precio (euros):
+      >{{'Precio (euros)'|translate}}:
     </label>
     <input
       [ngClass]="{
@@ -63,13 +63,13 @@
   </div>
   <button type="button" class="btn btn-danger mx-3" routerLink="tarifas">
     <i class="fas fa-arrow-circle-left"></i>
-    Volver atrás
+    {{'Volver atrás'|translate}}
   </button>
   <button
     type="submit"
     [disabled]="miFormulario.invalid"
     class="btn btn-primary"
   >
-    Añadir
+    {{'Añadir'|translate}}
   </button>
 </form>

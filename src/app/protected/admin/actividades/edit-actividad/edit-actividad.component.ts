@@ -52,7 +52,7 @@ export class EditActividadComponent implements OnInit {
     this.activatedRoute.params
       .pipe(switchMap(({ id }) => this.adminService.getActividadPorId(id)))
       .subscribe((actividad) => {
-        console.log(actividad);
+        //console.log(actividad);
         this.actividad = actividad;
         //  this.emailMonitor!=this.actividad.email_monitor;
         this.imagenGuardada = this.actividad.imagen!;
@@ -179,7 +179,7 @@ export class EditActividadComponent implements OnInit {
         formData.append('update', '2');
         formData.append('info', JSON.stringify(info));
         this.file_data = formData;
-        console.log(this.file_data);
+        //(this.file_data);
       } else {
         //this.snackBar.open('File size exceeds 4 MB. Please choose less than 4 MB','',{duration: 2000});
       }

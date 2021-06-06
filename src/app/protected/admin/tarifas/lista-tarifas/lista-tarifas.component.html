@@ -1,10 +1,10 @@
 <div class="container">
-  <h1>Listado de Tarifas</h1>
+  <h1>{{'Listado de Tarifas'|translate}}</h1>
   <hr />
   <div class="row" *ngIf="isAdmin()">
     <div class="col text-right">
       <button routerLink="./add-tarifa" class="btn btn-primary">
-        <i class="fa fa-plus"></i> Añadir tarifa
+        <i class="fa fa-plus"></i> {{'Añadir tarifa'|translate}}
       </button>
     </div>
   </div>
@@ -19,9 +19,9 @@
         <thead class="thead-dark" *ngIf="tarifas.length > 0">
           <tr>
             <th scope="col">ID</th>
-            <th scope="col">Nombre</th>
-            <th scope="col">Descripcion</th>
-            <th scope="col">Precio</th>
+            <th scope="col">{{'Nombre'|translate}}</th>
+            <th scope="col">{{'Descripcion'|translate}}</th>
+            <th scope="col">{{'Precio'|translate}}</th>
             <th scope="col" *ngIf="isAdmin()"></th>
             <th scope="col" *ngIf="isAdmin()"></th>
           </tr>
@@ -33,16 +33,18 @@
             <td>{{ ele.descripcion }}</td>
             <td>{{ ele.precio | currency: "EUR" }}</td>
             <td *ngIf="isAdmin()">
-              <button class="btn btn-danger" (click)="borrarTarifa(ele, i)">
+              <button 
+              [title]="'title.Borrar'|translate"
+              class="btn btn-danger" (click)="borrarTarifa(ele, i)">
                 <i class="fa fa-trash"></i>
               </button>
   
             </td>
             <td *ngIf="isAdmin()">
-           
               <button
                 class="btn btn-warning ms-2"
                 [routerLink]="['./editar-tarifa', ele.id]"
+                [title]="'title.Ver más'|translate"
               >
                 <i class="fas fa-search-plus"></i>
               </button>

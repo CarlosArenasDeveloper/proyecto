@@ -102,7 +102,7 @@ export class AddSesionComponent implements OnInit {
 
   add() {
     this.sesion = this.miFormulario.value;
-    console.log(this.sesion);
+    //console.log(this.sesion);
     this.adminService.addSesion(this.sesion).subscribe((resp) => {
       if (resp != 'error') {
         Swal.fire({

@@ -1,9 +1,9 @@
-<h1>Añadiendo centro</h1>
+<h1>{{'Añadiendo centro'|translate}}</h1>
 <hr />
 <form [formGroup]="miFormulario" (ngSubmit)="addCentro()" autocomplete="off">
   <div class="mb-3">
     <label for="exampleFormControlInput1" class="form-label"
-      >Nombre del centro:
+      >{{'Nombre del centro'|translate}}:
     </label>
     <input
       [ngClass]="{
@@ -18,12 +18,13 @@
       class="form-text text-danger fst-italic"
       *ngIf="campoNoValido('nombre')"
     >
-      El nombre es requerido
+    {{'El nombre es requerido'|translate}}
+      
     </span>
   </div>
   <div class="mb-3">
     <label for="exampleFormControlTextarea1" class="form-label"
-      >Direccion:
+      >{{'Direccion'|translate}}:
     </label>
     <textarea
       [ngClass]="{
@@ -38,13 +39,13 @@
       class="form-text text-danger fst-italic"
       *ngIf="campoNoValido('direccion')"
     >
-      La direccion es obligatoria
+      {{'La direccion es obligatoria'|translate}}
     </span>
   </div>
   
   <div class="mb-3">
     <label for="latitud" class="form-label"
-      >Latitud:
+      >{{'Latitud'|translate}}:
     </label>
     <input
       [ngClass]="{
@@ -59,12 +60,12 @@
       class="form-text text-danger fst-italic"
       *ngIf="campoNoValido('latitud')"
     >
-      La latitud es requerida
+      {{'La latitud es requerida'|translate}}
     </span>
   </div>
   <div class="mb-3">
     <label for="longitud" class="form-label"
-      >Longitud:
+      >{{'Longitud'|translate}}:
     </label>
     <input
       [ngClass]="{
@@ -79,12 +80,12 @@
       class="form-text text-danger fst-italic"
       *ngIf="campoNoValido('longitud')"
     >
-      La longitud es requerida
+      {{'La longitud es requerida'|translate}}
     </span>
   </div>
   <div class="mb-3">
     <label for="ubicacion" class="form-label"
-      >Ubicacion del centro:
+      >{{'Ubicacion del centro'|translate}}:
     </label>
     <input
       [ngClass]="{
@@ -99,12 +100,12 @@
       class="form-text text-danger fst-italic"
       *ngIf="campoNoValido('ubicacion')"
     >
-      La ubicacion es requerida
+      {{'La ubicacion es requerida'|translate}}
     </span>
   </div>
   <div class="mb-3">
     <label for="telefono" class="form-label"
-      >Telefono de contacto:
+      >{{'Telefono de contacto'|translate}}:
     </label>
     <input
       [ngClass]="{
@@ -124,14 +125,14 @@
   </div>
   <button type="button" class="btn btn-danger mx-3" routerLink="centros">
     <i class="fas fa-arrow-circle-left"></i>
-    Volver atrás
+    {{'Volver atrás'|translate}}
   </button>
   <button
     type="submit"
     [disabled]="miFormulario.invalid"
     class="btn btn-primary"
   >
-    Añadir
+    {{'Añadir'|translate}}
   </button>
 </form>
 

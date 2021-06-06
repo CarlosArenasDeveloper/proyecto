@@ -18,10 +18,19 @@
       </div>
 
       <div style="display: block">
-        <canvas
+        <canvas *ngIf="isSpanish"
           baseChart
           [datasets]="barChartData"
           [labels]="barChartLabels"
+          [options]="barChartOptions"
+          [legend]="barChartLegend"
+          [chartType]="barChartType"
+          (chartHover)="chartHovered($event)"
+        ></canvas>
+        <canvas *ngIf="!isSpanish"
+          baseChart
+          [datasets]="barChartDataIngles"
+          [labels]="barChartLabelsIngles"
           [options]="barChartOptions"
           [legend]="barChartLegend"
           [chartType]="barChartType"

@@ -78,10 +78,10 @@ export class EditarPerfilComponent implements OnInit {
       }
     } else {
       if (month < 10) {
-        console.log(`${year}-0${month}-${day}`);
+        //console.log(`${year}-0${month}-${day}`);
         return `${year}-0${month}-${day}`;
       } else {
-        console.log(`${year}-${month}-${day}`);
+        //console.log(`${year}-${month}-${day}`);
         return `${year}-${month}-${day}`;
       }
     }
@@ -455,7 +455,7 @@ export class EditarPerfilComponent implements OnInit {
         formData.append('update', '2');
         formData.append('info', JSON.stringify(info));
         this.file_data = formData;
-        console.log(this.file_data);
+       // console.log(this.file_data);
       } else {
         //this.snackBar.open('File size exceeds 4 MB. Please choose less than 4 MB','',{duration: 2000});
       }
@@ -473,7 +473,7 @@ export class EditarPerfilComponent implements OnInit {
         )
         .subscribe((cliente) => {
           this.usuario = cliente;
-          console.log(this.usuario);
+          //console.log(this.usuario);
         });
       this.usuario.imagen = '';
     });

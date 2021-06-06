@@ -22,6 +22,11 @@
     "Paso 2":"Paso 2",
     "Paso 3":"Paso 3"
   },
+  "title":{
+    "Borrar":"Borrar",
+    "Ver más":"Ver más",
+    "Ir a google maps":"Ir a google maps"
+  },
   "inscribete ya": "inscribete ya",
   "inscribete ahora": "inscribete ahora",
   "area de clientes": "area de clientes",
@@ -209,7 +214,52 @@
 "Total monitores":"Total monitores",
 "Clientes por sexo":"Clientes por sexo",
 "Monitores por gimnasio":"Monitores por gimnasio",
-"Monitores por sexo":"Monitores por sexo"
+"Monitores por sexo":"Monitores por sexo",
+"Listado de Tarifas":"Listado de tarifas",
+"Añadir tarifa":"Añadir tarifa",
+"Descripcion":"Descripcion",
+"Precio":"Precio",
+"Añadiendo tarifa":"Añadiendo tarifa",
+"Nombre de la tarifa":"Nombre de la tarifa",
+"La descripcion es obligatoria":"La descripcion es obligatoria",
+"Precio (euros)":"Precio (euros)",
+"Añadir":"Añadir",
+"El precio es requerido":"El precio es requerido",
+"El valor introducido no corresponde con un precio valido":"El valor introducido no corresponde con un precio valido",
+"La tarifa":"La tarifa",
+"se ha añadido correctamente":"se ha añadido correctamente",
+"Editar tarifa":"Editar tarifa",
+"Tarifa añadida":"Tarifa añadida",
+"Tarifa actualizada":"Tarifa actualizada",
+"Estas seguro de querer eliminar la tarifa":"Estas seguro de querer eliminar la tarifa",
+"Si, eliminar":"Si, eliminar",
+"Tarifa eliminada correctamente":"Tarifa eliminada correctamente",
+"Eliminar tarifa":"Eliminar tarifa",
+"Listado de Centros":"Listado de Centros",
+"Añadir centro":"Añadir centro",
+"Ubicacion":"Ubicacion",
+"Los usuarios serán eliminados al borrar el centro, estás seguro de querer eliminarlo":"Los usuarios serán eliminados al borrar el centro, estás seguro de querer eliminarlo",
+"Centro eliminado correctamente":"Centro eliminado correctamente",
+"Estas seguro de querer eliminar":"Estas seguro de querer eliminar",
+"Borrar centro":"Borrar centro",
+"usuarios pertenecen al centro":"usuarios pertenecen al centro",
+"Editar centro":"Editar centro",
+"Nombre del centro":"Nombre del centro",
+"La direccion es obligatoria":"La direccion es obligatoria",
+"Latitud":"Latitud",
+"La latitud es requerida":"La latitud es requerida",
+"Longitud":"Longitud",
+"La longitud es requerida":"La longitud es requerida",
+"Ubicacion del centro":"Ubicacion del centro",
+"La ubicacion es requerida":"La ubicacion es requerida",
+"Telefono de contacto":"Telefono de contacto",
+"Añadiendo centro":"Añadiendo centro",
+"Centro añadido":"Centro añadido"
+
+
+
+
+
 
 
 

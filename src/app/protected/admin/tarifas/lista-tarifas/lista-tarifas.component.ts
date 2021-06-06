@@ -4,6 +4,7 @@ import { AdminService } from '../../../services/admin.service';
 import { Usuario, Tarifa } from '../../../../models/interface';
 import Swal from 'sweetalert2';
 import { DataTableDirective } from 'angular-datatables';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-lista-tarifas',
@@ -13,23 +14,29 @@ import { DataTableDirective } from 'angular-datatables';
 export class ListaTarifasComponent implements OnInit,OnDestroy {
 
   usuario!:Usuario
+  url!:string;
   dtOptions: DataTables.Settings = {};
   dtTrigger = new Subject();
   tarifas: any = [];
   @ViewChild(DataTableDirective, { static: false })
   datatableElement!: DataTableDirective;
 
-  constructor(private adminService: AdminService) {}
+  constructor(private adminService: AdminService,private translateService:TranslateService) {}
 
   ngOnInit(): void {
     const usuario = JSON.parse(sessionStorage.getItem('usuario')!);
     this.usuario = usuario;
-    
+    if(localStorage.getItem('lang')=='es'){
+      this.url='//cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json'
+    }else{
+      this.url='//cdn.datatables.net/plug-ins/1.10.25/i18n/English.json'
+    }
+
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 5,
       language: {
-        url: '//cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json',
+        url: this.url,
       },
       responsive: true   
     };
@@ -54,13 +61,14 @@ export class ListaTarifasComponent implements OnInit,OnDestroy {
 
   borrarTarifa(tarifa: Tarifa, i: number) {
     Swal.fire({
-      title: `¿Estas seguro de querer eliminar la tarifa ${tarifa.nombre?.toUpperCase()}?`,
+      title:`${this.translateService.instant('Eliminar tarifa')}`,
+      text: `¿${this.translateService.instant('Estas seguro de querer eliminar la tarifa')} ${tarifa.nombre?.toUpperCase()}?`,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Si, eliminar',
-      cancelButtonText: 'No, cancelar',
+      confirmButtonText: `${this.translateService.instant('Si, eliminar')}`,
+      cancelButtonText: `${this.translateService.instant('No, cancelar')}`,
     }).then((result) => {
       if (result.isConfirmed) {
         this.adminService.borrarTarifa(tarifa.id!).subscribe((tarifa) => {
@@ -83,7 +91,7 @@ export class ListaTarifasComponent implements OnInit,OnDestroy {
         Swal.fire({
           position: 'top-end',
           icon: 'success',
-          title: 'Tarifa eliminada correctamente',
+          title: `${this.translateService.instant('Tarifa eliminada correctamente')}`,
           showConfirmButton: false,
           timer: 2000,
         });

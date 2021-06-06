@@ -5,6 +5,7 @@ import { AdminService } from '../../../services/admin.service';
 import { Tarifa } from '../../../../models/interface';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-edit-tarifa',
@@ -18,7 +19,7 @@ export class EditTarifaComponent implements OnInit {
     private fb: FormBuilder,
     private adminService: AdminService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private translateService:TranslateService
   ) {}
 
   ngOnInit(): void {
@@ -54,9 +55,9 @@ export class EditTarifaComponent implements OnInit {
   get precioMessage(): string {
     const errors = this.miFormulario.get('precio')?.errors;
     if (errors?.required) {
-      return 'El precio es requerido';
+      return `${this.translateService.instant('El precio es requerido')}`;
     } else if (errors?.pattern) {
-      return 'El valor introducido no corresponde con un precio valido';
+      return `${this.translateService.instant('El valor introducido no corresponde con un precio valido')}`;
     }
     return '';
   }
@@ -69,7 +70,8 @@ export class EditTarifaComponent implements OnInit {
         Swal.fire({
           position: 'top-end',
           icon: 'success',
-          title: 'Datos correctamente actualizados',
+          title:`${this.translateService.instant('Tarifa actualizada')}!`,
+          text: `${this.translateService.instant('Datos correctamente actualizados')}`,
           showConfirmButton: false,
           timer: 2000,
         });

@@ -4,6 +4,7 @@ import { AdminService } from '../../../services/admin.service';
 import Swal from 'sweetalert2';
 import { Centro, Usuario } from '../../../../models/interface';
 import { DataTableDirective } from 'angular-datatables';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-lista-centros',
@@ -19,7 +20,7 @@ export class ListaCentrosComponent implements OnInit, OnDestroy {
   @ViewChild(DataTableDirective, { static: false })
   datatableElement!: DataTableDirective;
 
-  constructor(private adminService: AdminService) {}
+  constructor(private adminService: AdminService,private translateService:TranslateService) {}
 
   ngOnInit(): void {
     const usuario = JSON.parse(sessionStorage.getItem('usuario')!);
@@ -62,14 +63,14 @@ export class ListaCentrosComponent implements OnInit, OnDestroy {
     this.adminService.getUsuariosGym(centro.id!).subscribe((numeroUsuarios) => {
       if (numeroUsuarios > 0) {
         Swal.fire({
-          title: `Hay ${numeroUsuarios} usuarios que pertenecen al centro ${centro.nombre?.toUpperCase()}`,
-          text: `Los usuarios serán eliminados al borrar el centro`,
+          title: `${numeroUsuarios} ${this.translateService.instant('usuarios pertenecen al centro')} ${centro.nombre?.toUpperCase()}`,
+          text: `${this.translateService.instant('Los usuarios serán eliminados al borrar el centro, estás seguro de querer eliminarlo')}`,
           icon: 'warning',
           showCancelButton: true,
           confirmButtonColor: '#3085d6',
           cancelButtonColor: '#d33',
-          confirmButtonText: 'Si, eliminar',
-          cancelButtonText: 'No, cancelar',
+          confirmButtonText: `${this.translateService.instant('Si, eliminar')}`,
+          cancelButtonText: `${this.translateService.instant('No, cancelar')}`,
         }).then((result) => {
           if (result.isConfirmed) {
             this.adminService.borrarCentro(centro.id!).subscribe((centro) => {
@@ -92,7 +93,7 @@ export class ListaCentrosComponent implements OnInit, OnDestroy {
             Swal.fire({
               position: 'top-end',
               icon: 'success',
-              title: 'Centro eliminado correctamente',
+              title: `${this.translateService.instant('Centro eliminado correctamente')}`,
               showConfirmButton: false,
               timer: 2000,
             });
@@ -100,13 +101,14 @@ export class ListaCentrosComponent implements OnInit, OnDestroy {
         });
       } else {
         Swal.fire({
-          title: `¿Estas seguro de querer eliminar ${centro.nombre?.toUpperCase()} ?`,
+          title:`${this.translateService.instant('Borrar centro')}`,
+          text: `¿${this.translateService.instant('Estas seguro de querer eliminar')} ${centro.nombre?.toUpperCase()} ?`,
           icon: 'warning',
           showCancelButton: true,
           confirmButtonColor: '#3085d6',
           cancelButtonColor: '#d33',
-          confirmButtonText: 'Si, eliminar',
-          cancelButtonText: 'No, cancelar',
+          confirmButtonText: `${this.translateService.instant('Si, eliminar')}`,
+          cancelButtonText: `${this.translateService.instant('No, cancelar')}`,
         }).then((result) => {
           if (result.isConfirmed) {
             this.adminService.borrarCentro(centro.id!).subscribe((centro) => {
@@ -129,7 +131,7 @@ export class ListaCentrosComponent implements OnInit, OnDestroy {
             Swal.fire({
               position: 'top-end',
               icon: 'success',
-              title: 'Centro eliminado correctamente',
+              title: `${this.translateService.instant('Centro eliminado correctamente')}`,
               showConfirmButton: false,
               timer: 2000,
             });
@@ -138,6 +140,4 @@ export class ListaCentrosComponent implements OnInit, OnDestroy {
       }
     });
   }
-
-  ventanaModal() {}
 }

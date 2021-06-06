@@ -10,13 +10,13 @@ import { AdminService } from '../../../protected/services/admin.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ActividadesPorTarifaComponent } from '../actividades-por-tarifa/actividades-por-tarifa.component';
 import { ICreateOrderRequest, IPayPalConfig } from 'ngx-paypal';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-registro',
   templateUrl: './registro.component.html',
   styles: [
     `
-    
       .mat-stepper-horizontal {
         margin-top: 8px;
       }
@@ -28,12 +28,11 @@ import { ICreateOrderRequest, IPayPalConfig } from 'ngx-paypal';
       mat-form-field {
         width: 100%;
       }
-
     `,
   ],
 })
 export class RegistroComponent implements OnInit {
-  showPaypalButtons:boolean= false;
+  showPaypalButtons: boolean = false;
   cliente: Usuario = {};
   hide = true;
   oculto = true;
@@ -46,7 +45,7 @@ export class RegistroComponent implements OnInit {
   maxDate!: Date;
   tarifas: any;
   centros: any;
-  tarifa!:Tarifa;
+  tarifa!: Tarifa;
 
   constructor(
     public dialog: MatDialog,
@@ -55,7 +54,8 @@ export class RegistroComponent implements OnInit {
     private emailValidatorService: EmailValidatorService,
     private authService: AuthService,
     private router: Router,
-    private adminService: AdminService
+    private adminService: AdminService,
+    private translateService: TranslateService
   ) {
     const currentYear = new Date().getFullYear();
     this.minDate = new Date(currentYear - 100, 0, 1);
@@ -65,7 +65,6 @@ export class RegistroComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.authService.selectTarifas().subscribe((resp) => {
       this.tarifas = resp;
     });
@@ -76,11 +75,11 @@ export class RegistroComponent implements OnInit {
 
     this.firstFormGroup = this.fb.group(
       {
-        nombre: ['a', [Validators.required]],
-        apellido1: ['a', [Validators.required]],
+        nombre: ['', [Validators.required]],
+        apellido1: ['', [Validators.required]],
         apellido2: [''],
         dni: [
-          '31032580Z',
+          '',
           [
             Validators.required,
             Validators.pattern(
@@ -89,15 +88,15 @@ export class RegistroComponent implements OnInit {
           ],
         ],
         email: [
-          'c@asd.com',
+          '',
           [
             Validators.required,
             Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
           ],
           [this.emailValidatorService],
         ],
-        password: ['123456', [Validators.required, Validators.minLength(6)]],
-        password2: ['123456', [Validators.required]],
+        password: ['', [Validators.required, Validators.minLength(6)]],
+        password2: ['', [Validators.required]],
       },
       {
         validators: [
@@ -109,16 +108,16 @@ export class RegistroComponent implements OnInit {
       fecha_nac: ['', [Validators.required]],
       sexo: [''],
       telefono: [
-        '678789789',
+        '',
         [Validators.required, Validators.pattern('^[6-7]{1}[0-9]{8}$')],
       ],
       cuenta_bancaria: [
-        'ES1232132132132132132232',
+        '',
         [Validators.required, Validators.pattern('[a-zA-Z]{2}[0-9]{22}$')],
       ],
-      ciudad: ['c', [Validators.required]],
-      direccion: ['c', [Validators.required]],
-      cod_postal: ['12', [Validators.required]],
+      ciudad: ['', [Validators.required]],
+      direccion: ['', [Validators.required]],
+      cod_postal: ['', [Validators.required]],
     });
 
     this.thirdFormGroup = this.fb.group({
@@ -140,12 +139,11 @@ export class RegistroComponent implements OnInit {
         Swal.fire({
           position: 'top-end',
           icon: 'success',
-          title:
-            'Bienvenido ' +
-            this.cliente.nombre?.toLocaleUpperCase() +
-            '. Se ha enviado un correo de verificacion a ' +
-            this.cliente.email +
-            '!',
+          title: `
+            ${this.translateService.instant('Bienvenido')} 
+            ${this.cliente.nombre?.toLocaleUpperCase()}. ${this.translateService.instant(
+            'Se ha enviado un correo de verificacion a'
+          )} ${this.cliente.email} !`,
           showConfirmButton: false,
           timer: 4000,
         });
@@ -168,11 +166,13 @@ export class RegistroComponent implements OnInit {
   get emailErrorMsg(): string {
     const errors = this.firstFormGroup.get('email')?.errors;
     if (errors?.required) {
-      return 'El email es requerido';
+      return this.translateService.instant('El email es obligatorio');
     } else if (errors?.pattern) {
-      return 'El valor ingresado no tiene formato de correo';
+      return this.translateService.instant(
+        'El valor ingresado no tiene formato de correo'
+      );
     } else if (errors?.emailTomado) {
-      return 'El email ya está registrado';
+      return this.translateService.instant('El email ya está registrado');
     }
     return '';
   }
@@ -180,9 +180,11 @@ export class RegistroComponent implements OnInit {
   get dniErrorMsg(): string {
     const errors = this.firstFormGroup.get('dni')?.errors;
     if (errors?.required) {
-      return 'El DNI es requerido';
+      return this.translateService.instant('El DNI es requerido');
     } else if (errors?.pattern) {
-      return 'El valor ingresado no corresponde con formato DNI/NIE';
+      return this.translateService.instant(
+        'El valor ingresado no corresponde con formato DNI/NIE'
+      );
     }
     return '';
   }
@@ -190,9 +192,9 @@ export class RegistroComponent implements OnInit {
   get passwordErrorMsg(): string {
     const errors = this.firstFormGroup.get('password')?.errors;
     if (errors?.required) {
-      return 'La contraseña es requerida';
+      return this.translateService.instant('La contraseña es requerida');
     } else if (errors?.minlength) {
-      return 'La contraseña debe tener mas de 6 caracteres';
+      return this.translateService.instant('La contraseña debe tener mas de 6 caracteres');
     }
     return '';
   }
@@ -200,9 +202,9 @@ export class RegistroComponent implements OnInit {
   get telefonoErrorMsg(): string {
     const errors = this.secondFormGroup.get('telefono')?.errors;
     if (errors?.required) {
-      return 'El nº de telefono es requerido';
+      return this.translateService.instant('El nº de telefono es requerido');
     } else if (errors?.pattern) {
-      return 'El valor ingresado no tiene formato de numero de telefono';
+      return this.translateService.instant('El valor ingresado no tiene formato de numero de telefono');
     }
     return '';
   }
@@ -210,30 +212,30 @@ export class RegistroComponent implements OnInit {
   get cuentaErrorMsg(): string {
     const errors = this.secondFormGroup.get('cuenta_bancaria')?.errors;
     if (errors?.required) {
-      return 'El nº de cuenta es requerido';
+      return this.translateService.instant('El nº de cuenta es requerido');
     } else if (errors?.pattern) {
-      return 'El valor ingresado no tiene formato de numero de cuenta';
+      return this.translateService.instant('El valor ingresado no tiene formato de numero de cuenta');
     }
     return '';
   }
-  
-  
 
-   esMenor() {
+  esMenor() {
     const today: Date = new Date();
-    const birthDate: Date = new Date(this.secondFormGroup.get('fecha_nac')?.value);
+    const birthDate: Date = new Date(
+      this.secondFormGroup.get('fecha_nac')?.value
+    );
     let age: number = today.getFullYear() - birthDate.getFullYear();
     const month: number = today.getMonth() - birthDate.getMonth();
     if (month < 0 || (month === 0 && today.getDate() < birthDate.getDate())) {
-        age--;
+      age--;
     }
-    if(age < 18){
+    if (age < 18) {
       this.secondFormGroup.get('fecha_nac')?.setErrors({ noIguales: true });
       return true;
-    } else{
-      return "";
+    } else {
+      return '';
     }
-}
+  }
   elegirTarifa(id: number): void {
     this.thirdFormGroup.controls['id_tarifa'].setValue(id);
   }
@@ -249,20 +251,16 @@ export class RegistroComponent implements OnInit {
   public payPalConfig?: IPayPalConfig;
 
   private initConfig(): void {
-      console.log(this.tarifa);
+    console.log(this.tarifa);
     this.payPalConfig = {
-
       currency: 'EUR',
-      clientId: 'AQAwkSv02HKvahX2b6dCbOOfjL4N4knsgbZd5-Gb1JbTctNk4MuZEyAS8fMY-xFtrl2OAjzetUMgodcd',
+      clientId:
+        'AQAwkSv02HKvahX2b6dCbOOfjL4N4knsgbZd5-Gb1JbTctNk4MuZEyAS8fMY-xFtrl2OAjzetUMgodcd',
       createOrderOnClient: (data) =>
-
         <ICreateOrderRequest>{
-         
-
           intent: 'CAPTURE',
           purchase_units: [
             {
-
               amount: {
                 currency_code: 'EUR',
                 value: this.tarifa.precio?.toString(),
@@ -275,8 +273,8 @@ export class RegistroComponent implements OnInit {
               },
               items: [
                 {
-                  name: "Tarifa "+this.tarifa.nombre?.toUpperCase(),
-                  quantity: "1",
+                  name: 'Tarifa ' + this.tarifa.nombre?.toUpperCase(),
+                  quantity: '1',
                   unit_amount: {
                     currency_code: 'EUR',
                     value: this.tarifa.precio?.toString(),
@@ -293,7 +291,7 @@ export class RegistroComponent implements OnInit {
         label: 'paypal',
         layout: 'vertical',
       },
-      
+
       onApprove: (data, actions) => {
         console.log(
           'onApprove - transaction was approved, but not authorized',
@@ -305,7 +303,6 @@ export class RegistroComponent implements OnInit {
         // });
       },
       onClientAuthorization: (data) => {
-        
         console.log(
           'onClientAuthorization - you should probably inform your server about completed transaction at this point',
           data
@@ -319,9 +316,7 @@ export class RegistroComponent implements OnInit {
         console.log('OnError', err);
       },
       onClick: (data, actions) => {
-        
         console.log('onClick', data, actions);
-      
       },
     };
   }
@@ -333,16 +328,17 @@ export class RegistroComponent implements OnInit {
       ...this.secondFormGroup.value,
       ...this.thirdFormGroup.value,
     };
-    this.adminService.getTarifaPorId(this.cliente.id_tarifa!).subscribe((tarifa)=>{
-      this.tarifa=tarifa;
-    })
+    this.adminService
+      .getTarifaPorId(this.cliente.id_tarifa!)
+      .subscribe((tarifa) => {
+        this.tarifa = tarifa;
+      });
 
     this.initConfig();
     console.log(this.tarifa);
   }
 
-  back(){
+  back() {
     this.showPaypalButtons = false;
   }
-  
 }

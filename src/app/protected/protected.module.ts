@@ -11,6 +11,7 @@ import { MonitorComponent } from './monitor/monitor.component';
 import { ClientesModule } from './admin/clientes/clientes.module';
 import { NoticiasComponent } from '../shared/noticias/noticias.component';
 import { ChartsModule } from 'ng2-charts';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { ChartsModule } from 'ng2-charts';
     MaterialModule,
     DataTablesModule,
     ChartsModule,
+    TranslateModule
   ],
 
 })

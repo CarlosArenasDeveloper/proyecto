@@ -32,7 +32,7 @@
             class="nav-link text-white "
             routerLinkActive="active"
             routerLink="./dashboard/noticias"
-            >NOTICIAS</a
+            >{{'noticias'|translate|uppercase}}</a
           >
         </li>
         <li class="nav-item">
@@ -41,14 +41,14 @@
             class="nav-link text-white"
             routerLinkActive="active"
             routerLink="./centros"
-            >CENTROS</a
+            >{{'centros'|translate|uppercase}}</a
           >
           <a
             *ngIf="sesion()"
             class="nav-link text-white"
             routerLinkActive="active"
             routerLink="./dashboard/centros"
-            >CENTROS</a
+            >{{'centros'|translate|uppercase}}</a
           >
         </li>
         <li class="nav-item">
@@ -57,14 +57,14 @@
             class="nav-link text-white"
             routerLinkActive="active"
             routerLink="./actividades"
-            >ACTIVIDADES</a
+            >{{'actividades'|translate|uppercase}}</a
           >
           <a
             *ngIf="sesion()"
             class="nav-link text-white"
             routerLinkActive="active"
             routerLink="./dashboard/actividades"
-            >ACTIVIDADES</a
+            >{{'actividades'|translate|uppercase}}</a
           >
         </li>
        
@@ -73,24 +73,21 @@
             class="nav-link text-white"
             routerLinkActive="active"
             routerLink="./dashboard/ejercicios"
-            >EJERCICIOS</a
+            >{{'ejercicios'|translate|uppercase}}</a
           >
         </li>
-        <!-- <li *ngIf="cliente()" class="nav-item">
-          <a class="nav-link text-white" routerLinkActive="active">RESERVAS</a>
-        </li> -->
         <li class="nav-item ms-lg-5">
           <a *ngIf="!sesion()"
             class="nav-link text-white"
             routerLink="./auth/login"
             routerLinkActive="active"
-            >AREA DE CLIENTES
+            >{{'area de clientes'|translate|uppercase}}
           </a>
 
           <a style="background-color: rgba(170, 40, 40, 0.603);" *ngIf="cliente()"
           class="nav-link text-white active"
           routerLink="./dashboard/cliente"
-          >AREA DE CLIENTES
+          >{{'area de clientes'|translate|uppercase}}
         </a>
         </li>
         <li *ngIf="!sesion()" class="nav-item">
@@ -98,12 +95,16 @@
             class="nav-link text-white"
             routerLink="./auth/registro"
             routerLinkActive="active"
-            >INSCRIBITE YA</a
+            >{{'inscribete ya'|translate|uppercase}}</a
           >
         </li>
-        <!-- <li *ngIf="sesion()" class="nav-item">
-            <a class="nav-link text-white" (click)="cerrarSesion()" routerLinkActive="active"> CERRAR SESION <i class="fas fa-sign-out-alt"></i></a>
-          </li> -->
+        <li *ngIf="!sesion()" >
+          <select name="idioma"  id="idioma" class="form-select bg-danger text-white ms-2 text-center" (change)="changeLang($event.target.value!)"> 
+            <option value="es" class="es text-white text-center" [selected]="lang=='es'">ES</option>
+            <option value="en" class="en  text-white text-center" [selected]="lang=='en'">EN</option>
+        </select>
+        
+        </li>
       </ul>
     </div>
   </div>

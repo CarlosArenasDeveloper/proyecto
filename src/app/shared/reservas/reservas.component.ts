@@ -1,13 +1,16 @@
+declare var require:any
 import { Component, OnInit } from '@angular/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
-import esLocale from '@fullcalendar/core/locales/es';
+//import esLocale from '@fullcalendar/core/locales/es';
+const esLocale = require('@fullcalendar/core/locales/es');
 import { Router } from '@angular/router';
 import Tooltip from 'tooltip.js';
 import { AdminService } from 'src/app/protected/services/admin.service';
 import Swal from 'sweetalert2';
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-reservas',
   templateUrl: './reservas.component.html',
@@ -20,15 +23,26 @@ export class ReservasComponent implements OnInit {
   reservas!: any;
   public optionsMonth: any;
   public optionsList: any;
-  constructor(private router: Router, private adminService: AdminService) {
+  public idioma: any;
+  constructor(
+    private router: Router,
+    private adminService: AdminService,
+    private translateService: TranslateService
+  ) {
+    if (localStorage.getItem('lang') == 'es') {
+      this.idioma = esLocale;
+    } else {
+      this.idioma = '';
+    }
+
     const usuario = JSON.parse(sessionStorage.getItem('usuario')!);
     this.usuario = usuario;
 
-    this.adminService.getSesionesDisponiblesPorTarifa(this.usuario.id_tarifa).subscribe((events) => {
-      this.events = events;
-    });
-
- 
+    this.adminService
+      .getSesionesDisponiblesPorTarifa(this.usuario.id_tarifa)
+      .subscribe((events) => {
+        this.events = events;
+      });
 
     this.optionsList = {
       contentHeight: 700,
@@ -36,7 +50,7 @@ export class ReservasComponent implements OnInit {
       defaultDate: new Date(),
       duration: { days: 7 },
       defaultView: 'list',
-      locale: esLocale,
+      locale: this.idioma,
       header: {
         left: '',
         center: 'title',
@@ -44,13 +58,14 @@ export class ReservasComponent implements OnInit {
       },
       editable: false,
     };
+
     this.optionsMonth = {
       hemeSystem: 'lumen',
       eventLimit: true,
       showNonCurrentDates: false,
       plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
       defaultDate: new Date(),
-      locale: esLocale,
+      locale: this.idioma,
       header: {
         left: 'prev,next',
         center: 'title',
@@ -62,20 +77,31 @@ export class ReservasComponent implements OnInit {
           .getReservasClienteIDSesion(usuario.email)
           .subscribe((reservas: any) => {
             this.reservas = reservas;
-            if (info.event.extendedProps.estado!='cancelada' && reservas.includes(info.event.id)) {
+            if (
+              info.event.extendedProps.estado != 'cancelada' &&
+              reservas.includes(info.event.id)
+            ) {
               Swal.fire({
                 position: 'top-end',
                 icon: 'warning',
-                title: 'Ya ha realizado la reserva de esta sesion',
+                title: `${translateService.instant('Reserva no realizada')}`,
+                text: `${translateService.instant(
+                  'Ya ha realizado la reserva de esta sesion'
+                )}`,
                 showConfirmButton: false,
                 timer: 2000,
               });
-            }else if(info.event.extendedProps.estado=='cancelada' && reservas.includes(info.event.id)){
+            } else if (
+              info.event.extendedProps.estado == 'cancelada' &&
+              reservas.includes(info.event.id)
+            ) {
               Swal.fire({
                 position: 'top-end',
                 icon: 'warning',
-                title: 'Sesion cancelada ',
-                text: `Lo sentimos, la sesion y la reserva realizada anteriormente han sido canceladas, disculpe las molestias.`,
+                title: `${translateService.instant('Sesion cancelada')}`,
+                text: `${translateService.instant(
+                  'Lo sentimos, la sesion y la reserva realizada anteriormente han sido canceladas, disculpe las molestias'
+                )}.`,
                 showConfirmButton: false,
                 timer: 3500,
               });
@@ -90,19 +116,23 @@ export class ReservasComponent implements OnInit {
                     email_cliente: usuario.email,
                   };
                   Swal.fire({
-                    title: `Confirmar reserva`,
-                    text: `¿Quieres reservar la clase de ${
-                      info.event.title
-                    } para el ${info.event.start.toLocaleDateString()} a las  ${(
-                      '0' + info.event.start.getHours()
-                    ).substr(-2)}:${(
+                    title: `${translateService.instant('Realizar reserva')}`,
+                    text: `¿${translateService.instant(
+                      'Quieres reservar la clase de'
+                    )} ${info.event.title} ${translateService.instant(
+                      'para el'
+                    )} ${info.event.start.toLocaleDateString()} ${translateService.instant(
+                      'a las'
+                    )}  ${('0' + info.event.start.getHours()).substr(-2)}:${(
                       '0' + info.event.start.getMinutes()
                     ).substr(-2)}?`,
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
-                    confirmButtonText: 'Si, reservar',
+                    confirmButtonText: `${translateService.instant(
+                      'Si, reservar'
+                    )}`,
                     cancelButtonText: 'No',
                   }).then((result) => {
                     if (result.isConfirmed) {
@@ -113,13 +143,17 @@ export class ReservasComponent implements OnInit {
                             Swal.fire({
                               position: 'top-end',
                               icon: 'success',
-                              title: 'Reserva realizada con exito',
+                              title: `${translateService.instant(
+                                'Reserva realizada con exito!'
+                              )}`,
+                              text: `${translateService.instant(
+                                'Se le ha enviado un correo electronico a su email con los detalles de la reserva'
+                              )}`,
                               showConfirmButton: false,
-                              timer: 2000,
-                            }).then(()=>{
-                              router.navigateByUrl('/dashboard/cliente')
-
-                            })
+                              timer: 2500,
+                            }).then(() => {
+                              router.navigateByUrl('/dashboard/cliente');
+                            });
                           }
                         });
                     }
@@ -130,7 +164,12 @@ export class ReservasComponent implements OnInit {
                   Swal.fire({
                     position: 'top-end',
                     icon: 'warning',
-                    title: 'La sesion esta completa',
+                    title: `${translateService.instant(
+                      'Reserva no realizada'
+                    )}`,
+                    text: `${translateService.instant(
+                      'Lo sentimos. La sesion esta completa'
+                    )}`,
                     showConfirmButton: false,
                     timer: 2000,
                   });
@@ -140,8 +179,10 @@ export class ReservasComponent implements OnInit {
                   Swal.fire({
                     position: 'top-end',
                     icon: 'error',
-                    title: 'Sesion cancelada',
-                    text:`No se puede realizar la reserva ya que la sesion ha sido cancelada, disculpe las molestias.`,
+                    title: `${translateService.instant('Sesion cancelada')}`,
+                    text: `${translateService.instant(
+                      'No se puede realizar la reserva ya que la sesion ha sido cancelada, disculpe las molestias'
+                    )}.`,
                     showConfirmButton: false,
                     timer: 3500,
                   });
@@ -158,27 +199,25 @@ export class ReservasComponent implements OnInit {
             '</h6>' +
             '<h6>' +
             ('0' + e.event.start.getHours()).substr(-2) +
-            // e.event.start.getHours() +
             ':' +
             ('0' + e.event.start.getMinutes()).substr(-2) +
-            // e.event.start.getMinutes() +
             ' - ' +
             ('0' + e.event.end.getHours()).substr(-2) +
             ':' +
             ('0' + e.event.end.getMinutes()).substr(-2) +
             '</h6>' +
             '<hr>' +
-            '<span>Sala ' +
+            `<span>${translateService.instant('Sala')} ` +
             e.event.extendedProps.sala +
             '</span>' +
             "<br><span><i class='fas fa-stopwatch'></i>: " +
             Math.abs(e.event.start - e.event.end) / 1000 / 60 +
-            ' minutos </span>' +
+            ` ${translateService.instant('minutos')} </span>` +
             '<br>' +
-            '<span>Plazas disponibles: ' +
+            `<span>${translateService.instant('Plazas disponibles')}: ` +
             (e.event.extendedProps.aforo - e.event.extendedProps.num_clientes) +
             '<br></span>' +
-            '<span>Estado: ' +
+            `<span>${translateService.instant('Estado')}: ` +
             e.event.extendedProps.estado +
             '</span>' +
             '<br>',
@@ -202,7 +241,9 @@ export class ReservasComponent implements OnInit {
         console.log(this.reservas);
       });
 
-      this.adminService.getSesionesDisponiblesPorTarifa(this.usuario.id_tarifa).subscribe((events) => {
+    this.adminService
+      .getSesionesDisponiblesPorTarifa(this.usuario.id_tarifa)
+      .subscribe((events) => {
         this.events = events;
       });
   }

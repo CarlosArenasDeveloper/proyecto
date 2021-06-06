@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import Swal from 'sweetalert2';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,8 @@ export class LoginComponent {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private translate: TranslateService
   ) {}
   miFormulario: FormGroup = this.fb.group({
     email: [
@@ -32,9 +34,9 @@ export class LoginComponent {
   get emailErrorMsg(): string {
     const errors = this.miFormulario.get('email')?.errors;
     if (errors?.required) {
-      return 'Email es obligatorio';
+      return this.translate.instant('El email es obligatorio');
     } else if (errors?.pattern) {
-      return 'El valor ingresado no tiene formato de correo';
+      return  this.translate.instant('El valor ingresado no tiene formato de correo');
     }
     return '';
   }
@@ -51,7 +53,7 @@ export class LoginComponent {
     const { email, password } = this.miFormulario.value;
     this.authService.login(email, password).subscribe((datosUsuario) => {
       if (datosUsuario != 'error') {
-        datosUsuario.password="************";
+        datosUsuario.password = '************';
         sessionStorage.setItem('usuario', JSON.stringify(datosUsuario));
         if (datosUsuario.role == 1) {
           this.router.navigateByUrl('/dashboard/admin');
@@ -61,8 +63,8 @@ export class LoginComponent {
         ) {
           Swal.fire({
             icon: 'error',
-            title: 'Bloqueado',
-            text: `Hola ${datosUsuario.nombre?.toUpperCase()}, usted está bloqueado, para volver a acceder pongase en contacto con el personal de Fit & Healthy  `,
+            title: this.translate.instant('Bloqueado'),
+            text: `${this.translate.instant('Hola')} ${datosUsuario.nombre?.toUpperCase()}, ${this.translate.instant('usted está bloqueado, para volver a acceder pongase en contacto con el personal de Fit & Healthy')}`,
           });
         } else if (datosUsuario.role == 2 && datosUsuario.verificado == 1) {
           this.router.navigateByUrl('/dashboard/cliente');
@@ -71,15 +73,14 @@ export class LoginComponent {
           Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: `Hola ${datosUsuario.nombre?.toUpperCase()},  para acceder a Fit & Healthy debe verificar su email. Se ha enviado un correo a la direccion de ${
+            text: `${this.translate.instant('Hola')} ${datosUsuario.nombre?.toUpperCase()}, ${this.translate.instant('para acceder a Fit & Healthy debe verificar su email. Se ha enviado un correo a la direccion de')}  ${
               datosUsuario.email
             } `,
           }).then((result) => {
             if (result.isConfirmed) {
               this.authService
                 .enviarVerificacionBis(email)
-                .subscribe((resp) => {
-                });
+                .subscribe((resp) => {});
             }
           });
         } else {
@@ -90,9 +91,8 @@ export class LoginComponent {
         this.datosIncorrectos = true;
         Swal.fire({
           icon: 'error',
-          title: 'Error al intentar acceder a Fit & Healthy!',
-          text:
-            'El email y la contraseña que ingresaste no coinciden con nuestros registros. Por favor, revisa e inténtelo de nuevo.',
+          title: this.translate.instant('Error al intentar acceder a Fit & Healthy!'),
+          text: this.translate.instant('El email y la contraseña que ingresaste no coinciden con nuestros registros. Por favor, revisa e inténtelo de nuevo.'),
         });
       }
     });

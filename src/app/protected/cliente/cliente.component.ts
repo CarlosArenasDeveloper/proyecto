@@ -1,13 +1,15 @@
+declare var require:any
+const esLocale = require('@fullcalendar/core/locales/es');
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AdminService } from '../services/admin.service';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import listPlugin from '@fullcalendar/list';
 import interactionPlugin from '@fullcalendar/interaction';
-import esLocale from '@fullcalendar/core/locales/es';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import Swal from 'sweetalert2';
 import Tooltip from 'tooltip.js';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-cliente',
@@ -24,9 +26,16 @@ export class ClienteComponent implements OnInit {
   reservas!: any;
   public optionsMonth: any;
   public optionsList: any;
-  constructor(private router: Router, private adminService: AdminService) {
+  public idioma:any;
+  constructor(private router: Router, private adminService: AdminService,private translateService:TranslateService) {
     const usuario = JSON.parse(sessionStorage.getItem('usuario')!);
     this.usuario = usuario;
+
+    if(localStorage.getItem('lang')=='es'){
+      this.idioma=esLocale
+    } else{
+      this.idioma=""
+    } 
 
     this.adminService
     .seleccionarSesionesCliente(this.usuario.email)
@@ -45,7 +54,7 @@ export class ClienteComponent implements OnInit {
       defaultDate: new Date(),
       duration: { days: 14 },
       defaultView: 'list',
-      locale: esLocale,
+      locale: this.idioma,
       header: {
         left: '',
         center: 'title',
@@ -54,12 +63,20 @@ export class ClienteComponent implements OnInit {
       editable: false,
       eventClick:function(info:any){
         Swal.fire({
-          title: `¿Estas seguro de querer eliminar la reserva?`,
+          // title: `¿Estas seguro de querer eliminar la reserva?`,
+          title:`${translateService.instant('Cancelar reserva')}`,
+          text: `¿ ${translateService.instant('Quieres cancelar la clase de')} ${
+            info.event.title
+          } ${translateService.instant('para el')} ${info.event.start.toLocaleDateString()} ${translateService.instant('a las')}  ${(
+            '0' + info.event.start.getHours()
+          ).substr(-2)}:${(
+            '0' + info.event.start.getMinutes()
+          ).substr(-2)}?`,
           icon: 'warning',
           showCancelButton: true,
           confirmButtonColor: '#3085d6',
           cancelButtonColor: '#d33',
-          confirmButtonText: 'Si, cancelar',
+          confirmButtonText: `${translateService.instant('Si, cancelar')}`,
           cancelButtonText: 'No',
         }).then((result) => {
           if (result.isConfirmed) {
@@ -72,7 +89,8 @@ export class ClienteComponent implements OnInit {
                 Swal.fire({
                   position: 'top-end',
                   icon: 'success',
-                  title: 'Reserva cancelada correctamente',
+                  title: `${translateService.instant('Reserva cancelada correctamente')}`,
+                  text:`${translateService.instant('Gracias por dejar una plaza libre para otro usuario')}`,
                   showConfirmButton: false,
                   timer: 2000,
                 }).then((result) => {
@@ -90,7 +108,7 @@ export class ClienteComponent implements OnInit {
       showNonCurrentDates: false,
       plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
       defaultDate: new Date(),
-      locale: esLocale,
+      locale: this.idioma,
       header: {
         left: 'prev,next',
         center: 'title',
@@ -101,7 +119,8 @@ export class ClienteComponent implements OnInit {
         switch (info.event.extendedProps.estado) {
           case 'finalizada':
             Swal.fire({
-              title: `La sesion ha finalizado`,
+              title: `${translateService.instant('La sesion ha finalizado')}`,
+              text:`${translateService.instant('Esperamos volver a verte pronto')}`,
               icon: 'warning',
               position: 'top-end',
               timer: 2000,
@@ -111,22 +130,30 @@ export class ClienteComponent implements OnInit {
             break;
           case 'cancelada':
             Swal.fire({
-              title: `La sesion ya ha sido cancelada`,
-              icon: 'warning',
               position: 'top-end',
-              timer: 2000,
+              icon: 'warning',
+              title: `${translateService.instant('Sesion cancelada')}`,
+              text: `${translateService.instant('Lo sentimos, la sesion y la reserva realizada anteriormente han sido canceladas, disculpe las molestias')}.`,
               showConfirmButton: false,
-
+              timer: 3500,
             });
             break;
           default:
             Swal.fire({
-              title: `¿Estas seguro de querer eliminar la reserva?`,
+              // title: `¿Estas seguro de querer eliminar la reserva?`,
+              title:`${translateService.instant('Cancelar reserva')}`,
+              text: `¿ ${translateService.instant('Quieres cancelar la clase de')} ${
+                info.event.title
+              } ${translateService.instant('para el')} ${info.event.start.toLocaleDateString()} ${translateService.instant('a las')}  ${(
+                '0' + info.event.start.getHours()
+              ).substr(-2)}:${(
+                '0' + info.event.start.getMinutes()
+              ).substr(-2)}?`,
               icon: 'warning',
               showCancelButton: true,
               confirmButtonColor: '#3085d6',
               cancelButtonColor: '#d33',
-              confirmButtonText: 'Si, cancelar',
+              confirmButtonText: `${translateService.instant('Si, cancelar')}`,
               cancelButtonText: 'No',
             }).then((result) => {
               if (result.isConfirmed) {
@@ -139,7 +166,8 @@ export class ClienteComponent implements OnInit {
                     Swal.fire({
                       position: 'top-end',
                       icon: 'success',
-                      title: 'Reserva cancelada correctamente',
+                      title: `${translateService.instant('Reserva cancelada correctamente')}`,
+                      text:`${translateService.instant('Gracias por dejar una plaza libre para otro usuario')}`,
                       showConfirmButton: false,
                       timer: 2000,
                     }).then((result) => {
@@ -160,27 +188,25 @@ export class ClienteComponent implements OnInit {
             '</h6>' +
             '<h6>' +
             ('0' + e.event.start.getHours()).substr(-2) +
-            // e.event.start.getHours() +
             ':' +
             ('0' + e.event.start.getMinutes()).substr(-2) +
-            // e.event.start.getMinutes() +
             ' - ' +
             ('0' + e.event.end.getHours()).substr(-2) +
             ':' +
             ('0' + e.event.end.getMinutes()).substr(-2) +
             '</h6>' +
             '<hr>' +
-            '<span>Sala ' +
+            `<span>${translateService.instant('Sala')} ` +
             e.event.extendedProps.sala +
             '</span>' +
             "<br><span><i class='fas fa-stopwatch'></i>: " +
             Math.abs(e.event.start - e.event.end) / 1000 / 60 +
-            ' minutos </span>' +
+            ` ${translateService.instant('minutos')} </span>` +
             '<br>' +
-            '<span>Plazas disponibles: ' +
+            `<span>${translateService.instant('Plazas disponibles')}: ` +
             (e.event.extendedProps.aforo - e.event.extendedProps.num_clientes) +
             '<br></span>' +
-            '<span>Estado: ' +
+            `<span>${translateService.instant('Estado')}: ` +
             e.event.extendedProps.estado +
             '</span>' +
             '<br>',

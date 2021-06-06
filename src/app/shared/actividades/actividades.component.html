@@ -1,13 +1,13 @@
 <div style="background-color: rgb(255, 215, 215)" class="m-3 p-5 row">
   <div class="col-12">
-    <h1 class="text-center">Actividades</h1>
+    <h1 class="text-center">{{'actividades'|translate|titlecase}}</h1>
     <hr />
     <span
-      >En Fit & Healthy contamos con gran cantidad de actividades dirigidas,
+      >{{'En Fit & Healthy contamos con gran cantidad de actividades dirigidas,
       para adaptarnos a las necesidades de nuestros socios. Dependiendo de tu
       tarifa elegida, podrás elegir las actividades dirigidas que más te
       convengan con las que, además de practicar deporte y conseguir tus
-      objetivos, ¡te divertirás!
+      objetivos, ¡te divertirás!'|translate}}
     </span>
   </div>
   <div class="col-4 my-3" *ngFor="let actividad of actividades">
@@ -17,7 +17,7 @@
     >
       <article>
         <div  class="col text-center">
-          <img [src]="actividad.imagen!|imagen" class="card-img-top"/>      
+          <img [src]="actividad.imagen!|imagen" class="card-img-top" [title]="actividad.nombre"/>      
         </div>
       </article>
       <div class="card-body">

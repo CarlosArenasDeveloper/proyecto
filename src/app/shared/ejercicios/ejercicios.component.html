@@ -1,6 +1,6 @@
 <div style="background-color: rgb(255, 215, 215)" class="m-3 p-5 row">
   <div class="col-12">
-    <h1 class="text-center">¿Qué músculo quieres entrenar?</h1>
+    <h1 class="text-center">¿{{'Qué músculo quieres entrenar'|translate}}?</h1>
     <hr />
   </div>
   <div class=" col-12 col-md-4 col-lg-3 my-3" *ngFor="let musculo of musculos">
@@ -12,7 +12,7 @@
         <p class="card-title text-center"></p>
         <h4 class="text-center">{{ musculo.nombre | titlecase }}</h4>
       </div>
-      <img [src]="musculo.imagen!|imagen" class="card-img-top border-rounded" style="height: 250px;"/>
+      <img [src]="musculo.imagen!|imagen" [title]=" musculo.nombre" class="card-img-top border-rounded" style="height: 250px;"/>
 
 
     </div>
@@ -23,6 +23,6 @@
   (click)="inicio()"
 >
   <i class="fas fa-arrow-circle-left"></i>
-  Volver al inicio
+  {{'Volver al inicio'|translate}}
 </button>
 </div>

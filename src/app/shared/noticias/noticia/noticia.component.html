@@ -1,8 +1,8 @@
 <div class="row">
   <div class="col">
-    <h5>Categoria: {{ noticia.id_categoria }}</h5>
+    <h5>{{'Categoria'|translate}}: {{ noticia.id_categoria }}</h5>
     <i class="far fa-calendar-alt"></i>
-    <small>Publicado el {{ noticia.fecha | date }}</small>
+    <small>{{'Publicado el'|translate}} {{ noticia.fecha | date }}</small>
     <i class="fas fa-user-edit ms-5"></i>
     <small>{{ noticia.email_usuario | titlecase }}</small>
 
@@ -25,7 +25,7 @@
       routerLink="/noticias"
     >
       <i class="fas fa-arrow-circle-left"></i>
-      Volver atrás
+      {{'Volver atrás'|translate}}
     </button>
     <button
       *ngIf="sesion()"
@@ -34,16 +34,17 @@
       routerLink="/dashboard/noticias"
     >
       <i class="fas fa-arrow-circle-left"></i>
-      Volver atrás
+      {{'Volver atrás'|translate}}
     </button>
 
     <small *ngIf="noticia.fecha_edit != null" style="float: right"
-      >Ultima edicion el {{ noticia.fecha_edit | date }}</small
+      >{{'Ultima edicion el'|translate}} {{ noticia.fecha_edit | date }}</small
     >
   </div>
 </div>
 <div class="row mt-4 p-5" *ngIf="noticias.length > 0">
-  <H3 class="text-center">Noticias relacionadas</H3>
+  <H3 class="text-center">{{'Noticias relacionadas'|translate}}</H3>
+  <hr>
   <div
     class="card col-3 m-3 border border-3 border-danger"
     *ngFor="let noticia of noticias"
@@ -64,7 +65,7 @@
         color="warn"
         [routerLink]="['/dashboard/noticias', noticia.id]"
       >
-        <i class="fas fa-search"></i> Ver la noticia completa.
+        <i class="fas fa-search"></i> {{'Ver la noticia completa'|translate}}.
       </button>
       <button
         mat-raised-button
@@ -73,7 +74,7 @@
         color="warn"
         [routerLink]="['/noticias', noticia.id]"
       >
-        <i class="fas fa-search"></i> Ver la noticia completa.
+        <i class="fas fa-search"></i>  {{'Ver la noticia completa'|translate}}.
       </button>
       <br />
     </div>

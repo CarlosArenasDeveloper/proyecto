@@ -9,11 +9,24 @@ import { Usuario } from '../../models/interface';
 })
 export class NavegacionComponent implements OnInit {
   usuario!: any;
+  lang: any;
+
   constructor(private route: Router) {}
   ngOnInit(): void {
+    this.lang = localStorage.getItem('lang') || 'es';
+
     if (sessionStorage.getItem('usuario')) {
       this.usuario = JSON.parse(sessionStorage.getItem('usuario')!);
     }
+  }
+
+  changeLang(lang: any) {
+    localStorage.setItem('lang', lang);
+    // sessionStorage.removeItem('usuario')
+    this.route.navigateByUrl('/').then(()=>{
+      location.reload();
+
+    });
   }
 
   cerrarSesion(): void {

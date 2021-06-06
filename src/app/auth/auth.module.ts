@@ -12,6 +12,7 @@ import { ReestablecerPasswordComponent } from './pages/reestablecer-password/ree
 import { ActividadesPorTarifaComponent } from './pages/actividades-por-tarifa/actividades-por-tarifa.component';
 import { NgxPayPalModule } from 'ngx-paypal';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [LoginComponent, RegistroComponent, PasswordOlvidadaComponent, ReestablecerPasswordComponent, ActividadesPorTarifaComponent],
@@ -22,8 +23,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     SharedModule,
     ReactiveFormsModule,
     NgxSpinnerModule,
-    NgxPayPalModule
-    
+    NgxPayPalModule,
+    TranslateModule    
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

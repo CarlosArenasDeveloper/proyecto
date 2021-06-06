@@ -7,8 +7,14 @@ import { AdminService } from '../../protected/services/admin.service';
 import { ValidatorService } from '../../auth/services/validator.service';
 import { AuthService } from '../../auth/services/auth.service';
 import { Usuario, PasswordPerfil } from '../../models/interface';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  FormControl,
+} from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-editar-perfil',
   templateUrl: './editar-perfil.component.html',
@@ -26,7 +32,7 @@ export class EditarPerfilComponent implements OnInit {
   };
   file_data: any = '';
   nombreFichero: string = '';
-  imagenGuardada:string='';
+  imagenGuardada: string = '';
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -35,8 +41,8 @@ export class EditarPerfilComponent implements OnInit {
     private fb: FormBuilder,
     private validatorService: ValidatorService,
     private authService: AuthService,
-    private sanitizer: DomSanitizer
-
+    private sanitizer: DomSanitizer,
+    private translateService: TranslateService
   ) {
     const currentYear = new Date().getFullYear();
     this.minDate = new Date(currentYear - 100, 0, 1);
@@ -55,7 +61,7 @@ export class EditarPerfilComponent implements OnInit {
   reservas!: any;
   estado!: any;
   usuario: Usuario = {};
-  user:any;
+  user: any;
 
   fechaActual(): string {
     let date = new Date();
@@ -140,9 +146,9 @@ export class EditarPerfilComponent implements OnInit {
       )
       .subscribe((usuario) => {
         this.usuario = usuario;
-        this.user=usuario
-        this.imagenGuardada=this.usuario.imagen!
-        this.nombreFichero=this.usuario.imagen!
+        this.user = usuario;
+        this.imagenGuardada = this.usuario.imagen!;
+        this.nombreFichero = this.usuario.imagen!;
         if (this.usuario.role == 1) {
           this.role = 1;
         } else if (this.usuario.role == 3) {
@@ -213,13 +219,18 @@ export class EditarPerfilComponent implements OnInit {
         Swal.fire({
           position: 'top-end',
           icon: 'success',
-          title: 'Datos correctamente actualizados',
+          title: `${this.translateService.instant(
+            'Datos correctamente actualizados'
+          )}`,
           showConfirmButton: false,
           timer: 2000,
         });
       }
     });
-    if (this.usuario.imagen != '' && this.nombreFichero!=this.imagenGuardada) {
+    if (
+      this.usuario.imagen != '' &&
+      this.nombreFichero != this.imagenGuardada
+    ) {
       this.uploadFile();
     }
     if (this.nombreFichero == this.imagenGuardada) {
@@ -243,18 +254,11 @@ export class EditarPerfilComponent implements OnInit {
   get dniErrorMsg(): string {
     const errors = this.miFormulario.get('dni')?.errors;
     if (errors?.required) {
-      return 'El DNI es requerido';
+      return this.translateService.instant('El DNI es requerido');
     } else if (errors?.pattern) {
-      return 'El valor ingresado no corresponde con formato DNI/NIE';
-    }
-    return '';
-  }
-  get passwordErrorMsg(): string {
-    const errors = this.formPassword.get('password')?.errors;
-    if (errors?.required) {
-      return 'La contraseña es requerida';
-    } else if (errors?.minlength) {
-      return 'La contraseña debe tener mas de 6 caracteres';
+      return this.translateService.instant(
+        'El valor ingresado no corresponde con formato DNI/NIE'
+      );
     }
     return '';
   }
@@ -262,19 +266,23 @@ export class EditarPerfilComponent implements OnInit {
   get passwordErrorActual(): string {
     const errors = this.formPassword.get('passwordactual')?.errors;
     if (errors?.required) {
-      return 'La contraseña es requerida';
+      return this.translateService.instant('La contraseña es requerida');
     } else if (errors?.minlength) {
-      return 'La contraseña debe tener mas de 6 caracteres';
+      return this.translateService.instant(
+        'La contraseña debe tener mas de 6 caracteres'
+      );
     }
     return '';
   }
 
-  get cuentaErrorMsg(): string {
-    const errors = this.miFormulario.get('cuenta_bancaria')?.errors;
+  get passwordErrorMsg(): string {
+    const errors = this.miFormulario.get('password')?.errors;
     if (errors?.required) {
-      return 'El nº de cuenta es requerido';
-    } else if (errors?.pattern) {
-      return 'El valor ingresado no tiene formato de numero de cuenta';
+      return this.translateService.instant('La contraseña es requerida');
+    } else if (errors?.minlength) {
+      return this.translateService.instant(
+        'La contraseña debe tener mas de 6 caracteres'
+      );
     }
     return '';
   }
@@ -282,9 +290,23 @@ export class EditarPerfilComponent implements OnInit {
   get telefonoErrorMsg(): string {
     const errors = this.miFormulario.get('telefono')?.errors;
     if (errors?.required) {
-      return 'El nº de telefono es requerido';
+      return this.translateService.instant('El nº de telefono es requerido');
     } else if (errors?.pattern) {
-      return 'El valor ingresado no tiene formato de numero de telefono';
+      return this.translateService.instant(
+        'El valor ingresado no tiene formato de numero de telefono'
+      );
+    }
+    return '';
+  }
+
+  get cuentaErrorMsg(): string {
+    const errors = this.miFormulario.get('cuenta_bancaria')?.errors;
+    if (errors?.required) {
+      return this.translateService.instant('El nº de cuenta es requerido');
+    } else if (errors?.pattern) {
+      return this.translateService.instant(
+        'El valor ingresado no tiene formato de numero de cuenta'
+      );
     }
     return '';
   }
@@ -292,22 +314,21 @@ export class EditarPerfilComponent implements OnInit {
     this.cambiarPass = true;
   }
 
-
   esMenor() {
     const today: Date = new Date();
     const birthDate: Date = new Date(this.miFormulario.get('fecha_nac')?.value);
     let age: number = today.getFullYear() - birthDate.getFullYear();
     const month: number = today.getMonth() - birthDate.getMonth();
     if (month < 0 || (month === 0 && today.getDate() < birthDate.getDate())) {
-        age--;
+      age--;
     }
-    if(age < 18){
+    if (age < 18) {
       this.miFormulario.get('fecha_nac')?.setErrors({ noIguales: true });
       return true;
-    } else{
-      return "";
+    } else {
+      return '';
     }
-}
+  }
 
   confirmarPassword() {
     this.passwordPerfil = this.formPassword.value;
@@ -319,28 +340,36 @@ export class EditarPerfilComponent implements OnInit {
           Swal.fire({
             position: 'top-end',
             icon: 'success',
-            title: 'Contraseña correctamente actualizada',
+            title: `${this.translateService.instant(
+              'Contraseña correctamente actualizada'
+            )}`,
             showConfirmButton: false,
             timer: 2000,
           });
         } else {
           Swal.fire({
             icon: 'error',
-            title: 'Error al intentar cambiar la contraseña!',
-            text: 'La contraseña que ingresaste no coincide con nuestros registros. Por favor, revisala e inténtelo de nuevo.',
+            title: `${this.translateService.instant(
+              'Error al intentar cambiar la contraseña'
+            )}!`,
+            text: `${this.translateService.instant(
+              'La contraseña que ingresaste no coincide con nuestros registros. Por favor, revisala e inténtelo de nuevo'
+            )}.`,
           });
         }
       });
   }
   darAlta() {
     Swal.fire({
-      title: `¿Estas seguro de que quieres darte de alta?`,
+      title: `¿${this.translateService.instant(
+        'Estas seguro de que quieres darte de alta'
+      )}?`,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Si, dar de alta',
-      cancelButtonText: 'No, cancelar',
+      confirmButtonText: `${this.translateService.instant('Si, dar de alta')}`,
+      cancelButtonText: `${this.translateService.instant('No, cancelar')}`,
     }).then((result) => {
       if (result.isConfirmed) {
         this.miFormulario.controls['fecha_alta'].setValue(this.fechaActual());
@@ -350,11 +379,16 @@ export class EditarPerfilComponent implements OnInit {
           Swal.fire({
             position: 'top-end',
             icon: 'success',
-            title: 'Alta completada, te esperamos en nuestro centro!',
+            title: `${this.translateService.instant(
+              'Alta completada con exito'
+            )}`,
+            text: `${this.translateService.instant(
+              'Te esperamos en nuestro centro'
+            )}!`,
             showConfirmButton: false,
             timer: 1500,
-          })
-          this.user.estado='activo'
+          });
+          this.user.estado = 'activo';
         });
       }
     });
@@ -362,13 +396,17 @@ export class EditarPerfilComponent implements OnInit {
 
   darBaja() {
     Swal.fire({
-      title: `¿Estas seguro de que quieres darte de baja?`,
+      title: `¿${this.translateService.instant(
+        'Estas seguro de que quieres darte de baja'
+      )}?`,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Si, darme de baja',
-      cancelButtonText: 'No, cancelar',
+      confirmButtonText: `${this.translateService.instant(
+        'Si, darme de baja'
+      )}`,
+      cancelButtonText: `${this.translateService.instant('No, cancelar')}`,
     }).then((result) => {
       if (result.isConfirmed) {
         this.miFormulario.controls['fecha_baja'].setValue(this.fechaActual());
@@ -379,13 +417,16 @@ export class EditarPerfilComponent implements OnInit {
           Swal.fire({
             position: 'top-end',
             icon: 'success',
-            title:
-              'Baja completada correctamente. Esperamos volver a verte pronto!',
+            title: `${this.translateService.instant(
+              'Baja completada con exito'
+            )}!`,
+            text: `${this.translateService.instant(
+              'Esperamos volver a verte pronto'
+            )}.`,
             showConfirmButton: false,
             timer: 1500,
-          })
-          this.user.estado='baja'
-
+          });
+          this.user.estado = 'baja';
         });
       }
     });
@@ -420,17 +461,19 @@ export class EditarPerfilComponent implements OnInit {
       }
     }
   }
-  
+
   uploadFile() {
     this.previsualizacion = '';
     this.mostrarImagen = true;
-    this.usuario.imagen=this.nombreFichero;
+    this.usuario.imagen = this.nombreFichero;
     this.adminService.uploadFile(this.file_data).subscribe((resp) => {
       this.activatedRoute.params
-        .pipe(switchMap(({ email }) => this.adminService.getUsuarioPorEmail(email)))
+        .pipe(
+          switchMap(({ email }) => this.adminService.getUsuarioPorEmail(email))
+        )
         .subscribe((cliente) => {
-        this.usuario = cliente;
-        console.log(this.usuario);
+          this.usuario = cliente;
+          console.log(this.usuario);
         });
       this.usuario.imagen = '';
     });
@@ -438,11 +481,11 @@ export class EditarPerfilComponent implements OnInit {
   }
 
   capturarFile(event: any): any {
-   // this.previsualizacion2 = '';
+    // this.previsualizacion2 = '';
     const archivoCapturado = event.target.files[0];
     this.extraerBase64(archivoCapturado).then((imagen: any) => {
       this.previsualizacion = imagen.base;
-     // this.previsualizacion2 = imagen.base;
+      // this.previsualizacion2 = imagen.base;
     });
     this.archivos.push(archivoCapturado);
   }

@@ -233,7 +233,7 @@
 
           <div class="mb-5 col-md-4 col-12">
             <label for="start">Fecha y hora del inicio de la sesion:</label>
-            <p-calendar
+            <p-calendar *ngIf="isEspanish"
               [ngClass]="{
                 'is-invalid': campoNoValido('start')
               }"
@@ -247,6 +247,19 @@
               [locale]="localeES"
             >
             </p-calendar>
+            <p-calendar *ngIf="!isEspanish"
+            [ngClass]="{
+              'is-invalid': campoNoValido('start')
+            }"
+            id="start"
+            type="datetime-local"
+            dateFormat="dd/mm/yy"
+            inputStyleClass="form-control"
+            formControlName="start"
+            showTime="true"
+            [minDate]="today"
+          >
+          </p-calendar>
             <span
               class="form-text text-danger fst-italic"
               *ngIf="campoNoValido('start')"
@@ -257,7 +270,7 @@
 
           <div class="mb-5 col-md-4 col-12">
             <label for="end">Fecha y hora del fin de la sesion:</label>
-            <p-calendar
+            <p-calendar  *ngIf="isEspanish"
               id="end"
               type=""
               dateFormat="dd/mm/yy"
@@ -266,16 +279,26 @@
               showTime="true"
               formControlName="end"
               [locale]="localeES"
+
             >
             </p-calendar>
+            <p-calendar  *ngIf="!isEspanish"
+            id="end"
+            type=""
+            dateFormat="dd/mm/yy"
+            [minDate]="miFormulario.controls['start'].value"
+            inputStyleClass="form-control"
+            showTime="true"
+            formControlName="end"
+          >
+          </p-calendar>
             <span
-              class="form-text text-danger fst-italic"
-              *ngIf="campoNoValido('end')"
-            >
-              La fecha y hora de fin son requeridas
-            </span>
+            class="form-text text-danger fst-italic"
+            *ngIf="campoNoValido('end')"
+          >
+            La fecha y hora de fin son requeridas
+          </span>
           </div>
-
           <div class="mt-3 row form-group">
             <div class="col-12">
               <button

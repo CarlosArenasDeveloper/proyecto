@@ -9,6 +9,7 @@ import { MaterialModule } from '../../material/material.module';
 import { DataTablesModule } from 'angular-datatables';
 import { FullCalendarModule } from 'primeng/fullcalendar';
 import { CalendarModule } from 'primeng/calendar';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { CalendarModule } from 'primeng/calendar';
     DataTablesModule,
     FullCalendarModule,
     CalendarModule,
+    TranslateModule
   ]
 })
 export class ClienteModule { }

@@ -1,6 +1,6 @@
 <div style="background-color: rgb(255, 215, 215);" class="m-3">
 
-<h2 class="text-center pt-5 ">INICIAR SESIÓN <i class="fas fa-door-open"></i></h2>
+<h2 class="text-center pt-5 ">{{'INICIAR SESIÓN'|translate}} <i class="fas fa-door-open"></i></h2>
 <hr />
 
 <div class="row">
@@ -20,7 +20,7 @@
             class="form-control"
             [ngClass]="campoNoValido('email')?'is-invalid':''"
             formControlName="email"
-            placeholder="Ingrese el email"
+            [placeholder]="'placeholder.Ingrese el email'|translate"
           />
           <span class="form-text text-danger" *ngIf="campoNoValido('email')">
             {{ emailErrorMsg }}
@@ -29,7 +29,7 @@
       </div>
       <!-- Password -->
       <div class="row mb-3">
-        <label class="col-sm-3 col-form-label"><i class="fas fa-key me-1"></i> Contraseña:</label>
+        <label class="col-sm-3 col-form-label"><i class="fas fa-key me-1"></i> {{'Contraseña'|translate}}:</label>
         <div class="col-sm-9">
           <input
             type="password"
@@ -38,11 +38,11 @@
             [ngClass]="{
               'is-invalid': campoNoValido('password')
             }"
-            placeholder=" Ingrese la contraseña"
+            [placeholder]="'placeholder.Ingrese la contraseña'|translate"
           />
           
           <span class="form-text text-danger" *ngIf="campoNoValido('password')">
-            La contraseña debe de ser mayor de 6 caracteres.
+            {{'La contraseña debe de ser mayor de 6 caracteres.'|translate}}
           </span>
         </div>
       </div>
@@ -60,20 +60,20 @@
       </div>
       <div class="row mt-2">
         <div class="col">
-          ¿Quieres cambiar tu estilo de vida?
+          {{'¿Quieres cambiar tu estilo de vida?'|translate}}
           <button
             class="btn btn-primary"
             type="submit"
             routerLink="/auth/registro"
           >
-            Inscribete ya!
+            {{'inscribete ya'|translate|titlecase}}!
           </button>
         </div>
       </div>
       <div class="row">
         <div class="col">
           <a routerLink="/auth/passwordOlvidada"
-            >¿Has olvidado tu contraseña?</a
+            >¿{{'Has olvidado tu contraseña'|translate}}?</a
           >
         </div>
       </div>

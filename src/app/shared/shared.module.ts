@@ -26,6 +26,7 @@ import { ImgPipe } from './pipes/img.pipe';
 import {FullCalendarModule} from 'primeng/fullcalendar';
 import { CalendarModule } from 'primeng/calendar';
 import { ReservarSesionComponent } from './reservas/reservar-sesion/reservar-sesion.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,7 @@ import { ReservarSesionComponent } from './reservas/reservar-sesion/reservar-ses
     ReservarSesionComponent,
   ],
   imports: [SharedRoutingModule,CommonModule, RouterModule, MaterialModule,ReactiveFormsModule,    FullCalendarModule,
-    CalendarModule],
+    CalendarModule,TranslateModule],
   exports: [
     NavegacionComponent,
     ImagenPipe,

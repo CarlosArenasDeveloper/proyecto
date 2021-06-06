@@ -12,6 +12,7 @@ import { DataTableDirective } from 'angular-datatables';
 })
 export class ListaCentrosComponent implements OnInit, OnDestroy {
   usuario!: Usuario;
+  url!:string;
   dtOptions: DataTables.Settings = {};
   dtTrigger = new Subject();
   centros: any = [];
@@ -24,11 +25,17 @@ export class ListaCentrosComponent implements OnInit, OnDestroy {
     const usuario = JSON.parse(sessionStorage.getItem('usuario')!);
     this.usuario = usuario;
 
+    if(localStorage.getItem('lang')=='es'){
+      this.url='//cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json'
+    }else{
+      this.url='//cdn.datatables.net/plug-ins/1.10.25/i18n/English.json'
+    }
+
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 5,
       language: {
-        url: '//cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json',
+        url: this.url,
       },
       responsive: true,
     };
@@ -40,6 +47,7 @@ export class ListaCentrosComponent implements OnInit, OnDestroy {
   }
 
   isAdmin() {
+    
     if (this.usuario.role == 1) {
       return true;
     }

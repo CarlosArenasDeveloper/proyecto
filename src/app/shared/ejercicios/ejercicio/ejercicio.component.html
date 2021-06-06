@@ -6,22 +6,22 @@
       <div class="col">
         <ul class="fichastec">
           <li>
-            <i class="fanicon tipo-fuerza"></i> <strong>Tipo:</strong>
+            <i class="fanicon tipo-fuerza"></i> <strong>{{'Tipo'|translate}}:</strong>
             {{ ejercicio.tipo | titlecase }}
           </li>
           <li>
-            <i class="fanicon nivel-med"></i> <strong>Nivel:</strong>
+            <i class="fanicon nivel-med"></i> <strong>{{'Nivel'|translate}}:</strong>
             {{ ejercicio.nivel | titlecase }}
           </li>
           <li>
             <i class="fanicon involucra"></i>
-            <strong>Músculo principal: </strong>
+            <strong>{{'Músculo principal'|translate}}: </strong>
             <a href="./dashboard/ejercicios/{{ ejercicio.nombre_musculo }}">{{
               ejercicio.nombre_musculo | titlecase
             }}</a>
           </li>
           <li>
-            <i class="fanicon equipo"></i> <strong>Equipo:</strong>
+            <i class="fanicon equipo"></i> <strong>{{'Equipo'|translate}}:</strong>
             {{ ejercicio.equipo | titlecase }}
           </li>
         </ul>
@@ -42,7 +42,7 @@
 </div>
 <div *ngIf="ejercicio.video!=''" class="row mt-5">
   <div class="col text-center">
-    <h3>¿Como realizar el ejercicio?</h3>
+    <h3>¿{{'Como realizar el ejercicio'|translate}}?</h3>
     <iframe width="560" height="315" [src]="getVideoIframe(ejercicio.video)" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
   </div> 
 </div>
@@ -52,5 +52,5 @@
   routerLink="/dashboard/ejercicios/{{ ejercicio.nombre_musculo }}"
 >
   <i class="fas fa-arrow-circle-left"></i>
-  Volver atras
+  {{'Volver atrás'|translate}}
 </button>

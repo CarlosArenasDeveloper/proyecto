@@ -20,6 +20,7 @@ export class EditSesionComponent implements OnInit {
   salas: any;
   actividades: any;
   localeES: any;
+  isEspanish:boolean=true;
 
 
   constructor(
@@ -28,6 +29,9 @@ export class EditSesionComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private router: Router
   ) {
+    if (localStorage.getItem('lang') == 'en') {
+      this.isEspanish = false;
+    } 
     this.today = new Date();
     this.localeES = {
       firstDayOfWeek: 1,

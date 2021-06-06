@@ -1,11 +1,6 @@
 <head>
   <link href="../../../assets/css/animate.css" rel="stylesheet" />
   <link
-    rel="stylesheet"
-    href="../../../assets/css/bootstrap.min.css"
-    type="text/css"
-  />
-  <link
     href="https://fonts.googleapis.com/css?family=Lato:300,400,700"
     rel="stylesheet"
   />
@@ -15,30 +10,31 @@
   <div
     class="container-fluid pl-0 pr-0 bg-img clearfix parallax-window2"
     data-parallax="scroll"
-    data-image-src="../../../assets/images/banner2.jpg"
+    data-image-src="assets/images/banner2.jpg"
   >
     <div class="container">
       <div class="fh5co-banner-text-box">
-        <div class="quote-box pl-5 pr-5 wow bounceInRight">
-          <h2>BIENVENID@ A <br /><span>FIT & HEALTHY</span></h2>
+        <div class="quote-box px-5 wow bounceInRight">
+          <h2>{{'bienvenid@ a'|translate|uppercase}} <br /><span>FIT & HEALTHY</span></h2>
         </div>
         <a
-          href="/auth/login"
+        routerLink="./auth/login"
+
           class="
             btn
             text-uppercase
             btn-outline-danger btn-lg
-            mr-3
+            me-3
             mb-3
             wow
             bounceInUp
           "
         >
-          AREA PARA CLIENTES</a
+        {{'area de clientes'|translate|uppercase}}</a
         >
         <a
-          href="/auth/registro"
-          class="
+        routerLink="./auth/registro"
+        class="
             btn
             text-uppercase
             btn-outline-danger btn-lg
@@ -47,7 +43,7 @@
             bounceInDown
           "
         >
-          INSCRIBETE AHORA
+        {{'inscribete ahora'|translate|uppercase}}
         </a>
       </div>
     </div>
@@ -58,24 +54,19 @@
         <div class="col-md-6">
           <!-- <h4 class="wow bounceInUp">FOR NETWORK</h4> -->
           <h2 class="wow bounceInRight">
-            En ningún sitio como en Fit & Healthy
+            {{'En ningún sitio como en Fit & Healthy'|translate|uppercase}}
           </h2>
           <hr />
           <!-- <h5 class="wow bounceInLeft">NETWORK SUMMER 2017</h5> -->
           <p class="wow bounceInDown">
-            En Fit & Healthy hemos implementado medidas de seguridad
-            desarrolladas por científicos del Fit & Healhty LAB y supervisadas y
-            validadas por nuestros expertos en Virología, Epidemiología y Salud
-            Pública de la Universidad Sheffield Hallam y Rey Juan Carlos I.
-            Todas ellas asegurando un índice de seguridad de 7,4 sobre 8 frente
-            al COVID-19. Por lo que te garantizamos que no estarás,
-            #EnNingúnSitioComoEnGOfit
+            {{'En Fit & Healthy hemos implementado medidas de seguridad desarrolladas por científicos del Fit & Healhty LAB y supervisadas y validadas por nuestros expertos en Virología, Epidemiología y Salud Pública de la Universidad Sheffield Hallam y Rey Juan Carlos I. Todas ellas asegurando un índice de seguridad de 7,4 sobre 8 frente al COVID-19. Por lo que te garantizamos que no estarás'|translate}}
+
           </p>
         </div>
         <div class="col-md-6">
           <figure class="wow bounceInDown">
             <img
-              src="../../../assets/images/about-img.jpg"
+              src="assets/images/about-img.jpg"
               alt="gym"
               class="img-fluid"
             />
@@ -88,19 +79,14 @@
     id="about-us"
     class="container-fluid fh5co-about-us pl-0 pr-0 parallax-window"
     data-parallax="scroll"
-    data-image-src="../../../assets/images/about-us-bg.jpg"
+    data-image-src="assets/images/about-us-bg.jpg"
   >
     <div class="container">
       <div class="col-sm-6 offset-sm-6">
-        <h2 class="wow bounceInLeft" data-wow-delay=".25s">SOBRE NOSOTROS</h2>
+        <h2 class="wow bounceInLeft" data-wow-delay=".25s">{{'sobre nosotros'|translate|uppercase}}</h2>
         <hr />
         <p class="wow bounceInRight" data-wow-delay=".25s">
-          Fit & Healthy nace de la mano de inversores experimentados en el
-          sector de la salud y el deporte, que cuentan con más de 40 años de
-          experiencia y de éxito en otros países de Europa, donde ya se han
-          convertido en toda una referencia dentro de este sector. Esto nos ha
-          llevado a entrar en España con un modelo innovador y ya contrastado,
-          que está teniendo mucha aceptación y éxito entre nuestros clientes.
+       {{'Fit & Healthy nace de la mano de inversores experimentados en el sector de la salud y el deporte, que cuentan con más de 40 años de experiencia y de éxito en otros países de Europa, donde ya se han convertido en toda una referencia dentro de este sector. Esto nos ha llevado a entrar en España con un modelo innovador y ya contrastado, que está teniendo mucha aceptación y éxito entre nuestros clientes.'|translate}}
         </p>
         <a
           class="
@@ -111,8 +97,8 @@
             wow
             bounceInDown
           "
-          href="/centros"
-          >Conoce nuestros centros</a
+          routerLink="./centros"
+          >{{'Conoce nuestros centros'|translate}}</a
         >
       </div>
     </div>
@@ -122,7 +108,7 @@
       <div class="row">
         <div class="col-md-5 pr-0">
           <img
-            src="../../../assets/images/rode-gym.jpg"
+            src="assets/images/rode-gym.jpg"
             alt="gym"
             class="img-fluid wow bounceInLeft"
           />
@@ -131,7 +117,7 @@
           <div class="wow bounceInRight" data-wow-delay=".25s">
             <div class="card-img-overlay">
               <p>
-                Nuestra pasión por el fitness, la innovación y la atención a
+                <!-- Nuestra pasión por el fitness, la innovación y la atención a
                 nuestros clientes, nos lleva a brindarles el mejor producto.
                 Ofrecemos el mejor servicio de actividades, maquinaria de última
                 generación y un equipo de profesionales altamente cualificados,
@@ -139,11 +125,11 @@
                 adicionales. Los valores principales que identifican a Fit &
                 Healthy son la honestidad, sencillez e innovación, y nos hemos
                 basado en todos ellos a la hora de diseñar lo que creemos que es
-                un producto de fitness líder en el mercado.
+                un producto de fitness líder en el mercado. -->
               </p>
             </div>
             <img
-              src="../../../assets/images/gym-girls.jpg"
+              src="assets/images/gym-girls.jpg"
               alt="girls in gym"
               class="img-fluid"
             />
@@ -154,15 +140,15 @@
         <div class="col-md-4">
           <div class="card">
             <div class="card-body mb-4 wow bounceInLeft" data-wow-delay=".25s">
-              <h4 class="card-title">FIT & HEALTHY es FUN              </h4>
+              <h4 class="card-title">{{'FIT & HEALTHY es DIVERSION'|translate}}            </h4>
               <p class="card-text">
-                Programas para aquellas personas que acuden a Fit & Healthy con la diversión como uno de sus principales objetivos..
+                {{'Programas para aquellas personas que acuden a Fit & Healthy con la diversión como uno de sus principales objetivos.'|translate}}
               </p>
             </div>
             <img
               class="card-img-top img-fluid wow bounceInRight"
               data-wow-delay=".25s"
-              src="../../../assets/images/g1.jpg"
+              src="assets/images/g1.jpg"
               alt="Card image"
             />
           </div>
@@ -172,13 +158,13 @@
             <img
               class="card-img-top img-fluid wow bounceInUp"
               data-wow-delay=".25s"
-              src="../../../assets/images/g2.jpg"
+              src="assets/images/g2.jpg"
               alt="Card image"
             />
             <div class="card-body mt-4 wow bounceInDown" data-wow-delay=".25s">
-              <h4 class="card-title">FIT & HEALTHY es FAMILY</h4>
+              <h4 class="card-title">{{'FIT & HEALTHY es FAMILIA'|translate}}</h4>
               <p class="card-text">
-                Disfruta de la práctica deportiva, mientras tus hijos disfrutan de juegos y actividades adaptadas para ellos.
+                {{'Disfruta de la práctica deportiva, mientras tus hijos disfrutan de juegos y actividades adaptadas para ellos.'|translate}}
               </p>
             </div>
           </div>
@@ -186,16 +172,15 @@
         <div class="col-md-4">
           <div class="card">
             <div class="card-body mb-4 wow bounceInRight" data-wow-delay=".25s">
-              <h4 class="card-title">La FELICIDAD también se entrena</h4>
+              <h4 class="card-title">{{'La FELICIDAD también se entrena'|translate}}</h4>
               <p class="card-text">
-               Dedica a tu felicidad 150 minutos de ejercicio a la semana y viviras más y mejor
-               Esta demostrado.
+              {{'Dedica a tu felicidad 150 minutos de ejercicio a la semana y viviras más y mejor.Esta demostrado.'|translate}}
               </p>
             </div>
             <img
               class="card-img-top img-fluid wow bounceInLeft"
               data-wow-delay=".25s"
-              src="../../../assets/images/g3.jpg"
+              src="assets/images/g3.jpg"
               alt="Card image"
             />
           </div>
@@ -211,83 +196,23 @@
           data-wow-delay=".25s"
         >
           <div class="d-flex flex-wrap align-content-center">
-            <h4 style="color: darkorange;">ACERCA DE</h4>
-           
+            <h4 class="mt-4" style="color: darkorange;">{{'acerca de'|translate|uppercase}}</h4>
             <p>
-              IES TRASSIERRA
-              <a href="https://www.iestrassierra.com/" target="_blank"
-              ><img src="../../../assets/images/trassierra.PNG" alt="logo"
-            /></a>
-            </p>
-            <p>
-              &copy; 2021.<br />
-              Desarrollado por Carlos Arenas Carretero
+              
+              {{'Desarrollado por Carlos Arenas Carretero. Alumno del IES Trassierra.'|translate}}&copy; 2021.<br />
             </p>
           </div>
         </div>
-        <div
-          class="col-md-6 footer2 wow bounceInUp"
-          data-wow-delay=".25s"
-          id="contact"
-        >
-          <div class="form-box">
-            <h4>CONTACTA CON NOSOTROS</h4>
-            <table class="table table-responsive d-table">
-              <tr>
-                <td>
-                  <input
-                    type="text"
-                    class="form-control pl-0"
-                    placeholder="Nombre"
-                  />
-                </td>
-                <td>
-                  <input
-                    type="email"
-                    class="form-control pl-0"
-                    placeholder="Email"
-                  />
-                </td>
-              </tr>
-              <tr>
-                <td colspan="2"></td>
-              </tr>
-              <tr>
-                <td colspan="2">
-                  <input
-                    type="text"
-                    class="form-control pl-0"
-                    placeholder="direccion"
-                  />
-                </td>
-              </tr>
-              <tr>
-                <td colspan="2"></td>
-              </tr>
-              <tr>
-                <td colspan="2">
-                  <input
-                    type="text"
-                    class="form-control pl-0"
-                    placeholder="Mensaje"
-                  />
-                </td>
-              </tr>
-              <tr>
-                <td colspan="2"></td>
-              </tr>
-              <tr>
-                <td colspan="2" class="text-center pl-0">
-                  <a type="submit" href="https://outlook.live.com/" target="_blank" class="btn btn-dark">Enviar</a>
-                </td>
-              </tr>
-            </table>
-          </div>
+        <div class="col-md-6 footer3 wow bounceInRight text-center" data-wow-delay=".25s">
+          <a href="https://www.iestrassierra.com/" target="_blank"
+          ><img src="assets/images/trassierra.PNG" alt="iestrassierra" title="iestrassierra"
+        /></a>
         </div>
+
         <div class="col-md-3 footer3 wow bounceInRight" data-wow-delay=".25s">
-          <h4 class="mt-5" style="color: darkorange;">TELEFONO</h4>
+          <h4 class="mt" style="color: darkorange;">{{'telefono'|translate|uppercase}}</h4>
           <p>683234123</p>
-          <h4 style="color: darkorange;">EMAIL</h4>
+          <h4 style="color: darkorange;">{{'email'|translate|uppercase}}</h4>
           <p>fitandhealthycm@gmail.com</p>
         </div>
       </div>

@@ -4,7 +4,7 @@
       <button mat-icon-button (click)="sidenav.toggle()">
         <mat-icon>menu</mat-icon>
       </button>
-      <span>Panel de administracion</span>
+      <span>{{'Panel de administracion'|translate}}</span>
       <span class="spacer"></span>
     </mat-toolbar>
 
@@ -19,7 +19,7 @@
             <mat-nav-list>
               <a mat-list-item (click)="sidenav.toggle()">
                 <i class="fas fa-users fa-2x text-white"></i>
-                <span class="ms-1 text-white">Usuarios</span>
+                <span class="ms-1 text-white">{{'Usuarios'|translate}}</span>
               </a>
             </mat-nav-list>
           </mat-panel-title>
@@ -34,7 +34,7 @@
             (click)="sidenav.toggle()"
           >
             <i class="far fa-user text-white ms-4"></i>
-            <span class="text-white ms-1">Clientes</span>
+            <span class="text-white ms-1">{{'Clientes'|translate}}</span>
           </a>
           <a
             *ngIf="isMonitor()"
@@ -43,7 +43,7 @@
             (click)="sidenav.toggle()"
           >
             <i class="far fa-user text-white ms-4"></i>
-            <span class="text-white ms-1">Clientes</span>
+            <span class="text-white ms-1">{{'Clientes'|translate}}</span>
           </a>
         </mat-nav-list>
         <mat-nav-list *ngIf="isAdmin() || isMonitor()">
@@ -54,7 +54,7 @@
             (click)="sidenav.toggle()"
           >
             <i class="fas fa-user-tie text-white ms-4"></i>
-            <span class="text-white ms-1">Monitores</span>
+            <span class="text-white ms-1">{{'Monitores'|translate}}</span>
           </a>
           <a
             *ngIf="isMonitor()"
@@ -63,15 +63,9 @@
             (click)="sidenav.toggle()"
           >
             <i class="fas fa-user-tie text-white ms-4"></i>
-            <span class="text-white ms-1">Monitores</span>
+            <span class="text-white ms-1">{{'Monitores'|translate}}</span>
           </a>
         </mat-nav-list>
-        <!-- <mat-nav-list *ngIf="isAdmin()">
-          <a (click)="monitores()" mat-list-item (click)="sidenav.toggle()">
-            <i class="fas fa-user-shield text-white ms-4"></i>
-            <span class="text-white ms-1">Gerentes</span>
-          </a>
-        </mat-nav-list> -->
       </mat-expansion-panel>
     </mat-accordion>
     <mat-accordion>
@@ -85,7 +79,7 @@
             <mat-nav-list>
               <a mat-list-item (click)="sidenav.toggle()">
                 <i class="fas fa-running fa-2x text-white"></i>
-                <span class="text-white ms-2">Entrenamiento</span>
+                <span class="text-white ms-2">{{'Entrenamiento'|translate}}</span>
               </a>
             </mat-nav-list>
           </mat-panel-title>
@@ -100,7 +94,7 @@
             (click)="sidenav.toggle()"
           >
             <i class="fas fa-dumbbell text-white ms-4"></i>
-            <span class="ms-1 text-white">Ejercicios</span>
+            <span class="ms-1 text-white">{{'ejercicios'|translate|titlecase}}</span>
           </a>
           <a
             *ngIf="isMonitor()"
@@ -109,7 +103,7 @@
             (click)="sidenav.toggle()"
           >
             <i class="fas fa-dumbbell text-white ms-4"></i>
-            <span class="ms-1 text-white">Ejercicios</span>
+            <span class="ms-1 text-white">{{'ejercicios'|translate|titlecase}}</span>
           </a>
         </mat-nav-list>
 
@@ -121,7 +115,7 @@
             (click)="sidenav.toggle()"
           >
             <i class="fas fa-heartbeat text-white ms-4"></i>
-            <span class="ms-1 text-white">Musculos</span>
+            <span class="ms-1 text-white">{{'Musculos'|translate}}</span>
           </a>
 
           <a
@@ -131,7 +125,7 @@
             (click)="sidenav.toggle()"
           >
             <i class="fas fa-heartbeat text-white ms-4"></i>
-            <span class="ms-1 text-white">Musculos</span>
+            <span class="ms-1 text-white">{{'Musculos'|translate}}</span>
           </a>
         </mat-nav-list>
       </mat-expansion-panel>
@@ -145,7 +139,7 @@
         (click)="sidenav.toggle()"
       >
         <i class="fas fa-user-clock text-white fa-2x ms-4"></i>
-        <span class="ms-1 text-white ms-1">Actividades</span>
+        <span class="ms-1 text-white ms-1">{{'actividades'|translate|titlecase}}</span>
       </a>
       <a
         *ngIf="isMonitor()"
@@ -154,7 +148,7 @@
         (click)="sidenav.toggle()"
       >
         <i class="fas fa-user-clock text-white fa-2x ms-4"></i>
-        <span class="ms-1 text-white ms-1">Actividades</span>
+        <span class="ms-1 text-white ms-1">{{'actividades'|translate|titlecase}}</span>
       </a>
     </mat-nav-list>
     <mat-nav-list>
@@ -165,7 +159,7 @@
         (click)="sidenav.toggle()"
       >
         <i class="fab fa-buromobelexperte text-white fa-2x ms-4"></i>
-        <span class="ms-1 text-white ms-1">Salas</span>
+        <span class="ms-1 text-white ms-1">{{'Salas'|translate}}</span>
       </a>
       <a
         *ngIf="isMonitor()"
@@ -174,7 +168,7 @@
         (click)="sidenav.toggle()"
       >
         <i class="fab fa-buromobelexperte text-white fa-2x ms-4"></i>
-        <span class="ms-1 text-white ms-1">Salas</span>
+        <span class="ms-1 text-white ms-1">{{'Salas'|translate}}</span>
       </a>
     </mat-nav-list>
     <mat-nav-list>
@@ -185,7 +179,7 @@
         (click)="sidenav.toggle()"
       >
         <i class="far fa-calendar-alt text-white fa-2x ms-4"></i>
-        <span class="ms-1 text-white">Sesiones</span>
+        <span class="ms-1 text-white">{{'Sesiones'|translate}}</span>
       </a>
       <a
         *ngIf="isMonitor()"
@@ -194,7 +188,7 @@
         (click)="sidenav.toggle()"
       >
         <i class="far fa-calendar-alt text-white fa-2x ms-4"></i>
-        <span class="ms-1 text-white">Sesiones</span>
+        <span class="ms-1 text-white">{{'Sesiones'|translate}}</span>
       </a>
     </mat-nav-list>
     <mat-nav-list>
@@ -205,7 +199,7 @@
         (click)="sidenav.toggle()"
       >
         <i class="far fa-newspaper text-white ms-4 fa-2x"></i>
-        <span class="ms-1 text-white">Noticias</span>
+        <span class="ms-1 text-white">{{'noticias'|translate|titlecase}}</span>
       </a>
       <a
         *ngIf="isMonitor()"
@@ -214,7 +208,7 @@
         (click)="sidenav.toggle()"
       >
         <i class="far fa-newspaper text-white ms-4 fa-2x"></i>
-        <span class="ms-1 text-white">Noticias</span>
+        <span class="ms-1 text-white">{{'noticias'|translate|titlecase}}</span>
       </a>
     </mat-nav-list>
     <mat-nav-list>
@@ -225,7 +219,7 @@
         (click)="sidenav.toggle()"
       >
         <i class="fas fa-money-check-alt fa-2x text-white ms-4"></i>
-        <span class="text-white ms-1">Tarifas</span>
+        <span class="text-white ms-1">{{'Tarifas'|translate}}</span>
       </a>
       <a
         *ngIf="isMonitor()"
@@ -234,7 +228,7 @@
         (click)="sidenav.toggle()"
       >
         <i class="fas fa-money-check-alt fa-2x text-white ms-4"></i>
-        <span class="text-white ms-1">Tarifas</span>
+        <span class="text-white ms-1">{{'Tarifas'|translate}}</span>
       </a>
     </mat-nav-list>
     <mat-nav-list>
@@ -245,7 +239,7 @@
         (click)="sidenav.toggle()"
       >
         <i class="far fa-building text-white fa-2x ms-4"></i>
-        <span class="ms-1 text-white">Centros</span>
+        <span class="ms-1 text-white">{{'centros'|translate|titlecase}}</span>
       </a>
       <a
         *ngIf="isMonitor()"
@@ -254,7 +248,7 @@
         (click)="sidenav.toggle()"
       >
         <i class="far fa-building text-white fa-2x ms-4"></i>
-        <span class="ms-1 text-white">Centros</span>
+        <span class="ms-1 text-white">{{'centros'|translate|titlecase}}</span>
       </a>
     </mat-nav-list>
   </mat-sidenav>
@@ -264,19 +258,20 @@
       *ngIf="isAdmin() || isMonitor()"
       mat-icon-button
       (click)="sidenav.toggle()"
+      title="menu"
     >
       <mat-icon>menu</mat-icon>
     </button>
-    <a (click)="panel()"> <i class="fas fa-home text-white"></i></a>
+    <a (click)="panel()" title="home"> <i class="fas fa-home text-white"></i></a>
 
     <span class="spacer"></span>
 
     <span
-      >Hola {{ usuario.nombre | titlecase }}!
+      >{{'Hola'|translate}} {{ usuario.nombre | titlecase }}!
       <!-- <i class="fas fa-user"></i> -->
       <!-- <button mat-button [matMenuTriggerFor]="menu"> <mat-icon>account_circle</mat-icon></button> -->
     </span>
-    <button mat-button [matMenuTriggerFor]="beforeMenu">
+    <button  title="options" mat-button [matMenuTriggerFor]="beforeMenu">
       <i class="fas fa-chevron-down"></i>
     </button>
     <mat-menu #beforeMenu="matMenu" xPosition="before">
@@ -284,18 +279,18 @@
         mat-menu-item
         [routerLink]="['/dashboard/admin/editar-perfil', usuario.email]"
       >
-        Editar perfil 
+        {{'Editar perfil'|translate}} 
       <mat-icon>account_circle</mat-icon>
       </button>
       <button *ngIf="usuario.role==3"
       mat-menu-item
       [routerLink]="['/dashboard/monitor/editar-perfil', usuario.email]"
     >
-    Editar perfil 
+    {{'Editar perfil'|translate}}  
     <mat-icon>account_circle</mat-icon>
     </button>
       <button mat-menu-item (click)="cerrarSesion()">
-        Cerrar sesion<i class="fas fa-sign-out-alt ms-2"></i>
+        {{'Cerrar sesion'|translate}}<i class="fas fa-sign-out-alt ms-2"></i>
       </button>
     </mat-menu>
   </mat-toolbar>
@@ -311,7 +306,7 @@
                 class="nav-link"
                 routerLinkActive="active"
                 routerLink="./ejercicios"
-                >Ejercicios</a
+                >{{'ejercicios'|translate|titlecase}}</a
               >
             </li>
             <li class="nav-item">
@@ -319,7 +314,7 @@
                 class="nav-link"
                 routerLinkActive="active"
                 routerLink="./reservas"
-                >Reserva de clases</a
+                >{{'Reserva de clases'|translate}}</a
               >
             </li>           
           </ul>
@@ -330,11 +325,9 @@
     <span class="spacer"></span>
 
     <span
-      >Hola {{ usuario.nombre | titlecase }}!
-      <!-- <i class="fas fa-user"></i> -->
-      <!-- <button mat-button [matMenuTriggerFor]="menu"> <mat-icon>account_circle</mat-icon></button> -->
+      >{{'Hola'|translate}} {{ usuario.nombre | titlecase }}!
     </span>
-    <button mat-button [matMenuTriggerFor]="beforeMenu">
+    <button title="options" mat-button [matMenuTriggerFor]="beforeMenu">
       <i class="fas fa-chevron-down"></i>
     </button>
     <mat-menu #beforeMenu="matMenu" xPosition="before">
@@ -342,11 +335,11 @@
       mat-menu-item
       [routerLink]="['/dashboard/cliente/editar-perfil', usuario.email]"
     >
-    Editar perfil 
+    {{'Editar perfil'|translate}}  
     <mat-icon>account_circle</mat-icon>
     </button>
       <button mat-menu-item (click)="cerrarSesion()">
-        Cerrar sesion<i class="fas fa-sign-out-alt ms-2"></i>
+        {{'Cerrar sesion'|translate}}<i class="fas fa-sign-out-alt ms-2"></i>
       </button>
     </mat-menu>
   </mat-toolbar>

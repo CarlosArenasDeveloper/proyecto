@@ -1,6 +1,6 @@
 <div style="background-color: rgb(255, 215, 215);" class="m-3 p-5 row">
   <div class="col-6">
-    <img [src]="actividad.imagen!|imagen" class="card-img-top img-fluid img-thumbnail"/>      
+    <img [src]="actividad.imagen!|imagen" class="card-img-top img-fluid img-thumbnail" [title]="actividad.nombre"/>      
 
         <button
         *ngIf="!sesion()"
@@ -9,7 +9,7 @@
         routerLink="/actividades"
       >
         <i class="fas fa-arrow-circle-left"></i>
-        Volver atrás
+        {{'Volver atrás'|translate}}
       </button>
       <button
         *ngIf="sesion()"
@@ -18,13 +18,13 @@
         routerLink="/dashboard/actividades"
       >
         <i class="fas fa-arrow-circle-left"></i>
-        Volver atrás
+        {{'Volver atrás'|translate}}
       </button>
     </div>
     <div class="col-6">
         <h3>{{actividad.nombre|uppercase}}</h3>
         <br>
-        Tarifa: {{actividad.id_tarifa}}
+        {{'Tarifa'|translate}}: {{actividad.id_tarifa}}
         <br>
         <span *ngIf="sesion()"><i class="fas fa-user-graduate"></i> : {{actividad.email_monitor}}</span>
           <section>

@@ -1,6 +1,6 @@
 <div style="background-color: rgb(255, 215, 215)" class="m-3 p-5 row">
   <div class="col-12">
-    <h1 class="text-center">Ejercicios para {{ musculo.nombre }}</h1>
+    <h1 class="text-center">{{'Ejercicios para'|translate}} {{ musculo.nombre }}</h1>
     <span>{{ musculo.descripcion }}</span>
     <hr />
   </div>
@@ -11,7 +11,7 @@
   ]">
       <div class="card-body">
         <p class="card-title">
-          <img [src]="ejercicio.imagen!|imagen" class="card-img-top border-rounded" style="height: 250px;"/>
+          <img [src]="ejercicio.imagen!|imagen" [title]="ejercicio.nombre" class="card-img-top border-rounded" style="height: 250px;"/>
         </p>
         <p class="card-text text-center">
           {{ ejercicio.nombre }}
@@ -20,7 +20,7 @@
     </div>
   </div>
   <div *ngIf="!existenEjercicios">
-    <h1>Sin ejercicios</h1>
+    <h3 class="text-center fst-italic">{{'Sin ejercicios'|translate}}</h3>
   </div>
   <button
   type="button"
@@ -28,6 +28,6 @@
   routerLink="/dashboard/ejercicios"
 >
   <i class="fas fa-arrow-circle-left"></i>
-  Volver atras
+  {{'Volver atrás'|translate}}
 </button>
 </div>

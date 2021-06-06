@@ -2,18 +2,18 @@
   <div>
     <div>
       <div class="text-center mt-4">
-          <h3>Altas y bajas de clientes por mes y año</h3>
+          <h3>{{'Altas y bajas de clientes por mes y año'|translate}}</h3>
           <hr>
         <button type="button" class="btn btn-danger" (click)="anterior()">
-            <i class="fas fa-backward"></i> Año anterior
+            <i class="fas fa-backward"></i> {{'Año anterior'|translate}}
         </button>
         <button 
           class="mx-3 btn btn-secondary" disabled
         >
-          Año {{ anioActual }}
+          {{'Año'|translate}} {{ anioActual }}
         </button>
         <button type="button" id="siguiente" disabled class="btn btn-primary" (click)="siguiente()">
-          Siguiente año <i class="fas fa-forward"></i>
+          {{'Siguiente año'|translate}} <i class="fas fa-forward"></i>
         </button>
       </div>
 
@@ -29,18 +29,18 @@
         ></canvas>
       </div>
       <button mat-button mat-raised-button color="warn" (click)="randomize()">
-        Cambiar vista
+        {{'Cambiar vista'|translate}}
       </button>
-      <span class="float-end text-primary"> Total altas por año: {{ numAltas }} </span>
+      <span class="float-end text-primary"> {{'Total altas por año'|translate}}: {{ numAltas }} </span>
       <br>
-      <span class="float-end text-primar" style="color: #d63384;"> Total bajas por año: {{ numBajas}} </span>
+      <span class="float-end text-primar" style="color: #d63384;"> {{'Total bajas por año'|translate}}: {{ numBajas}} </span>
     </div>
   </div>
 </div>
 
 <div class="row mt-5">
   <div class="col-12 col-md-6">
-    <h3 class="text-center">Clientes por gimnasio</h3>
+    <h3 class="text-center">{{'Clientes por gimnasio'|translate}}</h3>
     <hr />
     <div style="display: block">
       <canvas
@@ -52,10 +52,10 @@
       >
       </canvas>
     </div>
-    <span class="float-end text-primary"> Total clientes: {{ clientes }} </span>
+    <span class="float-end text-primary"> {{'Total clientes'|translate}}: {{ clientes }} </span>
   </div>
   <div class="col-12 col-md-6">
-    <h3 class="text-center">Sexo clientes</h3>
+    <h3 class="text-center">{{'Clientes por sexo'|translate}}</h3>
     <hr />
     <div style="display: block">
       <canvas
@@ -72,7 +72,7 @@
 
 <div class="row mt-5">
   <div class="col-12 col-md-6">
-    <h3 class="text-center">Monitores por gimnasio</h3>
+    <h3 class="text-center">{{'Monitores por gimnasio'|translate}}</h3>
     <hr />
     <div style="display: block">
       <canvas
@@ -85,11 +85,11 @@
       </canvas>
     </div>
     <span class="float-end text-primary">
-      Total monitores: {{ monitores }}
+      {{'Total monitores'|translate}}: {{ monitores }}
     </span>
   </div>
   <div class="col-12 col-md-6">
-    <h3 class="text-center">Sexo monitores</h3>
+    <h3 class="text-center">{{'Monitores por sexo'|translate}}</h3>
     <hr />
     <div style="display: block">
       <canvas

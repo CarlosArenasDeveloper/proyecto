@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col my-4">
       <h1>
-        Mi perfil: {{ usuario.nombre | titlecase }}
+        {{'Mi perfil'|translate}}: {{ usuario.nombre | titlecase }}
         {{ usuario.apellido1 | titlecase }} {{ usuario.apellido2 | titlecase }}
       </h1>
     </div>
@@ -33,7 +33,7 @@
           <img [src]="previsualizacion" style="width: 300px; height: 300px" />
         </div>
     
-        <label for="formFile" class="form-label">Foto:</label>
+        <label for="formFile" class="form-label">{{'Foto'|translate}}:</label>
         <input
           id="formFile"
           [formControl]="file"
@@ -49,7 +49,7 @@
         class="btn btn-primary float-end"
         [disabled]="miFormulario.invalid"
       >
-        Actualizar datos
+        {{'Actualizar datos'|translate}}
         <i class="fa fa-edit"></i>
       </button>
       <button
@@ -57,18 +57,18 @@
         class="btn btn-danger float-start"
         (click)="cambiarPassword()"
       >
-        Cambiar contraseña
+        {{'Cambiar contraseña'|translate}}
         <i class="fas fa-key"></i>
       </button>
         <br>
       <form [formGroup]="formPassword" (ngSubmit)="confirmarPassword()">
         <div class="row mt-5" *ngIf="cambiarPass">
           <mat-form-field>
-            <mat-label>Contraseña actual</mat-label>
+            <mat-label>{{'Contraseña actual'|translate}}</mat-label>
             <input
               type="password"
               matInput
-              placeholder="Introduzca la contraseña actual"
+              [placeholder]="'placeholder.Introduzca la contraseña actual'|translate"
               formControlName="passwordactual"
               required
             />
@@ -81,15 +81,15 @@
           </span>
           <div class="col mb-4">
             <a routerLink="/auth/passwordOlvidada"
-              >¿Has olvidado tu contraseña?</a
+              >¿{{'Has olvidado tu contraseña'|translate}}?</a
             >
           </div>
           <mat-form-field>
-            <mat-label>Nueva contraseña</mat-label>
+            <mat-label>{{'Nueva contraseña'|translate}}</mat-label>
             <input
               type="password"
               matInput
-              placeholder="Introduzca la nueva contraseña"
+              [placeholder]="'placeholder.Introduzca la nueva contraseña'|translate"
               formControlName="password"
               required
             />
@@ -102,7 +102,7 @@
           </span>
 
           <mat-form-field>
-            <mat-label>Confirmar contraseña</mat-label>
+            <mat-label>{{'Confirmar contraseña'|translate}}</mat-label>
             <input
               type="password"
               matInput
@@ -115,14 +115,14 @@
             class="form-text text-danger fst-italic"
             *ngIf="campoNoValid('password2')"
           >
-            Las contraseñas deben de ser iguales
+            {{'Las contraseñas deben de ser iguales'|translate}}
           </span>
           <button
             type="submit"
             class="btn btn-primary float-end"
             [disabled]="formPassword.invalid"
           >
-            Actualizar contraseña
+            {{'Actualizar contraseña'|translate}}
             <i class="fa fa-edit"></i>
           </button>
         </div>
@@ -133,15 +133,15 @@
       <div class="row">
         <div class="row">
           <mat-form-field>
-            <mat-label>Email:(no se puede cambiar)</mat-label>
+            <mat-label>{{'Email:(no se puede cambiar)'|translate}}</mat-label>
             <input matInput formControlName="email" readonly />
           </mat-form-field>
           <mat-form-field>
-            <mat-label>Nombre:</mat-label>
+            <mat-label>{{'Nombre'|translate}}:</mat-label>
             <input
               di
               matInput
-              placeholder="Introduzca su nombre"
+              [placeholder]="'placeholder.Introduzca su nombre'|translate"
               formControlName="nombre"
               required
             />
@@ -150,14 +150,16 @@
             class="form-text text-danger fst-italic"
             *ngIf="campoNoValido('nombre')"
           >
-            El nombre es requerido
+            {{'El nombre es requerido'|translate}}
           </span>
 
           <mat-form-field>
-            <mat-label>Primer apellido:</mat-label>
+            <mat-label>{{'Primer apellido'|translate}}:</mat-label>
             <input
               matInput
-              placeholder="Introduzca su primer apellido"
+              [placeholder]="
+                  'placeholder.Introduzca su primer apellido' | translate
+                "
               formControlName="apellido1"
               required
             />
@@ -166,14 +168,16 @@
             class="form-text text-danger fst-italic"
             *ngIf="campoNoValido('apellido1')"
           >
-            El primer apellido es requerido
+            {{'El primer apellido es requerido'|translate}}
           </span>
 
           <mat-form-field>
-            <mat-label>Segundo apellido:</mat-label>
+            <mat-label>{{'Segundo apellido'|translate}}:</mat-label>
             <input
               matInput
-              placeholder="Introduzca su segundo apellido"
+              [placeholder]="
+              'placeholder.Introduzca su segundo apellido' | translate
+            "
               formControlName="apellido2"
             />
           </mat-form-field>
@@ -181,7 +185,7 @@
             <mat-label>DNI/NIE:</mat-label>
             <input
               matInput
-              placeholder="Introduzca su dni"
+              [placeholder]="'placeholder.Introduzca su dni' | translate"       
               formControlName="dni"
               required
             />
@@ -194,12 +198,16 @@
           </span>
 
           <mat-form-field>
-            <mat-label>Nº de cuenta bancaria (24 digitos): </mat-label>
+            <mat-label>{{'Nº de cuenta bancaria (24 digitos)'|translate}}: </mat-label>
             <input
               matInput
-              placeholder="Introduzca su numero de cuenta bancaria"
+              matInput
+              #input
+              maxlength="24"
+              [placeholder]="'placeholder.Introduzca su contraseña' | translate"   
               formControlName="cuenta_bancaria"
             />
+            <mat-hint align="end">{{ input.value?.length || 0 }}/24</mat-hint>
           </mat-form-field>
           <span
             class="form-text text-danger fst-italic"
@@ -209,35 +217,35 @@
           </span>
 
           <mat-radio-group formControlName="sexo" class="mb-4">
-            Sexo:
+           {{'Sexo'|translate}}:
             <br />
             <mat-radio-button value="hombre" color="warn"
-              >Hombre</mat-radio-button
+              >{{'Hombre'|translate}}</mat-radio-button
             >
             <br />
             <mat-radio-button value="mujer" color="warn"
-              >Mujer</mat-radio-button
+              >{{'Mujer'|translate}}</mat-radio-button
             >
           </mat-radio-group>
 
           <mat-form-field>
-            <mat-label>Fecha de nacimiento: (+18) </mat-label>
+            <mat-label>{{'Fecha de nacimiento'|translate}}: (+18) </mat-label>
             <input matInput type="date" formControlName="fecha_nac" />
           </mat-form-field>
           <span
             class="form-text text-danger fst-italic"
             *ngIf="campoNoValido('fecha_nac') || esMenor() "
           >
-            La edad minima requerida son 18 años
+            {{'La edad minima requerida son 18 años'|translate}}
           </span>        
 
           <mat-form-field>
             <mat-label
-              >Nº de telefono: <mat-icon>call_end</mat-icon>
+              >{{'Nº de telefono'|translate}}: <mat-icon>call_end</mat-icon>
             </mat-label>
             <input
               matInput
-              placeholder="Introduzca su numero de telefono"
+              [placeholder]="'placeholder.Introduzca su numero de telefono' | translate"    
               formControlName="telefono"
             />
           </mat-form-field>
@@ -249,11 +257,11 @@
           </span>
 
           <mat-form-field>
-            <mat-label>Ciudad:</mat-label>
+            <mat-label>{{'Ciudad'|translate}}:</mat-label>
             <input
               matInput
               formControlName="ciudad"
-              placeholder="Introduzca la ciudad de su domicilio"
+              [placeholder]="'placeholder.Introduzca la ciudad de su domicilio' | translate"  
               required
             />
           </mat-form-field>
@@ -261,15 +269,15 @@
             class="form-text text-danger fst-italic"
             *ngIf="campoNoValido('ciudad')"
           >
-            El ciudad es requerida
+            {{'La ciudad es requerida'|translate}}
           </span>
 
           <mat-form-field>
-            <mat-label>Direccion:</mat-label>
+            <mat-label>{{'Direccion'|translate}}:</mat-label>
             <input
               matInput
               formControlName="direccion"
-              placeholder="Introduzca su direccion"
+              [placeholder]="'placeholder.Introduzca su direccion' | translate"     
               required
             />
           </mat-form-field>
@@ -277,14 +285,14 @@
             class="form-text text-danger fst-italic"
             *ngIf="campoNoValido('direccion')"
           >
-            La direccion es requerida
+            {{'La direccion es requerida'|translate}}
           </span>
           <mat-form-field>
-            <mat-label>Codigo postal:</mat-label>
+            <mat-label>{{'Codigo postal'|translate}}:</mat-label>
             <input
               matInput
               formControlName="cod_postal"
-              placeholder="Introduzca su codigo postal"
+              [placeholder]="'placeholder.Introduzca su codigo postal' | translate"      
               required
             />
           </mat-form-field>
@@ -292,10 +300,10 @@
             class="form-text text-danger fst-italic"
             *ngIf="campoNoValido('cod_postal')"
           >
-            El codigo postal es requerido
+            {{'El codigo postal es requerido'|translate}}
           </span>
           <mat-form-field *ngIf="role != 1">
-            <mat-label>Centro:</mat-label>
+            <mat-label>{{'Centro'|translate}}:</mat-label>
             <input
               disabled
               matInput
@@ -305,7 +313,7 @@
             />
           </mat-form-field>
           <mat-form-field *ngIf="role == 2">
-            <mat-label>Tarifa actual:</mat-label>
+            <mat-label>{{'Tarifa actual'|translate}}:</mat-label>
             <input
               disabled
               matInput
@@ -317,7 +325,7 @@
           <mat-form-field
             *ngIf="role == 2 && user.estado == 'activo'"
           >
-            <mat-label>Numero de reservas:</mat-label>
+            <mat-label>{{'Numero de reservas'|translate}}:</mat-label>
             <input
               disabled
               matInput
@@ -330,17 +338,17 @@
           <mat-form-field
             *ngIf="role == 2 && user.estado == 'activo'"
           >
-            <mat-label>Fecha alta:</mat-label>
+            <mat-label>{{'Fecha alta'|translate}}:</mat-label>
             <input type="date" matInput formControlName="fecha_alta" readonly />
           </mat-form-field>
 
           <mat-form-field *ngIf="role == 2 && user.estado == 'baja'">
-            <mat-label>Fecha baja:</mat-label>
+            <mat-label>{{'Fecha baja'|translate}}:</mat-label>
             <input type="date" matInput formControlName="fecha_baja" readonly />
           </mat-form-field>
 
           <div *ngIf="role == 2">
-            Estado actual :<span
+            {{'Estado actual'|translate}} :<span
               [ngClass]="{
                 'text-success': user.estado === 'activo',
                 'text-danger': user.estado === 'baja',
@@ -355,7 +363,7 @@
               class="btn btn-primary mx-3"
               (click)="darBaja()"
             >
-              Solicitar baja
+              {{'Solicitar baja'|translate}}
             </a>
             <a
             type="button"
@@ -363,7 +371,7 @@
               class="btn btn-primary mx-3"
               (click)="darAlta()"
             >
-              Solicitar alta
+              {{'Solicitar alta'|translate}}
             </a>
           </div>
         </div>

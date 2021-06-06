@@ -1,10 +1,12 @@
+declare var require:any
+const esLocale = require('@fullcalendar/core/locales/es');
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AdminService } from '../../../services/admin.service';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import listPlugin from '@fullcalendar/list';
 import interactionPlugin from '@fullcalendar/interaction';
-import esLocale from '@fullcalendar/core/locales/es' ;
+//import esLocale from '@fullcalendar/core/locales/es' ;
 import timeGridPlugin from '@fullcalendar/timegrid';
 import Tooltip from 'tooltip.js';
 
@@ -15,20 +17,27 @@ import Tooltip from 'tooltip.js';
 })
 export class ListaAllSesionesComponent {
   public events: any;
-
+  public idioma: any;
   public optionsMonth: any;
   public optionsList: any;
   constructor(private router: Router, private adminService: AdminService) {
     this.adminService.getPrueba().subscribe((events) => {
       this.events = events;
     });
+
+    if (localStorage.getItem('lang') == 'es') {
+      this.idioma = esLocale;
+    } else {
+      this.idioma = '';
+    }
+
     this.optionsList = {
       contentHeight: 700,
       plugins: [dayGridPlugin, listPlugin, interactionPlugin],
       defaultDate: new Date(),
       duration: { days: 7 },
       defaultView: 'list',
-      locale: esLocale,
+      locale: this.idioma,
       header: {
         left: '',
         center: 'title',
@@ -43,7 +52,7 @@ export class ListaAllSesionesComponent {
       selectable: true,
       plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
       defaultDate: new Date(),
-      locale: esLocale,
+      locale: this.idioma,
       header: {
         left: 'prev,next',
         center: 'title',

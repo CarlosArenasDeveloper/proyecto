@@ -4,7 +4,7 @@ import { DataTablesModule } from 'angular-datatables';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
 import { MaterialModule } from './material/material.module';
@@ -14,7 +14,11 @@ registerLocaleData(localeEs);
 import { NgxPayPalModule } from 'ngx-paypal';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { FullCalendarModule } from 'primeng/fullcalendar';
-
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -27,7 +31,14 @@ import { FullCalendarModule } from 'primeng/fullcalendar';
     MaterialModule,
     NgxPayPalModule,
     FullCalendarModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    TranslateModule.forRoot({
+      loader: {
+          provide: TranslateLoader,
+          useFactory: HttpLoaderFactory,
+          deps: [HttpClient]
+      }
+  })
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'es' },

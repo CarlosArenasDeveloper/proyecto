@@ -8,6 +8,7 @@ import { MaterialModule } from '../../../material/material.module';
 import { DataTablesModule } from 'angular-datatables';
 import { ListaCategoriasComponent } from './lista-categorias/lista-categorias.component';
 import { AddCategoriaComponent } from './add-categoria/add-categoria.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { AddCategoriaComponent } from './add-categoria/add-categoria.component';
     ReactiveFormsModule,
     MaterialModule,
     DataTablesModule,
+    TranslateModule
   ],
   exports:[ListaCategoriasComponent, AddCategoriaComponent]
 })

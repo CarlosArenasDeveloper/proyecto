@@ -1,13 +1,13 @@
 <div class="container">
-    <h1>Listado de noticias</h1>
+    <h1>{{'Listado de noticias'|translate}}</h1>
     <hr />
     <div class="row">
       <div class="col text-right">
         <button routerLink="./add-noticia" class="btn btn-primary">
-          <i class="fa fa-plus"></i> Añadir noticia
+          <i class="fa fa-plus"></i> {{'Añadir noticia'|translate}}
         </button>
         <button (click)="categorias()" class="ms-2 btn btn-primary float-end">
-          <i class="fas fa-tags"></i> Categorias
+          <i class="fas fa-tags"></i> {{'Categorias'|translate}}
         </button>
       </div>
     </div>
@@ -22,12 +22,12 @@
           <thead class="thead-dark" >
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Editor</th>
-              <th scope="col">Titulo</th>
-              <th scope="col">Categoria</th>
-              <th scope="col">Fecha lanzamiento</th>
-              <th scope="col">Ultima edicion</th>
-              <th scope="col">¿Esta visible?</th>
+              <th scope="col">{{'Editor'|translate}}</th>
+              <th scope="col">{{'Titulo'|translate}}</th>
+              <th scope="col">{{'Categoria'|translate}}</th>
+              <th scope="col">{{'Fecha lanzamiento'|translate}}</th>
+              <th scope="col">{{'Ultima edicion'|translate}}</th>
+              <th scope="col">¿{{'Esta visible'|translate}}?</th>
               <th scope="col"></th>
               <th scope="col"></th>
 
@@ -46,13 +46,13 @@
               <td>{{ ele.fecha|date}}</td>
 
               <td ><span *ngIf="ele.fecha_edit!=null">{{ ele.fecha_edit|date}}</span>
-                <span *ngIf="ele.fecha_edit==null">Sin editar</span></td>
-              <td *ngIf="ele.visible==1">Si</td>
+                <span *ngIf="ele.fecha_edit==null">{{'Sin editar'|translate}}</span></td>
+              <td *ngIf="ele.visible==1">{{'Si'|translate}}</td>
               <td *ngIf="ele.visible==0">No</td>
 
 
               <td *ngIf="ele.email_usuario==editor || usuario.role==1;else error">
-                <button class="btn btn-danger" (click)="borrarNoticia(ele, i)">
+                <button class="btn btn-danger" [title]="'title.Borrar'|translate" (click)="borrarNoticia(ele, i)">
                   <i class="fa fa-trash"></i>
                 </button>
                 
@@ -60,6 +60,7 @@
               <td *ngIf="ele.email_usuario==editor || usuario.role==1; else error">
                 <button
                   class="btn btn-warning ms-2"
+                [title]="'title.Ver más'|translate"
                   [routerLink]="['./editar-noticia', ele.id]"
                 >
                   <i class="fas fa-search-plus"></i>
@@ -79,9 +80,6 @@
           </tbody>
         </table>
       </div>
-    </div>
-    <div *ngIf="noticias.length==0">
-      <span>NO HAY REGISTROS</span>
     </div>
   </div>
   

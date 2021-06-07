@@ -9,6 +9,7 @@ import { SharedModule } from '../../../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../../../material/material.module';
 import { DataTablesModule } from 'angular-datatables';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { DataTablesModule } from 'angular-datatables';
     ReactiveFormsModule,
     MaterialModule,
     DataTablesModule,
+    TranslateModule  
   ],
   exports: [ListaNoticiasComponent, EditNoticiaComponent, AddNoticiaComponent],
 })

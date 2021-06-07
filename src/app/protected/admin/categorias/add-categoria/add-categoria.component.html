@@ -1,8 +1,8 @@
-<h1 mat-dialog-title>Escriba el nombre de la nueva categoria</h1>
+<h1 mat-dialog-title>{{'Escriba el nombre de la nueva categoria'|translate}}</h1>
 <form [formGroup]="miFormulario" autocomplete="off">
   <div mat-dialog-content>
     <mat-form-field>
-      <mat-label>Categoria: </mat-label>
+      <mat-label>{{'Categoria'|translate}}: </mat-label>
       <input matInput autocomplete="off" formControlName="nombre" />
     </mat-form-field>
     <span
@@ -10,13 +10,13 @@
       *ngIf="campoNoValido('nombre')"
     >
     <br>
-      El nombre es requerido
+      {{'El nombre es requerido'|translate}}
     </span>
   </div>
   <div mat-dialog-actions>
-    <button mat-raised-button color="warn" (click)="onNoClick()" cdkFocusInitial>Cancelar</button>
+    <button mat-raised-button color="warn" (click)="onNoClick()" cdkFocusInitial>{{'Cancelar'|translate}}</button>
     <button mat-raised-button type="submit" (click)="addCategoria()" color="primary" [disabled]="miFormulario.invalid">
-      Añadir
+      {{'Añadir'|translate}}
     </button>
   </div>
 </form>

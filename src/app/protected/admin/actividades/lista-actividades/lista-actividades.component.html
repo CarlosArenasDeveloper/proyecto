@@ -1,10 +1,10 @@
 <div class="container">
-  <h1>Listado de actividades</h1>
+  <h1>{{'Listado de actividades'|translate}}</h1>
   <hr />
   <div *ngIf="isAdmin()" class="row">
     <div class="col text-right">
       <button routerLink="./add-actividad" class="btn btn-primary">
-        <i class="fa fa-plus"></i> Añadir actividad
+        <i class="fa fa-plus"></i> {{'Añadir actividad'|translate}}
       </button>
     </div>
   </div>
@@ -27,9 +27,9 @@
           <tr>
             <th scope="col">#</th>
             <th scope="col">Monitor</th>
-            <th scope="col">Nombre</th>
-            <th scope="col">Descripcion</th>
-            <th scope="col">Tarifa</th>
+            <th scope="col">{{'Nombre'|translate}}</th>
+            <th scope="col">{{'Descripcion'|translate}}</th>
+            <th scope="col">{{'Tarifa'|translate}}</th>
             <th scope="col" *ngIf="isAdmin()"></th>
             <th scope="col"></th>
           </tr>
@@ -59,6 +59,7 @@
                 *ngIf="isAdmin()"
                 class="btn btn-danger"
                 (click)="borrarActividad(ele, i)"
+                [title]="'title.Borrar'|translate"
               >
                 <i class="fa fa-trash"></i>
               </button>
@@ -66,6 +67,7 @@
             <td>
               <button
                 class="btn btn-warning ms-2"
+                [title]="'title.Ver más'|translate"
                 [routerLink]="['./editar-actividad', ele.id]"
               >
                 <i class="fas fa-search-plus"></i>

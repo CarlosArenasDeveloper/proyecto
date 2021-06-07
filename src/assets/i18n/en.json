@@ -263,7 +263,120 @@
 "Fecha lanzamiento":"Release date",
 "Ultima edicion":"Last edition",
 "Esta visible":"Is visible",
-"Si":"Yes"
+"Si":"Yes",
+"Reestableciendo contraseña":"Resetting password",
+"Contraseña actualizada":"Updated password",
+"Se ha cambiado la contraseña de acceso correctamente":"The access password has been changed successfully",
+"Listado de categorias":"List of categories",
+"Añadir Categoria":"Add Category",
+"Categoria eliminada correctamente":"Category deleted successfully",
+"Cancelar":"Cancel",
+"Escriba el nombre de la nueva categoria":"Enter the name of the new category",
+"Añadiendo noticia":"Adding news",
+"El titulo es requerido":"Title is required",
+"Cual es la categoria de la noticia":"What is the category of the news",
+"Seleccione una categoria":"Select a category",
+"La categoria es requerida":"Category is required",
+"Cuerpo":"Body",
+"El cuerpo de la noticia es requerido":"The body of the news is required",
+"Quieres que aparezca en la seccion de noticias":"Do you want it to appear in the news section",
+"Imagen":"Picture",
+"La noticia":"The news",
+"Editando noticia":"Editing news",
+"¿Quién es el editor":"Who is the publisherr",
+"Seleccione un editor":"Select an editor",
+"El editor es requerido":"The editor is required",
+"Listado de salas":"List of rooms",
+"Añadir Sala":"Add Room",
+"Aforo":"Capacity",
+"Actualizar Sala":"Update Room",
+"El aforo es requerido":"Capacity is required",
+"Actualizar":"Update",
+"Escriba el aforo de la nueva sala":"Input the capacity of the new room",
+"¿Estas seguro de querer eliminar la sala":"Are you sure you want to delete the room",
+"Sala eliminada correctamente":"Room removed successfully",
+"Sala añadida correctamente":"Room added successfully",
+"Listado de actividades":"List of activities",
+"Añadir actividad":"Add activity",
+"¿Estas seguro de querer eliminar":"Are you sure you want to delete",
+"de la lista de actividades":"from the list of activities",
+"actividad eliminada correctamente":"activity successfully removed",
+"Añadiendo actividad":"Adding activity",
+"Qué monitor impartira la actividad":"Which monitor will teach the activity",
+"Seleccione un monitor":"Select a monitor",
+"El monitor es requerido":"Monitor is required",
+"¿Que tarifa minima incluira dicha actividad":"What minimum rate will this activity include?",
+"La tarifa es requerida":"The rate is required",
+"El descripcion de la actividad es requerida":"The description of the activity is required",
+"Color de referencia":"Reference color",
+"se ha añadido correctamente a la lista de actividades":"successfully added to the list of activities",
+"Informacion sobre":"Information about",
+"Editando":"Editing",
+"Editar actividad":"Edit activity",
+"Listado de musculos":"List of muscles",
+"Añadir musculo":"Add muscle",
+"Musculo eliminado correctamente":"Musculo eliminado correctamente",
+"¿Estas seguro de querer eliminar el":"Are you sure you want to delete the",
+"de la lista de musculos":"from the list of muscles",
+"Añadiendo musculo":"Adding muscle",
+"se ha añadido correctamente a la lista de musculos":"has been successfully added to the list of muscles",
+"Editar musculo":"Edit muscle",
+"Listado de ejercicios":"List of exercises",
+"Añadir ejercicio":"Add exercise",
+"Añadiendo ejercicio":"Adding exercise",
+"¿Que musculo utiliza":"What muscle is used",
+"Seleccione un musculo":"Select a muscle",
+"El musculo es requerido":"Muscle is :required",
+"¿Que nivel tiene":"What level is it",
+"Seleccione un nivel":"Select a level",
+"Principiante":"Beginner",
+"Intermedio":"Intermediate",
+"Avanzado":"Advanced",
+"El nivel es requerido":"Level is required",
+"¿Que tipo de ejercicio es":"What kind of exercise is",
+"Seleccione un tipo":"Select a type",
+"Basico":"Basic",
+"Multifuncional":"Multifunctional",
+"Analitico":"Analytical",
+"El tipo es requerido":"Type is required",
+"Equipo necesario para la realizacion del ejercicio":"Equipment necessary to carry out the exercise",
+"El equipo es requerido":"Equipment is required",
+"Video":"Video",
+"El ejercicio":"The exercise",
+"Editar ejercicio":"Edit exercise",
+"Editar":"Edit",
+"Datos incompletos":"Incomplete data",
+"Por favor, rellene todos los campos requeridos":"Please fill in all the required fields",
+"¿Quieres que la noticia vuelva a ser de las recientes":"Do you want the news to be one of the recent",
+"No, mantener la fecha de lanzamiento":"No, keep the release date"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

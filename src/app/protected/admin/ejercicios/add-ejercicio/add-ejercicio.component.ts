@@ -4,6 +4,7 @@ import { Ejercicio, Musculo } from '../../../../models/interface';
 import { AdminService } from '../../../services/admin.service';
 import Swal from 'sweetalert2';
 import { DomSanitizer } from '@angular/platform-browser';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-add-ejercicio',
@@ -26,7 +27,7 @@ export class AddEjercicioComponent implements OnInit {
   ejercicio!: Ejercicio;
   musculos: any;
   constructor(private fb: FormBuilder, private adminService: AdminService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,private translateService:TranslateService
     ) {}
 
   ngOnInit(): void {
@@ -62,7 +63,7 @@ export class AddEjercicioComponent implements OnInit {
         Swal.fire({
           position: 'top-end',
           icon: 'success',
-          title: `El ejercicio ${this.ejercicio.nombre} se ha añadido correctamente!`,
+          title: `${this.translateService.instant('El ejercicio')} ${this.ejercicio.nombre} ${this.translateService.instant('se ha añadido correctamente')}!`,
           showConfirmButton: false,
           timer: 2000,
         });

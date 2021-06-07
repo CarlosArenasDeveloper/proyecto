@@ -5,6 +5,7 @@ import { AuthService } from '../../services/auth.service';
 import { ValidatorService } from '../../services/validator.service';
 import { switchMap } from 'rxjs/operators';
 import Swal from 'sweetalert2';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -19,6 +20,7 @@ export class ReestablecerPasswordComponent {
     private authService: AuthService,
     private validatorService: ValidatorService,
     private activatedRoute: ActivatedRoute,
+    private translateService:TranslateService
 
   ) {}
   miFormulario: FormGroup = this.fb.group(
@@ -43,9 +45,9 @@ export class ReestablecerPasswordComponent {
   get passwordErrorMsg(): string {
     const errors = this.miFormulario.get('password')?.errors;
     if (errors?.required) {
-      return 'La contraseña es requerida';
+      return this.translateService.instant('La contraseña es requerida');
     } else if (errors?.minlength) {
-      return 'La contraseña debe tener mas de 6 caracteres';
+      return this.translateService.instant('La contraseña debe tener mas de 6 caracteres');
     }
     return '';
   }
@@ -59,7 +61,8 @@ export class ReestablecerPasswordComponent {
         Swal.fire({
           position: 'top-end',
           icon: 'success',
-          title: 'Se ha cambiado la contraseña de acceso correctamente!' ,
+          title:`${this.translateService.instant('Contraseña actualizada')}`,
+          text: `${this.translateService.instant('Se ha cambiado la contraseña de acceso correctamente')}!` ,
           showConfirmButton: false,
           timer: 3000,
         });

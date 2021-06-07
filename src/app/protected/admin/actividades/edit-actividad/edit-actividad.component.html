@@ -1,12 +1,12 @@
 <div class="container">
-  <h1 *ngIf="!isAdmin();else mas">Informacion sobre  {{actividad.nombre}} </h1>
-  <ng-template #mas> <h1>Editando {{actividad.nombre}}</h1></ng-template>
+  <h1 *ngIf="!isAdmin();else mas">{{'Informacion sobre'|translate}}  {{actividad.nombre}} </h1>
+  <ng-template #mas> <h1>{{'Editando'|translate}} {{actividad.nombre}}</h1></ng-template>
 
     <hr />
     <form [formGroup]="miFormulario" (ngSubmit)="editarActividad()" autocomplete="off" >
       <div class="mb-3">
         <label for="nombre" class="form-label"
-          >Nombre:
+          >{{'Nombre'|translate}}:
         </label>
         <input 
           [ngClass]="{ 
@@ -21,15 +21,15 @@
           class="form-text text-danger fst-italic"
           *ngIf="campoNoValido('nombre')"
         >
-          El nombre es requerido
+        {{'El nombre es requerido'|translate}}
         </span>
       </div>
       <div class="mb-3">
-        <span>¿Qué monitor impartira la actividad?:</span>   <button type="button" class="btn btn-danger" (click)="cambiarMonitor()">Cambiar de monitor</button>
+        <span>{{'Qué monitor impartira la actividad'|translate}}?:</span>  
         <select class="form-select mt-2" formControlName="email_monitor"  [ngClass]="{
           'is-invalid': campoNoValido('email_monitor')
         }">
-          <option value="null">Seleccion un monitor ...</option>
+          <option value="null">{{'Seleccione un monitor'|translate}} ...</option>
           <option *ngFor="let monitor of monitores" [value]="monitor.email">
             {{ monitor.nombre | titlecase }}
             {{ monitor.apellido1 | titlecase }} 
@@ -40,15 +40,15 @@
           class="form-text text-danger fst-italic"
           *ngIf="campoNoValido('email_monitor') || this.miFormulario.get('email_monitor')?.value=='null'"
         >
-          La monitor es requerido
+        {{'El monitor es requerido'|translate}}
         </span>
       </div>
       <div class="mb-3">
-        <span>¿Que tarifa minima incluira dicha actividad?:</span>  
+        <span>{{'¿Que tarifa minima incluira dicha actividad'|translate}}?:</span>  
         <select class="form-select mt-2" formControlName="id_tarifa"  [ngClass]="{
           'is-invalid': campoNoValido('id_tarifa')
         }">
-          <option value="null">Seleccione una tarifa ...</option>
+          <option value="null">{{'Seleccione una tarifa'|translate}} ...</option>
           <option *ngFor="let tarifa of tarifas" [value]="tarifa.id">
             {{ tarifa.nombre | titlecase }}
           </option>
@@ -57,12 +57,13 @@
           class="form-text text-danger fst-italic"
           *ngIf="campoNoValido('id_tarifa') || this.miFormulario.get('id_tarifa')?.value=='null'"
         >
-          La tarifa es requerida
+        {{'La tarifa es requerida'|translate}}
+
         </span>
       </div>
       <div class="mb-3">
         <label for="exampleFormControlTextarea1" class="form-label mt-3"
-          >Descripcion:
+          >{{'Descripcion'|translate}}:
         </label>
         <textarea
           [ngClass]="{
@@ -77,7 +78,7 @@
           class="form-text text-danger fst-italic"
           *ngIf="campoNoValido('descripcion')"
         >
-         El descripcion de la actividad es requerida
+        {{'El descripcion de la actividad es requerida'|translate}}
         </span>
       </div>
 
@@ -95,7 +96,7 @@
           <img [src]="previsualizacion" style="width: 300px; height: 300px" />
         </div>
     
-        <label for="formFile" class="form-label">Imagen:</label>
+        <label for="formFile" class="form-label">{{'Imagen'|translate}}:</label>
         <input
           id="formFile"
           [formControl]="file"
@@ -106,7 +107,7 @@
         />
       </div>
       <div class="mb-3">
-        <label for="d" class="form-label">Color de referencia: </label>
+        <label for="d" class="form-label">{{'Color de referencia'|translate}}: </label>
         <input
           formControlName="color"
           type="text"
@@ -116,14 +117,14 @@
       </div>
       <button type="button" class="btn btn-danger mx-3" routerLink="actividades">
         <i class="fas fa-arrow-circle-left"></i>
-        Volver atrás
+        {{'Volver atrás'|translate}}
       </button>
       <button *ngIf="isAdmin()"
         type="submit"
         [disabled]="miFormulario.invalid"
         class="btn btn-primary"
       >
-        Editar
+        {{'Editar actividad'|translate}}
       <i class="fas fa-edit"></i>
 
       </button>

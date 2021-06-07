@@ -9,6 +9,7 @@ import { SharedModule } from '../../../shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../../../material/material.module';
 import { DataTablesModule } from 'angular-datatables';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { DataTablesModule } from 'angular-datatables';
     ReactiveFormsModule,
     MaterialModule,
     DataTablesModule,
-    FormsModule
+    FormsModule,
+    TranslateModule
   ],
   exports:[ListaSalasComponent, AddSalaComponent, EditSalaComponent]
 })

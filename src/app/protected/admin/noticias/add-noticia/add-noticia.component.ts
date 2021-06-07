@@ -12,6 +12,7 @@ import {
 } from '@angular/material/dialog';
 import { AddCategoriaComponent } from '../../categorias/add-categoria/add-categoria.component';
 import { DomSanitizer } from '@angular/platform-browser';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-add-noticia',
@@ -39,7 +40,8 @@ export class AddNoticiaComponent implements OnInit {
     private fb: FormBuilder,
     private adminService: AdminService,
     private router: Router,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private translateService:TranslateService
   ) {}
 
   openDialog(): void {
@@ -120,7 +122,7 @@ export class AddNoticiaComponent implements OnInit {
         Swal.fire({
           position: 'top-end',
           icon: 'success',
-          title: `La noticia "${this.noticia.titulo}" se ha añadido correctamente!`,
+          title: `${this.translateService.instant('La noticia')} "${this.noticia.titulo}" ${this.translateService.instant('se ha añadido correctamente')}!`,
           showConfirmButton: false,
           timer: 2000,
         });

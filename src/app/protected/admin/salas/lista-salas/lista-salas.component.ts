@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AddSalaComponent } from '../add-sala/add-sala.component';
 import { EditSalaComponent } from '../edit-sala/edit-sala.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-lista-salas',
@@ -19,19 +20,22 @@ export class ListaSalasComponent implements OnInit {
   dtOptions: DataTables.Settings = {};
   dtTrigger = new Subject();
   salas: any = [];
+  url!:string
   @ViewChild(DataTableDirective, { static: false })
   datatableElement!: DataTableDirective;
 
   constructor(
     private adminService: AdminService,
     public dialog: MatDialog,
-    private router: Router
+    private router: Router,
+    private translateService:TranslateService
   ) {}
 
   openDialog(): void {
     const dialogRef = this.dialog.open(AddSalaComponent, {
       width: '350px',
     });
+    
 
     dialogRef.afterClosed().subscribe((result) => {
       this.adminService.getSalas().subscribe((salas) => {
@@ -85,11 +89,18 @@ export class ListaSalasComponent implements OnInit {
     const usuario = JSON.parse(sessionStorage.getItem('usuario')!);
     this.usuario = usuario;
 
+    
+    if(localStorage.getItem('lang')=='es'){
+      this.url='//cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json'
+    }else{
+      this.url='//cdn.datatables.net/plug-ins/1.10.25/i18n/English.json'
+    }
+
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 5,
       language: {
-        url: '//cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json',
+        url: this.url
       },
       responsive: true,
     };
@@ -112,13 +123,13 @@ export class ListaSalasComponent implements OnInit {
 
   borrarSala(sala: Sala, i: number) {
     Swal.fire({
-      title: `¿Estas seguro de querer eliminar la sala ${sala.id}?`,
+      title: `${this.translateService.instant('¿Estas seguro de querer eliminar la sala')} ${sala.id}?`,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Si, eliminar',
-      cancelButtonText: 'No, cancelar',
+      confirmButtonText: `${this.translateService.instant('Si, eliminar')}`,
+      cancelButtonText: `${this.translateService.instant('No, cancelar')}`,
     }).then((result) => {
       if (result.isConfirmed) {
         this.adminService.borrarSala(sala.id!).subscribe((sala) => {
@@ -141,7 +152,7 @@ export class ListaSalasComponent implements OnInit {
         Swal.fire({
           position: 'top-end',
           icon: 'success',
-          title: 'Sala eliminada correctamente',
+          title: `${this.translateService.instant('Sala eliminada correctamente')}`,
           showConfirmButton: false,
           timer: 2000,
         });

@@ -5,6 +5,7 @@ import { AdminService } from '../../../services/admin.service';
 import { Sesion } from '../../../../models/interface';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-edit-sesion',
   templateUrl: './edit-sesion.component.html',
@@ -27,7 +28,8 @@ export class EditSesionComponent implements OnInit {
     private adminService: AdminService,
     private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private translateService:TranslateService
   ) {
     if (localStorage.getItem('lang') == 'en') {
       this.isEspanish = false;
@@ -128,8 +130,8 @@ export class EditSesionComponent implements OnInit {
       Swal.fire({
         position: 'top-end',
         icon: 'error',
-        title: 'Datos incompletos',
-        text:'Por favor, rellene todos los campos requeridos',
+        title:  `${this.translateService.instant('Datos incompletos')}`,
+        text:`${this.translateService.instant('Por favor, rellene todos los campos requeridos')}`,
         showConfirmButton: false,
         timer: 2000,
       });

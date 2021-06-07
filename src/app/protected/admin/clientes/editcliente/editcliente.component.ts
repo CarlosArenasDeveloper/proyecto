@@ -8,6 +8,7 @@ import { ValidatorService } from '../../../../auth/services/validator.service';
 import { AuthService } from '../../../../auth/services/auth.service';
 import Swal from 'sweetalert2';
 import { DomSanitizer } from '@angular/platform-browser';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-editcliente',
@@ -36,7 +37,8 @@ export class EditclienteComponent implements OnInit {
     private fb: FormBuilder,
     private validatorService: ValidatorService,
     private authService: AuthService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private translateService:TranslateService
 
   ) {
     const currentYear = new Date().getFullYear();
@@ -259,9 +261,9 @@ export class EditclienteComponent implements OnInit {
   get passwordErrorMsg(): string {
     const errors = this.miFormulario.get('password')?.errors;
     if (errors?.required) {
-      return 'La contraseña es requerida';
+      return this.translateService.instant('La contraseña es requerida');
     } else if (errors?.minlength) {
-      return 'La contraseña debe tener mas de 6 caracteres';
+      return this.translateService.instant('La contraseña debe tener mas de 6 caracteres');
     }
     return '';
   }

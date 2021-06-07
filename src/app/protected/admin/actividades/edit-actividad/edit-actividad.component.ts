@@ -11,6 +11,7 @@ import Swal from 'sweetalert2';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { DomSanitizer } from '@angular/platform-browser';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-edit-actividad',
@@ -42,7 +43,8 @@ export class EditActividadComponent implements OnInit {
     private fb: FormBuilder,
     private adminService: AdminService,
     private activatedRoute: ActivatedRoute,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private translateService:TranslateService
   ) {}
 
   ngOnInit(): void {
@@ -122,8 +124,8 @@ export class EditActividadComponent implements OnInit {
       Swal.fire({
         position: 'top-end',
         icon: 'error',
-        title: 'Datos incompletos',
-        text: 'Por favor, rellene todos los campos requeridos',
+        title:  `${this.translateService.instant('Datos incompletos')}`,
+        text:`${this.translateService.instant('Por favor, rellene todos los campos requeridos')}`,
         showConfirmButton: false,
         timer: 2000,
       });
@@ -139,7 +141,7 @@ export class EditActividadComponent implements OnInit {
         Swal.fire({
           position: 'top-end',
           icon: 'success',
-          title: 'Datos correctamente actualizados',
+          title: `${this.translateService.instant('Datos correctamente actualizados')}`,
           showConfirmButton: false,
           timer: 2000,
         });

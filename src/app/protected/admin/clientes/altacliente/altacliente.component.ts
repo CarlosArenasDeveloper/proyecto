@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 import { AdminService } from '../../../services/admin.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ActividadesPorTarifaComponent } from 'src/app/auth/pages/actividades-por-tarifa/actividades-por-tarifa.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-altacliente',
@@ -30,7 +31,8 @@ export class AltaclienteComponent implements OnInit {
     private emailValidatorService: EmailValidatorService,
     private authService: AuthService,
     private router: Router,
-    private adminService: AdminService
+    private adminService: AdminService,
+    private translateService:TranslateService
   ) {
     this.tarifas = [];
     this.centros = [];
@@ -155,13 +157,12 @@ export class AltaclienteComponent implements OnInit {
     }
     return '';
   }
-
   get passwordErrorMsg(): string {
     const errors = this.firstFormGroup.get('password')?.errors;
     if (errors?.required) {
-      return 'La contraseña es requerida';
+      return this.translateService.instant('La contraseña es requerida');
     } else if (errors?.minlength) {
-      return 'La contraseña debe tener mas de 6 caracteres';
+      return this.translateService.instant('La contraseña debe tener mas de 6 caracteres');
     }
     return '';
   }

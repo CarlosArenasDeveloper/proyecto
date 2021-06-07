@@ -4,6 +4,7 @@ import { AdminService } from '../../../services/admin.service';
 import Swal from 'sweetalert2';
 import { DataTableDirective } from 'angular-datatables';
 import { Musculo } from '../../../../models/interface';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-lista-musculos',
@@ -17,15 +18,21 @@ export class ListaMusculosComponent implements OnInit,OnDestroy {
   musculos: any = [];
   @ViewChild(DataTableDirective, { static: false })
   datatableElement!: DataTableDirective;
-
-  constructor(private adminService: AdminService) {}
+  url!:string
+  constructor(private adminService: AdminService,private translateService:TranslateService) {}
 
   ngOnInit(): void {
+    if(localStorage.getItem('lang')=='es'){
+      this.url='//cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json'
+    }else{
+      this.url='//cdn.datatables.net/plug-ins/1.10.25/i18n/English.json'
+    }
+
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 5,
       language: {
-        url: '//cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json',
+        url: this.url
       },
       responsive: true   
     };
@@ -43,13 +50,13 @@ export class ListaMusculosComponent implements OnInit,OnDestroy {
 
   borrarMusculo(musculo: Musculo, i: number) {
     Swal.fire({
-      title: `¿Estas seguro de querer eliminar el  ${musculo.nombre?.toUpperCase()} de la lista de musculos?`,
+      title: `${this.translateService.instant('¿Estas seguro de querer eliminar el')}  ${musculo.nombre?.toUpperCase()} ${this.translateService.instant('de la lista de musculos')}?`,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Si, eliminar',
-      cancelButtonText: 'No, cancelar',
+      confirmButtonText: `${this.translateService.instant('Si, eliminar')}`,
+      cancelButtonText: `${this.translateService.instant('No, cancelar')}`,
     }).then((result) => {
       if (result.isConfirmed) {
         this.adminService.borrarMusculo(musculo.nombre!).subscribe((musculo) => {
@@ -73,7 +80,7 @@ export class ListaMusculosComponent implements OnInit,OnDestroy {
         Swal.fire({
           position: 'top-end',
           icon: 'success',
-          title: 'Musculo eliminado correctamente',
+          title: `${this.translateService.instant('Musculo eliminado correctamente')}`,
           showConfirmButton: false,
           timer: 2000,
         });

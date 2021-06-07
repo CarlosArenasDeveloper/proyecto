@@ -10,6 +10,7 @@ import { AdminService } from '../../../services/admin.service';
 import { Sala } from '../../../../models/interface';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-add-sala',
   templateUrl: './add-sala.component.html',
@@ -20,7 +21,8 @@ export class AddSalaComponent {
   constructor(
     private fb: FormBuilder,
     private adminService: AdminService,
-    public dialogRef: MatDialogRef<AddNoticiaComponent>
+    public dialogRef: MatDialogRef<AddNoticiaComponent>,
+    private translateService:TranslateService
   ) //@Inject(MAT_DIALOG_DATA) public data: DialogData
   {}
 
@@ -43,7 +45,7 @@ export class AddSalaComponent {
       Swal.fire({
         position: 'top-end',
         icon: 'success',
-        title: 'Sala añadida correctamente',
+        title: `${this.translateService.instant('Sala añadida correctamente')}`,
         showConfirmButton: false,
         timer: 2000,
       });

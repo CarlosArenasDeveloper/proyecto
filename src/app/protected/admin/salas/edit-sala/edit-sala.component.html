@@ -1,8 +1,8 @@
-<h1 mat-dialog-title>Actualizar Sala {{data.id}}</h1>
+<h1 mat-dialog-title>{{'Actualizar Sala'|translate}} {{data.id}}</h1>
 <form [formGroup]="miFormulario" autocomplete="off">
   <div mat-dialog-content>
     <mat-form-field>
-      <mat-label>Aforo: </mat-label>
+      <mat-label>{{'Aforo'|translate}}: </mat-label>
       <input matInput autocomplete="off" formControlName="aforo" />
     </mat-form-field>
     <span
@@ -10,13 +10,13 @@
       *ngIf="campoNoValido('aforo')"
     >
     <br>
-      El aforo es requerido
+      {{'El aforo es requerido'|translate}}
     </span>
   </div>
   <div mat-dialog-actions>
-    <button mat-raised-button color="warn" (click)="onNoClick()" cdkFocusInitial>Cancelar</button>
+    <button mat-raised-button color="warn" (click)="onNoClick()" cdkFocusInitial>{{'Cancelar'|translate}}</button>
     <button mat-raised-button type="submit" (click)="editarSala()" color="primary" [disabled]="miFormulario.invalid">
-      Actualizar 
+      {{'Actualizar'|translate}} 
       <i class="fas fa-edit"></i>
     </button>
   </div>

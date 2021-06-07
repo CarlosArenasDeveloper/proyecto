@@ -4,6 +4,7 @@ import { Actividad } from '../../../../models/interface';
 import { AdminService } from '../../../services/admin.service';
 import Swal from 'sweetalert2';
 import { DomSanitizer } from '@angular/platform-browser';
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-add-actividad',
   templateUrl: './add-actividad.component.html',
@@ -28,7 +29,8 @@ export class AddActividadComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private adminService: AdminService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private translateService:TranslateService
   ) {}
 
   ngOnInit(): void {
@@ -67,7 +69,7 @@ export class AddActividadComponent implements OnInit {
         Swal.fire({
           position: 'top-end',
           icon: 'success',
-          title: `${this.actividad.nombre} se ha añadido correctamente a la lista de actividades!`,
+          title: `${this.actividad.nombre} ${this.translateService.instant('se ha añadido correctamente a la lista de actividades')}!`,
           showConfirmButton: false,
           timer: 2000,
         });

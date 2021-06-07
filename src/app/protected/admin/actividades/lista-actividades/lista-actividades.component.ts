@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import { DataTableDirective } from 'angular-datatables';
 import { Actividad, Usuario } from '../../../../models/interface';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -18,21 +19,29 @@ export class ListaActividadesComponent implements OnInit , OnDestroy{
   dtTrigger = new Subject();
   actividades: any = [];
   usuario!: Usuario;
+  url!:string;
 
   @ViewChild(DataTableDirective, { static: false })
   datatableElement!: DataTableDirective;
 
-  constructor(private adminService: AdminService,private router :Router) {}
+  constructor(private adminService: AdminService,private router :Router,private translateService:TranslateService) {}
 
   ngOnInit(): void {
     const usuario = JSON.parse(sessionStorage.getItem('usuario')!);
     this.usuario = usuario;
 
+    
+    if(localStorage.getItem('lang')=='es'){
+      this.url='//cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json'
+    }else{
+      this.url='//cdn.datatables.net/plug-ins/1.10.25/i18n/English.json'
+    }
+
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 5,
       language: {
-        url: '//cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json',
+        url: this.url,
       },
       responsive: true,
     };
@@ -59,13 +68,13 @@ export class ListaActividadesComponent implements OnInit , OnDestroy{
 
   borrarActividad(actividad: Actividad, i: number) {
     Swal.fire({
-      title: `¿Estas seguro de querer eliminar ${actividad.nombre?.toUpperCase()} de la lista de actividades?`,
+      title: `${this.translateService.instant('¿Estas seguro de querer eliminar')} ${actividad.nombre?.toUpperCase()} ${this.translateService.instant('de la lista de actividades')}?`,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Si, eliminar',
-      cancelButtonText: 'No, cancelar',
+      confirmButtonText: `${this.translateService.instant('Si, eliminar')}`,
+      cancelButtonText: `${this.translateService.instant('No, cancelar')}`,
     }).then((result) => {
       if (result.isConfirmed) {
         this.adminService.borrarActividad(actividad.id!).subscribe((actividad) => {
@@ -88,7 +97,7 @@ export class ListaActividadesComponent implements OnInit , OnDestroy{
         Swal.fire({
           position: 'top-end',
           icon: 'success',
-          title: 'actividad eliminada correctamente',
+          title: `${this.translateService.instant('actividad eliminada correctamente')}`,
           showConfirmButton: false,
           timer: 2000,
         });

@@ -7,6 +7,7 @@ import { DataTableDirective } from 'angular-datatables';
 import { MatDialog } from '@angular/material/dialog';
 import { AddCategoriaComponent } from '../add-categoria/add-categoria.component';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-lista-categorias',
@@ -15,6 +16,7 @@ import { Router } from '@angular/router';
 })
 export class ListaCategoriasComponent implements OnInit, OnDestroy {
   usuario!: Usuario;
+  url!:string;
   dtOptions: DataTables.Settings = {};
   dtTrigger = new Subject();
   categorias: any = [];
@@ -24,7 +26,8 @@ export class ListaCategoriasComponent implements OnInit, OnDestroy {
   constructor(
     private adminService: AdminService,
     public dialog: MatDialog,
-    private router: Router
+    private router: Router,
+    private translateService:TranslateService
   ) {}
 
   openDialog(): void {
@@ -57,11 +60,17 @@ export class ListaCategoriasComponent implements OnInit, OnDestroy {
     const usuario = JSON.parse(sessionStorage.getItem('usuario')!);
     this.usuario = usuario;
     
+    if(localStorage.getItem('lang')=='es'){
+      this.url='//cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json'
+    }else{
+      this.url='//cdn.datatables.net/plug-ins/1.10.25/i18n/English.json'
+    }
+
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 5,
       language: {
-        url: '//cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json',
+        url: this.url,
       },
       responsive: true,
     };
@@ -97,8 +106,8 @@ export class ListaCategoriasComponent implements OnInit, OnDestroy {
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Si, eliminar',
-      cancelButtonText: 'No, cancelar',
+      confirmButtonText: `${this.translateService.instant('Si, eliminar')}`,
+      cancelButtonText: `${this.translateService.instant('No, cancelar')}`,
     }).then((result) => {
       if (result.isConfirmed) {
         this.adminService
@@ -123,7 +132,7 @@ export class ListaCategoriasComponent implements OnInit, OnDestroy {
         Swal.fire({
           position: 'top-end',
           icon: 'success',
-          title: 'Categoria eliminada correctamente',
+          title: `${this.translateService.instant('Categoria eliminada correctamente')}`,
           showConfirmButton: false,
           timer: 2000,
         });

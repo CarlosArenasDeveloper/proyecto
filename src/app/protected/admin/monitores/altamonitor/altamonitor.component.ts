@@ -7,6 +7,7 @@ import { AuthService } from '../../../../auth/services/auth.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { AdminService } from '../../../services/admin.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-altamonitor',
@@ -29,7 +30,8 @@ export class AltamonitorComponent implements OnInit {
     private emailValidatorService: EmailValidatorService,
     private authService:AuthService,
     private adminService :AdminService,
-    private router: Router
+    private router: Router,
+    private translateService: TranslateService
   ) {
     const currentYear = new Date().getFullYear();
     this.minDate = new Date(currentYear - 100, 0, 1);
@@ -121,9 +123,9 @@ export class AltamonitorComponent implements OnInit {
   get passwordErrorMsg(): string {
     const errors = this.firstFormGroup.get('password')?.errors;
     if (errors?.required) {
-      return 'La contraseña es requerida';
+      return this.translateService.instant('La contraseña es requerida');
     } else if (errors?.minlength) {
-      return 'La contraseña debe tener mas de 6 caracteres';
+      return this.translateService.instant('La contraseña debe tener mas de 6 caracteres');
     }
     return '';
   }

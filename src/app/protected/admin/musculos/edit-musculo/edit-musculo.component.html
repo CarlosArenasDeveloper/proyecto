@@ -1,9 +1,9 @@
-<h1>Editar {{musculo.nombre}}</h1>
+<h1>{{'Editar'|translate}} {{musculo.nombre}}</h1>
 <hr />
 <form [formGroup]="miFormulario" (ngSubmit)="editarMusculo()" autocomplete="off"> 
   <div class="mb-3">
     <label for="exampleFormControlInput1" class="form-label"
-      >Nombre del musculo:
+      >{{'Nombre'|translate}}:
     </label>
     <input
     readonly
@@ -20,12 +20,12 @@
       *ngIf="campoNoValido('nombre')"
     >
       <br />
-      El nombre es requerido
+      {{'El nombre es requerido'|translate}}
     </span>
   </div>
   <div class="mb-3">
     <label for="exampleFormControlTextarea1" class="form-label"
-      >Descripcion:
+      >{{'Descripcion'|translate}}:
     </label>
     <textarea
       [ngClass]="{
@@ -41,7 +41,7 @@
       *ngIf="campoNoValido('descripcion')"
     >
       <br />
-      La descripcion es obligatoria
+      {{'La descripcion es obligatoria'|translate}}
     </span>
   </div>
   <div class="my-3">
@@ -68,14 +68,14 @@
   </div>
   <button type="button" class="btn btn-danger mx-3" routerLink="musculos">
     <i class="fas fa-arrow-circle-left"></i>
-    Volver atrás
+    {{'Volver atrás'|translate}}
   </button>
   <button
     type="submit"
     [disabled]="miFormulario.invalid"
     class="btn btn-primary"
   >
-    Editar
+    {{'Editar musculo'|translate}}
     <i class="fas fa-edit"></i>
   </button>
 </form>

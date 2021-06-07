@@ -1,9 +1,9 @@
-<h1>Añadiendo musculo</h1>
+<h1>{{'Añadiendo musculo'|translate}}</h1>
 <hr />
 <form [formGroup]="miFormulario" (ngSubmit)="addMusculo()" autocomplete="off"> 
   <div class="mb-3">
     <label for="exampleFormControlInput1" class="form-label"
-      >Nombre del musculo:
+      >{{'Nombre'|translate}}:
     </label>
     <input
       [ngClass]="{
@@ -18,12 +18,12 @@
       class="form-text text-danger fst-italic"
       *ngIf="campoNoValido('nombre')"
     >
-      El nombre es requerido
+      {{'El nombre es requerido'|translate}}
     </span>
   </div>
   <div class="mb-3">
     <label for="exampleFormControlTextarea1" class="form-label"
-      >Descripcion:
+      >{{'Descripcion'|translate}}:
     </label>
     <textarea
       [ngClass]="{
@@ -38,7 +38,7 @@
       class="form-text text-danger fst-italic"
       *ngIf="campoNoValido('descripcion')"
     >
-      La descripcion es obligatoria
+      {{'La descripcion es obligatoria'|translate}}
     </span>
   </div>
   <div class="my-3">
@@ -46,7 +46,7 @@
       <img [src]="previsualizacion" style="width: 300px; height: 300px" />
     </div>
 
-    <label for="formFile" class="form-label">Imagen:</label>
+    <label for="formFile" class="form-label">{{'Imagen'|translate}}:</label>
     <input
       id="formFile"
       [formControl]="file"
@@ -58,13 +58,13 @@
   </div>
   <button type="button" class="btn btn-danger mx-3" routerLink="musculos">
     <i class="fas fa-arrow-circle-left"></i>
-    Volver atrás
+    {{'Volver atrás'|translate}}
   </button>
   <button
     type="submit"
     [disabled]="miFormulario.invalid"
     class="btn btn-primary"
   >
-    Añadir
+    {{'Añadir'|translate}}
   </button>
 </form>

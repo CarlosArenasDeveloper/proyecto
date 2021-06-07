@@ -1,9 +1,9 @@
-<h1>Añadiendo ejercicio</h1>
+<h1>{{'Añadiendo ejercicio'|translate}}</h1>
 <hr />
 <form [formGroup]="miFormulario" (ngSubmit)="addEjercicio()" autocomplete="off">
   <div class="mb-3">
     <label for="exampleFormControlInput1" class="form-label"
-      >Nombre del ejercicio:
+      >{{'Nombre'|translate}}:
     </label>
     <input
       [ngClass]="{
@@ -18,15 +18,15 @@
       class="form-text text-danger fst-italic"
       *ngIf="campoNoValido('nombre')"
     >
-      El nombre es requerido
+      {{'El nombre es requerido'|translate}}
     </span>
   </div>
   <div class="mb-3">
-    <span>¿Que musculo utiliza?:</span>
+    <span>{{'¿Que musculo utiliza'|translate}}?:</span>
     <select class="form-select mt-2" formControlName="nombre_musculo"  [ngClass]="{
       'is-invalid': campoNoValido('nombre_musculo')
     }">
-      <option value="">Seleccione un musculo ...</option>
+      <option value="">{{'Seleccione un musculo'|translate}} ...</option>
       <option *ngFor="let musculo of musculos" [value]="musculo.nombre">
         {{ musculo.nombre | titlecase }}
       </option>
@@ -35,46 +35,46 @@
       class="form-text text-danger fst-italic"
       *ngIf="campoNoValido('nombre_musculo')"
     >
-      El musculo es requerido
+      {{'El musculo es requerido'|translate}}
     </span>
   </div>
   <div class="mb-3">
-    <span>¿Que nivel tiene?:</span>
+    <span>{{'¿Que nivel tiene'|translate}}?:</span>
     <select class="form-select mt-2" formControlName="nivel"  [ngClass]="{
       'is-invalid': campoNoValido('nivel')
     }">
-      <option value="">Seleccione un nivel ...</option>
-      <option value="principiante">Principiante</option>
-      <option value="intermedio">Intermedio</option>
-      <option value="avanzado">Avanzado</option>
+      <option value="">{{'Seleccione un nivel'|translate}} ...</option>
+      <option value="principiante">{{'Principiante'|translate}}</option>
+      <option value="intermedio">{{'Intermedio'|translate}}</option>
+      <option value="avanzado">{{'Avanzado'|translate}}</option>
     </select>
     <span
       class="form-text text-danger fst-italic"
       *ngIf="campoNoValido('nivel')"
     >
-      El nivel es requerido
+      {{'El nivel es requerido'|translate}}
     </span>
   </div>
   <div class="mb-3">
-    <span>¿Que tipo de ejercicio es?:</span>
+    <span>{{'¿Que tipo de ejercicio es'|translate}}?:</span>
     <select class="form-select mt-2" formControlName="tipo"  [ngClass]="{
       'is-invalid': campoNoValido('tipo')
     }">
-      <option value="">Seleccione un tipo ...</option>
-      <option value="basico">Basico</option>
-      <option value="multifuncional">Multifuncional</option>
-      <option value="analitico">Analitico</option>
+      <option value="">{{'Seleccione un tipo'|translate}} ...</option>
+      <option value="basico">{{'Basico'|translate}}</option>
+      <option value="multifuncional">{{'Multifuncional'|translate}}</option>
+      <option value="analitico">{{'Analitico'|translate}}</option>
     </select>
     <span
       class="form-text text-danger fst-italic"
       *ngIf="campoNoValido('tipo')"
     >
-      El tipo es requerido</span
+      {{'El tipo es requerido'|translate}}</span
     >
   </div>
   <div class="mb-3">
     <label for="equipo" class="form-label"
-      >Equipo necesario para la realizacion del ejercicio:
+      >{{'Equipo necesario para la realizacion del ejercicio'|translate}}:
     </label>
     <input
       [ngClass]="{
@@ -89,12 +89,12 @@
       class="form-text text-danger fst-italic"
       *ngIf="campoNoValido('equipo')"
     >
-      El equipo es requerido
+      {{'El equipo es requerido'|translate}}
     </span>
   </div>
   <div class="mb-3">
     <label for="exampleFormControlTextarea1" class="form-label mt-3"
-      >Descripcion:
+      >{{'Descripcion'|translate}}:
     </label>
     <textarea
       [ngClass]="{
@@ -109,7 +109,7 @@
       class="form-text text-danger fst-italic"
       *ngIf="campoNoValido('descripcion')"
     >
-      La descripcion es requerida
+      {{'La descripcion es obligatoria'|translate}}
     </span>
   </div>
 
@@ -118,7 +118,7 @@
       <img [src]="previsualizacion" style="width: 300px; height: 300px" />
     </div>
 
-    <label for="formFile" class="form-label">Imagen:</label>
+    <label for="formFile" class="form-label">{{'Imagen'|translate}}:</label>
     <input
       id="formFile"
       [formControl]="file"
@@ -129,7 +129,7 @@
     />
   </div>
   <div class="mb-3">
-    <label for="video" class="form-label">Video: </label>
+    <label for="video" class="form-label">{{'Video'|translate}}: </label>
     <input
       formControlName="video"
       type="text"
@@ -144,13 +144,13 @@
   </div>
   <button type="button" class="btn btn-danger mx-3" routerLink="ejercicios">
     <i class="fas fa-arrow-circle-left"></i>
-    Volver atrás
+    {{'Volver atrás'|translate}}
   </button>
   <button
     type="submit"
     [disabled]="miFormulario.invalid"
     class="btn btn-primary"
   >
-    Añadir
+    {{'Añadir'|translate}}
   </button>
 </form>

@@ -1,4 +1,4 @@
-<h1>Editando noticia</h1>
+<h1>{{'Editando noticia'|translate}}</h1>
 <hr />
 <form
   [formGroup]="miFormulario"
@@ -6,7 +6,7 @@
   autocomplete="off"
 >
   <div class="mb-3">
-    <label for="titulo" class="form-label">Titulo: </label>
+    <label for="titulo" class="form-label">{{'Titulo'|translate}}: </label>
     <input
       [ngClass]="{
         'is-invalid': campoNoValido('titulo')
@@ -20,11 +20,11 @@
       class="form-text text-danger fst-italic"
       *ngIf="campoNoValido('titulo')"
     >
-      El titulo es requerido
+    {{'El titulo es requerido'|translate}}
     </span>
   </div>
   <div class="mb-3">
-    <span>¿Quién es el editor?:</span>
+    <span>{{'¿Quién es el editor'|translate}}?:</span>
     <select
       class="form-select mt-2"
       formControlName="email_usuario"
@@ -32,7 +32,7 @@
         'is-invalid': campoNoValido('email_usuario')
       }"
     >
-      <option value="null">Seleccione un editor ...</option>
+      <option value="null">{{'Seleccione un editor'|translate}} ...</option>
       <option *ngFor="let editor of editores" [value]="editor.email">
         {{ editor.nombre | titlecase }}
         {{ editor.apellido1 | titlecase }}
@@ -46,11 +46,11 @@
         this.miFormulario.get('email_usuario')?.value == 'null'
       "
     >
-      El editor es requerido
+      {{'El editor es requerido'|translate}}
     </span>
   </div>
   <div class="mb-3">
-    <span>¿Cual es la categoria de la noticia?:</span>
+    <span>¿{{'Cual es la categoria de la noticia'|translate}}?:</span>
 
     <select
       class="form-select mt-2"
@@ -59,7 +59,7 @@
         'is-invalid': campoNoValido('id_categoria')
       }"
     >
-      <option value="null">Seleccione una categoria ...</option>
+      <option value="null">{{'Seleccione una categoria'|translate}} ...</option>
       <option *ngFor="let categoria of categorias" [value]="categoria.id">
         {{ categoria.nombre | titlecase }}
       </option>
@@ -71,12 +71,13 @@
         this.miFormulario.get('id_categoria')?.value == 'null'
       "
     >
-      La categoria es requerida
+    {{'La categoria es requerida'|translate}}
     </span>
   </div>
   <div class="mb-3">
     <label for="exampleFormControlTextarea1" class="form-label mt-3"
-      >Cuerpo:
+      >
+      {{'Cuerpo'|translate}}:
     </label>
     <textarea
       [ngClass]="{
@@ -91,7 +92,7 @@
       class="form-text text-danger fst-italic"
       *ngIf="campoNoValido('cuerpo')"
     >
-      El cuerpo de la noticia es requerido
+    {{'El cuerpo de la noticia es requerido'|translate}}
     </span>
   </div>
   <div *ngIf="noticia.imagen" class="col text-center">
@@ -108,7 +109,7 @@
       <img [src]="previsualizacion" style="width: 300px; height: 300px" />
     </div>
 
-    <label for="formFile" class="form-label">Imagen:</label>
+    <label for="formFile" class="form-label">{{'Imagen'|translate}}:</label>
     <input
       id="formFile"
       [formControl]="file"
@@ -132,14 +133,14 @@
   </div>
   <button type="button" class="btn btn-danger mx-3" routerLink="noticias">
     <i class="fas fa-arrow-circle-left"></i>
-    Volver atrás
+    {{'Volver atrás'|translate}}
   </button>
   <button
     type="submit"
     [disabled]="miFormulario.invalid"
     class="btn btn-primary"
   >
-    Editar
+    {{'Editar'|translate}}
     <i class="fas fa-edit"></i>
   </button>
 </form>

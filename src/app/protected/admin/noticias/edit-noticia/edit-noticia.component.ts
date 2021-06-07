@@ -11,6 +11,7 @@ import { AdminService } from '../../../services/admin.service';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { DomSanitizer } from '@angular/platform-browser';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-edit-noticia',
@@ -45,7 +46,8 @@ export class EditNoticiaComponent implements OnInit {
     private fb: FormBuilder,
     private adminService: AdminService,
     private activatedRoute: ActivatedRoute,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private translateService:TranslateService
   ) {}
 
   ngOnInit(): void {
@@ -140,8 +142,8 @@ export class EditNoticiaComponent implements OnInit {
       Swal.fire({
         position: 'top-end',
         icon: 'error',
-        title: 'Datos incompletos',
-        text: 'Por favor, rellene todos los campos requeridos',
+        title:  `${this.translateService.instant('Datos incompletos')}`,
+        text:`${this.translateService.instant('Por favor, rellene todos los campos requeridos')}`,
         showConfirmButton: false,
         timer: 2000,
       });
@@ -152,13 +154,13 @@ export class EditNoticiaComponent implements OnInit {
 
     if (this.estabaVisible == 0 && this.noticia.visible == true) {
       Swal.fire({
-        title: '¿Quieres que la noticia vuelva a ser de las recientes?',
+        title: `${this.translateService.instant('¿Quieres que la noticia vuelva a ser de las recientes')}?`,
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Si',
-        cancelButtonText: 'No, mantener la fecha de lanzamiento',
+        confirmButtonText: `${this.translateService.instant('Si')}`,
+        cancelButtonText: `${this.translateService.instant('No, mantener la fecha de lanzamiento')}`,
       }).then((result) => {
         if (result.isConfirmed) {
           this.noticia.fecha = this.fechaActual();
@@ -188,7 +190,7 @@ export class EditNoticiaComponent implements OnInit {
         Swal.fire({
           position: 'top-end',
           icon: 'success',
-          title: 'Datos correctamente actualizados',
+          title: `${this.translateService.instant('Datos correctamente actualizados')}`,
           showConfirmButton: false,
           timer: 2000,
         });

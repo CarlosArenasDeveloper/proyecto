@@ -17,17 +17,24 @@ export class ListaEjerciciosComponent implements OnInit,OnDestroy {
   ejercicios: any = [];
   @ViewChild(DataTableDirective, { static: false })
   datatableElement!: DataTableDirective;
+  url!:string;
 
   constructor(private adminService: AdminService) {}
 
   ngOnInit(): void {
+    if(localStorage.getItem('lang')=='es'){
+      this.url='//cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json'
+    }else{
+      this.url='//cdn.datatables.net/plug-ins/1.10.25/i18n/English.json'
+    }
+
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 5,
       language: {
-        url: '//cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json',
+        url: this.url,
       },
-      responsive: true   
+      responsive: true,
     };
 
 

@@ -6,6 +6,7 @@ import { Ejercicio } from '../../../../models/interface';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { DomSanitizer } from '@angular/platform-browser';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-edit-ejercicio',
@@ -36,7 +37,8 @@ export class EditEjercicioComponent implements OnInit {
     private adminService: AdminService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private translateService:TranslateService
 
   ) {}
 
@@ -92,8 +94,8 @@ export class EditEjercicioComponent implements OnInit {
       Swal.fire({
         position: 'top-end',
         icon: 'error',
-        title: 'Datos incompletos',
-        text:'Por favor, rellene todos los campos requeridos',
+        title:  `${this.translateService.instant('Datos incompletos')}`,
+        text:`${this.translateService.instant('Por favor, rellene todos los campos requeridos')}`,
         showConfirmButton: false,
         timer: 2000,
       });
@@ -109,7 +111,7 @@ export class EditEjercicioComponent implements OnInit {
         Swal.fire({
           position: 'top-end',
           icon: 'success',
-          title: 'Datos correctamente actualizados',
+          title: `${this.translateService.instant('Datos correctamente actualizados')}`,
           showConfirmButton: false,
           timer: 2000,
         });

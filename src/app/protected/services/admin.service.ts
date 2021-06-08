@@ -108,6 +108,12 @@ export class AdminService {
       JSON.stringify(usuario)
     );
   }
+  registro(usuario: Usuario):Observable<Usuario> {
+    return this.htpp.post(
+      `${this.baseUrl}/registroCliente.php`,
+      JSON.stringify(usuario)
+    );
+  }
   getNombresClientes() {
     return this.htpp.get(`${this.baseUrl}/nombres.php`);
   }

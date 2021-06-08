@@ -101,24 +101,13 @@ export class AltamonitorComponent implements OnInit {
   get emailErrorMsg(): string {
     const errors = this.firstFormGroup.get('email')?.errors;
     if (errors?.required) {
-      return 'El email es requerido';
+      return this.translateService.instant('El email es obligatorio');
     } else if (errors?.pattern) {
-      return 'El valor ingresado no tiene formato de correo';
-    } else if (errors?.emailTomado) {
-      return 'El email ya está registrado';
+      return  this.translateService.instant('El valor ingresado no tiene formato de correo');
     }
     return '';
   }
 
-  get dniErrorMsg(): string {
-    const errors = this.firstFormGroup.get('dni')?.errors;
-    if (errors?.required) {
-      return 'El DNI es requerido';
-    } else if (errors?.pattern) {
-      return 'El valor ingresado no corresponde con formato DNI/NIE';
-    }
-    return '';
-  }
 
   get passwordErrorMsg(): string {
     const errors = this.firstFormGroup.get('password')?.errors;
@@ -130,12 +119,28 @@ export class AltamonitorComponent implements OnInit {
     return '';
   }
 
+
+
+  get dniErrorMsg(): string {
+    const errors = this.firstFormGroup.get('dni')?.errors;
+    if (errors?.required) {
+      return this.translateService.instant('El DNI es requerido');
+    } else if (errors?.pattern) {
+      return this.translateService.instant(
+        'El valor ingresado no corresponde con formato DNI/NIE'
+      );
+    }
+    return '';
+  }
+
+
+
   get telefonoErrorMsg(): string {
     const errors = this.secondFormGroup.get('telefono')?.errors;
     if (errors?.required) {
-      return 'El nº de telefono es requerido';
+      return this.translateService.instant('El nº de telefono es requerido');
     } else if (errors?.pattern) {
-      return 'El valor ingresado no tiene formato de numero de telefono';
+      return this.translateService.instant('El valor ingresado no tiene formato de numero de telefono');
     }
     return '';
   }
@@ -143,13 +148,12 @@ export class AltamonitorComponent implements OnInit {
   get cuentaErrorMsg(): string {
     const errors = this.secondFormGroup.get('cuenta_bancaria')?.errors;
     if (errors?.required) {
-      return 'El nº de cuenta es requerido';
+      return this.translateService.instant('El nº de cuenta es requerido');
     } else if (errors?.pattern) {
-      return 'El valor ingresado no tiene formato de numero de cuenta';
+      return this.translateService.instant('El valor ingresado no tiene formato de numero de cuenta');
     }
     return '';
   }
-
   
   add() {
     this.monitor = {
@@ -161,7 +165,7 @@ export class AltamonitorComponent implements OnInit {
         Swal.fire({
           position: 'top-end',
           icon: 'success',
-          title: 'Se ha añadido con exito a ' +this.monitor.nombre!.toUpperCase() +'!' ,
+          title:  `${this.translateService.instant('Se ha añadido con exito a')} ${this.monitor.nombre!.toUpperCase()} !` ,
           showConfirmButton: false,
           timer: 1500,
         });

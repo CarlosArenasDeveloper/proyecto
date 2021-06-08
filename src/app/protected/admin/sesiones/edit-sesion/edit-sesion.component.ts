@@ -29,7 +29,7 @@ export class EditSesionComponent implements OnInit {
     private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private translateService:TranslateService
+    private translateService:TranslateService,
   ) {
     if (localStorage.getItem('lang') == 'en') {
       this.isEspanish = false;
@@ -145,47 +145,20 @@ export class EditSesionComponent implements OnInit {
         Swal.fire({
           position: 'top-end',
           icon: 'success',
-          title: 'Datos correctamente actualizados',
+          title: `${this.translateService.instant('Datos correctamente actualizados')}`,
           showConfirmButton: false,
           timer: 2000,
         });
       } else {
         Swal.fire({
           icon: 'error',
-          title: 'Error al editar la sesion.',
-          text: `Por favor, compruebe que la sala este libre o que la actividad este no duplicada en la franja horaria seleccionada.`,
+          title: `${this.translateService.instant('Error al editar la sesion')}.`,
+          text: `${this.translateService.instant('Por favor, compruebe que la sala este libre o que la actividad este no duplicada en la franja horaria seleccionada.')}`,
         });
       }
     });
   }
 
-  // borrar() {
-  //   Swal.fire({
-  //     title: `¿Estas seguro de querer eliminar la sesion?`,
-  //     icon: 'warning',
-  //     showCancelButton: true,
-  //     confirmButtonColor: '#3085d6',
-  //     cancelButtonColor: '#d33',
-  //     confirmButtonText: 'Si, eliminar',
-  //     cancelButtonText: 'No, cancelar',
-  //   }).then((result) => {
-  //     if (result.isConfirmed) {
-  //       this.adminService.borrarPrueba(this.sesion.id).subscribe((resp) => {
-  //         if (resp == null) {
-  //           Swal.fire({
-  //             position: 'top-end',
-  //             icon: 'success',
-  //             title: 'Sesion eliminada correctamente',
-  //             showConfirmButton: false,
-  //             timer: 2000,
-  //           }).then((result) => {
-  //             this.router.navigateByUrl('dashboard/admin/sesiones');
-  //           });
-  //         }
-  //       });
-  //     }
-  //   });
-  // }
 
   campoNoValido(campo: string) {
     return (
@@ -193,90 +166,46 @@ export class EditSesionComponent implements OnInit {
       this.miFormulario.get(campo)?.touched
     );
   }
-  // cambiarEstado() {
-  //   Swal.fire({
-  //     title: 'Cambiar estado',
-  //     showDenyButton: true,
-  //     showCancelButton: true,
-  //     confirmButtonText: `FINALIZADA`,
-  //     denyButtonText: `COMPLETA`,
-  //     cancelButtonText: `INCOMPLETA`,
-  //     cancelButtonColor: `#2778c4`,
-  //     confirmButtonColor: `#757575`,
-  //   }).then((result) => {
-  //     if (result.isConfirmed) {
-  //       Swal.fire({
-  //         title: `¿Estas seguro de que querer cambiar el estado de la sesión a finalizada ?`,
-  //         icon: 'warning',
-  //         showCancelButton: true,
-  //         confirmButtonColor: '#3085d6',
-  //         cancelButtonColor: '#d33',
-  //         confirmButtonText: 'Si, cambiar',
-  //         cancelButtonText: 'No, cancelar',
-  //       }).then((result) => {
-  //         if (result.isConfirmed) {
-  //           this.miFormulario.get('estado')?.setValue('finalizada');
-  //         }
-  //       });
-  //     } else if (result.isDenied) {
-  //       Swal.fire({
-  //         title: `¿Estas seguro de que querer cambiar el estado de la sesión a completa ?`,
-  //         icon: 'warning',
-  //         showCancelButton: true,
-  //         confirmButtonColor: '#3085d6',
-  //         cancelButtonColor: '#d33',
-  //         confirmButtonText: 'Si, cambiar',
-  //         cancelButtonText: 'No, cancelar',
-  //       }).then((result) => {
-  //         if (result.isConfirmed) {
-  //           this.miFormulario.get('estado')?.setValue('completa');
-  //         }
-  //       });
-  //     } else {
-  //       Swal.fire({
-  //         title: `¿Estas seguro de que querer cambiar el estado de la sesión a incompleta ?`,
-  //         icon: 'warning',
-  //         showCancelButton: true,
-  //         confirmButtonColor: '#3085d6',
-  //         cancelButtonColor: '#d33',
-  //         confirmButtonText: 'Si, cambiar',
-  //         cancelButtonText: 'No, cancelar',
-  //       }).then((result) => {
-  //         if (result.isConfirmed) {
-  //           this.miFormulario.get('estado')?.setValue('incompleta');
-  //         }
-  //       });
-  //     }
-  //   });
-  // }
+
 
   cancelar(){
-    Swal.fire({
-      title: `¿Estas seguro de querer cancelar la sesion?`,
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Si, cancelar',
-      cancelButtonText: 'No',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        const idsesion = parseInt(this.sesion.id)
-        //console.log(idsesion);
-        this.adminService.cancelarSesion(idsesion).subscribe((resp) => {
-          if (resp == null) {
-            Swal.fire({
-              position: 'top-end',
-              icon: 'success',
-              title: 'Sesion cancelada correctamente',
-              showConfirmButton: false,
-              timer: 2000,
-            }).then((result) => {
-            this.router.navigateByUrl('dashboard/admin/sesiones');
-            });
-          }
-        });
-      }
-    });
+    if(this.sesion.estado=='cancelada'){
+      Swal.fire({
+        position: 'top-end',
+        icon: 'error',
+        title:  `${this.translateService.instant('La sesión ya esta cancelada')}`,
+        showConfirmButton: false,
+        timer: 2000,
+      });
+    }else{
+      Swal.fire({
+        title: `${this.translateService.instant('¿Estas seguro de querer cancelar la sesion?')}`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: `${this.translateService.instant('Si, cancelar')}`,
+        cancelButtonText: 'No',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          const idsesion = parseInt(this.sesion.id)
+          //console.log(idsesion);
+          this.adminService.cancelarSesion(idsesion).subscribe((resp) => {
+            if (resp == null) {
+              Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: `${this.translateService.instant('Sesion cancelada correctamente')}`,
+                showConfirmButton: false,
+                timer: 2000,
+              }).then((result) => {
+              this.router.navigateByUrl('dashboard/admin/sesiones');
+              });
+            }
+          });
+        }
+      });
+    }
+
   }
 }

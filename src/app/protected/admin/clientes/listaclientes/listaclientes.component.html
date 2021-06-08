@@ -1,11 +1,11 @@
 <div class="container">
-  <h1>Listado de Clientes</h1>
+  <h1>{{'Listado de Clientes'|translate}}</h1>
   <hr />
   <div class="row">
     <div class="col text-right">
       <button routerLink="./altacliente" class="btn btn-primary">
         <i class="fa fa-user-plus"></i>
-        Añadir cliente
+        {{'Añadir cliente'|translate}}
       </button>
     </div>
   </div>
@@ -20,13 +20,13 @@
         <thead class="thead-dark" *ngIf="clientes.length > 0">
           <tr>
             <th scope="col">#</th>
-            <th scope="col">Nombre</th>
-            <th scope="col">Apellidos</th>
-            <th scope="col">Email</th>
-            <th scope="col">Tarifa</th>
-            <th scope="col">Centro</th>
-            <th scope="col">Estado</th>
-            <th scope="col">Verificado</th>
+            <th scope="col">{{'Nombre'|translate}}</th>
+            <th scope="col">{{'Apellidos'|translate}}</th>
+            <th scope="col">{{'Email'|translate}}</th>
+            <th scope="col">{{'Tarifa'|translate}}</th>
+            <th scope="col">{{'Centro'|translate}}</th>
+            <th scope="col">{{'Estado'|translate}}</th>
+            <th scope="col">{{'Verificado'|translate}}</th>
             <th scope="col"></th>
             <th scope="col"></th>
 
@@ -55,15 +55,18 @@
               {{ ele.estado | titlecase }}
             </td>
             <td *ngIf="ele.verificado == 0">No <i class="fas fa-times"></i></td>
-            <td *ngIf="ele.verificado == 1">Si <i class="fas fa-check"></i></td>
+            <td *ngIf="ele.verificado == 1">{{'Si'|translate}} <i class="fas fa-check"></i></td>
             <td>
-              <button class="btn btn-danger" (click)="borrarCliente(ele, i)">
+              <button class="btn btn-danger" 
+              [title]="'title.Borrar'|translate"
+              (click)="borrarCliente(ele, i)">
                 <i class="fa fa-trash"></i>
               </button>
               
             </td>
             <td><button
               class="btn btn-warning ms-2"
+              [title]="'title.Ver más'|translate"
               [routerLink]="['./editcliente', ele.email]"
             >
               <i class="fas fa-search-plus"></i>

@@ -8,8 +8,8 @@ import { EmailValidatorService } from '../../../../auth/services/email-validator
 import Swal from 'sweetalert2';
 import { AdminService } from '../../../services/admin.service';
 import { MatDialog } from '@angular/material/dialog';
-import { ActividadesPorTarifaComponent } from 'src/app/auth/pages/actividades-por-tarifa/actividades-por-tarifa.component';
 import { TranslateService } from '@ngx-translate/core';
+import { ActividadesPorTarifaComponent } from '../../../../auth/pages/actividades-por-tarifa/actividades-por-tarifa.component';
 
 @Component({
   selector: 'app-altacliente',
@@ -32,7 +32,7 @@ export class AltaclienteComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private adminService: AdminService,
-    private translateService:TranslateService
+    private translateService: TranslateService
   ) {
     this.tarifas = [];
     this.centros = [];
@@ -107,20 +107,22 @@ export class AltaclienteComponent implements OnInit {
       ...this.thirdFormGroup.value,
     };
 
-    this.adminService.addCliente(this.cliente).subscribe((resp) => {
+    this.adminService.registro(this.cliente).subscribe((resp) => {
       //console.log(this.cliente);
       if (resp != 'ERROR') {
         Swal.fire({
           position: 'top-end',
           icon: 'success',
-          title:
-            'Se ha añadido con exito a ' +
-            this.cliente.nombre!.toUpperCase() +
-            '!',
+          title: `
+            ${this.translateService.instant('Bienvenido')} 
+            ${this.cliente.nombre?.toLocaleUpperCase()}. ${this.translateService.instant(
+            'Se ha enviado un correo de verificacion a'
+          )} ${this.cliente.email} !`,
           showConfirmButton: false,
-          timer: 1500,
+          timer: 3000,
+        }).then(() => {
+          this.router.navigateByUrl('dashboard/admin/listaclientes');
         });
-        this.router.navigateByUrl('dashboard/admin/listaclientes');
       }
     });
   }
@@ -139,11 +141,13 @@ export class AltaclienteComponent implements OnInit {
   get emailErrorMsg(): string {
     const errors = this.firstFormGroup.get('email')?.errors;
     if (errors?.required) {
-      return 'El email es requerido';
+      return this.translateService.instant('El email es obligatorio');
     } else if (errors?.pattern) {
-      return 'El valor ingresado no tiene formato de correo';
+      return this.translateService.instant(
+        'El valor ingresado no tiene formato de correo'
+      );
     } else if (errors?.emailTomado) {
-      return 'El email ya está registrado';
+      return this.translateService.instant('El email ya está registrado');
     }
     return '';
   }
@@ -151,18 +155,23 @@ export class AltaclienteComponent implements OnInit {
   get dniErrorMsg(): string {
     const errors = this.firstFormGroup.get('dni')?.errors;
     if (errors?.required) {
-      return 'El DNI es requerido';
+      return this.translateService.instant('El DNI es requerido');
     } else if (errors?.pattern) {
-      return 'El valor ingresado no corresponde con formato DNI/NIE';
+      return this.translateService.instant(
+        'El valor ingresado no corresponde con formato DNI/NIE'
+      );
     }
     return '';
   }
+
   get passwordErrorMsg(): string {
     const errors = this.firstFormGroup.get('password')?.errors;
     if (errors?.required) {
       return this.translateService.instant('La contraseña es requerida');
     } else if (errors?.minlength) {
-      return this.translateService.instant('La contraseña debe tener mas de 6 caracteres');
+      return this.translateService.instant(
+        'La contraseña debe tener mas de 6 caracteres'
+      );
     }
     return '';
   }
@@ -170,9 +179,11 @@ export class AltaclienteComponent implements OnInit {
   get telefonoErrorMsg(): string {
     const errors = this.secondFormGroup.get('telefono')?.errors;
     if (errors?.required) {
-      return 'El nº de telefono es requerido';
+      return this.translateService.instant('El nº de telefono es requerido');
     } else if (errors?.pattern) {
-      return 'El valor ingresado no tiene formato de numero de telefono';
+      return this.translateService.instant(
+        'El valor ingresado no tiene formato de numero de telefono'
+      );
     }
     return '';
   }
@@ -180,28 +191,32 @@ export class AltaclienteComponent implements OnInit {
   get cuentaErrorMsg(): string {
     const errors = this.secondFormGroup.get('cuenta_bancaria')?.errors;
     if (errors?.required) {
-      return 'El nº de cuenta es requerido';
+      return this.translateService.instant('El nº de cuenta es requerido');
     } else if (errors?.pattern) {
-      return 'El valor ingresado no tiene formato de numero de cuenta';
+      return this.translateService.instant(
+        'El valor ingresado no tiene formato de numero de cuenta'
+      );
     }
     return '';
   }
 
   esMenor() {
     const today: Date = new Date();
-    const birthDate: Date = new Date(this.secondFormGroup.get('fecha_nac')?.value);
+    const birthDate: Date = new Date(
+      this.secondFormGroup.get('fecha_nac')?.value
+    );
     let age: number = today.getFullYear() - birthDate.getFullYear();
     const month: number = today.getMonth() - birthDate.getMonth();
     if (month < 0 || (month === 0 && today.getDate() < birthDate.getDate())) {
-        age--;
+      age--;
     }
-    if(age < 18){
+    if (age < 18) {
       this.secondFormGroup.get('fecha_nac')?.setErrors({ noIguales: true });
       return true;
-    } else{
-      return "";
+    } else {
+      return '';
     }
-}
+  }
   elegirTarifa(id: number) {
     this.thirdFormGroup.controls['id_tarifa'].setValue(id);
     this.thirdFormGroup.controls['id_centro'].setValue('');
@@ -214,6 +229,4 @@ export class AltaclienteComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((result) => {});
   }
-
-  
 }

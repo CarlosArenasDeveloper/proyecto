@@ -10,6 +10,7 @@ import { DataTablesModule } from 'angular-datatables';
 import { ListaAllSesionesComponent } from './lista-all-sesiones/lista-all-sesiones.component';
 import { FullCalendarModule } from 'primeng/fullcalendar';
 import { CalendarModule } from 'primeng/calendar';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [ListaSesionesMonitorComponent, ListaAllSesionesComponent],
@@ -19,7 +20,8 @@ import { CalendarModule } from 'primeng/calendar';
     ReactiveFormsModule,
     DataTablesModule,
     FullCalendarModule,
-    CalendarModule
+    CalendarModule,
+    TranslateModule
   ],
   exports:[
     ListaSesionesMonitorComponent, ListaAllSesionesComponent

@@ -10,6 +10,7 @@ import interactionPlugin from '@fullcalendar/interaction';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import Swal from 'sweetalert2';
 import Tooltip from 'tooltip.js';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-lista-sesiones-monitor',
@@ -25,7 +26,7 @@ export class ListaSesionesMonitorComponent implements OnInit {
   public optionsList: any;
   public idioma: any;
 
-  constructor(private router: Router, private adminService: AdminService) {
+  constructor(private router: Router, private adminService: AdminService,translateService:TranslateService) {
     const usuario = JSON.parse(sessionStorage.getItem('usuario')!);
     this.usuario = usuario;
 
@@ -72,7 +73,7 @@ export class ListaSesionesMonitorComponent implements OnInit {
         switch (info.event.extendedProps.estado) {
           case 'finalizada':
             Swal.fire({
-              title: `La sesion ha finalizado`,
+              title: `${translateService.instant('La sesion ha finalizado')}`,
               icon: 'warning',
               position: 'top-end',
               timer: 2000,
@@ -82,7 +83,7 @@ export class ListaSesionesMonitorComponent implements OnInit {
             break;
           case 'cancelada':
             Swal.fire({
-              title: `La sesion ya ha sido cancelada`,
+              title: `${translateService.instant('La sesion ya ha sido cancelada')}`,
               icon: 'warning',
               position: 'top-end',
               timer: 2000,
@@ -92,12 +93,12 @@ export class ListaSesionesMonitorComponent implements OnInit {
             break;
           default:
             Swal.fire({
-              title: `¿Estas seguro de querer cancelar la sesion?`,
+              title: `${translateService.instant('¿Estas seguro de querer cancelar la sesion?')}`,
               icon: 'warning',
               showCancelButton: true,
               confirmButtonColor: '#3085d6',
               cancelButtonColor: '#d33',
-              confirmButtonText: 'Si, cancelar',
+              confirmButtonText: `${translateService.instant('Si, cancelar')}`,
               cancelButtonText: 'No',
             }).then((result) => {
               if (result.isConfirmed) {
@@ -106,7 +107,7 @@ export class ListaSesionesMonitorComponent implements OnInit {
                     Swal.fire({
                       position: 'top-end',
                       icon: 'success',
-                      title: 'Sesion cancelada correctamente',
+                      title: `${translateService.instant('Sesion cancelada correctamente')}`,
                       showConfirmButton: false,
                       timer: 2000,
                     }).then((result) => {
@@ -127,27 +128,25 @@ export class ListaSesionesMonitorComponent implements OnInit {
             '</h6>' +
             '<h6>' +
             ('0' + e.event.start.getHours()).substr(-2) +
-            // e.event.start.getHours() +
             ':' +
             ('0' + e.event.start.getMinutes()).substr(-2) +
-            // e.event.start.getMinutes() +
             ' - ' +
             ('0' + e.event.end.getHours()).substr(-2) +
             ':' +
             ('0' + e.event.end.getMinutes()).substr(-2) +
             '</h6>' +
             '<hr>' +
-            '<span>Sala ' +
+            `<span>${translateService.instant('Sala')} ` +
             e.event.extendedProps.sala +
             '</span>' +
             "<br><span><i class='fas fa-stopwatch'></i>: " +
             Math.abs(e.event.start - e.event.end) / 1000 / 60 +
-            ' minutos </span>' +
+            ` ${translateService.instant('minutos')} </span>` +
             '<br>' +
-            '<span>Plazas disponibles: ' +
+            `<span>${translateService.instant('Plazas disponibles')}: ` +
             (e.event.extendedProps.aforo - e.event.extendedProps.num_clientes) +
             '<br></span>' +
-            '<span>Estado: ' +
+            `<span>${translateService.instant('Estado')}: ` +
             e.event.extendedProps.estado +
             '</span>' +
             '<br>',

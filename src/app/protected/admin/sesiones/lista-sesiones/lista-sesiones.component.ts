@@ -9,6 +9,7 @@ import interactionPlugin from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
 import { Router } from '@angular/router';
 import Tooltip from 'tooltip.js';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-lista-sesiones',
@@ -27,7 +28,7 @@ export class ListaSesionesComponent {
 
   public optionsMonth: any;
   public optionsList: any;
-  constructor(private router: Router, private adminService: AdminService) {
+  constructor(private router: Router, private adminService: AdminService,private translateService:TranslateService) {
     this.adminService.getPrueba().subscribe((events) => {
       this.events = events;
       //console.log(this.events);
@@ -98,17 +99,17 @@ export class ListaSesionesComponent {
             ('0' + e.event.end.getMinutes()).substr(-2) +
             '</h6>' +
             '<hr>' +
-            '<span>Sala ' +
+            `<span>${translateService.instant('Sala')} ` +
             e.event.extendedProps.sala +
             '</span>' +
             "<br><span><i class='fas fa-stopwatch'></i>: " +
             Math.abs(e.event.start - e.event.end) / 1000 / 60 +
-            ' minutos </span>' +
+            ` ${translateService.instant('minutos')} </span>` +
             '<br>' +
-            '<span>Plazas disponibles: ' +
+            `<span>${translateService.instant('Plazas disponibles')}: ` +
             (e.event.extendedProps.aforo - e.event.extendedProps.num_clientes) +
             '<br></span>' +
-            '<span>Estado: ' +
+            `<span>${translateService.instant('Estado')}: ` +
             e.event.extendedProps.estado +
             '</span>' +
             '<br>',

@@ -26,6 +26,7 @@ import { TranslateModule } from '@ngx-translate/core';
     NgxPayPalModule,
     TranslateModule    
   ],
+  exports:[ActividadesPorTarifaComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AuthModule { }

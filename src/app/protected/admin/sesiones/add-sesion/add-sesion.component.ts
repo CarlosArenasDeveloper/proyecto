@@ -4,6 +4,7 @@ import { Sesion, Actividad, Horario } from '../../../../models/interface';
 import { AdminService } from '../../../services/admin.service';
 import Swal from 'sweetalert2';
 import { ActivatedRoute } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-add-sesion',
@@ -22,7 +23,7 @@ export class AddSesionComponent implements OnInit {
   constructor(
     private adminService: AdminService,
     private fb: FormBuilder,
-    private activatedRoute: ActivatedRoute
+    private translateService:TranslateService
   ) {
     this.today = new Date();
 
@@ -107,16 +108,16 @@ export class AddSesionComponent implements OnInit {
       if (resp != 'error') {
         Swal.fire({
           position: 'top-end',
-          icon: 'success',
-          title: 'Se ha creado la sesion correctamente',
+          icon: `success`,
+          title: `${this.translateService.instant('Se ha creado la sesion correctamente')}`,
           showConfirmButton: false,
           timer: 2000,
         });
       } else {
         Swal.fire({
           icon: 'error',
-          title: 'Error al crear la sesion.',
-          text: `Por favor, compruebe que la sala este libre o que la actividad este no duplicada en la franja horaria seleccionada.`,
+          title: `${this.translateService.instant('Error al crear la sesion')}`,
+          text: `${this.translateService.instant('Por favor, compruebe que la sala este libre o que la actividad este no duplicada en la franja horaria seleccionada.')}`,
         });
       }
     });

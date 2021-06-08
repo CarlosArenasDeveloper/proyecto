@@ -205,9 +205,9 @@ export class EditclienteComponent implements OnInit {
     if (this.cliente.estado === 'baja') {
       Swal.fire({
         icon: 'error',
-        title: 'Los datos no fueron actualizados...',
+        title: `${this.translateService.instant('Los datos no fueron actualizados')}...`,
         text:
-          'Para cambiar la informacion de un cliente, este debe de estar dado de alta!',
+          `${this.translateService.instant('Para cambiar la informacion de un cliente, este debe de estar dado de alta')}!`,
       });
       return;
     }
@@ -224,7 +224,7 @@ export class EditclienteComponent implements OnInit {
         Swal.fire({
           position: 'top-end',
           icon: 'success',
-          title: 'Datos correctamente actualizados',
+          title: `${this.translateService.instant('Datos correctamente actualizados')}`,
           showConfirmButton: false,
           timer: 2000,
         });
@@ -252,9 +252,11 @@ export class EditclienteComponent implements OnInit {
   get dniErrorMsg(): string {
     const errors = this.miFormulario.get('dni')?.errors;
     if (errors?.required) {
-      return 'El DNI es requerido';
+      return this.translateService.instant('El DNI es requerido');
     } else if (errors?.pattern) {
-      return 'El valor ingresado no corresponde con formato DNI/NIE';
+      return this.translateService.instant(
+        'El valor ingresado no corresponde con formato DNI/NIE'
+      );
     }
     return '';
   }
@@ -268,26 +270,29 @@ export class EditclienteComponent implements OnInit {
     return '';
   }
 
-  get cuentaErrorMsg(): string {
-    const errors = this.miFormulario.get('cuenta_bancaria')?.errors;
-    if (errors?.required) {
-      return 'El nº de cuenta es requerido';
-    } else if (errors?.pattern) {
-      return 'El valor ingresado no tiene formato de numero de cuenta';
-    }
-    return '';
-  }
-
   get telefonoErrorMsg(): string {
     const errors = this.miFormulario.get('telefono')?.errors;
     if (errors?.required) {
-      return 'El nº de telefono es requerido';
+      return this.translateService.instant('El nº de telefono es requerido');
     } else if (errors?.pattern) {
-      return 'El valor ingresado no tiene formato de numero de telefono';
+      return this.translateService.instant(
+        'El valor ingresado no tiene formato de numero de telefono'
+      );
     }
     return '';
   }
 
+  get cuentaErrorMsg(): string {
+    const errors = this.miFormulario.get('cuenta_bancaria')?.errors;
+    if (errors?.required) {
+      return this.translateService.instant('El nº de cuenta es requerido');
+    } else if (errors?.pattern) {
+      return this.translateService.instant(
+        'El valor ingresado no tiene formato de numero de cuenta'
+      );
+    }
+    return '';
+  }
 
   esMenor() {
     const today: Date = new Date();
@@ -307,22 +312,22 @@ export class EditclienteComponent implements OnInit {
 
   cambiarEstado() {
     Swal.fire({
-      title: 'Cambiar estado a ' + this.cliente.nombre?.toUpperCase(),
+      title: `${this.translateService.instant('Cambiar estado a')} ${this.cliente.nombre?.toUpperCase()}`,
       showDenyButton: true,
       showCancelButton: true,
-      confirmButtonText: `ALTA`,
-      denyButtonText: `BAJA`,
-      cancelButtonText: `BLOQUEAR`,
+      confirmButtonText: `${this.translateService.instant('alta')}`,
+      denyButtonText: `${this.translateService.instant('baja')}`,
+      cancelButtonText: `${this.translateService.instant('bloquear')}`,
     }).then((result) => {
       if (result.isConfirmed) {
         Swal.fire({
-          title: `¿Estas seguro de que quieres dar de alta a ${this.cliente.nombre?.toUpperCase()} ${this.cliente.apellido1?.toUpperCase()}?`,
+          title: `${this.translateService.instant('¿Estas seguro de que quieres dar de alta a')} ${this.cliente.nombre?.toUpperCase()} ${this.cliente.apellido1?.toUpperCase()}?`,
           icon: 'warning',
           showCancelButton: true,
           confirmButtonColor: '#3085d6',
           cancelButtonColor: '#d33',
-          confirmButtonText: 'Si, dar de alta',
-          cancelButtonText: 'No, cancelar',
+          confirmButtonText: `${this.translateService.instant('Si')}`,
+          cancelButtonText: `${this.translateService.instant('No, cancelar')}`,
         }).then((result) => {
           if (result.isConfirmed) {
             this.cliente.estado = 'activo';
@@ -335,7 +340,7 @@ export class EditclienteComponent implements OnInit {
               Swal.fire({
                 position: 'top-end',
                 icon: 'success',
-                title: 'Se ha dado de alta a '+ this.cliente.nombre?.toUpperCase(),
+                title: `${this.translateService.instant('Se ha dado de alta a')}  ${this.cliente.nombre?.toUpperCase()}`,
                 showConfirmButton: false,
                 timer: 1500,
               });
@@ -344,13 +349,13 @@ export class EditclienteComponent implements OnInit {
         });
       } else if (result.isDenied) {
         Swal.fire({
-          title: `¿Estas seguro de que quieres dar de baja a ${this.cliente.nombre?.toUpperCase()} ${this.cliente.apellido1?.toUpperCase()}?`,
+          title: `${this.translateService.instant('¿Estas seguro de que quieres dar de baja a')} ${this.cliente.nombre?.toUpperCase()} ${this.cliente.apellido1?.toUpperCase()}?`,
           icon: 'warning',
           showCancelButton: true,
           confirmButtonColor: '#3085d6',
           cancelButtonColor: '#d33',
-          confirmButtonText: 'Si, dar de baja',
-          cancelButtonText: 'No, cancelar',
+          confirmButtonText: `${this.translateService.instant('Si')}`,
+          cancelButtonText: `${this.translateService.instant('No, cancelar')}`,
         }).then((result) => {
           if (result.isConfirmed) {
             this.cliente.estado = 'baja';
@@ -364,7 +369,7 @@ export class EditclienteComponent implements OnInit {
               Swal.fire({
                 position: 'top-end',
                 icon: 'success',
-                title: 'Se ha dado de baja a '+ this.cliente.nombre?.toUpperCase(),
+                title: `${this.translateService.instant('Se ha dado de baja a')} ${this.cliente.nombre?.toUpperCase()}`,
                 showConfirmButton: false,
                 timer: 1500,
               });
@@ -373,13 +378,13 @@ export class EditclienteComponent implements OnInit {
         });
       } else {
         Swal.fire({
-          title: `¿Estas seguro de que quieres bloquear a ${this.cliente.nombre?.toUpperCase()} ${this.cliente.apellido1?.toUpperCase()}?`,
+          title: `${this.translateService.instant('¿Estas seguro de que quieres bloquear a')} ${this.cliente.nombre?.toUpperCase()} ${this.cliente.apellido1?.toUpperCase()}?`,
           icon: 'warning',
           showCancelButton: true,
           confirmButtonColor: '#3085d6',
           cancelButtonColor: '#d33',
-          confirmButtonText: 'Si, bloquear',
-          cancelButtonText: 'No, cancelar',
+          confirmButtonText: `${this.translateService.instant('Si')}`,
+          cancelButtonText: `${this.translateService.instant('No, cancelar')}`,
         }).then((result) => {
           if (result.isConfirmed) {
             this.cliente.estado = 'bloqueado';
@@ -392,7 +397,7 @@ export class EditclienteComponent implements OnInit {
               Swal.fire({
                 position: 'top-end',
                 icon: 'success',
-                title: 'Se ha bloqueado a '+ this.cliente.nombre?.toUpperCase(),
+                title: `Se ha bloqueado a ' ${this.cliente.nombre?.toUpperCase()}`,
                 showConfirmButton: false,
                 timer: 1500,
               });

@@ -2,7 +2,7 @@
 <form [formGroup]="miFormulario" (ngSubmit)="editar()">
 
 <h1>
-  Informacion del cliente: {{ cliente.nombre | titlecase }}
+  {{'Informacion del cliente'|translate}}: {{ cliente.nombre | titlecase }}
   {{ cliente.apellido1 | titlecase }} {{ cliente.apellido2 | titlecase }}
 </h1>
 <div class="row">
@@ -28,7 +28,7 @@
         <img [src]="previsualizacion" style="width: 300px; height: 300px" />
       </div>
   
-      <label for="formFile" class="form-label">Foto del cliente:</label>
+      <label for="formFile" class="form-label">{{'Foto del cliente'|translate}}:</label>
       <input
         id="formFile"
         [formControl]="file"
@@ -44,7 +44,7 @@
 
     <div class="row mt-5">
       <mat-form-field appearance="fill">
-        <mat-label>Seleccione una tarifa: </mat-label>
+        <mat-label>{{'Seleccione una tarifa'|translate}}: </mat-label>
         <mat-select formControlName="id_tarifa">
           <mat-option *ngFor="let tarifa of tarifas" [value]="tarifa.id">
             {{ tarifa.nombre | titlecase }}
@@ -55,11 +55,11 @@
         class="form-text text-danger fst-italic"
         *ngIf="campoNoValido('id_tarifa')"
       >
-        La eleccion de la tarifa es requerida
+        {{'La eleccion de la tarifa es requerida'|translate}}
       </span>
 
       <mat-form-field appearance="fill">
-        <mat-label>Seleccione un centro: </mat-label>
+        <mat-label>{{'Seleccione un centro'|translate}}: </mat-label>
         <mat-select formControlName="id_centro">
           <mat-option *ngFor="let centro of centros" [value]="centro.id">
             {{ centro.nombre | titlecase }}
@@ -70,24 +70,24 @@
         class="form-text text-danger fst-italic"
         *ngIf="campoNoValido('id_centro')"
       >
-        La eleccion del centro es requerida
+        {{'La eleccion del centro es requerida'|translate}}
       </span>
 
       <mat-form-field appearance="fill">
-        <mat-label>Seleccione un rol: </mat-label>
+        <mat-label>{{'Seleccione un rol'|translate}}: </mat-label>
         <mat-select formControlName="role">
-          <mat-option value="2"> Cliente </mat-option>
-          <mat-option value="3"> Monitor </mat-option>
+          <mat-option value="2"> {{'Cliente'|translate}} </mat-option>
+          <mat-option value="3"> {{'Monitor'|translate}} </mat-option>
         </mat-select>
       </mat-form-field>
       <span
         class="form-text text-danger fst-italic"
         *ngIf="campoNoValido('role')"
       >
-        La eleccion del rol es requerida
+        {{'La eleccion del rol es requerida'|translate}}
       </span>
     </div>
-    <mat-checkbox formControlName="verificado" color="warn" class="mb-4">Verificar cliente</mat-checkbox>
+    <mat-checkbox formControlName="verificado" color="warn" class="mb-4">{{'Verificar cliente'|translate}</mat-checkbox>
     <br>
     <button
     type="button"
@@ -95,10 +95,10 @@
     routerLink="./listaclientes"
   >
   <i class="fas fa-arrow-circle-left"></i>
-    Volver atrás
+    {{'Volver atrás'|translate}}
       </button>
   <button type="submit" class="btn btn-primary" [disabled]="miFormulario.invalid">
-    Actualizar datos 
+    {{'Actualizar datos'|translate}} 
     <i class="fa fa-edit"></i>
   </button>
   </div>
@@ -107,14 +107,14 @@
     <div class="row">
         <div class="row">
             <mat-form-field>
-              <mat-label>Email:(no se puede cambiar)</mat-label>
+              <mat-label>{{'Email:(no se puede cambiar)'|translate}}</mat-label>
               <input matInput formControlName="email" readonly />
             </mat-form-field>
           <mat-form-field>
-            <mat-label>Nombre:</mat-label>
+            <mat-label>{{'Nombre'|translate}}:</mat-label>
             <input
               matInput
-              placeholder="Introduzca su nombre"
+              [placeholder]="'placeholder.Introduzca su nombre'|translate"
               formControlName="nombre"
               required
             />
@@ -123,14 +123,16 @@
             class="form-text text-danger fst-italic"
             *ngIf="campoNoValido('nombre')"
           >
-            El nombre es requerido
+          {{'El nombre es requerido'|translate}}
           </span>
 
           <mat-form-field>
-            <mat-label>Primer apellido:</mat-label>
+            <mat-label>{{'Primer apellido'|translate}}:</mat-label>
             <input
               matInput
-              placeholder="Introduzca su primer apellido"
+              [placeholder]="
+              'placeholder.Introduzca su primer apellido' | translate
+            "
               formControlName="apellido1"
               required
             />
@@ -139,14 +141,16 @@
             class="form-text text-danger fst-italic"
             *ngIf="campoNoValido('apellido1')"
           >
-            El primer apellido es requerido
+          {{'El primer apellido es requerido'|translate}}
           </span>
 
           <mat-form-field>
-            <mat-label>Segundo apellido:</mat-label>
+            <mat-label>{{'Segundo apellido'|translate}}:</mat-label>
             <input
               matInput
-              placeholder="Introduzca su segundo apellido"
+              [placeholder]="
+              'placeholder.Introduzca su segundo apellido' | translate
+            "
               formControlName="apellido2"
             />
           </mat-form-field>
@@ -154,7 +158,7 @@
             <mat-label>DNI/NIE:</mat-label>
             <input
               matInput
-              placeholder="Introduzca su dni"
+              [placeholder]="'placeholder.Introduzca su dni' | translate"       
               formControlName="dni"
               required
             />
@@ -167,11 +171,11 @@
           </span>
 
           <mat-form-field>
-            <mat-label>Contraseña</mat-label>
+            <mat-label>{{'Contraseña'|translate}}</mat-label>
             <input
               type="password"
               matInput
-              placeholder="Introduzca su contraseña"
+              [placeholder]="'placeholder.Introduzca su contraseña'|translate"
               formControlName="password"
               required
             />
@@ -184,11 +188,11 @@
           </span>
 
           <mat-form-field>
-            <mat-label>Confirmar contraseña</mat-label>
+            <mat-label>{{'Confirmar contraseña'|translate}}</mat-label>
             <input
               type="password"
               matInput
-              placeholder="Introduzca su nombre"
+              [placeholder]="'placeholder.Introduzca la nueva contraseña'|translate"
               formControlName="password2"
               required
             />
@@ -197,14 +201,14 @@
             class="form-text text-danger fst-italic"
             *ngIf="campoNoValido('password2')"
           >
-            Las contraseñas deben de ser iguales
+          {{'Las contraseñas deben de ser iguales'|translate}}
           </span>
 
           <mat-form-field>
-            <mat-label>Nº de cuenta bancaria (24 digitos): </mat-label>
+            <mat-label>{{'Nº de cuenta bancaria (24 digitos)'|translate}}: </mat-label>
             <input
               matInput
-              placeholder="Introduzca su numero de cuenta bancaria"
+              [placeholder]="'placeholder.Introduzca su contraseña' | translate"
               formControlName="cuenta_bancaria"
             />
           </mat-form-field>
@@ -216,35 +220,35 @@
           </span>
 
           <mat-radio-group formControlName="sexo" class="mb-4">
-            Seleccione su sexo:
+            {{'Sexo'|translate}}:
             <br />
             <mat-radio-button value="hombre" color="warn"
-              >Hombre</mat-radio-button
+              >{{'Hombre'|translate}}</mat-radio-button
             >
             <br />
             <mat-radio-button value="mujer" color="warn"
-              >Mujer</mat-radio-button
+              >{{'Mujer'|translate}}</mat-radio-button
             >
           </mat-radio-group>
 
           <mat-form-field>
-            <mat-label>Fecha de nacimiento: (+18) </mat-label>
+            <mat-label>{{'Fecha de nacimiento'|translate}}: (+18) </mat-label>
             <input matInput type="date" formControlName="fecha_nac" />
           </mat-form-field>
           <span
             class="form-text text-danger fst-italic"
             *ngIf="campoNoValido('fecha_nac') || esMenor() "
           >
-            La edad minima requerida son 18 años
+          {{'La edad minima requerida son 18 años'|translate}}
           </span>  
 
           <mat-form-field>
             <mat-label
-              >Nº de telefono: <mat-icon>call_end</mat-icon>
+              >{{'Nº de telefono'|translate}}: <mat-icon>call_end</mat-icon>
             </mat-label>
             <input
               matInput
-              placeholder="Introduzca su numero de telefono"
+              [placeholder]="'placeholder.Introduzca su numero de telefono' | translate"    
               formControlName="telefono"
             />
           </mat-form-field>
@@ -256,11 +260,11 @@
           </span>
 
           <mat-form-field>
-            <mat-label>Ciudad:</mat-label>
+            <mat-label>{{'Ciudad'|translate}}:</mat-label>
             <input
               matInput
               formControlName="ciudad"
-              placeholder="Introduzca la ciudad de su domicilio"
+              [placeholder]="'placeholder.Introduzca la ciudad de su domicilio' | translate"  
               required
             />
           </mat-form-field>
@@ -268,15 +272,15 @@
             class="form-text text-danger fst-italic"
             *ngIf="campoNoValido('ciudad')"
           >
-            El ciudad es requerida
+          {{'La ciudad es requerida'|translate}}
           </span>
 
           <mat-form-field>
-            <mat-label>Direccion:</mat-label>
+            <mat-label>{{'Direccion'|translate}}:</mat-label>
             <input
               matInput
               formControlName="direccion"
-              placeholder="Introduzca su direccion"
+              [placeholder]="'placeholder.Introduzca su direccion' | translate"     
               required
             />
           </mat-form-field>
@@ -284,14 +288,14 @@
             class="form-text text-danger fst-italic"
             *ngIf="campoNoValido('direccion')"
           >
-            La direccion es requerida
+          {{'La direccion es requerida'|translate}}
           </span>
           <mat-form-field>
-            <mat-label>Codigo postal:</mat-label>
+            <mat-label>{{'Codigo postal'|translate}}:</mat-label>
             <input
               matInput
               formControlName="cod_postal"
-              placeholder="Introduzca su codigo postal"
+              [placeholder]="'placeholder.Introduzca su codigo postal' | translate"      
               required
             />
           </mat-form-field>
@@ -299,51 +303,36 @@
             class="form-text text-danger fst-italic"
             *ngIf="campoNoValido('cod_postal')"
           >
-            El codigo postal es requerido
+          {{'El codigo postal es requerido'|translate}}
           </span>
 
           <mat-form-field *ngIf="cliente.estado=='activo'">
-            <mat-label>Numero de reservas::</mat-label>
+            <mat-label>{{'Numero de reservas'|translate}}:</mat-label>
             <input type="number" matInput formControlName="num_reservas" />
           </mat-form-field>
 
           <mat-form-field *ngIf="cliente.estado=='activo'">
-            <mat-label>Fecha alta:</mat-label>
+            <mat-label>{{'Fecha alta'|translate}}:</mat-label>
             <input type="date" matInput 
             formControlName="fecha_alta" 
             readonly />
           </mat-form-field>
 
           <mat-form-field *ngIf="cliente.estado=='baja'">
-            <mat-label>Fecha baja:</mat-label>
+            <mat-label>{{'Fecha baja'|translate}}:</mat-label>
             <input type="date" matInput formControlName="fecha_baja" readonly />
           </mat-form-field>
 
           <div>
-            Estado actual :<span [ngClass]="{
+            {{'Estado actual'|translate}} :<span [ngClass]="{
               'text-success': cliente.estado === 'activo',
               'text-danger': cliente.estado === 'baja',
               'text-secondary':cliente.estado==='bloqueado'
             }">  {{ cliente.estado |titlecase }}</span>
             <a class="btn btn-primary mx-3" (click)="cambiarEstado()">
-              Cambiar estado 
+              {{'Cambiar estado'|translate}} 
                       </a>
           </div>
-          
-          <!-- <a
-            *ngIf="cliente.estado == 'activo'"
-            (click)="baja()"
-            class="btn btn-danger mx-3"
-          >
-            Dar de baja <i class="fas fa-arrow-down"></i>
-          </a>
-          <a
-            *ngIf="cliente.estado == 'baja'"
-            (click)="alta()"
-            class="btn btn-primary mx-3"
-          >
-            Dar de alta <i class="fas fa-arrow-up"></i>
-          </a> -->
         </div>
     </div>
   </div>

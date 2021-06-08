@@ -1,8 +1,8 @@
 <div class="row p-1 bg-white">
-    <h1>Mis sesiones</h1>
+    <h1>{{'Mis sesiones'|translate}}</h1>
     <hr />
     <div class="col-12">
-      <button  class="btn btn-danger  float-end" routerLink="lista-sesiones">Volver atrás</button>
+      <button  class="btn btn-primary  float-end" routerLink="lista-sesiones">{{'Listado de sesiones'|translate}}</button>
     </div>
     <div class="mt-5 col-md-9 col-12">
       <p-fullCalendar [events]="events" [options]="optionsMonth"></p-fullCalendar>

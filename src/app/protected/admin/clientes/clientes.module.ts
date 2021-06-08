@@ -9,6 +9,8 @@ import { SharedModule } from '../../../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from 'src/app/material/material.module';
 import { DataTablesModule } from 'angular-datatables';
+import { TranslateModule } from '@ngx-translate/core';
+import { ActividadesPorTarifaComponent } from '../../../auth/pages/actividades-por-tarifa/actividades-por-tarifa.component';
 
 
 @NgModule({
@@ -20,7 +22,9 @@ import { DataTablesModule } from 'angular-datatables';
     ReactiveFormsModule,
     MaterialModule,
     DataTablesModule,
+    TranslateModule,
   ],
-  exports:[AltaclienteComponent,EditclienteComponent,ListaclientesComponent]
+  exports:[AltaclienteComponent,EditclienteComponent,ListaclientesComponent],
+  entryComponents: [ActividadesPorTarifaComponent],
 })
 export class ClientesModule { }

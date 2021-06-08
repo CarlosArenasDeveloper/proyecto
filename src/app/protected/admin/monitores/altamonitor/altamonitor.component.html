@@ -1,16 +1,16 @@
-<h1>Añadiendo a un nuevo monitor!</h1>
+<h1>{{'Añadiendo a un nuevo monitor'|translate}}!</h1>
 <mat-horizontal-stepper [linear]="true" #stepper>
   
   <mat-step [stepControl]="firstFormGroup">
     <form [formGroup]="firstFormGroup" autocomplete="off">
-      <ng-template matStepLabel>Paso 1</ng-template>
+      <ng-template matStepLabel>{{'Paso 1'|translate}}</ng-template>
       <div class="row">
         <div class="col-12 col-md-6 col-lg-4">
           <mat-form-field>
-            <mat-label>Nombre:</mat-label>
+            <mat-label>{{ "Nombre" | translate }}:</mat-label>
             <input
               matInput
-              placeholder="Introduzca su nombre"
+              [placeholder]="'placeholder.Introduzca su nombre' | translate"
               formControlName="nombre"
               required
             />
@@ -20,16 +20,18 @@
             *ngIf="campoNoValido('nombre')"
           >
             <br />
-            El nombre es requerido
+            {{ "El nombre es requerido" | translate }}
           </span>
         </div>
 
         <div class="col-12 col-md-6 col-lg-4">
           <mat-form-field>
-            <mat-label>Primer apellido:</mat-label>
+            <mat-label>{{ "Primer apellido" | translate }}:</mat-label>
             <input
               matInput
-              placeholder="Introduzca su primer apellido"
+              [placeholder]="
+              'placeholder.Introduzca su primer apellido' | translate
+            "
               formControlName="apellido1"
               required
             />
@@ -39,16 +41,18 @@
             *ngIf="campoNoValido('apellido1')"
           >
             <br />
-            El primer apellido es requerido
+            {{ "El primer apellido es requerido" | translate }}
           </span>
         </div>
 
         <div class="col-12 col-md-6 col-lg-4">
           <mat-form-field>
-            <mat-label>Segundo apellido:</mat-label>
+            <mat-label>{{ "Segundo apellido" | translate }}:</mat-label>
             <input
               matInput
-              placeholder="Introduzca su segundo apellido"
+              [placeholder]="
+                  'placeholder.Introduzca su segundo apellido' | translate
+                "
               formControlName="apellido2"
             />
           </mat-form-field>
@@ -59,7 +63,7 @@
             <mat-label>Email:</mat-label>
             <input
               matInput
-              placeholder="Introduzca su email"
+              [placeholder]="'placeholder.Introduzca su email' | translate"
               formControlName="email"
               required
             />
@@ -78,7 +82,7 @@
             <mat-label>DNI/NIE:</mat-label>
             <input
               matInput
-              placeholder="Introduzca su dni"
+              [placeholder]="'placeholder.Introduzca su dni' | translate"                
               formControlName="dni"
               required
             />
@@ -94,11 +98,11 @@
 
         <div class="col-6">
           <mat-form-field>
-            <mat-label>Contraseña</mat-label>
+            <mat-label>{{ "Contraseña" | translate }}</mat-label>
             <input
               type="password"
               matInput
-              placeholder="Introduzca su contraseña"
+              [placeholder]="'placeholder.Introduzca su contraseña' | translate"                
               formControlName="password"
               required
             />
@@ -114,11 +118,11 @@
 
         <div class="col">
           <mat-form-field>
-            <mat-label>Confirmar contraseña</mat-label>
+            <mat-label>{{ "Confirmar contraseña" | translate }}:</mat-label>
             <input
               type="password"
               matInput
-              placeholder="Introduzca su nombre"
+              [placeholder]="'placeholder.Confirme su contraseña' | translate"                
               formControlName="password2"
               required
             />
@@ -128,17 +132,17 @@
             class="form-text text-danger fst-italic"
             *ngIf="campoNoValido('password2')"
           >
-            Las contraseñas deben de ser iguales
+          {{ "Las contraseñas deben de ser iguales" | translate }}
           </span>
         </div>
 
         <div class="col-12">  
           <button mat-raised-button matStepperPrevious color="warn" routerLink="/dashboard/admin/listamonitores">
             <i class="fas fa-arrow-circle-left"></i>
-            Volver atras
+            {{ "Volver atrás" | translate }}
           </button>
           <button mat-raised-button matStepperNext color="primary" class="mt-5 mx-2">
-          Siguiente
+            {{ "Siguiente" | translate }}
           <i class="fas fa-arrow-circle-right"></i>
         </button></div>
       
@@ -146,15 +150,15 @@
     </form>
   </mat-step>
 
-  <mat-step [stepControl]="secondFormGroup" label="Paso 2">
+  <mat-step [stepControl]="secondFormGroup"  [label]="'label.Paso 2' | translate">
     <form [formGroup]="secondFormGroup" autocomplete="off">
       <div class="row">
         <div class="col-12 col-md-6">
           <mat-form-field>
-            <mat-label>Nº de cuenta bancaria (24 digitos): </mat-label>
+            <mat-label>{{ "Nº de cuenta bancaria (24 digitos)" | translate }}: </mat-label>
             <input
               matInput
-              placeholder="Introduzca su numero de cuenta bancaria"
+              [placeholder]="'placeholder.Introduzca su numero de cuenta bancaria' | translate"                
               formControlName="cuenta_bancaria"
             />
           </mat-form-field>
@@ -168,17 +172,21 @@
         </div>
         <div class="col-12 col-md-6 mt-4">
           <mat-radio-group formControlName="sexo">
-            Seleccione su sexo:
+            {{ "Seleccione su sexo" | translate }}:
             <br>
-            <mat-radio-button value="hombre" color="warn">Hombre</mat-radio-button>
+            <mat-radio-button value="hombre" color="warn">{{
+              "Hombre" | translate
+            }}</mat-radio-button>
             <br>
-            <mat-radio-button value="mujer" color="warn">Mujer</mat-radio-button>
+            <mat-radio-button value="mujer" color="warn">{{
+              "Mujer" | translate
+            }}</mat-radio-button>
           </mat-radio-group>
         </div>
 
         <div class="col-12 col-md-6 mt-4">
           <mat-form-field>
-            <mat-label>Fecha de nacimiento: (+18) </mat-label>
+            <mat-label>{{ "Fecha de nacimiento" | translate }}: (+18) </mat-label>
             <input matInput type="date" formControlName="fecha_nac" />
           </mat-form-field>
           <span
@@ -186,7 +194,7 @@
             *ngIf="campoNoValido('fecha_nac') || esMenor() "
           >
             <br />
-            La edad minima requerida son 18 años
+            {{ "La edad minima requerida son 18 años" | translate }}
           </span>        
         </div>
 
@@ -194,11 +202,11 @@
         <div class="col-12 col-md-6">
           <mat-form-field>
             <mat-label
-              >Nº de telefono: <mat-icon>call_end</mat-icon>
+              >{{ "Nº de telefono" | translate }}: <mat-icon>call_end</mat-icon>
             </mat-label>
             <input
               matInput
-              placeholder="Introduzca su numero de telefono"
+              [placeholder]="'placeholder.Introduzca su numero de telefono' | translate"                
               formControlName="telefono"
             />
           </mat-form-field>
@@ -213,11 +221,11 @@
 
         <div class="col-12 col-md-6 col-lg-4">
           <mat-form-field>
-            <mat-label>Ciudad:</mat-label>
+            <mat-label>{{ "Ciudad" | translate }}:</mat-label>
             <input
               matInput
               formControlName="ciudad"
-              placeholder="Introduzca la ciudad de su domicilio"
+             [placeholder]="'placeholder.Introduzca la ciudad de su domicilio' | translate"                
               required
             />
           </mat-form-field>
@@ -226,17 +234,17 @@
             *ngIf="campoNoValido('ciudad')"
           >
             <br />
-            El ciudad es requerida
+            {{ "La ciudad es requerida" | translate }}
           </span>
         </div>
 
         <div class="col-12 col-md-6">
           <mat-form-field>
-            <mat-label>Direccion:</mat-label>
+            <mat-label>{{ "Direccion" | translate }}:</mat-label>
             <input
               matInput
               formControlName="direccion"
-              placeholder="Introduzca su direccion"
+              [placeholder]="'placeholder.Introduzca su direccion' | translate"                
               required
             />
           </mat-form-field>
@@ -245,17 +253,17 @@
             *ngIf="campoNoValido('direccion')"
           >
             <br />
-            La direccion es requerida
+            {{ "La direccion es requerida" | translate }}
           </span>
         </div>
 
         <div class="col-12 col-md-6 col-lg-4">
           <mat-form-field>
-            <mat-label>Codigo postal:</mat-label>
+            <mat-label>{{ "Codigo postal" | translate }}:</mat-label>
             <input
               matInput
               formControlName="cod_postal"
-              placeholder="Introduzca su codigo postal"
+              [placeholder]="'placeholder.Introduzca su codigo postal' | translate"                
               required
             />
           </mat-form-field>
@@ -264,13 +272,13 @@
             *ngIf="campoNoValido('cod_postal')"
           >
             <br />
-            El codigo postal es requerido
+            {{ "El codigo postal es requerido" | translate }}
           </span>
         </div>
         
         <div class="row mt-4">
           <mat-form-field appearance="fill">
-            <mat-label>Seleccione un centro: </mat-label>
+            <mat-label>{{'Seleccione un centro'|translate}}: </mat-label>
             <mat-select formControlName="id_centro">
               <mat-option *ngFor="let centro of centros" [value]="centro.id">
                 {{centro.nombre|titlecase}} 
@@ -281,17 +289,17 @@
           class="form-text text-danger fst-italic"
           *ngIf="campoNoValido('id_centro')"
         >
-          La eleccion del centro es requerida
+         {{'La eleccion del centro es requerida'|translate}}
         </span>
         </div>
 
         <div class="col-12">
           <button mat-raised-button matStepperPrevious color="warn">
             <i class="fas fa-arrow-circle-left"></i>
-            Anterior
+            {{ "Anterior" | translate }}
           </button>
           <button mat-raised-button matStepperNext color="primary" class="mt-5 mx-2">
-            Siguiente
+            {{'Siguiente'|translate}}
             <i class="fas fa-arrow-circle-right"></i>
             </button>
         </div>
@@ -300,15 +308,15 @@
   </mat-step>
 
   <mat-step>
-    <ng-template matStepLabel>Hecho</ng-template>
-    <p>Para terminar, pulse el boton de confirmar</p>
+    <ng-template matStepLabel>{{ "Hecho" | translate }}</ng-template>
+    <p>{{'Para terminar, pulse el boton de confirmar'|translate}}</p>
     <div>
       <button mat-raised-button matStepperPrevious color="warn">
         <i class="fas fa-arrow-circle-left"></i>
-        Anterior 
+        {{'Anterior'|translate}} 
       </button>
       <button mat-raised-button matStepperNext color="primary" class="mt-5 mx-2" (click)="add()">
-        Confirmar <i class="fas fa-check-circle"></i>
+        {{'Confirmar'|translate}} <i class="fas fa-check-circle"></i>
         </button>
     </div>
   </mat-step>

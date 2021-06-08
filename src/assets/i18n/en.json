@@ -348,7 +348,79 @@
 "Datos incompletos":"Incomplete data",
 "Por favor, rellene todos los campos requeridos":"Please fill in all the required fields",
 "¿Quieres que la noticia vuelva a ser de las recientes":"Do you want the news to be one of the recent",
-"No, mantener la fecha de lanzamiento":"No, keep the release date"
+"No, mantener la fecha de lanzamiento":"No, keep the release date",
+"Listado de Clientes":"List of clients",
+"Añadir cliente":"Add client",
+"Apellidos":"Surnames",
+"Verificado":"Verified",
+"Estas seguro de querer eliminar a":"Are you sure you want to eliminate",
+"Cliente eliminado":"Deleted client",
+"Se ha borrado correctamente a":"Has been successfully deleted",
+"Listado de Monitores":"List of monitors",
+"Añadir monitor":"Add monitor",
+"Nuevo cliente":"Add client",
+"Para terminar el registro, pulse el boton de confirmar":"To finish the registration, press the confirm button",
+"Confirmar":"Confirm",
+"Foto del cliente":"Client photo",
+"Informacion del cliente":"Client information",
+"Cambiar estado":"Change Status",
+"Seleccione un rol":"Select a role",
+"Cliente":"Client",
+"Verificar cliente":"Verify client",
+"Los datos no fueron actualizados":"The data was not updated",
+"Para cambiar la informacion de un cliente, este debe de estar dado de alta":"To change the information of a client, this must be admitted",
+"¿Estas seguro de que quieres dar de alta a":"Are you sure you want to admit",
+"Se ha dado de alta a":"Has been discharged to",
+"¿Estas seguro de que quieres dar de baja a":"Are you sure you want to unsubscribe",
+"Se ha dado de baja a":"Has been unsubscribed to",
+"¿Estas seguro de que quieres bloquear a":"Are you sure you want to block",
+"Se ha bloqueado a":"It has been blocked to",
+"Cambiar estado a":"Change state to",
+"alta":"ADMIT",
+"baja":"UNSUSCRIBE",
+"bloquear":"BLOCK",
+"Informacion del monitor":"Monitor information",
+"Foto del monitor":"Monitor photo",
+"Monitor eliminado":"Monitor removed",
+"Musculo":"Muscle",
+"Permisos insuficientes":"Insufficient permissions",
+"No puede modificar una noticia en la cual usted no sea el editor":"You cannot modify a news story in which you are not the editor",
+"Noticia eliminada correctamente":"News successfully deleted",
+"Estas seguro de querer eliminar la noticia":"Are you sure you want to delete the news",
+"Listado de sesiones":"Session list",
+"Mis sesiones":"My sessions",
+"Sesion cancelada correctamente":"Session successfully canceled",
+"¿Estas seguro de querer cancelar la sesion?":"Are you sure you want to cancel the session?",
+"La sesion ya ha sido cancelada":"The session has already been canceled",
+"Añadiendo sesion":"Add session",
+"Elige la actividad":"Choose the activity",
+"Seleccione un actividad":"Select an activity",
+"La actividad es requerida":"Activity is required",
+"¿En que sala se realizara?":"In which room will it take place?",
+"Seleccione un sala":"Select a room",
+"La sala es requerida":"The room is required",
+"Fecha y hora del inicio de la sesion":"Date and time of the start of the session",
+"La fecha y hora de inicio son requeridas":"The start date and time are required",
+"Fecha y hora del fin de la sesion":"Date and time of the end of the session",
+"La fecha y hora de fin son requeridas":"End date and time are required",
+"Se ha creado la sesion correctamente":"The session was created successfully",
+"Error al crear la sesion":"Error creating session",
+"Por favor, compruebe que la sala este libre o que la actividad este no duplicada en la franja horaria seleccionada.":"Please, check that the room is free or that the activity is not duplicated in the selected time slot.",
+"Editando sesion":"Edit session",
+"Clientes que van a asistir a la sesion":"Clients who will attend the session",
+"Cancelar sesion":"Cancel session",
+"Error al editar la sesion":"Error editing session",
+"La sesión ya esta cancelada":"The session is already canceled"
+
+
+
+
+
+
+
+
+
+
 
 
 

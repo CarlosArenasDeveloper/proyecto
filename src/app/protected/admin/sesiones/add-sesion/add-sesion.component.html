@@ -2,7 +2,7 @@
   <div class="col-12">
     <div class="row">
       <div class="col-12">
-        <h1>Añadiendo sesion</h1>
+        <h1>{{'Añadiendo sesion'|translate}}</h1>
         <hr>
       </div>
     </div>
@@ -11,7 +11,7 @@
       <div class="col-12">
         <form [formGroup]="miFormulario" (ngSubmit)="add()" autocomplete="off">
           <div class="mb-5">
-            <span>Elige la actividad:</span>
+            <span>{{'Elige la actividad'|translate}}:</span>
             <select
               class="form-select mt-2"
               formControlName="title"
@@ -19,7 +19,7 @@
                 'is-invalid': campoNoValido('title')
               }"
             >
-              <option value="">Seleccione un actividad ...</option>
+              <option value="">{{'Seleccione un actividad'|translate}} ...</option>
               <option
                 *ngFor="let actividad of actividades"
                 [value]="actividad.id"
@@ -31,12 +31,12 @@
               class="form-text text-danger fst-italic"
               *ngIf="campoNoValido('title')"
             >
-              La actividad es requerida
+              {{'La actividad es requerida'|translate}}
             </span>
           </div>
 
           <div class="mb-5">
-            <span>¿En que sala se realizara?:</span>
+            <span>{{'¿En que sala se realizara?'|translate}}:</span>
             <select
               class="form-select mt-2"
               formControlName="sala"
@@ -44,20 +44,20 @@
                 'is-invalid': campoNoValido('sala')
               }"
             >
-              <option value="">Seleccione un sala ...</option>
+              <option value="">{{'Seleccione un sala'|translate}} ...</option>
               <option *ngFor="let sala of salas" [value]="sala.id">
-                Sala {{ sala.id }}
+                {{'Sala'|translate}} {{ sala.id }}
               </option>
             </select>
             <span
               class="form-text text-danger fst-italic"
               *ngIf="campoNoValido('sala')"
             >
-              La sala es requerida
+              {{'La sala es requerida'|translate}}
             </span>
           </div>
           <div class="mb-5 col-md-4 col-12">
-            <label for="start">Fecha y hora del inicio de la sesion:</label>
+            <label for="start">{{'Fecha y hora del inicio de la sesion'|translate}}:</label>
             <p-calendar *ngIf="isEspanish"
               [ngClass]="{
                 'is-invalid': campoNoValido('start')
@@ -89,12 +89,12 @@
               class="form-text text-danger fst-italic"
               *ngIf="campoNoValido('start')"
             >
-              La fecha y hora de inicio son requeridas
+              {{'La fecha y hora de inicio son requeridas'|translate}}
             </span>
           </div>
 
           <div class="mb-5 col-md-4 col-12">
-            <label for="end">Fecha y hora del fin de la sesion:</label>
+            <label for="end">{{'Fecha y hora del fin de la sesion'|translate}}:</label>
             <p-calendar  *ngIf="isEspanish"
               id="end"
               type=""
@@ -121,7 +121,7 @@
             class="form-text text-danger fst-italic"
             *ngIf="campoNoValido('end')"
           >
-            La fecha y hora de fin son requeridas
+            {{'La fecha y hora de fin son requeridas'|translate}}
           </span>
           </div>
 
@@ -133,11 +133,11 @@
                 routerLink="sesiones"
               >
                 <i class="fas fa-arrow-circle-left"></i>
-                Volver atrás
+                {{'Volver atrás'|translate}}
               </button>
 
               <button type="submit" class="btn btn-primary btn-block" [disabled]="miFormulario.invalid">
-                Añadir
+                {{'Añadir'|translate}}
               </button>
             </div>
           </div>

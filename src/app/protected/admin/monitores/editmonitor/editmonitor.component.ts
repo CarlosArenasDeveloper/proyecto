@@ -13,6 +13,7 @@ import { Usuario } from '../../../../models/interface';
 import Swal from 'sweetalert2';
 import { switchMap } from 'rxjs/operators';
 import { DomSanitizer } from '@angular/platform-browser';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-editmonitor',
@@ -40,7 +41,8 @@ export class EditmonitorComponent implements OnInit {
     private fb: FormBuilder,
     private validatorService: ValidatorService,
     private authService: AuthService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private translateService:TranslateService
   ) {
     const currentYear = new Date().getFullYear();
     this.minDate = new Date(currentYear - 100, 0, 1);
@@ -190,7 +192,7 @@ export class EditmonitorComponent implements OnInit {
         Swal.fire({
           position: 'top-end',
           icon: 'success',
-          title: 'Datos correctamente actualizados',
+          title: `${this.translateService.instant('Datos correctamente actualizados')}`,
           showConfirmButton: false,
           timer: 2000,
         });
@@ -222,28 +224,20 @@ export class EditmonitorComponent implements OnInit {
   get dniErrorMsg(): string {
     const errors = this.miFormulario.get('dni')?.errors;
     if (errors?.required) {
-      return 'El DNI es requerido';
+      return this.translateService.instant('El DNI es requerido');
     } else if (errors?.pattern) {
-      return 'El valor ingresado no corresponde con formato DNI/NIE';
+      return this.translateService.instant(
+        'El valor ingresado no corresponde con formato DNI/NIE'
+      );
     }
     return '';
   }
   get passwordErrorMsg(): string {
     const errors = this.miFormulario.get('password')?.errors;
     if (errors?.required) {
-      return 'La contraseña es requerida';
+      return this.translateService.instant('La contraseña es requerida');
     } else if (errors?.minlength) {
-      return 'La contraseña debe tener mas de 6 caracteres';
-    }
-    return '';
-  }
-
-  get cuentaErrorMsg(): string {
-    const errors = this.miFormulario.get('cuenta_bancaria')?.errors;
-    if (errors?.required) {
-      return 'El nº de cuenta es requerido';
-    } else if (errors?.pattern) {
-      return 'El valor ingresado no tiene formato de numero de cuenta';
+      return this.translateService.instant('La contraseña debe tener mas de 6 caracteres');
     }
     return '';
   }
@@ -251,12 +245,28 @@ export class EditmonitorComponent implements OnInit {
   get telefonoErrorMsg(): string {
     const errors = this.miFormulario.get('telefono')?.errors;
     if (errors?.required) {
-      return 'El nº de telefono es requerido';
+      return this.translateService.instant('El nº de telefono es requerido');
     } else if (errors?.pattern) {
-      return 'El valor ingresado no tiene formato de numero de telefono';
+      return this.translateService.instant(
+        'El valor ingresado no tiene formato de numero de telefono'
+      );
     }
     return '';
   }
+
+  get cuentaErrorMsg(): string {
+    const errors = this.miFormulario.get('cuenta_bancaria')?.errors;
+    if (errors?.required) {
+      return this.translateService.instant('El nº de cuenta es requerido');
+    } else if (errors?.pattern) {
+      return this.translateService.instant(
+        'El valor ingresado no tiene formato de numero de cuenta'
+      );
+    }
+    return '';
+  }
+
+
 
   fileChange(event: any) {
     const archivoCapturado = event.target.files[0];
@@ -339,4 +349,20 @@ export class EditmonitorComponent implements OnInit {
         return null;
       }
     });
+
+    esMenor() {
+      const today: Date = new Date();
+      const birthDate: Date = new Date(this.miFormulario.get('fecha_nac')?.value);
+      let age: number = today.getFullYear() - birthDate.getFullYear();
+      const month: number = today.getMonth() - birthDate.getMonth();
+      if (month < 0 || (month === 0 && today.getDate() < birthDate.getDate())) {
+          age--;
+      }
+      if(age < 18){
+        this.miFormulario.get('fecha_nac')?.setErrors({ noIguales: true });
+        return true;
+      } else{
+        return "";
+      }
+  }
 }

@@ -9,6 +9,7 @@ import { DataTablesModule } from 'angular-datatables';
 import { AltamonitorComponent } from './altamonitor/altamonitor.component';
 import { EditmonitorComponent } from './editmonitor/editmonitor.component';
 import { ListamonitoresComponent } from './listamonitores/listamonitores.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { ListamonitoresComponent } from './listamonitores/listamonitores.compone
     ReactiveFormsModule,
     MaterialModule,
     DataTablesModule,
+    TranslateModule
   ],
   exports: [
     AltamonitorComponent,

@@ -1,144 +1,8 @@
-<!-- <h1>Editando sesion</h1>
-<hr />
-<form [formGroup]="miFormulario" (ngSubmit)="editarSesion()" autocomplete="off">
- 
-  <div class="mb-3">
-    <span>Elige la actividad:</span>
-    <select
-      class="form-select mt-2"
-      formControlName="id_actividad"
-      [ngClass]="{
-        'is-invalid': campoNoValido('id_actividad')
-      }"
-    >
-      <option value="null">Seleccione un actividad ...</option>
-      <option *ngFor="let actividad of actividades" [value]="actividad.id">
-        {{ actividad.nombre |titlecase}}
-      </option>
-    </select>
-    <span
-      class="form-text text-danger fst-italic"
-      *ngIf="campoNoValido('id_actividad') || this.miFormulario.get('id_actividad')?.value=='null'" 
-    >
-      La actividad es requerida
-    </span>
-  </div>
-
-  <div class="mb-3">
-    <span>¿En que sala se realizara?:</span>
-    <select
-      class="form-select mt-2"
-      formControlName="id_sala"
-      [ngClass]="{
-        'is-invalid': campoNoValido('id_sala')
-      }"
-    >
-      <option value=null>Seleccione un sala ...</option>
-      <option *ngFor="let sala of salas" [value]="sala.id">
-        Sala {{ sala.id }}
-      </option>
-    </select>
-    <span
-      class="form-text text-danger fst-italic"
-      *ngIf="campoNoValido('id_sala') || this.miFormulario.get('id_sala')?.value=='null'" 
-    >
-      La sala es requerida
-    </span>
-  
-  </div>
-
-  <div class="mb-3">
-    <label for="fecha" class="form-label">Fecha: </label>
-    <input
-    type="date"
-    [ngClass]="{
-      'is-invalid': campoNoValido('fecha')
-    }"
-      matInput
-      type="datetime-local"
-      formControlName="fecha"
-    class="form-control"
-    />
-    <span
-      class="form-text text-danger fst-italic"
-      *ngIf="campoNoValido('fecha')"
-    >
-      La fecha es requerida
-    </span>
-  </div>
-
-  <div class="mb-3">
-    <label for="hora" class="form-label">Hora: </label>
-    <input
-      type="time"
-      formControlName="hora"
-      id="hora"
-      class="form-control"
-      [ngClass]="{
-        'is-invalid': campoNoValido('hora')
-      }"
-    />
-    <span
-      class="form-text text-danger fst-italic"
-      *ngIf="campoNoValido('hora')"
-    >
-      La hora es requerida
-    </span>
-  </div>
-  <div class="mb-3">
-    Estado actual :
-    <a class="btn btn-dark m-2" (click)="cambiarEstado()">
-      Cambiar estado </a
-    ><input
-      class="form-control"
-      [ngClass]="{
-        'text-success': sesion.estado === 'incompleta' ,
-        'text-danger': sesion.estado === 'completa',
-        'text-secondary': sesion.estado === 'finalizada'
-      }"
-      formControlName="estado"
-    />
-  </div>
-  <div class="mb-3">
-    <label for="num_clientes" class="form-label"
-      >Clientes que van a asistir a la sesion:
-    </label>
-    <input
-      [ngClass]="{
-        'is-invalid': campoNoValido('num_clientes')
-      }"
-      formControlName="num_clientes"
-      type="text"
-      class="form-control"
-      id="num_clientes"
-    />
-    <span
-      class="form-text text-danger fst-italic"
-      *ngIf="campoNoValido('num_clientes')"
-    >
-      El num_clientes es requerido
-    </span>
-  </div>
-  <button type="button" class="btn btn-danger mx-3" routerLink="sesiones">
-    <i class="fas fa-arrow-circle-left"></i>
-    Volver atrás
-  </button>
-  <button
-    type="submit"
-    [disabled]="miFormulario.invalid"
-    class="btn btn-primary"
-  >
-    Editar
-    <i class="fas fa-edit"></i>
-
-  </button>
-</form> -->
-
 <div class="row mt-3">
   <div class="col-12">
     <div class="row">
       <div class="col-12">
-        <h1>Editando sesion</h1>
+        <h1>{{'Editando sesion'|translate}}</h1>
         <hr />
         <button
           type="button"
@@ -146,7 +10,7 @@
           routerLink="sesiones"
         >
           <i class="fas fa-arrow-circle-left"></i>
-          Volver atrás
+          {{'Volver atrás'|translate}}
         </button>
       </div>
     </div>
@@ -159,7 +23,7 @@
           autocomplete="off"
         >
           <div class="mb-5">
-            <span>Elige la actividad:</span>
+            <span>{{'Elige la actividad'|translate}}:</span>
             <select
               class="form-select mt-2"
               formControlName="title"
@@ -167,7 +31,7 @@
                 'is-invalid': campoNoValido('title')
               }"
             >
-              <option value="null">Seleccione un actividad ...</option>
+              <option value="null">{{'Seleccione un actividad'|translate}} ...</option>
               <option
                 *ngFor="let actividad of actividades"
                 [value]="actividad.id"
@@ -179,12 +43,12 @@
               class="form-text text-danger fst-italic"
               *ngIf="campoNoValido('title')"
             >
-              La actividad es requerida
+            {{'La actividad es requerida'|translate}}
             </span>
           </div>
 
           <div class="mb-5">
-            <span>¿En que sala se realizara?:</span>
+            <span>{{'¿En que sala se realizara?'|translate}}:</span>
             <select
               class="form-select mt-2"
               formControlName="sala"
@@ -192,21 +56,21 @@
                 'is-invalid': campoNoValido('sala')
               }"
             >
-              <option value="null">Seleccione un sala ...</option>
+              <option value="null">{{'Seleccione un sala'|translate}} ...</option>
               <option *ngFor="let sala of salas" [value]="sala.id">
-                Sala {{ sala.id }}
+                {{'Sala'|translate}} {{ sala.id }}
               </option>
             </select>
             <span
               class="form-text text-danger fst-italic"
               *ngIf="campoNoValido('sala')"
             >
-              La sala es requerida
+            {{'La sala es requerida'|translate}}
             </span>
           </div>
 
           <div class="mb-5" *ngIf="sesion">
-            Estado actual :
+           {{'Estado actual'|translate}} :
             <input
               disabled
               class="form-control"
@@ -220,7 +84,7 @@
           </div>
           <div class="mb-5">
             <label for="num_clientes" class="form-label"
-              >Clientes que van a asistir a la sesion:
+              >{{'Clientes que van a asistir a la sesion'|translate}}:
             </label>
             <input
               disabled
@@ -232,7 +96,7 @@
           </div>
 
           <div class="mb-5 col-md-4 col-12">
-            <label for="start">Fecha y hora del inicio de la sesion:</label>
+            <label for="start">{{'Fecha y hora del inicio de la sesion'|translate}}:</label>
             <p-calendar *ngIf="isEspanish"
               [ngClass]="{
                 'is-invalid': campoNoValido('start')
@@ -264,12 +128,12 @@
               class="form-text text-danger fst-italic"
               *ngIf="campoNoValido('start')"
             >
-              La fecha y hora de inicio son requeridas
+            {{'La fecha y hora de inicio son requeridas'|translate}}
             </span>
           </div>
 
           <div class="mb-5 col-md-4 col-12">
-            <label for="end">Fecha y hora del fin de la sesion:</label>
+            <label for="end">{{'Fecha y hora del fin de la sesion'|translate}}:</label>
             <p-calendar  *ngIf="isEspanish"
               id="end"
               type=""
@@ -296,7 +160,7 @@
             class="form-text text-danger fst-italic"
             *ngIf="campoNoValido('end')"
           >
-            La fecha y hora de fin son requeridas
+          {{'La fecha y hora de fin son requeridas'|translate}}
           </span>
           </div>
           <div class="mt-3 row form-group">
@@ -306,7 +170,7 @@
                 class="btn btn-danger btn-block mx-3"
                 (click)="cancelar()"
               >
-                Cancelar sesion <i class="fas fa-window-close"></i>
+                {{'Cancelar sesion'|translate}} <i class="fas fa-window-close"></i>
               </button>
 
               <button
@@ -314,7 +178,7 @@
                 class="btn btn-primary btn-block"
                 [disabled]="miFormulario.invalid"
               >
-                Actualizar <i class="fa fa-edit"></i>
+                {{'Actualizar'|translate}} <i class="fa fa-edit"></i>
               </button>
             </div>
           </div>

@@ -36,7 +36,6 @@ export class EditarPerfilComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private router: Router,
     private adminService: AdminService,
     private fb: FormBuilder,
     private validatorService: ValidatorService,
@@ -220,7 +219,7 @@ export class EditarPerfilComponent implements OnInit {
           position: 'top-end',
           icon: 'success',
           title: `${this.translateService.instant(
-            'Datos correctamente actualizados'
+            `${this.translateService.instant('Datos correctamente actualizados')}`
           )}`,
           showConfirmButton: false,
           timer: 2000,

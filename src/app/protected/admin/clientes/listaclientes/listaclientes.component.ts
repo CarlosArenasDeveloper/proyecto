@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 
 import { Subject } from 'rxjs';
 import { DataTableDirective } from 'angular-datatables';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-listaclientes',
@@ -17,15 +18,24 @@ export class ListaclientesComponent implements OnInit, OnDestroy {
   clientes: any = [];
   @ViewChild(DataTableDirective, { static: false })
   datatableElement!: DataTableDirective;
+  url!: string;
 
-  constructor(private adminService: AdminService) {}
+  constructor(private adminService: AdminService,
+  private translateService:TranslateService
+  ) {}
 
   ngOnInit(): void {
+    if (localStorage.getItem('lang') == 'es') {
+      this.url = '//cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json';
+    } else {
+      this.url = '//cdn.datatables.net/plug-ins/1.10.25/i18n/English.json';
+    }
+
     this.dtOptions = {
       pagingType: 'full_numbers',
-      pageLength: 5,
+      pageLength: 10,
       language: {
-        url: '//cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json',
+        url: this.url,
       },
       responsive: true,
     };
@@ -42,13 +52,13 @@ export class ListaclientesComponent implements OnInit, OnDestroy {
 
   borrarCliente(usuario: Usuario, i: number) {
     Swal.fire({
-      title: `¿Estas seguro de querer eliminar a ${usuario.nombre?.toUpperCase()} ${usuario.apellido1?.toUpperCase()}?`,
+      title: `¿${this.translateService.instant('Estas seguro de querer eliminar a')} ${usuario.nombre?.toUpperCase()} ${usuario.apellido1?.toUpperCase()}?`,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Si, eliminar',
-      cancelButtonText: 'No, cancelar',
+      confirmButtonText: `${this.translateService.instant('Si, eliminar')}`,
+      cancelButtonText: `${this.translateService.instant('No, cancelar')}`,
     }).then((result) => {
       if (result.isConfirmed) {
         this.adminService.borrarUsuario(usuario.email!).subscribe((usuario) => {
@@ -71,8 +81,8 @@ export class ListaclientesComponent implements OnInit, OnDestroy {
         Swal.fire({
           position: 'top-end',
           icon: 'success',
-          title: 'Cliente eliminado',
-          text: `Se ha borrado correctamente a ${usuario.nombre?.toUpperCase()} ${usuario.apellido1?.toUpperCase()}`,
+          title: `${this.translateService.instant('Cliente eliminado')}`,
+          text: `${this.translateService.instant('Se ha borrado correctamente a')} ${usuario.nombre?.toUpperCase()} ${usuario.apellido1?.toUpperCase()}`,
           showConfirmButton: false,
           timer: 2000,
         });

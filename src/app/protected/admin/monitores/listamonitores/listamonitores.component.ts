@@ -4,6 +4,7 @@ import { AdminService } from '../../../services/admin.service';
 import { Usuario } from '../../../../models/interface';
 import { Subject } from 'rxjs';
 import { DataTableDirective } from 'angular-datatables';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-listamonitores',
@@ -17,8 +18,8 @@ export class ListamonitoresComponent implements OnInit,OnDestroy {
   usuario!: Usuario;
   @ViewChild(DataTableDirective, { static: false })
   datatableElement!: DataTableDirective;
-  
-  constructor(private adminService: AdminService) {}
+  url!:string;
+  constructor(private adminService: AdminService,private translateService:TranslateService) {}
 
   ngOnDestroy(): void {
     this.dtTrigger.unsubscribe();
@@ -28,11 +29,17 @@ export class ListamonitoresComponent implements OnInit,OnDestroy {
     const usuario = JSON.parse(sessionStorage.getItem('usuario')!);
     this.usuario = usuario;
     
+    if (localStorage.getItem('lang') == 'es') {
+      this.url = '//cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json';
+    } else {
+      this.url = '//cdn.datatables.net/plug-ins/1.10.25/i18n/English.json';
+    }
+
     this.dtOptions = {
       pagingType: 'full_numbers',
-      pageLength: 5,
+      pageLength: 10,
       language: {
-        url: '//cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json',
+        url: this.url,
       },
       responsive: true,
     };
@@ -52,13 +59,13 @@ export class ListamonitoresComponent implements OnInit,OnDestroy {
   
   borrarMonitor(usuario: Usuario, i: number) {
     Swal.fire({
-      title: `¿Estas seguro de querer eliminar a ${usuario.nombre?.toUpperCase()} ${usuario.apellido1?.toUpperCase()}?`,
+      title: `${this.translateService.instant('Estas seguro de querer eliminar a')} ${usuario.nombre?.toUpperCase()} ${usuario.apellido1?.toUpperCase()}?`,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Si, eliminar',
-      cancelButtonText: 'No, cancelar',
+      confirmButtonText: `${this.translateService.instant('Si, eliminar')}`,
+      cancelButtonText: `${this.translateService.instant('No, cancelar')}`,
     }).then((result) => {
       if (result.isConfirmed) {
         this.adminService.borrarMonitor(usuario.email!).subscribe((usuario) => {
@@ -82,8 +89,8 @@ export class ListamonitoresComponent implements OnInit,OnDestroy {
         Swal.fire({
           position: 'top-end',
           icon: 'success',
-          title: 'Monitor eliminado!',
-          text: `Se ha borrado correctamente a ${usuario.nombre?.toUpperCase()} ${usuario.apellido1?.toUpperCase()}`,
+          title: `${this.translateService.instant('Monitor eliminado')}!`,
+          text: `${this.translateService.instant('Se ha borrado correctamente a')} ${usuario.nombre?.toUpperCase()} ${usuario.apellido1?.toUpperCase()}`,
           showConfirmButton: false,
           timer: 2000,
         });

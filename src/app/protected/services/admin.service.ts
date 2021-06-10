@@ -556,5 +556,9 @@ export class AdminService {
     return this.htpp.get(`${this.baseUrl}/selectColoresLibresEdit.php?codigo=%23${color}`);
   }
 
+  seleccionarNumReservasRealizadas(email:string){
+    return this.htpp.get(`${this.baseUrl}/seleccionarNumReservasRealizadas.php?email=${email}`);
+
+  }
 
 }

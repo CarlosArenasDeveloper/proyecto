@@ -10,13 +10,22 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import Swal from 'sweetalert2';
 import Tooltip from 'tooltip.js';
 import { TranslateService } from '@ngx-translate/core';
-
+import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
+import { Color, Label, MultiDataSet } from 'ng2-charts';
 @Component({
   selector: 'app-cliente',
   templateUrl: './cliente.component.html',
   styleUrls: ['./cliente.component.css']
 })
 export class ClienteComponent implements OnInit {
+  public labelsSexo: Label[] = [`${this.translateService.instant('realizadas')}`,`${this.translateService.instant('canceladas')}`,`${this.translateService.instant('pendientes')}`];
+  public dataSexo: MultiDataSet = [];
+  public doughnutChartType: ChartType = 'doughnut';
+  public colors: Color[] = [
+    {
+      backgroundColor: ['#0075ED', '#e6e718', '#11C40E', '#C40E32'],
+    },
+  ];
 
   public events: any;
   public eventsPendientes: any;
@@ -37,6 +46,10 @@ export class ClienteComponent implements OnInit {
       this.idioma=""
     } 
 
+    this.adminService.seleccionarNumReservasRealizadas(this.usuario.email).subscribe((resp) => {
+      this.dataSexo = Object.values(resp);
+    });
+
     this.adminService
     .seleccionarSesionesCliente(this.usuario.email)
     .subscribe((events) => {
@@ -50,7 +63,7 @@ export class ClienteComponent implements OnInit {
     });
     
     this.optionsList = {
-      contentHeight: 700,
+      contentHeight: 400,
       plugins: [dayGridPlugin, listPlugin, interactionPlugin],
       defaultDate: new Date(),
       duration: { days: 14 },

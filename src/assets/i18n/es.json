@@ -421,7 +421,11 @@
 "El final de la sesion no puede ser antes o igual que el comienzo de la sesion":"El final de la sesion no puede ser antes o igual que el comienzo de la sesion",
 "Elija el color con el que se identificara a la actividad":"Elija el color con el que se identificara a la actividad",
 "Seleccione un color":"Seleccione un color",
-"Cambiar de monitor":"Cambiar de monitor"
+"Cambiar de monitor":"Cambiar de monitor",
+"realizadas":"realizadas",
+"canceladas":"canceladas",
+"pendientes":"pendientes",
+"Historico de sesiones":"Historico de sesiones"
 
 
 

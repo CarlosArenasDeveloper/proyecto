@@ -10,6 +10,7 @@ import { DataTablesModule } from 'angular-datatables';
 import { FullCalendarModule } from 'primeng/fullcalendar';
 import { CalendarModule } from 'primeng/calendar';
 import { TranslateModule } from '@ngx-translate/core';
+import { ChartsModule } from 'ng2-charts';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { TranslateModule } from '@ngx-translate/core';
     DataTablesModule,
     FullCalendarModule,
     CalendarModule,
-    TranslateModule
+    TranslateModule,
+    ChartsModule
   ]
 })
 export class ClienteModule { }

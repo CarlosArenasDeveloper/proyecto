@@ -1,0 +1,469 @@
+<div class="m-3" style="background-color: rgb(255, 215, 215)">
+    <h1 class="text-center pt-5">
+      {{
+        "Bienvenido" | translate
+      }}
+      {{usuario.nombre}}
+      {{'rellene los campos para completar el alta'|translate}}
+    </h1>
+    <hr />
+    <mat-horizontal-stepper
+      [linear]="true"
+      #stepper
+      color="warn"
+      style="background-color: rgb(255, 215, 215)"
+      class="m-5 p-5"
+    >
+      <mat-step [stepControl]="thirdFormGroup">
+        <form [formGroup]="thirdFormGroup" autocomplete="off">
+          <ng-template matStepLabel>{{ "Paso" | translate }} 1</ng-template>
+  
+          <div class="row my-4">
+            <div *ngFor="let tarifa of tarifas" class="col">
+              <div
+                class="card border border-3 border-danger p-1 mb-3"
+                style="background-color: rgb(255, 144, 144)"
+              >
+                <div class="card-body">
+                  <h5 class="card-title text-center">
+                    {{ "Tarifa" | translate | uppercase }}
+                    {{ tarifa.nombre | uppercase }}
+                  </h5>
+                  <hr />
+                  <a
+                    (click)="verActividades(tarifa)"
+                    mat-raised-button
+                    color="primary"
+                    >¿{{ "Qué actividades incluye esta tarifa" | translate }}?</a
+                  >
+  
+                  <p class="card-text p-2 text-justify">
+                    {{ tarifa.descripcion }}
+                  </p>
+                  <a
+                    mat-raised-button
+                    color="warn"
+                    (click)="elegirTarifa(tarifa.id)"
+                    >{{ "Elígela por" | translate }} {{ tarifa.precio }} €/{{
+                      "mes" | translate
+                    }}</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <mat-form-field appearance="fill">
+              <mat-label> {{ "Seleccione una tarifa" | translate }}: </mat-label>
+              <mat-select formControlName="id_tarifa">
+                <mat-option *ngFor="let tarifa of tarifas" [value]="tarifa.id">
+                  {{ tarifa.nombre | titlecase }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <span
+              class="form-text text-danger fst-italic"
+              *ngIf="campoNoValido('id_tarifa')"
+            >
+              {{ "La eleccion de la tarifa es requerida" | translate }}
+            </span>
+          </div>
+  
+          <div class="row">
+            <mat-form-field appearance="fill">
+              <mat-label>{{ "Seleccione un centro" | translate }}: </mat-label>
+              <mat-select formControlName="id_centro">
+                <mat-option *ngFor="let centro of centros" [value]="centro.id">
+                  {{ centro.nombre | titlecase }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <span
+              class="form-text text-danger fst-italic"
+              *ngIf="campoNoValido('id_centro')"
+            >
+              {{ "La eleccion del centro es requerida" | translate }}
+            </span>
+          </div>
+  
+          <div class="mt-4">
+            <button
+              mat-raised-button
+              matStepperPrevious
+              color="warn"
+              routerLink="/"
+            >
+              <i class="fas fa-arrow-circle-left"></i>
+              {{ "Anterior" | translate }}
+            </button>
+            <button mat-raised-button matStepperNext color="primary" class="mx-2">
+              {{ "Siguiente" | translate }}
+              <i class="fas fa-arrow-circle-right"></i>
+            </button>
+          </div>
+        </form>
+      </mat-step>
+  
+      <mat-step
+        [stepControl]="firstFormGroup"
+        [label]="'label.Paso 2' | translate"
+      >
+        <form [formGroup]="firstFormGroup" autocomplete="off">
+          <div class="row">
+            <div class="col-12 col-md-6 col-lg-4">
+              <mat-form-field>
+                <mat-label>{{ "Nombre" | translate }}:</mat-label>
+                <input
+                  matInput
+                  [placeholder]="'placeholder.Introduzca su nombre' | translate"
+                  formControlName="nombre"
+                  required
+                />
+              </mat-form-field>
+              <span
+                class="form-text text-danger fst-italic"
+                *ngIf="campoNoValido('nombre')"
+              >
+                <br />
+                {{ "El nombre es requerido" | translate }}
+              </span>
+            </div>
+  
+            <div class="col-12 col-md-6 col-lg-4">
+              <mat-form-field>
+                <mat-label>{{ "Primer apellido" | translate }}:</mat-label>
+                <input
+                  matInput
+                  [placeholder]="
+                    'placeholder.Introduzca su primer apellido' | translate
+                  "
+                  formControlName="apellido1"
+                  required
+                />
+              </mat-form-field>
+              <span
+                class="form-text text-danger fst-italic"
+                *ngIf="campoNoValido('apellido1')"
+              >
+                <br />
+                {{ "El primer apellido es requerido" | translate }}
+              </span>
+            </div>
+  
+            <div class="col-12 col-md-6 col-lg-4">
+              <mat-form-field>
+                <mat-label>{{ "Segundo apellido" | translate }}:</mat-label>
+                <input
+                  matInput
+                  [placeholder]="
+                    'placeholder.Introduzca su segundo apellido' | translate
+                  "
+                  formControlName="apellido2"
+                />
+              </mat-form-field>
+            </div>
+  
+            <div class="col-4">
+              <mat-form-field>
+                <mat-label>{{'Email:(no se puede cambiar)'|translate}}</mat-label>
+                <input
+                  readonly
+                  matInput
+                  formControlName="email"
+                  required
+                />
+              </mat-form-field>
+              <br />
+            </div>
+  
+            <div class="col-6">
+              <mat-form-field>
+                <mat-label>DNI/NIE:</mat-label>
+                <input
+                  matInput
+                  [placeholder]="'placeholder.Introduzca su dni' | translate"                
+                  formControlName="dni"
+                  required
+                />
+              </mat-form-field>
+              <span
+                class="form-text text-danger fst-italic"
+                *ngIf="campoNoValido('dni')"
+              >
+                <br />
+                {{ dniErrorMsg }}
+              </span>
+            </div>
+  
+            <div class="col-6">
+              <mat-form-field>
+                <mat-label>{{ "Contraseña" | translate }}</mat-label>
+                <input
+                  type="password"
+                  matInput
+                  [type]="hide ? 'password' : 'text'"
+                  [placeholder]="'placeholder.Introduzca su contraseña' | translate"                
+                  formControlName="password"
+                  required
+                />
+                <a
+                  mat-icon-button
+                  matSuffix
+                  (click)="hide = !hide"
+                  [attr.aria-label]="'Hide password'"
+                  [attr.aria-pressed]="hide"
+                >
+                  <mat-icon>{{
+                    hide ? "visibility_off" : "visibility"
+                  }}</mat-icon>
+                </a>
+              </mat-form-field>
+              <span
+                class="form-text text-danger fst-italic"
+                *ngIf="campoNoValido('password')"
+              >
+                <br />
+                {{ passwordErrorMsg }}
+              </span>
+            </div>
+  
+            <div class="col">
+              <mat-form-field>
+                <mat-label>{{ "Confirmar contraseña" | translate }}:</mat-label>
+                <input
+                  type="password"
+                  matInput
+                  [type]="oculto ? 'password' : 'text'"
+                  [placeholder]="'placeholder.Confirme su contraseña' | translate"                
+                  formControlName="password2"
+                  required
+                />
+                <a
+                  mat-icon-button
+                  matSuffix
+                  (click)="oculto = !oculto"
+                  [attr.aria-label]="'Hide password'"
+                  [attr.aria-pressed]="hide"
+                >
+                  <mat-icon>{{
+                    hide ? "visibility_off" : "visibility"
+                  }}</mat-icon>
+                </a>
+              </mat-form-field>
+              <br />
+              <span
+                class="form-text text-danger fst-italic"
+                *ngIf="campoNoValido('password2')"
+              >
+                {{ "Las contraseñas deben de ser iguales" | translate }}
+              </span>
+            </div>
+  
+            <div class="col-12">
+              <button mat-raised-button matStepperPrevious color="warn">
+                <i class="fas fa-arrow-circle-left"></i>
+                {{ "Volver atrás" | translate }}
+              </button>
+              <button
+                mat-raised-button
+                matStepperNext
+                color="primary"
+                class="mt-5 mx-2"
+              >
+                {{ "Siguiente" | translate }}
+                <i class="fas fa-arrow-circle-right"></i>
+              </button>
+            </div>
+          </div>
+        </form>
+      </mat-step>
+  
+      <mat-step
+        [stepControl]="secondFormGroup"
+        [label]="'label.Paso 3' | translate"
+      >
+        <form [formGroup]="secondFormGroup" autocomplete="off">
+          <div class="row">
+            <div class="col-12 col-md-6">
+              <mat-form-field>
+                <mat-label
+                  >{{ "Nº de cuenta bancaria (24 digitos)" | translate }}:
+                </mat-label>
+                <input
+                  matInput
+                  #input
+                  maxlength="24"
+                  [placeholder]="'placeholder.Introduzca su numero de cuenta bancaria' | translate"                
+                  formControlName="cuenta_bancaria"
+                />
+                <mat-hint align="end">{{ input.value?.length || 0 }}/24</mat-hint>
+              </mat-form-field>
+              <span
+                class="form-text text-danger fst-italic"
+                *ngIf="campoNoValido('cuenta_bancaria')"
+              >
+                <br />
+                {{ cuentaErrorMsg }}
+              </span>
+            </div>
+            <div class="col-12 col-md-6 mt-4">
+              <mat-radio-group formControlName="sexo">
+                {{ "Seleccione su sexo" | translate }}:
+                <br />
+                <mat-radio-button value="hombre" color="warn">{{
+                  "Hombre" | translate
+                }}</mat-radio-button>
+                <br />
+                <mat-radio-button value="mujer" color="warn">{{
+                  "Mujer" | translate
+                }}</mat-radio-button>
+              </mat-radio-group>
+            </div>
+  
+            <div class="col-12 col-md-6">
+              <mat-form-field>
+                <mat-label
+                  >{{ "Fecha de nacimiento" | translate }}: (+18)
+                </mat-label>
+                <input matInput type="date" formControlName="fecha_nac" />
+              </mat-form-field>
+              <span
+                class="form-text text-danger fst-italic"
+                *ngIf="campoNoValido('fecha_nac') || esMenor()"
+              >
+                <br />
+                {{ "La edad minima requerida son 18 años" | translate }}
+              </span>
+            </div>
+  
+            <div class="col-12 col-md-6">
+              <mat-form-field>
+                <mat-label
+                  >{{ "Nº de telefono" | translate }}:
+                  <mat-icon>call_end</mat-icon>
+                </mat-label>
+                <input
+                  matInput
+                  [placeholder]="'placeholder.Introduzca su numero de telefono' | translate"                
+                  formControlName="telefono"
+                />
+              </mat-form-field>
+              <span
+                class="form-text text-danger fst-italic"
+                *ngIf="campoNoValido('telefono')"
+              >
+                <br />
+                {{ telefonoErrorMsg }}
+              </span>
+            </div>
+  
+            <div class="col-12 col-md-6 col-lg-4">
+              <mat-form-field>
+                <mat-label>{{ "Ciudad" | translate }}:</mat-label>
+                <input
+                  matInput
+                  formControlName="ciudad"
+                  [placeholder]="'placeholder.Introduzca la ciudad de su domicilio' | translate"                
+                  required
+                />
+              </mat-form-field>
+              <span
+                class="form-text text-danger fst-italic"
+                *ngIf="campoNoValido('ciudad')"
+              >
+                <br />
+                {{ "La ciudad es requerida" | translate }}
+              </span>
+            </div>
+  
+            <div class="col-12 col-md-6">
+              <mat-form-field>
+                <mat-label>{{ "Direccion" | translate }}:</mat-label>
+                <input
+                  matInput
+                  formControlName="direccion"
+                  [placeholder]="'placeholder.Introduzca su direccion' | translate"                
+                  required
+                />
+              </mat-form-field>
+              <span
+                class="form-text text-danger fst-italic"
+                *ngIf="campoNoValido('direccion')"
+              >
+                <br />
+                {{ "La direccion es requerida" | translate }}
+              </span>
+            </div>
+  
+            <div class="col-12 col-md-6 col-lg-4">
+              <mat-form-field>
+                <mat-label>{{ "Codigo postal" | translate }}:</mat-label>
+                <input
+                  matInput
+                  formControlName="cod_postal"
+                  [placeholder]="'placeholder.Introduzca su codigo postal' | translate"                
+                  required
+                />
+              </mat-form-field>
+              <span
+                class="form-text text-danger fst-italic"
+                *ngIf="campoNoValido('cod_postal')"
+              >
+                <br />
+                {{ "El codigo postal es requerido" | translate }}
+              </span>
+            </div>
+  
+            <div class="col-12">
+              <button mat-raised-button matStepperPrevious color="warn">
+                <i class="fas fa-arrow-circle-left"></i>
+                {{ "Anterior" | translate }}
+              </button>
+              <button
+                mat-raised-button
+                matStepperNext
+                color="primary"
+                class="mt-5 mx-2"
+              >
+                {{ "Siguiente" | translate }}
+                <i class="fas fa-arrow-circle-right"></i>
+              </button>
+            </div>
+          </div>
+        </form>
+      </mat-step>
+  
+      <mat-step>
+        <ng-template matStepLabel>{{ "Hecho" | translate }}</ng-template>
+        <p>{{ "Para finalizar, confirme el pago" | translate }}.</p>
+        <div>
+          <button mat-raised-button matStepperPrevious color="warn">
+            <i class="fas fa-arrow-circle-left"></i>
+            {{ "Anterior" | translate }}
+          </button>
+          <button
+            matStepperNext
+            mat-raised-button
+            color="primary"
+            class="mt-5 mx-2"
+            *ngIf="!showPaypalButtons"
+            (click)="pay()"
+          >
+            {{ "Pagar con paypal" | translate }}
+            <i class="fab fa-paypal fa-2x"></i>
+          </button>
+          <div *ngIf="showPaypalButtons" class="mt-5">
+            <h3>
+              {{
+                "Elige que metodo utilizaras para realizar el primer pago"
+                  | translate
+              }}
+            </h3>
+  
+            <ngx-paypal [config]="payPalConfig"> </ngx-paypal>
+          </div>
+        </div>
+      </mat-step>
+    </mat-horizontal-stepper>
+  </div>
+  

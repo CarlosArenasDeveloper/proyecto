@@ -123,7 +123,7 @@ export class EditmonitorComponent implements OnInit {
   );
 
   ngOnInit(): void {
-    this.authService.selectCentros().subscribe((resp) => {
+    this.authService.getCentroCordoba().subscribe((resp) => {
       this.centros = resp;
     });
 

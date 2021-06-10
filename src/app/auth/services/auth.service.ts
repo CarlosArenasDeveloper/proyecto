@@ -45,4 +45,18 @@ export class AuthService {
 
   }
 
+  solicitudAlta(email:string){
+    return this.http.get(`${this.baseUrl}/altaEmail.php?email=${email}`);
+  }
+
+  confirmarAlta(usuario: Usuario):Observable<Usuario> {
+    return this.http.post(
+      `${this.baseUrl}/confirmarAlta.php`,
+      JSON.stringify(usuario)
+    );
+  }
+  getCentroCordoba(): Observable<Centro> {
+    return this.http.get(`${this.baseUrl}/selectCentroCordoba.php`);
+  }
+
 }

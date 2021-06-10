@@ -43,7 +43,7 @@ export class AltaclienteComponent implements OnInit {
       this.tarifas = resp;
     });
 
-    this.authService.selectCentros().subscribe((resp) => {
+    this.authService.getCentroCordoba().subscribe((resp) => {
       this.centros = resp;
     });
 

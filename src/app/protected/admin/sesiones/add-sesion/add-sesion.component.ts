@@ -19,17 +19,17 @@ export class AddSesionComponent implements OnInit {
   today!: Date;
   fin!: any;
   localeES: any;
-  isEspanish:boolean=true;
+  isEspanish: boolean = true;
   constructor(
     private adminService: AdminService,
     private fb: FormBuilder,
-    private translateService:TranslateService
+    private translateService: TranslateService
   ) {
     this.today = new Date();
 
     if (localStorage.getItem('lang') == 'en') {
       this.isEspanish = false;
-    } 
+    }
     this.localeES = {
       firstDayOfWeek: 1,
       dayNames: [
@@ -103,24 +103,45 @@ export class AddSesionComponent implements OnInit {
 
   add() {
     this.sesion = this.miFormulario.value;
-    //console.log(this.sesion);
-    this.adminService.addSesion(this.sesion).subscribe((resp) => {
-      if (resp != 'error') {
-        Swal.fire({
-          position: 'top-end',
-          icon: `success`,
-          title: `${this.translateService.instant('Se ha creado la sesion correctamente')}`,
-          showConfirmButton: false,
-          timer: 2000,
-        });
-      } else {
-        Swal.fire({
-          icon: 'error',
-          title: `${this.translateService.instant('Error al crear la sesion')}`,
-          text: `${this.translateService.instant('Por favor, compruebe que la sala este libre o que la actividad este no duplicada en la franja horaria seleccionada.')}`,
-        });
-      }
-    });
+    const inicio = new Date(this.sesion.start!);
+    const final = new Date(this.sesion.end!);
+    let resta = final.getTime() - inicio.getTime();
+
+    if (resta > 0) {
+      this.adminService.addSesion(this.sesion).subscribe((resp) => {
+        if (resp != 'error') {
+          Swal.fire({
+            position: 'top-end',
+            icon: `success`,
+            title: `${this.translateService.instant(
+              'Se ha creado la sesion correctamente'
+            )}`,
+            showConfirmButton: false,
+            timer: 2000,
+          });
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: `${this.translateService.instant(
+              'Error al crear la sesion'
+            )}`,
+            text: `${this.translateService.instant(
+              'Por favor, compruebe que la sala este libre o que la actividad este no duplicada en la franja horaria seleccionada.'
+            )}`,
+          });
+        }
+      });
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: `${this.translateService.instant(
+          'Hora de final de sesion incorrecta'
+        )}`,
+        text: `${this.translateService.instant(
+          'El final de la sesion no puede ser antes o igual que el comienzo de la sesion'
+        )}`,
+      });
+    }
   }
 
   campoNoValido(campo: string) {

@@ -36,7 +36,9 @@ export class LoginComponent {
     if (errors?.required) {
       return this.translate.instant('El email es obligatorio');
     } else if (errors?.pattern) {
-      return  this.translate.instant('El valor ingresado no tiene formato de correo');
+      return this.translate.instant(
+        'El valor ingresado no tiene formato de correo'
+      );
     }
     return '';
   }
@@ -57,6 +59,38 @@ export class LoginComponent {
         sessionStorage.setItem('usuario', JSON.stringify(datosUsuario));
         if (datosUsuario.role == 1) {
           this.router.navigateByUrl('/dashboard/admin');
+        } else if (datosUsuario.role == 2 && datosUsuario.estado == 'baja') {
+          Swal.fire({
+            icon: 'error',
+            title: this.translate.instant(
+              'No se puede acceder a fit & healthy'
+            ),
+            text: `${this.translate.instant(
+              'Hola'
+            )} ${datosUsuario.nombre?.toUpperCase()}, ${this.translate.instant(
+              'actualmente usted está dado de baja, ¿Quieres darte de alta de nuevo?'
+            )}`,
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: this.translate.instant('Si'),
+            cancelButtonText: this.translate.instant('No, cancelar'),
+          }).then((result) => {
+            if (result.isConfirmed) {
+              Swal.fire({
+                position: 'top-end',
+                icon: 'warning',
+                title: `${this.translate.instant('Alta pendiente de validacion')}`,
+                text:`${this.translate.instant('Para completar el alta, haga click en el enlace que le hemos enviado al correo electronico')} ${this.miFormulario.get('email')?.value}`,
+                showConfirmButton: false,
+                timer: 3500,
+              }).then(()=>{
+                this.authService.solicitudAlta(this.miFormulario.get('email')?.value).subscribe(()=>{
+                  console.log("solicitud alta");
+                })
+              })
+            }
+          });
         } else if (
           datosUsuario.role == 2 &&
           datosUsuario.estado == 'bloqueado'
@@ -64,7 +98,11 @@ export class LoginComponent {
           Swal.fire({
             icon: 'error',
             title: this.translate.instant('Bloqueado'),
-            text: `${this.translate.instant('Hola')} ${datosUsuario.nombre?.toUpperCase()}, ${this.translate.instant('usted está bloqueado, para volver a acceder pongase en contacto con el personal de Fit & Healthy')}`,
+            text: `${this.translate.instant(
+              'Hola'
+            )} ${datosUsuario.nombre?.toUpperCase()}, ${this.translate.instant(
+              'usted está bloqueado, para volver a acceder pongase en contacto con el personal de Fit & Healthy'
+            )}`,
           });
         } else if (datosUsuario.role == 2 && datosUsuario.verificado == 1) {
           this.router.navigateByUrl('/dashboard/cliente');
@@ -73,9 +111,11 @@ export class LoginComponent {
           Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: `${this.translate.instant('Hola')} ${datosUsuario.nombre?.toUpperCase()}, ${this.translate.instant('para acceder a Fit & Healthy debe verificar su email. Se ha enviado un correo a la direccion de')}  ${
-              datosUsuario.email
-            } `,
+            text: `${this.translate.instant(
+              'Hola'
+            )} ${datosUsuario.nombre?.toUpperCase()}, ${this.translate.instant(
+              'para acceder a Fit & Healthy debe verificar su email. Se ha enviado un correo a la direccion de'
+            )}  ${datosUsuario.email} `,
           }).then((result) => {
             if (result.isConfirmed) {
               this.authService
@@ -91,8 +131,12 @@ export class LoginComponent {
         this.datosIncorrectos = true;
         Swal.fire({
           icon: 'error',
-          title: this.translate.instant('Error al intentar acceder a Fit & Healthy!'),
-          text: this.translate.instant('El email y la contraseña que ingresaste no coinciden con nuestros registros. Por favor, revisa e inténtelo de nuevo.'),
+          title: this.translate.instant(
+            'Error al intentar acceder a Fit & Healthy!'
+          ),
+          text: this.translate.instant(
+            'El email y la contraseña que ingresaste no coinciden con nuestros registros. Por favor, revisa e inténtelo de nuevo.'
+          ),
         });
       }
     });

@@ -3,7 +3,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Usuario } from '../../../../models/interface';
 import { switchMap } from 'rxjs/operators';
 import { AdminService } from '../../../services/admin.service';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { ValidatorService } from '../../../../auth/services/validator.service';
 import { AuthService } from '../../../../auth/services/auth.service';
 import Swal from 'sweetalert2';
@@ -16,7 +21,6 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./editcliente.component.css'],
 })
 export class EditclienteComponent implements OnInit {
-
   previsualizacion!: string;
   mostrarImagen: boolean = false;
   public archivos: any = [];
@@ -28,7 +32,7 @@ export class EditclienteComponent implements OnInit {
   };
   file_data: any = '';
   nombreFichero: string = '';
-  imagenGuardada:string='';
+  imagenGuardada: string = '';
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -38,8 +42,7 @@ export class EditclienteComponent implements OnInit {
     private validatorService: ValidatorService,
     private authService: AuthService,
     private sanitizer: DomSanitizer,
-    private translateService:TranslateService
-
+    private translateService: TranslateService
   ) {
     const currentYear = new Date().getFullYear();
     this.minDate = new Date(currentYear - 100, 0, 1);
@@ -128,7 +131,7 @@ export class EditclienteComponent implements OnInit {
       this.tarifas = resp;
     });
 
-    this.authService.selectCentros().subscribe((resp) => {
+    this.authService.getCentroCordoba().subscribe((resp) => {
       this.centros = resp;
     });
 
@@ -138,8 +141,8 @@ export class EditclienteComponent implements OnInit {
       )
       .subscribe((cliente) => {
         this.cliente = cliente;
-        this.imagenGuardada=this.cliente.imagen!
-        this.nombreFichero=this.cliente.imagen!
+        this.imagenGuardada = this.cliente.imagen!;
+        this.nombreFichero = this.cliente.imagen!;
         //console.log(this.cliente);
         if (this.cliente.verificado == 1) {
           this.miFormulario.controls['verificado'].setValue(true);
@@ -205,32 +208,40 @@ export class EditclienteComponent implements OnInit {
     if (this.cliente.estado === 'baja') {
       Swal.fire({
         icon: 'error',
-        title: `${this.translateService.instant('Los datos no fueron actualizados')}...`,
-        text:
-          `${this.translateService.instant('Para cambiar la informacion de un cliente, este debe de estar dado de alta')}!`,
+        title: `${this.translateService.instant(
+          'Los datos no fueron actualizados'
+        )}...`,
+        text: `${this.translateService.instant(
+          'Para cambiar la informacion de un cliente, este debe de estar dado de alta'
+        )}!`,
       });
       return;
     }
     if (this.cliente.role == 3) {
-      this.cliente.id_tarifa=undefined;
-      this.cliente.fecha_alta=undefined;
-      this.cliente.fecha_baja=undefined;
-      this.cliente.num_reservas=0;
+      this.cliente.id_tarifa = undefined;
+      this.cliente.fecha_alta = undefined;
+      this.cliente.fecha_baja = undefined;
+      this.cliente.num_reservas = 0;
     }
     this.cliente.imagen = this.nombreFichero;
-    
+
     this.adminService.editarCliente(this.cliente).subscribe((resp) => {
       if (resp) {
         Swal.fire({
           position: 'top-end',
           icon: 'success',
-          title: `${this.translateService.instant('Datos correctamente actualizados')}`,
+          title: `${this.translateService.instant(
+            'Datos correctamente actualizados'
+          )}`,
           showConfirmButton: false,
           timer: 2000,
         });
       }
     });
-    if (this.cliente.imagen != '' && this.nombreFichero!=this.imagenGuardada) {
+    if (
+      this.cliente.imagen != '' &&
+      this.nombreFichero != this.imagenGuardada
+    ) {
       this.uploadFile();
     }
     if (this.nombreFichero == this.imagenGuardada) {
@@ -265,7 +276,9 @@ export class EditclienteComponent implements OnInit {
     if (errors?.required) {
       return this.translateService.instant('La contraseña es requerida');
     } else if (errors?.minlength) {
-      return this.translateService.instant('La contraseña debe tener mas de 6 caracteres');
+      return this.translateService.instant(
+        'La contraseña debe tener mas de 6 caracteres'
+      );
     }
     return '';
   }
@@ -300,28 +313,51 @@ export class EditclienteComponent implements OnInit {
     let age: number = today.getFullYear() - birthDate.getFullYear();
     const month: number = today.getMonth() - birthDate.getMonth();
     if (month < 0 || (month === 0 && today.getDate() < birthDate.getDate())) {
-        age--;
+      age--;
     }
-    if(age < 18){
+    if (age < 18) {
       this.miFormulario.get('fecha_nac')?.setErrors({ noIguales: true });
       return true;
-    } else{
-      return "";
+    } else {
+      return '';
     }
-}
+  }
 
+  actualEstadoAlta() {
+    if (this.cliente.estado == 'activo') {
+      return false;
+    }
+    return true;
+  }
+  actualEstadoBaja() {
+    if (this.cliente.estado == 'baja') {
+      return false;
+    }
+    return true;
+  }
+  actualEstadoBloqueado() {
+    if (this.cliente.estado == 'bloqueado') {
+      return false;
+    }
+    return true;
+  }
   cambiarEstado() {
     Swal.fire({
-      title: `${this.translateService.instant('Cambiar estado a')} ${this.cliente.nombre?.toUpperCase()}`,
-      showDenyButton: true,
-      showCancelButton: true,
-      confirmButtonText: `${this.translateService.instant('alta')}`,
-      denyButtonText: `${this.translateService.instant('baja')}`,
-      cancelButtonText: `${this.translateService.instant('bloquear')}`,
+      title: `${this.translateService.instant(
+        'Cambiar estado a'
+      )} ${this.cliente.nombre?.toUpperCase()}`,
+      showConfirmButton: this.actualEstadoAlta(),
+      showDenyButton: this.actualEstadoBaja(),
+      showCancelButton: this.actualEstadoBloqueado(),
+      confirmButtonText: this.translateService.instant('alta'),
+      denyButtonText: this.translateService.instant('baja'),
+      cancelButtonText: this.translateService.instant('bloquear'),
     }).then((result) => {
       if (result.isConfirmed) {
         Swal.fire({
-          title: `${this.translateService.instant('¿Estas seguro de que quieres dar de alta a')} ${this.cliente.nombre?.toUpperCase()} ${this.cliente.apellido1?.toUpperCase()}?`,
+          title: `${this.translateService.instant(
+            '¿Estas seguro de que quieres dar de alta a'
+          )} ${this.cliente.nombre?.toUpperCase()} ${this.cliente.apellido1?.toUpperCase()}?`,
           icon: 'warning',
           showCancelButton: true,
           confirmButtonColor: '#3085d6',
@@ -340,7 +376,9 @@ export class EditclienteComponent implements OnInit {
               Swal.fire({
                 position: 'top-end',
                 icon: 'success',
-                title: `${this.translateService.instant('Se ha dado de alta a')}  ${this.cliente.nombre?.toUpperCase()}`,
+                title: `${this.translateService.instant(
+                  'Se ha dado de alta a'
+                )}  ${this.cliente.nombre?.toUpperCase()}`,
                 showConfirmButton: false,
                 timer: 1500,
               });
@@ -349,7 +387,9 @@ export class EditclienteComponent implements OnInit {
         });
       } else if (result.isDenied) {
         Swal.fire({
-          title: `${this.translateService.instant('¿Estas seguro de que quieres dar de baja a')} ${this.cliente.nombre?.toUpperCase()} ${this.cliente.apellido1?.toUpperCase()}?`,
+          title: `${this.translateService.instant(
+            '¿Estas seguro de que quieres dar de baja a'
+          )} ${this.cliente.nombre?.toUpperCase()} ${this.cliente.apellido1?.toUpperCase()}?`,
           icon: 'warning',
           showCancelButton: true,
           confirmButtonColor: '#3085d6',
@@ -369,7 +409,9 @@ export class EditclienteComponent implements OnInit {
               Swal.fire({
                 position: 'top-end',
                 icon: 'success',
-                title: `${this.translateService.instant('Se ha dado de baja a')} ${this.cliente.nombre?.toUpperCase()}`,
+                title: `${this.translateService.instant(
+                  'Se ha dado de baja a'
+                )} ${this.cliente.nombre?.toUpperCase()}`,
                 showConfirmButton: false,
                 timer: 1500,
               });
@@ -378,7 +420,9 @@ export class EditclienteComponent implements OnInit {
         });
       } else {
         Swal.fire({
-          title: `${this.translateService.instant('¿Estas seguro de que quieres bloquear a')} ${this.cliente.nombre?.toUpperCase()} ${this.cliente.apellido1?.toUpperCase()}?`,
+          title: `${this.translateService.instant(
+            '¿Estas seguro de que quieres bloquear a'
+          )} ${this.cliente.nombre?.toUpperCase()} ${this.cliente.apellido1?.toUpperCase()}?`,
           icon: 'warning',
           showCancelButton: true,
           confirmButtonColor: '#3085d6',
@@ -397,7 +441,7 @@ export class EditclienteComponent implements OnInit {
               Swal.fire({
                 position: 'top-end',
                 icon: 'success',
-                title: `Se ha bloqueado a ' ${this.cliente.nombre?.toUpperCase()}`,
+                title: `Se ha bloqueado a ${this.cliente.nombre?.toUpperCase()}`,
                 showConfirmButton: false,
                 timer: 1500,
               });
@@ -437,17 +481,19 @@ export class EditclienteComponent implements OnInit {
       }
     }
   }
-  
+
   uploadFile() {
     this.previsualizacion = '';
     this.mostrarImagen = true;
-    this.cliente.imagen=this.nombreFichero;
+    this.cliente.imagen = this.nombreFichero;
     this.adminService.uploadFile(this.file_data).subscribe((resp) => {
       this.activatedRoute.params
-        .pipe(switchMap(({ email }) => this.adminService.getUsuarioPorEmail(email)))
+        .pipe(
+          switchMap(({ email }) => this.adminService.getUsuarioPorEmail(email))
+        )
         .subscribe((cliente) => {
-        this.cliente = cliente;
-        //console.log(this.cliente);
+          this.cliente = cliente;
+          //console.log(this.cliente);
         });
       this.cliente.imagen = '';
     });
@@ -455,11 +501,11 @@ export class EditclienteComponent implements OnInit {
   }
 
   capturarFile(event: any): any {
-   // this.previsualizacion2 = '';
+    // this.previsualizacion2 = '';
     const archivoCapturado = event.target.files[0];
     this.extraerBase64(archivoCapturado).then((imagen: any) => {
       this.previsualizacion = imagen.base;
-     // this.previsualizacion2 = imagen.base;
+      // this.previsualizacion2 = imagen.base;
     });
     this.archivos.push(archivoCapturado);
   }

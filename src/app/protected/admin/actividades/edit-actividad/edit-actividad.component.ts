@@ -37,6 +37,7 @@ export class EditActividadComponent implements OnInit {
   usuario!: Usuario;
   id!: number;
   monitores: any;
+  colores:any;
   actividad: Actividad = {};
   tarifas: any;
   constructor(
@@ -86,12 +87,25 @@ export class EditActividadComponent implements OnInit {
             this.monitores = monitor;
           });
         }
+
+        if(this.actividad.color!=null){
+          console.log(this.actividad.color);
+          this.adminService.selectColoresLibresEdit(this.actividad.color).subscribe((colores)=>{
+            this.colores=colores;
+            console.log(colores);
+          })
+        }else{
+          this.adminService.selectColoresLibres().subscribe((colores)=>{
+            this.colores=colores;
+          })
+        }
        
       });
 
     this.adminService.getTarifas().subscribe((tarifa) => {
       this.tarifas = tarifa;
     });
+
   }
 
   isAdmin() {

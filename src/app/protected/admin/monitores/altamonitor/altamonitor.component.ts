@@ -41,7 +41,7 @@ export class AltamonitorComponent implements OnInit {
 
 
   ngOnInit() {
-    this.authService.selectCentros().subscribe(resp=>{
+    this.authService.getCentroCordoba().subscribe(resp=>{
       this.centros=resp;
     })
     

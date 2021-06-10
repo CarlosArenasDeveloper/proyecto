@@ -41,7 +41,8 @@ export class EditarPerfilComponent implements OnInit {
     private validatorService: ValidatorService,
     private authService: AuthService,
     private sanitizer: DomSanitizer,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private router:Router
   ) {
     const currentYear = new Date().getFullYear();
     this.minDate = new Date(currentYear - 100, 0, 1);
@@ -131,7 +132,7 @@ export class EditarPerfilComponent implements OnInit {
   });
 
   ngOnInit(): void {
-    this.authService.selectCentros().subscribe((resp) => {
+    this.authService.getCentroCordoba().subscribe((resp) => {
       this.centros = resp;
     });
 
@@ -385,7 +386,7 @@ export class EditarPerfilComponent implements OnInit {
               'Te esperamos en nuestro centro'
             )}!`,
             showConfirmButton: false,
-            timer: 1500,
+            timer: 2500,
           });
           this.user.estado = 'activo';
         });
@@ -423,9 +424,13 @@ export class EditarPerfilComponent implements OnInit {
               'Esperamos volver a verte pronto'
             )}.`,
             showConfirmButton: false,
-            timer: 1500,
-          });
-          this.user.estado = 'baja';
+            timer: 2500,
+          }).then(()=>{
+            this.user.estado = 'baja';
+            this.router.navigateByUrl('/')
+            sessionStorage.removeItem('usuario');
+            location.reload();
+          })
         });
       }
     });

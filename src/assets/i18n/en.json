@@ -410,7 +410,24 @@
 "Clientes que van a asistir a la sesion":"Clients who will attend the session",
 "Cancelar sesion":"Cancel session",
 "Error al editar la sesion":"Error editing session",
-"La sesión ya esta cancelada":"The session is already canceled"
+"La sesión ya esta cancelada":"The session is already canceled",
+"No se puede acceder a fit & healthy":"Can't access fit & healthy",
+"actualmente usted está dado de baja, ¿Quieres darte de alta de nuevo?":"You are currently unsubscribed, do you want to join again?",
+"Alta pendiente de validacion":"Join pending validation",
+"Para completar el alta, haga click en el enlace que le hemos enviado al correo electronico":"To complete the joining, click on the link that we have sent to the email",
+"rellene los campos para completar el alta":"fill in the fields to complete the back to Fit & Heatlthy",
+"proximas aperturas":"upcoming openings",
+"Hora de final de sesion incorrecta":"Wrong end of session time",
+"El final de la sesion no puede ser antes o igual que el comienzo de la sesion":"The end of the session cannot be before or equal to the beginning of the session",
+"Elija el color con el que se identificara a la actividad":"Choose the color with which the activity will be identified",
+"Seleccione un color":"Select a color",
+"Cambiar de monitor":"Change monitor"
+
+
+
+
+
+
 
 
 

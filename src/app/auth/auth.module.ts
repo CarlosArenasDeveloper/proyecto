@@ -13,9 +13,10 @@ import { ActividadesPorTarifaComponent } from './pages/actividades-por-tarifa/ac
 import { NgxPayPalModule } from 'ngx-paypal';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { TranslateModule } from '@ngx-translate/core';
+import { SolicitudAltaComponent } from './pages/solicitud-alta/solicitud-alta.component';
 
 @NgModule({
-  declarations: [LoginComponent, RegistroComponent, PasswordOlvidadaComponent, ReestablecerPasswordComponent, ActividadesPorTarifaComponent],
+  declarations: [LoginComponent, RegistroComponent, PasswordOlvidadaComponent, ReestablecerPasswordComponent, ActividadesPorTarifaComponent, SolicitudAltaComponent],
   imports: [
     CommonModule,
     AuthRoutingModule,

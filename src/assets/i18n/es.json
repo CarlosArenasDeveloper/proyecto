@@ -410,9 +410,18 @@
 "Clientes que van a asistir a la sesion":"Clientes que van a asistir a la sesion",
 "Cancelar sesion":"Cancelar sesion",
 "Error al editar la sesion":"Error al editar la sesion",
-"La sesión ya esta cancelada":"La sesión ya esta cancelada"
-
-
+"La sesión ya esta cancelada":"La sesión ya esta cancelada",
+"No se puede acceder a fit & healthy":"No se puede acceder a fit & healthy",
+"actualmente usted está dado de baja, ¿Quieres darte de alta de nuevo?":"actualmente usted está dado de baja, ¿Quieres darte de alta de nuevo?",
+"Alta pendiente de validacion":"Alta pendiente de validacion",
+"Para completar el alta, haga click en el enlace que le hemos enviado al correo electronico":"Para completar el alta, haga click en el enlace que le hemos enviado al correo electronico",
+"rellene los campos para completar el alta":"rellene los campos para completar el alta",
+"proximas aperturas":"proximas aperturas",
+"Hora de final de sesion incorrecta":"Hora de final de sesion incorrecta",
+"El final de la sesion no puede ser antes o igual que el comienzo de la sesion":"El final de la sesion no puede ser antes o igual que el comienzo de la sesion",
+"Elija el color con el que se identificara a la actividad":"Elija el color con el que se identificara a la actividad",
+"Seleccione un color":"Seleccione un color",
+"Cambiar de monitor":"Cambiar de monitor"
 
 
 

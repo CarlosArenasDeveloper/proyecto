@@ -25,6 +25,7 @@ export class AddActividadComponent implements OnInit {
 
   monitores: any;
   actividad!: Actividad;
+  colores:any;
   tarifas: any;
   constructor(
     private fb: FormBuilder,
@@ -41,6 +42,12 @@ export class AddActividadComponent implements OnInit {
     this.adminService.getTarifas().subscribe((tarifa)=>{
       this.tarifas=tarifa;
     })
+
+    this.adminService.selectColoresLibres().subscribe((colores)=>{
+      this.colores=colores;
+      console.log(colores);
+    })
+
   }
 
   miFormulario: FormGroup = this.fb.group({

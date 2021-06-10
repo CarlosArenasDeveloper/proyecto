@@ -25,7 +25,7 @@
         </span>
       </div>
       <div class="mb-3">
-        <span>{{'Qué monitor impartira la actividad'|translate}}?:</span>  
+        <span>{{'Qué monitor impartira la actividad'|translate}}?:</span>  <button type="button" class="btn btn-danger" (click)="cambiarMonitor()">{{'Cambiar de monitor'|translate}}</button>
         <select class="form-select mt-2" formControlName="email_monitor"  [ngClass]="{
           'is-invalid': campoNoValido('email_monitor')
         }">
@@ -106,7 +106,7 @@
           class="form-control"
         />
       </div>
-      <div class="mb-3">
+      <!-- <div class="mb-3">
         <label for="d" class="form-label">{{'Color de referencia'|translate}}: </label>
         <input
           formControlName="color"
@@ -114,6 +114,17 @@
           class="form-control"
           id="d"
         />
+      </div> -->
+      <div class="mb-3">
+        <span>{{'Elija el color con el que se identificara a la actividad'|translate}}:</span>  
+        <select class="form-select mt-2" formControlName="color"  [ngClass]="{
+          'is-invalid': campoNoValido('color')
+        }">
+          <option value="">{{'Seleccione un color'|translate}} ...</option>
+          <option *ngFor="let color of colores" [value]="color.codigo">
+            {{ color.nombre | titlecase }}
+          </option>
+        </select>
       </div>
       <button type="button" class="btn btn-danger mx-3" routerLink="actividades">
         <i class="fas fa-arrow-circle-left"></i>

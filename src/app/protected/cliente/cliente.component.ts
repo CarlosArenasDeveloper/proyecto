@@ -48,6 +48,7 @@ export class ClienteComponent implements OnInit {
     .subscribe((eventos) => {
       this.eventsPendientes = eventos;
     });
+    
     this.optionsList = {
       contentHeight: 700,
       plugins: [dayGridPlugin, listPlugin, interactionPlugin],

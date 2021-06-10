@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { Usuario, Tarifa } from '../../../models/interface';
 import { ValidatorService } from '../../services/validator.service';
@@ -11,27 +11,15 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActividadesPorTarifaComponent } from '../actividades-por-tarifa/actividades-por-tarifa.component';
 import { ICreateOrderRequest, IPayPalConfig } from 'ngx-paypal';
 import { TranslateService } from '@ngx-translate/core';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-registro',
-  templateUrl: './registro.component.html',
-  styles: [
-    `
-      .mat-stepper-horizontal {
-        margin-top: 8px;
-      }
-
-      .mat-form-field {
-        margin-top: 18px;
-      }
-
-      mat-form-field {
-        width: 100%;
-      }
-    `,
-  ],
+  selector: 'app-solicitud-alta',
+  templateUrl: './solicitud-alta.component.html',
+  styleUrls: ['./solicitud-alta.component.css']
 })
-export class RegistroComponent implements OnInit {
+export class SolicitudAltaComponent implements OnInit {
+
   showPaypalButtons: boolean = false;
   cliente: Usuario = {};
   hide = true;
@@ -46,7 +34,8 @@ export class RegistroComponent implements OnInit {
   tarifas: any;
   centros: any;
   tarifa!: Tarifa;
-
+  usuario: Usuario = {};
+  
   constructor(
     public dialog: MatDialog,
     private fb: FormBuilder,
@@ -55,7 +44,9 @@ export class RegistroComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private adminService: AdminService,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private activatedRoute: ActivatedRoute,
+
   ) {
     const currentYear = new Date().getFullYear();
     this.minDate = new Date(currentYear - 100, 0, 1);
@@ -93,7 +84,6 @@ export class RegistroComponent implements OnInit {
             Validators.required,
             Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
           ],
-          [this.emailValidatorService],
         ],
         password: ['', [Validators.required, Validators.minLength(6)]],
         password2: ['', [Validators.required]],
@@ -124,6 +114,43 @@ export class RegistroComponent implements OnInit {
       id_tarifa: ['', [Validators.required]],
       id_centro: ['', [Validators.required]],
     });
+
+    this.activatedRoute.params
+    .pipe(
+      switchMap(({ email }) => this.adminService.getUsuarioPorEmail(email))
+    )
+    .subscribe((usuario) => {
+      this.usuario = usuario;
+      console.log(this.usuario);
+      
+      this.firstFormGroup.controls['email'].setValue(this.usuario.email);
+      this.firstFormGroup.controls['password'].setValue(this.usuario.password);
+      this.firstFormGroup.controls['password2'].setValue(this.usuario.password);
+      this.thirdFormGroup.controls['id_centro'].setValue(this.usuario.id_centro)
+      this.firstFormGroup.controls['dni'].setValue(this.usuario.dni);
+      this.firstFormGroup.controls['nombre'].setValue(this.usuario.nombre);
+      this.firstFormGroup.controls['apellido1'].setValue(
+        this.usuario.apellido1
+      );
+      this.firstFormGroup.controls['apellido2'].setValue(
+        this.usuario.apellido2
+      );
+      this.secondFormGroup.controls['fecha_nac'].setValue(
+        this.usuario.fecha_nac
+      );
+      this.secondFormGroup.controls['sexo'].setValue(this.usuario.sexo);
+      this.secondFormGroup.controls['telefono'].setValue(this.usuario.telefono);
+      this.secondFormGroup.controls['cuenta_bancaria'].setValue(
+        this.usuario.cuenta_bancaria
+      );
+      this.secondFormGroup.controls['ciudad'].setValue(this.usuario.ciudad);
+      this.secondFormGroup.controls['direccion'].setValue(
+        this.usuario.direccion
+      );
+      this.secondFormGroup.controls['cod_postal'].setValue(
+        this.usuario.cod_postal
+      );
+    })
   }
 
   registrar() {
@@ -132,7 +159,7 @@ export class RegistroComponent implements OnInit {
       ...this.secondFormGroup.value,
       ...this.thirdFormGroup.value,
     };
-    this.authService.registro(this.cliente).subscribe((resp) => {
+    this.authService.confirmarAlta(this.cliente).subscribe((resp) => {
       if (resp != 'ERROR') {
         Swal.fire({
           position: 'top-end',
@@ -159,20 +186,6 @@ export class RegistroComponent implements OnInit {
       (this.thirdFormGroup.get(campo)?.invalid &&
         this.thirdFormGroup.get(campo)?.touched)
     );
-  }
-
-  get emailErrorMsg(): string {
-    const errors = this.firstFormGroup.get('email')?.errors;
-    if (errors?.required) {
-      return this.translateService.instant('El email es obligatorio');
-    } else if (errors?.pattern) {
-      return this.translateService.instant(
-        'El valor ingresado no tiene formato de correo'
-      );
-    } else if (errors?.emailTomado) {
-      return this.translateService.instant('El email ya está registrado');
-    }
-    return '';
   }
 
   get dniErrorMsg(): string {
@@ -323,4 +336,5 @@ export class RegistroComponent implements OnInit {
   back() {
     this.showPaypalButtons = false;
   }
+
 }

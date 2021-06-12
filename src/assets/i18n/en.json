@@ -425,7 +425,21 @@
 "realizadas":"done",
 "canceladas":"canceled",
 "pendientes":"pending",
-"Historico de sesiones":"Session history"
+"Historico de sesiones":"Session history",
+"Se ha enviado un correo a":"An email has been sent to",
+"para reestablecer la contraseña.":"to reset the password.",
+"Email no registrado":"Email not registered",
+"El email que ingresaste no coincide con nuestros registros. Por favor, revisa e inténtelo de nuevo.":"The email you entered does not match our records. Please check and try again.",
+"¿Has olvidado tu contraseña de acceso?":"Have you forgotten your access password?",
+"Enviar":"Send",
+"Volver al login":"Back to login",
+"¿Quieres volver a darte de alta en Fit & Healthy?":"Do you want to join again in fit & healthy?",
+"reregister":"re-register",
+"Actualmente esta dado de alta, para accerder a Fit & Healthy introduzca su email y contraseña en el acceso a clientes":"You are currently registered, to access Fit & Healthy enter your email and password in customer access"
+
+
+
+
 
 
 

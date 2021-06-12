@@ -59,4 +59,10 @@ export class AuthService {
     return this.http.get(`${this.baseUrl}/selectCentroCordoba.php`);
   }
 
+  getUsuarioPorEmail(email: string): Observable<Usuario> {
+    return this.http.get<Usuario>(
+      `${this.baseUrl}/seleccionarUsuario.php?email=${email}`
+    );
+  }
+
 }

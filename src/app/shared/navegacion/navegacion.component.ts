@@ -35,9 +35,11 @@ export class NavegacionComponent implements OnInit {
   }
 
   sesion(): boolean {
-    if (sessionStorage.getItem('usuario')) {
-      return true;
-    }
+      if (sessionStorage.getItem('usuario') 
+      // && this.usuario.estado && this.usuario.estado!=='activo'
+      ) {
+        return true;
+      }
     return false;
   }
 

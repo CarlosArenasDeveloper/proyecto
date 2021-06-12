@@ -5,6 +5,7 @@ import { AuthService } from '../../services/auth.service';
 import { AdminService } from '../../../protected/services/admin.service';
 import Swal from 'sweetalert2';
 import { Usuario } from '../../../models/interface';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-password-olvidada',
@@ -19,6 +20,7 @@ export class PasswordOlvidadaComponent implements OnInit {
     private fb: FormBuilder,
     private authService: AuthService,
     private adminService: AdminService,
+    private translateService:TranslateService
   ) {}
 
   ngOnInit(): void {
@@ -47,10 +49,12 @@ export class PasswordOlvidadaComponent implements OnInit {
   get emailErrorMsg(): string {
     const errors = this.miFormulario.get('email')?.errors;
     if (errors?.required) {
-      return 'El email es requerido';
+      return this.translateService.instant('El email es obligatorio');
     } else if (errors?.pattern) {
-      return 'El valor ingresado no tiene formato de correo';
-    } 
+      return this.translateService.instant(
+        'El valor ingresado no tiene formato de correo'
+      );
+    }
     return '';
   }
   
@@ -67,7 +71,7 @@ export class PasswordOlvidadaComponent implements OnInit {
         Swal.fire({
           position: 'top-end',
           icon: 'success',
-          title: 'Se ha enviado un correo a ' +this.miFormulario.controls['email'].value +' para reestablecer la contraseña.' ,
+          title: `${this.translateService.instant('Se ha enviado un correo a')} ${this.miFormulario.controls['email'].value} ${this.translateService.instant('para reestablecer la contraseña.')}` ,
           showConfirmButton: false,
           timer: 3000,
         });
@@ -77,9 +81,9 @@ export class PasswordOlvidadaComponent implements OnInit {
       }else{
         Swal.fire({
           icon: 'error',
-          title: 'Email no registrado',
+          title: `${this.translateService.instant('Email no registrado')}`,
           text:
-            'El email que ingresaste no coincide con nuestros registros. Por favor, revisa e inténtelo de nuevo.',
+            `${this.translateService.instant('El email que ingresaste no coincide con nuestros registros. Por favor, revisa e inténtelo de nuevo.')}`,
         });
       }
     })

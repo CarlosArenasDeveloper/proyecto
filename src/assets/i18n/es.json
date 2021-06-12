@@ -425,9 +425,17 @@
 "realizadas":"realizadas",
 "canceladas":"canceladas",
 "pendientes":"pendientes",
-"Historico de sesiones":"Historico de sesiones"
-
-
+"Historico de sesiones":"Historico de sesiones",
+"Se ha enviado un correo a":"Se ha enviado un correo a",
+"para reestablecer la contraseña.":"para reestablecer la contraseña.",
+"Email no registrado":"Email no registrado",
+"El email que ingresaste no coincide con nuestros registros. Por favor, revisa e inténtelo de nuevo.":"El email que ingresaste no coincide con nuestros registros. Por favor, revisa e inténtelo de nuevo.",
+"¿Has olvidado tu contraseña de acceso?":"¿Has olvidado tu contraseña de acceso?",
+"Enviar":"Enviar",
+"Volver al login":"Volver al login",
+"¿Quieres volver a darte de alta en fit & healthy?":"¿Quieres volver a darte de alta en fit & healthy?",
+"reregister":"Volver a darme de alta",
+"Actualmente esta dado de alta, para accerder a Fit & Healthy introduzca su email y contraseña en el acceso a clientes":"Actualmente esta dado de alta, para accerder a Fit & Healthy introduzca su email y contraseña en el acceso a clientes"
 
 
 

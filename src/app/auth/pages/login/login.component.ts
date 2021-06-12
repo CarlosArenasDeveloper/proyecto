@@ -60,6 +60,7 @@ export class LoginComponent {
         if (datosUsuario.role == 1) {
           this.router.navigateByUrl('/dashboard/admin');
         } else if (datosUsuario.role == 2 && datosUsuario.estado == 'baja') {
+          sessionStorage.removeItem('usuario');
           Swal.fire({
             icon: 'error',
             title: this.translate.instant(
@@ -95,6 +96,7 @@ export class LoginComponent {
           datosUsuario.role == 2 &&
           datosUsuario.estado == 'bloqueado'
         ) {
+          sessionStorage.removeItem('usuario');
           Swal.fire({
             icon: 'error',
             title: this.translate.instant('Bloqueado'),
@@ -104,7 +106,7 @@ export class LoginComponent {
               'usted está bloqueado, para volver a acceder pongase en contacto con el personal de Fit & Healthy'
             )}`,
           });
-        } else if (datosUsuario.role == 2 && datosUsuario.verificado == 1) {
+        } else if (datosUsuario.role == 2 && datosUsuario.verificado == 1 && datosUsuario.estado=='activo') {
           this.router.navigateByUrl('/dashboard/cliente');
         } else if (datosUsuario.role == 2 && datosUsuario.verificado == 0) {
           sessionStorage.removeItem('usuario');

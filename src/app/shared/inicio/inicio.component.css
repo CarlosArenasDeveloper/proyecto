@@ -14,7 +14,7 @@ body {
     background: rgba(255, 255, 255, 0.1);
   }
   body nav .navbar-nav a {
-    font-size: 16px;
+    font-size: 14px;
     text-transform: uppercase;
     color: #fff !important;
     transition: all 0.3s;

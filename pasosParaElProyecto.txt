@@ -1,0 +1,23 @@
+recordar que tengo que subir tambien los assets de los idiomas!
+    
+ ng build --prod --base-href=/alumnado/curso2021/DAW/daw2021a2/ o sino
+ ng build --prod --base-href=/http://www.iestrassierra.net/alumnado/curso2021/DAW/daw2021a2/
+<base href="/alumnado/curso2021/DAW/daw2021a2/"/> en el html del dist
+
+/alumnado/curso2021/DAW/daw2021a2/
+
+INICIO:
+CENTROS
+ACTIVIDADES
+AREA DE CLIENTES
+INSCRIBETE YA
+IDIOMA
+
+INICIAR SESION:
+->SOLICITAR ALTA PARA USUARIOS QUE SE HAYAN REGISTRADO Y QUE SU ESTADO ACTUAL SEA BAJA->manda correo->solicitud alta->pago paypal
+->OLVIDAR CONTRASEÑA->manda correo->reestablecer password
+->LOGIN: SI ESTAS DE BAJA, TE PREGUNTA SI QUIERES DARTE DE ALTA..
+	 SI ESTAS BLOQUEADO, TE PIDE QUE TE PONGAS EN CONTACTO CON ALGUIEN DEL CENTRO
+	 SI ESTAS DADO DE ALTA, ACCEDES
+	 SI ESTAS DADO DE ALTAS,PERO NO VERIFICADO, TE MANDA UN EMAIL PARA QUE VERIFIQUES Y VUELTAS A ENTRAR
+	 SI NO EXISTE EL EMAIL Y PASSWORD NO PUEDES ENTRAR
